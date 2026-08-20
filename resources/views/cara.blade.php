@@ -29,14 +29,12 @@
             </div>
 
             {{-- Heading --}}
-            <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
-                <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#191C1D] leading-tight mb-4">
+            <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
+                <h2 class="text-xl sm:text-2xl lg:text-3xl font-bold text-[#191C1D] leading-tight mb-4">
                     Layanan Kesehatan Terpercaya yang Berfokus pada Kesejahteraan Anda
                 </h2>
-                <p class="text-sm sm:text-base text-[#3E4944] leading-relaxed">
-                    Di CareLink, kami telah menyederhanakan proses layanan kesehatan
-                    untuk memastikan Anda mendapatkan perawatan terbaik dengan
-                    mudah dan nyaman.
+                <p class="text-sm sm:text-sm text-[#3E4944] leading-relaxed">
+                    Di CareLink, kami telah menyederhanakan proses layanan kesehatan untuk memastikan Anda mendapatkan perawatan terbaik dengan mudah dan nyaman.
                 </p>
             </div>
 
