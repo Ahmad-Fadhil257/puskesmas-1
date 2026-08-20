@@ -12,6 +12,7 @@
     <!-- Main CSS -->
     <link rel="stylesheet" href="{{ asset('css/layouts/nav.css') }}">
     <link rel="stylesheet" href="{{ asset('css/landing-page/hero.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/landing-page/info-cards.css') }}">
     <link rel="stylesheet" href="{{ asset('css/landing-page/about.css') }}">
 
     @stack('styles')
