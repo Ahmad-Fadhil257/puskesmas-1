@@ -15,6 +15,8 @@
     <link rel="stylesheet" href="{{ asset('css/landing-page/info-cards.css') }}">
     <link rel="stylesheet" href="{{ asset('css/landing-page/about.css') }}">
     <link rel="stylesheet" href="{{ asset('css/landing-page/nilai-nilai.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/landing-page/blog.css') }}">
+
 
 
     @stack('styles')

@@ -16,6 +16,10 @@
     <!-- Nilai-Nilai Kami Section -->
     @include('landing-page.nilai-nilai-section')
 
+    <!-- Blog & Berita Section -->
+    @include('landing-page.blog-section')
+
+
 
 
     <!-- Seksi berikutnya akan ditambahkan di sini secara modular -->
