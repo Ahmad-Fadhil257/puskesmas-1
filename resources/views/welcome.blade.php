@@ -7,6 +7,9 @@
     <!-- Hero Section -->
     @include('landing-page.hero-section')
 
+    <!-- About / Tentang Kami Section -->
+    @include('landing-page.about-section')
+
     <!-- Seksi berikutnya akan ditambahkan di sini secara modular -->
 
 @endsection

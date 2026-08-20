@@ -10,7 +10,9 @@
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
 
     <!-- Main CSS -->
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/layouts/nav.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/landing-page/hero.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/landing-page/about.css') }}">
 
     @stack('styles')
 </head>
