@@ -13,6 +13,10 @@
     <!-- About / Tentang Kami Section -->
     @include('landing-page.about-section')
 
+    <!-- Nilai-Nilai Kami Section -->
+    @include('landing-page.nilai-nilai-section')
+
+
 
     <!-- Seksi berikutnya akan ditambahkan di sini secara modular -->
 
