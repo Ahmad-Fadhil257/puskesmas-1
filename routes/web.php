@@ -4,12 +4,15 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\Admin\ArticleController as AdminArticleController;
 use App\Models\Article;
+use App\Http\Controllers\CaraKerjaController;
+use App\Models\CaraKerja;
 use Illuminate\Support\Facades\Route;
 
 // Landing Page Utama (dengan passing 3 artikel terbaru)
 Route::get('/', function () {
     $latestArticles = Article::published()->take(3)->get();
-    return view('welcome', compact('latestArticles'));
+    $caraKerja = CaraKerja::orderBy('urutan', 'asc')->get();
+    return view('welcome', compact('latestArticles', 'caraKerja'));
 })->name('home');
 
 // Portal Publik Berita & Blog
@@ -32,4 +35,9 @@ Route::middleware(['auth'])->group(function () {
 
     // CRUD Manajemen Berita
     Route::resource('admin/articles', AdminArticleController::class)->names('admin.articles');
+
+    // Cara Kerja CRUD
+    Route::prefix('admin')->name('admin.')->group(function () {
+        Route::resource('cara-kerja', CaraKerjaController::class)->except(['show']);
+    });
 });

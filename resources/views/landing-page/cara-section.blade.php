@@ -21,57 +21,19 @@
         {{-- Process Cards Grid --}}
         <div class="process__grid">
 
-            {{-- Step 01 --}}
-            <div class="process-card">
-                <div class="process-card__number-wrap">
-                    <div class="process-card__number">01</div>
+            @foreach ($caraKerja as $item)
+                <div class="process-card">
+                    <div class="process-card__number-wrap">
+                        <div class="process-card__number">{{ str_pad($item->urutan, 2, '0', STR_PAD_LEFT) }}</div>
+                    </div>
+                    <div class="process-card__content">
+                        <h3 class="process-card__title">{{ $item->judul }}</h3>
+                        <p class="process-card__desc">
+                            {{ $item->deskripsi }}
+                        </p>
+                    </div>
                 </div>
-                <div class="process-card__content">
-                    <h3 class="process-card__title">Buat Janji Temu</h3>
-                    <p class="process-card__desc">
-                        Jadwalkan kunjungan Anda melalui platform daring kami yang mudah digunakan atau dengan menghubungi tim dukungan kami yang ramah. Pilih waktu yang paling sesuai bagi Anda.
-                    </p>
-                </div>
-            </div>
-
-            {{-- Step 02 --}}
-            <div class="process-card">
-                <div class="process-card__number-wrap">
-                    <div class="process-card__number">02</div>
-                </div>
-                <div class="process-card__content">
-                    <h3 class="process-card__title">Konsultasikan dengan Ahli Kami</h3>
-                    <p class="process-card__desc">
-                        Temui dokter dan spesialis medis kami yang sangat ahli, yang akan mendengarkan keluhan Anda, memberikan diagnosis yang akurat, serta merekomendasikan pilihan pengobatan yang efektif.
-                    </p>
-                </div>
-            </div>
-
-            {{-- Step 03 --}}
-            <div class="process-card">
-                <div class="process-card__number-wrap">
-                    <div class="process-card__number">03</div>
-                </div>
-                <div class="process-card__content">
-                    <h3 class="process-card__title">Mendapatkan Perawatan</h3>
-                    <p class="process-card__desc">
-                        Setelah rencana perawatan ditetapkan, tim kami memastikan Anda mendapatkan layanan medis yang diperlukan, baik itu berupa resep dari apotek kami maupun perawatan khusus.
-                    </p>
-                </div>
-            </div>
-
-            {{-- Step 04 --}}
-            <div class="process-card">
-                <div class="process-card__number-wrap">
-                    <div class="process-card__number">04</div>
-                </div>
-                <div class="process-card__content">
-                    <h3 class="process-card__title">Menindaklanjuti</h3>
-                    <p class="process-card__desc">
-                        Setelah perawatan, kami tetap menjalin komunikasi untuk konsultasi lanjutan guna memastikan proses pemulihan Anda berjalan lancar serta menjawab pertanyaan lain yang mungkin Anda miliki.
-                    </p>
-                </div>
-            </div>
+            @endforeach
 
         </div>
 

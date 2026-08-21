@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\CaraKerja;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -25,5 +26,36 @@ class DatabaseSeeder extends Seeder
 
         // Seed Data Artikel Berita Awal
         $this->call(ArticleSeeder::class);
+
+        // Seed Data Cara Kerja
+        $caraKerja = [
+            [
+                'urutan' => 1,
+                'judul' => 'Buat Janji Temu',
+                'deskripsi' => 'Jadwalkan kunjungan Anda melalui platform daring kami yang mudah digunakan atau dengan menghubungi tim dukungan kami yang ramah. Pilih waktu yang paling sesuai bagi Anda.',
+            ],
+            [
+                'urutan' => 2,
+                'judul' => 'Konsultasikan dengan Ahli Kami',
+                'deskripsi' => 'Temui dokter dan spesialis medis kami yang sangat ahli, yang akan mendengarkan keluhan Anda, memberikan diagnosis yang akurat, serta merekomendasikan pilihan pengobatan yang efektif.',
+            ],
+            [
+                'urutan' => 3,
+                'judul' => 'Mendapatkan Perawatan',
+                'deskripsi' => 'Setelah rencana perawatan ditetapkan, tim kami memastikan Anda mendapatkan layanan medis yang diperlukan, baik itu berupa resep dari apotek kami maupun perawatan khusus.',
+            ],
+            [
+                'urutan' => 4,
+                'judul' => 'Menindaklanjuti',
+                'deskripsi' => 'Setelah perawatan, kami tetap menjalin komunikasi untuk konsultasi lanjutan guna memastikan proses pemulihan Anda berjalan lancar serta menjawab pertanyaan lain yang mungkin Anda miliki.',
+            ],
+        ];
+
+        foreach ($caraKerja as $item) {
+            CaraKerja::updateOrCreate(
+                ['urutan' => $item['urutan']],
+                $item
+            );
+        }
     }
 }
