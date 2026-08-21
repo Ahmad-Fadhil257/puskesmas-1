@@ -1,0 +1,234 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+:root {
+    --color-primary:         #0A5C45;
+    --color-primary-hover:   #084A37;
+    --color-dark:            #122822;
+    --color-body:            #40564F;
+    --color-muted:           #526B63;
+    --color-bg-1:            #C5E5DD;
+    --color-bg-2:            #EEF8F5;
+    --color-surface:         #FFFFFF;
+    --color-secondary:       #BBE4D8;
+    --color-secondary-hover: #A9DCCF;
+    --color-border:          #E2E8F0;
+    --color-card-bg:         #F8FAF9;
+    --color-orange:          #FA883C;
+
+    --font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    --container-max:      1200px;
+    --section-padding-y:  80px;
+    --section-padding-x:  24px;
+    --radius-sm:   8px;
+    --radius-md:   12px;
+    --radius-lg:   16px;
+    --radius-xl:   24px;
+    --radius-full: 9999px;
+    --shadow-sm: 0 2px 8px rgba(10, 92, 69, 0.06);
+    --shadow-md: 0 4px 20px rgba(10, 92, 69, 0.08);
+    --shadow-lg: 0 10px 30px rgba(10, 92, 69, 0.12);
+    --transition: all 0.25s ease;
+}
+
+/* ==========================================================================
+   CARA KERJA SECTION
+   ========================================================================== */
+.process {
+    padding: 70px var(--section-padding-x) 80px;
+    background: transparent;
+    width: 100%;
+}
+
+.process__container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* --------------------------------------------------------------------------
+   Header
+   -------------------------------------------------------------------------- */
+.process__header {
+    text-align: center;
+    margin-bottom: 52px;
+}
+
+.process__badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: var(--color-primary);
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+
+.process__badge svg {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+}
+
+.process__title {
+    color: var(--color-dark);
+    font-family: var(--font-family);
+    font-size: 2.25rem;
+    font-weight: 700;
+    line-height: 1.25;
+    margin-bottom: 14px;
+    letter-spacing: -0.01em;
+    max-width: 780px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.process__subtitle {
+    color: var(--color-body);
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    max-width: 660px;
+    margin: 0 auto;
+}
+
+/* --------------------------------------------------------------------------
+   Process Cards Grid (2x2)
+   -------------------------------------------------------------------------- */
+.process__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+}
+
+.process-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    padding: 36px 32px;
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.process-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 0;
+    background: var(--color-primary);
+    transition: height 0.3s ease;
+}
+
+.process-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--color-secondary);
+}
+
+.process-card:hover::before {
+    height: 100%;
+}
+
+.process-card__number-wrap {
+    flex-shrink: 0;
+}
+
+.process-card__number {
+    width: 52px;
+    height: 52px;
+    border-radius: var(--radius-full);
+    background: var(--color-primary);
+    color: #ffffff;
+    font-family: var(--font-family);
+    font-size: 1.125rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(10, 92, 69, 0.25);
+    transition: var(--transition);
+}
+
+.process-card:hover .process-card__number {
+    transform: scale(1.08);
+    background: var(--color-primary-hover);
+}
+
+.process-card__content {
+    flex: 1;
+}
+
+.process-card__title {
+    color: var(--color-dark);
+    font-size: 1.1875rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    line-height: 1.35;
+}
+
+.process-card__desc {
+    color: var(--color-body);
+    font-size: 0.9375rem;
+    line-height: 1.6;
+}
+
+/* --------------------------------------------------------------------------
+   Responsive
+   -------------------------------------------------------------------------- */
+@media (max-width: 1024px) {
+    .process__title {
+        font-size: 1.875rem;
+    }
+
+    .process__grid {
+        gap: 20px;
+    }
+
+    .process-card {
+        padding: 28px 24px;
+    }
+}
+
+@media (max-width: 768px) {
+    .process {
+        padding: 50px 16px 60px;
+    }
+
+    .process__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .process__title {
+        font-size: 1.625rem;
+    }
+
+    .process-card {
+        gap: 16px;
+        padding: 24px 20px;
+    }
+
+    .process-card__number {
+        width: 44px;
+        height: 44px;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .process__title {
+        font-size: 1.375rem;
+    }
+
+    .process-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
