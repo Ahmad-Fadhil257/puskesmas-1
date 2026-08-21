@@ -188,6 +188,12 @@
                             <div>Kelola Berita & Info</div>
                         </a>
                     </li>
+                    <li class="menu-item {{ request()->routeIs('admin.cara-kerja.*') ? 'active' : '' }}">
+                        <a href="{{ route('admin.cara-kerja.index') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-list-check"></i>
+                            <div>Kelola Cara Kerja</div>
+                        </a>
+                    </li>
                 </ul>
             </aside>
             <!-- / SIDEBAR MENU -->
