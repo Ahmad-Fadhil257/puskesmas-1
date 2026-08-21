@@ -109,7 +109,7 @@
 
                 <!-- Menu Navigation -->
                 <ul class="menu-inner py-1">
-                    <!-- UTAMA -->
+                    <!-- MENU UTAMA -->
                     <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">Menu Utama</span>
                     </li>
@@ -120,67 +120,9 @@
                         </a>
                     </li>
 
-                    <!-- PELAYANAN & PASIEN -->
+                    <!-- KONTEN & INFORMASI WEBSITE -->
                     <li class="menu-header small text-uppercase">
-                        <span class="menu-header-text">Pelayanan Pasien</span>
-                    </li>
-                    <li class="menu-item">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bx bx-user-plus"></i>
-                            <div data-i18n="Pendaftaran">Pendaftaran & Antrean</div>
-                        </a>
-                        <ul class="menu-sub">
-                            <li class="menu-item">
-                                <a href="#antrean" class="menu-link">
-                                    <div>Antrean Hari Ini</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="#janji-online" class="menu-link">
-                                    <div>Janji Temu Online</div>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="menu-item">
-                        <a href="#data-pasien" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-group"></i>
-                            <div>Data Pasien (Rekam Medis)</div>
-                        </a>
-                    </li>
-                    <li class="menu-item">
-                        <a href="#poli-layanan" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-plus-medical"></i>
-                            <div>Poli & Layanan Medis</div>
-                        </a>
-                    </li>
-
-                    <!-- TENAGA MEDIS & JADWAL -->
-                    <li class="menu-header small text-uppercase">
-                        <span class="menu-header-text">Tenaga Medis</span>
-                    </li>
-                    <li class="menu-item">
-                        <a href="#data-dokter" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-id-card"></i>
-                            <div>Data Dokter & Bidan</div>
-                        </a>
-                    </li>
-                    <li class="menu-item">
-                        <a href="#jadwal-praktik" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-calendar-event"></i>
-                            <div>Jadwal Praktik</div>
-                        </a>
-                    </li>
-
-                    <!-- INFORMASI & PENGATURAN -->
-                    <li class="menu-header small text-uppercase">
-                        <span class="menu-header-text">Informasi & Website</span>
-                    </li>
-                    <li class="menu-item">
-                        <a href="{{ url('/') }}" target="_blank" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-globe"></i>
-                            <div>Lihat Landing Page</div>
-                        </a>
+                        <span class="menu-header-text">Manajemen Konten</span>
                     </li>
                     <li class="menu-item {{ request()->routeIs('admin.articles.*') ? 'active' : '' }}">
                         <a href="{{ route('admin.articles.index') }}" class="menu-link">
@@ -192,6 +134,12 @@
                         <a href="{{ route('admin.cara-kerja.index') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-list-check"></i>
                             <div>Kelola Cara Kerja</div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="{{ url('/') }}" target="_blank" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-globe"></i>
+                            <div>Lihat Landing Page</div>
                         </a>
                     </li>
                 </ul>
