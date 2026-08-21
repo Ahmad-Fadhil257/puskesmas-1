@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="id" class="light-style layout-menu-fixed" dir="ltr" data-theme="theme-default" data-assets-path="{{ asset('admin-assets') }}/">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+    <title>@yield('title', 'Dashboard - Puskesmas CareLink')</title>
+
+    <!-- Theme State Early Init (Mencegah kedipan tema) -->
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem('sneat_theme');
+            if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark-style');
+                document.documentElement.classList.remove('light-style');
+                document.documentElement.setAttribute('data-bs-theme', 'dark');
+            } else {
+                document.documentElement.classList.add('light-style');
+                document.documentElement.classList.remove('dark-style');
+                document.documentElement.setAttribute('data-bs-theme', 'light');
+            }
+        })();
+    </script>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Public+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+    <!-- FontAwesome 6 Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Boxicons Icons -->
+    <link rel="stylesheet" href="{{ asset('admin-assets/vendor/fonts/boxicons.css') }}" />
+
+    <!-- Sneat Core CSS -->
+    <link rel="stylesheet" href="{{ asset('admin-assets/vendor/css/core.css') }}" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="{{ asset('admin-assets/vendor/css/theme-default.css') }}" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="{{ asset('admin-assets/css/demo.css') }}" />
+
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" href="{{ asset('admin-assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
+    <link rel="stylesheet" href="{{ asset('admin-assets/vendor/libs/apex-charts/apex-charts.css') }}" />
+
+    <!-- SweetAlert2 CSS (Modal Popup & Toast Notification Modern) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
+    <!-- Custom Puskesmas CareLink Theme Override (Emerald Green & Dark Mode) -->
+    <link rel="stylesheet" href="{{ asset('admin-assets/css/custom-theme.css') }}" />
+
+    <style>
+        /* SweetAlert2 Modal & Toast Custom Styling */
+        .swal2-popup {
+            font-family: 'Plus Jakarta Sans', sans-serif !important;
+            border-radius: 16px !important;
+        }
+        .swal2-popup.swal2-toast {
+            border-radius: 14px !important;
+            padding: 12px 18px !important;
+            box-shadow: 0 10px 30px rgba(10, 92, 69, 0.16), 0 2px 6px rgba(0, 0, 0, 0.06) !important;
+            border: 1px solid rgba(10, 92, 69, 0.1) !important;
+        }
+        .swal2-confirm.btn-emerald {
+            background-color: #0A5C45 !important;
+            border-radius: 12px !important;
+            padding: 10px 24px !important;
+            font-weight: 700 !important;
+        }
+        .swal2-cancel.btn-slate {
+            background-color: #64748B !important;
+            border-radius: 12px !important;
+            padding: 10px 20px !important;
+            font-weight: 700 !important;
+        }
+    </style>
+
+    <!-- Helpers -->
+    <script src="{{ asset('admin-assets/vendor/js/helpers.js') }}"></script>
+    <script src="{{ asset('admin-assets/js/config.js') }}"></script>
+
+    @stack('styles')
+</head>
+<body>
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+        <div class="layout-container">
+            
+            <!-- ====== SIDEBAR MENU ====== -->
+            <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+                <!-- Brand Header -->
+                <div class="app-brand demo py-3">
+                    <a href="{{ route('dashboard') }}" class="app-brand-link gap-2">
+                        <span class="app-brand-logo demo">
+                            <svg width="25" viewBox="0 0 24 24" fill="#0A5C45">
+                                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                            </svg>
+                        </span>
+                        <span class="app-brand-text demo menu-text fw-bolder fs-5 text-capitalize">CareLink</span>
+                    </a>
+
+                    <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
+                        <i class="bx bx-chevron-left bx-sm align-middle"></i>
+                    </a>
+                </div>
+
+                <div class="menu-inner-shadow"></div>
+
+                <!-- Menu Navigation -->
+                <ul class="menu-inner py-1">
+                    <!-- UTAMA -->
+                    <li class="menu-header small text-uppercase">
+                        <span class="menu-header-text">Menu Utama</span>
+                    </li>
+                    <li class="menu-item active">
+                        <a href="{{ route('dashboard') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                            <div data-i18n="Dashboard">Dashboard</div>
+                        </a>
+                    </li>
+
+                    <!-- PELAYANAN & PASIEN -->
+                    <li class="menu-header small text-uppercase">
+                        <span class="menu-header-text">Pelayanan Pasien</span>
+                    </li>
+                    <li class="menu-item">
+                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                            <i class="menu-icon tf-icons bx bx-user-plus"></i>
+                            <div data-i18n="Pendaftaran">Pendaftaran & Antrean</div>
+                        </a>
+                        <ul class="menu-sub">
+                            <li class="menu-item">
+                                <a href="#antrean" class="menu-link">
+                                    <div>Antrean Hari Ini</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="#janji-online" class="menu-link">
+                                    <div>Janji Temu Online</div>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="menu-item">
+                        <a href="#data-pasien" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-group"></i>
+                            <div>Data Pasien (Rekam Medis)</div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="#poli-layanan" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-plus-medical"></i>
+                            <div>Poli & Layanan Medis</div>
+                        </a>
+                    </li>
+
+                    <!-- TENAGA MEDIS & JADWAL -->
+                    <li class="menu-header small text-uppercase">
+                        <span class="menu-header-text">Tenaga Medis</span>
+                    </li>
+                    <li class="menu-item">
+                        <a href="#data-dokter" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-id-card"></i>
+                            <div>Data Dokter & Bidan</div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="#jadwal-praktik" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-calendar-event"></i>
+                            <div>Jadwal Praktik</div>
+                        </a>
+                    </li>
+
+                    <!-- INFORMASI & PENGATURAN -->
+                    <li class="menu-header small text-uppercase">
+                        <span class="menu-header-text">Informasi & Website</span>
+                    </li>
+                    <li class="menu-item">
+                        <a href="{{ url('/') }}" target="_blank" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-globe"></i>
+                            <div>Lihat Landing Page</div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="#berita" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-news"></i>
+                            <div>Kelola Berita & Info</div>
+                        </a>
+                    </li>
+                </ul>
+            </aside>
+            <!-- / SIDEBAR MENU -->
+
+            <!-- Layout page -->
+            <div class="layout-page">
+
+                <!-- ====== TOP NAVBAR ====== -->
+                <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme" id="layout-navbar">
+                    <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+                        <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+                            <i class="bx bx-menu bx-sm"></i>
+                        </a>
+                    </div>
+
+                    <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+                        <!-- Search Box -->
+                        <div class="navbar-nav align-items-center">
+                            <div class="nav-item d-flex align-items-center">
+                                <i class="bx bx-search fs-4 lh-0 text-muted me-2"></i>
+                                <input type="text" class="form-control border-0 shadow-none" placeholder="Cari data pasien, poli, atau dokter..." aria-label="Search..." />
+                            </div>
+                        </div>
+
+                        <!-- Right Actions -->
+                        <ul class="navbar-nav flex-row align-items-center ms-auto">
+                            
+                            <!-- Dark / Light Mode Toggle Button -->
+                            <li class="nav-item me-3">
+                                <a class="nav-link hide-arrow cursor-pointer d-flex align-items-center justify-content-center"
+                                   id="themeToggleBtn"
+                                   href="javascript:void(0);"
+                                   title="Beralih Mode Gelap/Terang"
+                                   style="width: 38px; height: 38px; border-radius: 50%;">
+                                    <i class="bx bx-moon fs-4" id="themeToggleIcon"></i>
+                                </a>
+                            </li>
+
+                            <!-- User Profile Dropdown -->
+                            <li class="nav-item navbar-dropdown dropdown-user dropdown">
+                                <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
+                                    <div class="avatar avatar-online">
+                                        <div class="avatar-initial rounded-circle bg-label-primary fw-bold">
+                                            {{ strtoupper(substr(Auth::user()->name ?? 'A', 0, 1)) }}
+                                        </div>
+                                    </div>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li>
+                                        <a class="dropdown-item" href="#">
+                                            <div class="d-flex">
+                                                <div class="flex-shrink-0 me-3">
+                                                    <div class="avatar avatar-online">
+                                                        <div class="avatar-initial rounded-circle bg-label-primary fw-bold">
+                                                            {{ strtoupper(substr(Auth::user()->name ?? 'A', 0, 1)) }}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="flex-grow-1">
+                                                    <span class="fw-semibold d-block">{{ Auth::user()->name ?? 'Admin Puskesmas' }}</span>
+                                                    <small class="text-muted">{{ Auth::user()->email ?? 'admin@carelink.com' }}</small>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <div class="dropdown-divider"></div>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">
+                                            <i class="bx bx-user me-2"></i>
+                                            <span class="align-middle">Profil Saya</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">
+                                            <i class="bx bx-cog me-2"></i>
+                                            <span class="align-middle">Pengaturan</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <div class="dropdown-divider"></div>
+                                    </li>
+                                    <li>
+                                        <!-- Logout Form with SweetAlert2 Confirmation -->
+                                        <form action="{{ route('logout') }}" method="POST" id="logoutForm">
+                                            @csrf
+                                            <button type="button" class="dropdown-item text-danger" id="btnLogout">
+                                                <i class="bx bx-power-off me-2"></i>
+                                                <span class="align-middle">Keluar (Logout)</span>
+                                            </button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                <!-- / TOP NAVBAR -->
+
+                <!-- Content wrapper -->
+                <div class="content-wrapper">
+                    <!-- Main Body Content -->
+                    <div class="container-xxl flex-grow-1 container-p-y">
+                        @yield('content')
+                    </div>
+
+                    <!-- Footer -->
+                    <footer class="content-footer footer bg-footer-theme">
+                        <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
+                            <div class="mb-2 mb-md-0">
+                                © {{ date('Y') }} Puskesmas CareLink. Sistem Manajemen Pelayanan Kesehatan.
+                            </div>
+                            <div>
+                                <span class="badge bg-label-primary">Versi 1.0.0 (PKL)</span>
+                            </div>
+                        </div>
+                    </footer>
+                    <div class="content-backdrop fade"></div>
+                </div>
+                <!-- / Content wrapper -->
+            </div>
+            <!-- / Layout page -->
+        </div>
+
+        <!-- Overlay for Mobile -->
+        <div class="layout-overlay layout-menu-toggle"></div>
+    </div>
+    <!-- / Layout wrapper -->
+
+    <!-- Sneat Core & Vendor JS -->
+    <script src="{{ asset('admin-assets/vendor/libs/jquery/jquery.js') }}"></script>
+    <script src="{{ asset('admin-assets/vendor/libs/popper/popper.js') }}"></script>
+    <script src="{{ asset('admin-assets/vendor/js/bootstrap.js') }}"></script>
+    <script src="{{ asset('admin-assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js') }}"></script>
+    <script src="{{ asset('admin-assets/vendor/js/menu.js') }}"></script>
+
+    <!-- Apex Charts -->
+    <script src="{{ asset('admin-assets/vendor/libs/apex-charts/apexcharts.js') }}"></script>
+
+    <!-- SweetAlert2 JS (Global Modal & Toast) -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- Main JS -->
+    <script src="{{ asset('admin-assets/js/main.js') }}"></script>
+
+    <!-- Global Flash Messages & Alert Scripts -->
+    <div id="flash-data"
+         data-success="{{ session('success') }}"
+         data-error="{{ session('error') }}"
+         data-info="{{ session('info') }}"
+         data-warning="{{ session('warning') }}"
+         style="display: none;"></div>
+
+    <script>
+        // Global SweetAlert2 Toast Mixin (Modern, Rounded, Animated Icons)
+        window.Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3500,
+            timerProgressBar: true,
+            didOpen: function (toast) {
+                toast.addEventListener('mouseenter', Swal.stopTimer);
+                toast.addEventListener('mouseleave', Swal.resumeTimer);
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Baca Flash Messages dari Laravel Session
+            const flash = document.getElementById('flash-data');
+            if (flash) {
+                const successMsg = flash.getAttribute('data-success');
+                const errorMsg = flash.getAttribute('data-error');
+                const infoMsg = flash.getAttribute('data-info');
+                const warningMsg = flash.getAttribute('data-warning');
+
+                if (successMsg) {
+                    window.Toast.fire({ icon: 'success', title: successMsg });
+                }
+                if (errorMsg) {
+                    window.Toast.fire({ icon: 'error', title: errorMsg });
+                }
+                if (infoMsg) {
+                    window.Toast.fire({ icon: 'info', title: infoMsg });
+                }
+                if (warningMsg) {
+                    window.Toast.fire({ icon: 'warning', title: warningMsg });
+                }
+            }
+
+            // Dark Mode / Light Mode Toggle Handler
+            const themeToggleBtn = document.getElementById('themeToggleBtn');
+            const themeToggleIcon = document.getElementById('themeToggleIcon');
+
+            function syncThemeIcon() {
+                const isDark = document.documentElement.classList.contains('dark-style');
+                if (themeToggleIcon) {
+                    if (isDark) {
+                        themeToggleIcon.classList.remove('bx-moon');
+                        themeToggleIcon.classList.add('bx-sun');
+                        themeToggleBtn.setAttribute('title', 'Beralih ke Mode Terang');
+                    } else {
+                        themeToggleIcon.classList.remove('bx-sun');
+                        themeToggleIcon.classList.add('bx-moon');
+                        themeToggleBtn.setAttribute('title', 'Beralih ke Mode Gelap');
+                    }
+                }
+            }
+
+            syncThemeIcon();
+
+            if (themeToggleBtn) {
+                themeToggleBtn.addEventListener('click', function () {
+                    const isDark = document.documentElement.classList.contains('dark-style');
+                    if (isDark) {
+                        document.documentElement.classList.remove('dark-style');
+                        document.documentElement.classList.add('light-style');
+                        document.documentElement.setAttribute('data-bs-theme', 'light');
+                        localStorage.setItem('sneat_theme', 'light');
+                    } else {
+                        document.documentElement.classList.remove('light-style');
+                        document.documentElement.classList.add('dark-style');
+                        document.documentElement.setAttribute('data-bs-theme', 'dark');
+                        localStorage.setItem('sneat_theme', 'dark');
+                    }
+                    syncThemeIcon();
+                });
+            }
+
+            // SweetAlert2 Konfirmasi Logout
+            const btnLogout = document.getElementById('btnLogout');
+            const logoutForm = document.getElementById('logoutForm');
+            if (btnLogout && logoutForm) {
+                btnLogout.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    Swal.fire({
+                        title: 'Konfirmasi Keluar',
+                        text: 'Apakah Anda yakin ingin mengakhiri sesi dan keluar dari sistem?',
+                        icon: 'question',
+                        showCancelButton: true,
+                        confirmButtonText: 'Ya, Keluar',
+                        cancelButtonText: 'Batal',
+                        customClass: {
+                            confirmButton: 'btn-emerald',
+                            cancelButton: 'btn-slate'
+                        }
+                    }).then(function (result) {
+                        if (result.isConfirmed) {
+                            logoutForm.submit();
+                        }
+                    });
+                });
+            }
+        });
+
+        // Helper Global SweetAlert2 untuk konfirmasi hapus data
+        window.confirmDelete = function(formId, itemName) {
+            itemName = itemName || 'data ini';
+            Swal.fire({
+                title: 'Hapus Data?',
+                text: 'Apakah Anda yakin ingin menghapus ' + itemName + '? Tindakan ini tidak dapat dibatalkan.',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#C53030',
+                cancelButtonColor: '#64748B',
+                confirmButtonText: 'Ya, Hapus',
+                cancelButtonText: 'Batal'
+            }).then(function (result) {
+                if (result.isConfirmed) {
+                    const form = document.getElementById(formId);
+                    if (form) form.submit();
+                }
+            });
+        };
+    </script>
+
+    @stack('scripts')
+</body>
+</html>
