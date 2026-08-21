@@ -19,3 +19,11 @@ Route::middleware(['auth'])->group(function () {
         return view('admin.dashboard');
     })->name('dashboard');
 });
+
+Route::get('/cara', function () {
+    return view('cara');
+})->name('cara');
+
+Route::get('/testimoni', function () {
+    return view('testimoni');
+})->name('testimoni');
