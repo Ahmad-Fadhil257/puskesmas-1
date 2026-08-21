@@ -289,9 +289,6 @@
                             <div class="mb-2 mb-md-0">
                                 © {{ date('Y') }} Puskesmas CareLink. Sistem Manajemen Pelayanan Kesehatan.
                             </div>
-                            <div>
-                                <span class="badge bg-label-primary">Versi 1.0.0 (PKL)</span>
-                            </div>
                         </div>
                     </footer>
                     <div class="content-backdrop fade"></div>
