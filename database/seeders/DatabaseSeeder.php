@@ -22,5 +22,8 @@ class DatabaseSeeder extends Seeder
                 'email_verified_at' => now(),
             ]
         );
+
+        // Seed Data Artikel Berita Awal
+        $this->call(ArticleSeeder::class);
     }
 }

@@ -113,7 +113,7 @@
                     <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">Menu Utama</span>
                     </li>
-                    <li class="menu-item active">
+                    <li class="menu-item {{ request()->routeIs('dashboard') ? 'active' : '' }}">
                         <a href="{{ route('dashboard') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
                             <div data-i18n="Dashboard">Dashboard</div>
@@ -182,8 +182,8 @@
                             <div>Lihat Landing Page</div>
                         </a>
                     </li>
-                    <li class="menu-item">
-                        <a href="#berita" class="menu-link">
+                    <li class="menu-item {{ request()->routeIs('admin.articles.*') ? 'active' : '' }}">
+                        <a href="{{ route('admin.articles.index') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-news"></i>
                             <div>Kelola Berita & Info</div>
                         </a>

@@ -2,22 +2,22 @@
 <header class="site-header">
     <nav class="navbar">
         <!-- Brand / Logo -->
-        <a href="{{ url('/') }}" class="navbar__brand">
+        <a href="{{ route('home') }}" class="navbar__brand">
             Puskesmas CareLink
         </a>
 
         <!-- Desktop Menu -->
         <ul class="navbar__menu">
-            <li><a href="#home" class="active">Home</a></li>
-            <li><a href="#layanan">Layanan</a></li>
-            <li><a href="#jadwal">Jadwal Dokter</a></li>
-            <li><a href="#berita">Berita</a></li>
-            <li><a href="#tentang">Tentang Kami</a></li>
-            <li><a href="#kontak">Kontak</a></li>
+            <li><a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'active' : '' }}">Home</a></li>
+            <li><a href="{{ url('/#layanan') }}">Layanan</a></li>
+            <li><a href="{{ url('/#jadwal') }}">Jadwal Dokter</a></li>
+            <li><a href="{{ route('blog.index') }}" class="{{ request()->routeIs('blog.*') ? 'active' : '' }}">Berita</a></li>
+            <li><a href="{{ url('/#tentang') }}">Tentang Kami</a></li>
+            <li><a href="{{ url('/#kontak') }}">Kontak</a></li>
         </ul>
 
         <!-- Desktop CTA -->
-        <a href="#janji-temu" class="btn-nav-cta">Janji Temu</a>
+        <a href="{{ url('/#janji-temu') }}" class="btn-nav-cta">Janji Temu</a>
 
         <!-- Mobile Toggle Button -->
         <button class="navbar__toggle" id="mobileToggle" aria-label="Toggle navigation" aria-expanded="false">
@@ -32,12 +32,12 @@
 
     <!-- Mobile Dropdown Menu -->
     <div class="navbar__mobile" id="mobileMenu">
-        <a href="#home" class="active">Home</a>
-        <a href="#layanan">Layanan</a>
-        <a href="#jadwal">Jadwal Dokter</a>
-        <a href="#berita">Berita</a>
-        <a href="#tentang">Tentang Kami</a>
-        <a href="#kontak">Kontak</a>
-        <a href="#janji-temu" class="btn-nav-cta">Janji Temu</a>
+        <a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'active' : '' }}">Home</a>
+        <a href="{{ url('/#layanan') }}">Layanan</a>
+        <a href="{{ url('/#jadwal') }}">Jadwal Dokter</a>
+        <a href="{{ route('blog.index') }}" class="{{ request()->routeIs('blog.*') ? 'active' : '' }}">Berita</a>
+        <a href="{{ url('/#tentang') }}">Tentang Kami</a>
+        <a href="{{ url('/#kontak') }}">Kontak</a>
+        <a href="{{ url('/#janji-temu') }}" class="btn-nav-cta">Janji Temu</a>
     </div>
 </header>

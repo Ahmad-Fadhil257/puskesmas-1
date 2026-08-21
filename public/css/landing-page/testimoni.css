@@ -1,67 +1,90 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
 :root {
-    --color-primary:         #0A5C45;
-    --color-primary-hover:   #084A37;
-    --color-dark:            #122822;
-    --color-body:            #40564F;
-    --color-muted:           #526B63;
-    --color-bg-1:            #C5E5DD;
-    --color-bg-2:            #EEF8F5;
-    --color-surface:         #FFFFFF;
+    --color-primary:         #006346;
+    --color-primary-dark:    #004F38;
     --color-secondary:       #BBE4D8;
-    --color-secondary-hover: #A9DCCF;
-    --color-border:          #334D44;
-    --color-card-dark:       #13231E;
-    --color-orange:          #FA883C;
-    --color-orange-hover:    #E77427;
+    --color-orange:          #E8672C;
+    --color-orange-hover:    #D5561E;
     --color-gold:            #FBBF24;
 
     --font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-    --container-max:      1200px;
-    --section-padding-y:  80px;
-    --section-padding-x:  24px;
-    --radius-sm:   8px;
-    --radius-md:   12px;
-    --radius-lg:   16px;
-    --radius-xl:   24px;
+    --container-max:      1240px;
+    --radius-16: 16px;
     --radius-full: 9999px;
-    --shadow-sm: 0 2px 8px rgba(10, 92, 69, 0.08);
-    --shadow-md: 0 4px 16px rgba(10, 92, 69, 0.12);
-    --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.18);
-    --transition: all 0.25s ease;
+    --transition-smooth: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* ==========================================================================
-   TESTIMONI SECTION
+   TESTIMONI SECTION (FULL WIDTH & SWIPER CAROUSEL ALA MADTIVE.COM)
    ========================================================================== */
 .testimonials {
-    padding: 40px var(--section-padding-x) 70px;
-    background: transparent;
     width: 100%;
+    margin: 60px 0;
+    padding: 90px 0 100px;
+    background: linear-gradient(145deg, #006648 0%, #00533B 60%, #004531 100%);
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
 }
 
 .testimonials__container {
     max-width: var(--container-max);
     margin: 0 auto;
+    padding: 0 32px;
     width: 100%;
-}
-
-.testimonials__card-wrap {
-    background: var(--color-primary);
-    border-radius: 32px;
-    padding: 64px 40px;
-    box-shadow: var(--shadow-md);
     position: relative;
-    overflow: hidden;
+    z-index: 1;
 }
 
 /* --------------------------------------------------------------------------
-   Header
+   Subtle Ambient Glow & Pattern
+   -------------------------------------------------------------------------- */
+.testimonials__decor-glow-1 {
+    position: absolute;
+    top: -100px;
+    right: -100px;
+    width: 450px;
+    height: 450px;
+    background: radial-gradient(circle, rgba(187, 228, 216, 0.22) 0%, transparent 70%);
+    border-radius: 50%;
+    filter: blur(60px);
+    pointer-events: none;
+    z-index: -1;
+}
+
+.testimonials__decor-glow-2 {
+    position: absolute;
+    bottom: -120px;
+    left: -120px;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(232, 103, 44, 0.16) 0%, transparent 70%);
+    border-radius: 50%;
+    filter: blur(65px);
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Pattern Halus (Subtle Geometric Dot Grid ~4% opacity) */
+.testimonials__decor-pattern {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1.2px, transparent 1.2px);
+    background-size: 24px 24px;
+    opacity: 0.55;
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* --------------------------------------------------------------------------
+   Section Header
    -------------------------------------------------------------------------- */
 .testimonials__header {
     text-align: center;
     margin-bottom: 48px;
+    position: relative;
+    z-index: 1;
 }
 
 .testimonials__badge {
@@ -69,7 +92,7 @@
     align-items: center;
     justify-content: center;
     gap: 8px;
-    color: var(--color-secondary);
+    color: #92e4c8;
     font-size: 0.8125rem;
     font-weight: 700;
     letter-spacing: 0.12em;
@@ -78,65 +101,157 @@
 }
 
 .testimonials__badge svg {
-    width: 16px;
-    height: 16px;
+    width: 15px;
+    height: 15px;
     fill: currentColor;
 }
 
 .testimonials__title {
     color: #ffffff;
     font-family: var(--font-family);
-    font-size: 2.25rem;
-    font-weight: 700;
+    font-size: 2.375rem;
+    font-weight: 800;
     line-height: 1.25;
     margin-bottom: 14px;
-    letter-spacing: -0.01em;
+    letter-spacing: -0.02em;
     max-width: 780px;
     margin-left: auto;
     margin-right: auto;
 }
 
 .testimonials__subtitle {
-    color: rgba(255, 255, 255, 0.82);
+    color: rgba(255, 255, 255, 0.85);
     font-size: 0.9375rem;
-    line-height: 1.6;
+    line-height: 1.65;
     max-width: 680px;
     margin: 0 auto;
 }
 
 /* --------------------------------------------------------------------------
-   Testimonial Grid (3 Columns)
+   Swiper Carousel Wrapper & Circular Navigation Buttons (Ala Madtive.com)
    -------------------------------------------------------------------------- */
-.testimonials__grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
+.testimonials__slider-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.testimonials__nav-btn {
+    position: absolute;
+    top: 48%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #FA883C;
+    border: none;
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 15;
+    transition: var(--transition-smooth);
+    box-shadow: 0 4px 16px rgba(250, 136, 60, 0.45);
+}
+
+.testimonials__nav-btn:hover {
+    background: #E8672C;
+    transform: translateY(-50%) scale(1.15);
+    box-shadow: 0 6px 22px rgba(232, 103, 44, 0.65);
+}
+
+.testimonials__nav-btn:active {
+    transform: translateY(-50%) scale(0.95);
+}
+
+.testimonials__nav-btn--prev {
+    left: -24px;
+}
+
+.testimonials__nav-btn--next {
+    right: -24px;
+}
+
+/* Swiper Container & Equal Heights */
+.testimoni-swiper {
+    overflow: hidden;
+    padding: 16px 4px 28px;
+    width: 100%;
+}
+
+.testimoni-swiper .swiper-wrapper {
+    display: flex;
     align-items: stretch;
 }
 
+.testimoni-swiper .swiper-slide {
+    height: auto;
+    display: flex;
+    align-items: stretch;
+    box-sizing: border-box;
+}
+
+/* --------------------------------------------------------------------------
+   Glassmorphism Testimonial Card (Equal Size & Uniform Height)
+   -------------------------------------------------------------------------- */
 .testimonial-card {
-    background: #0d221c;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-xl);
-    padding: 28px 24px;
+    width: 100%;
+    height: 100%;
+    min-height: 290px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: var(--radius-16);
+    padding: 32px 26px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    transition: var(--transition);
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 10px 30px rgba(0, 30, 20, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    transition: var(--transition-smooth);
+    position: relative;
+    overflow: hidden;
+    user-select: none;
+    box-sizing: border-box;
 }
 
+/* Glass Reflection Highlight */
+.testimonial-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 80%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.12), transparent);
+    transform: skewX(-20deg);
+    transition: left 0.75s ease;
+    pointer-events: none;
+}
+
+/* Interactive Hover Animation */
 .testimonial-card:hover {
-    transform: translateY(-4px);
-    border-color: var(--color-secondary);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+    transform: translateY(-8px) scale(1.015);
+    background: rgba(255, 255, 255, 0.13);
+    border-color: rgba(255, 255, 255, 0.35);
+    box-shadow: 0 20px 45px rgba(0, 25, 15, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.28);
+}
+
+.testimonial-card:hover::before {
+    left: 140%;
+}
+
+.testimonial-card__content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .testimonial-card__header {
     display: flex;
     align-items: center;
     gap: 14px;
-    margin-bottom: 18px;
+    margin-bottom: 20px;
 }
 
 .testimonial-card__avatar {
@@ -145,7 +260,14 @@
     border-radius: var(--radius-full);
     overflow: hidden;
     flex-shrink: 0;
-    border: 2px solid var(--color-secondary);
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+}
+
+.testimonial-card:hover .testimonial-card__avatar {
+    border-color: #FFFFFF;
+    transform: scale(1.06);
 }
 
 .testimonial-card__avatar img {
@@ -168,89 +290,150 @@
 }
 
 .testimonial-card__location {
-    color: rgba(255, 255, 255, 0.65);
+    color: rgba(255, 255, 255, 0.7);
     font-size: 0.75rem;
     font-weight: 500;
 }
 
+/* Quote Badge with Hover Animation */
 .testimonial-card__quote-badge {
-    width: 34px;
-    height: 34px;
+    width: 36px;
+    height: 36px;
     border-radius: var(--radius-full);
     background: var(--color-orange);
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    box-shadow: 0 2px 8px rgba(250, 136, 60, 0.4);
+    box-shadow: 0 3px 10px rgba(232, 103, 44, 0.4);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.testimonial-card:hover .testimonial-card__quote-badge {
+    transform: scale(1.12) rotate(6deg);
+    background: #FA793D;
+    box-shadow: 0 4px 16px rgba(232, 103, 44, 0.6);
 }
 
 .testimonial-card__quote-badge svg {
-    width: 15px;
-    height: 15px;
+    width: 16px;
+    height: 16px;
     fill: #ffffff;
 }
 
 .testimonial-card__quote {
-    color: rgba(255, 255, 255, 0.9);
+    color: rgba(255, 255, 255, 0.92);
     font-size: 0.875rem;
-    line-height: 1.65;
-    margin-bottom: 20px;
+    line-height: 1.68;
+    margin-bottom: 24px;
     flex: 1;
     font-style: normal;
 }
 
+/* Stars Rating with Hover Glow */
 .testimonial-card__stars {
     display: flex;
-    gap: 4px;
+    gap: 5px;
     align-items: center;
+    padding-top: 6px;
+    margin-top: auto;
+    transition: all 0.3s ease;
+}
+
+.testimonial-card:hover .testimonial-card__stars {
+    filter: drop-shadow(0 0 6px rgba(251, 191, 36, 0.7));
 }
 
 .testimonial-card__stars svg {
-    width: 16px;
-    height: 16px;
+    width: 17px;
+    height: 17px;
     fill: var(--color-gold);
+    transition: transform 0.2s ease;
+}
+
+.testimonial-card:hover .testimonial-card__stars svg {
+    transform: scale(1.08);
+}
+
+/* --------------------------------------------------------------------------
+   Swiper Pagination Dots (Presisi Gaya Madtive.com)
+   -------------------------------------------------------------------------- */
+.testimonials__pagination.swiper-pagination {
+    position: relative;
+    margin-top: 24px;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.testimonials__pagination .swiper-pagination-bullet {
+    width: 8px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.35);
+    opacity: 1;
+    border-radius: 50%;
+    margin: 0 !important;
+    transition: var(--transition-smooth);
+    cursor: pointer;
+}
+
+.testimonials__pagination .swiper-pagination-bullet:hover {
+    background: rgba(255, 255, 255, 0.7);
+}
+
+.testimonials__pagination .swiper-pagination-bullet-active {
+    width: 26px;
+    border-radius: 9999px;
+    background: #FA883C;
+    box-shadow: 0 2px 10px rgba(250, 136, 60, 0.55);
 }
 
 /* --------------------------------------------------------------------------
    Responsive Breakpoints
    -------------------------------------------------------------------------- */
 @media (max-width: 1024px) {
-    .testimonials__card-wrap {
-        padding: 48px 28px;
-    }
-
     .testimonials__title {
-        font-size: 1.875rem;
+        font-size: 2rem;
     }
 
-    .testimonials__grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
+    .testimonials__nav-btn--prev {
+        left: -14px;
+    }
+
+    .testimonials__nav-btn--next {
+        right: -14px;
     }
 }
 
 @media (max-width: 768px) {
     .testimonials {
-        padding: 30px 16px 50px;
+        padding: 60px 0 75px;
     }
 
-    .testimonials__card-wrap {
-        border-radius: 24px;
-        padding: 36px 18px;
-    }
-
-    .testimonials__title {
-        font-size: 1.5rem;
+    .testimonials__container {
+        padding: 0 20px;
     }
 
     .testimonial-card {
-        padding: 22px 18px;
+        padding: 26px 20px;
     }
-}
 
-@media (max-width: 480px) {
     .testimonials__title {
-        font-size: 1.25rem;
+        font-size: 1.625rem;
+    }
+
+    .testimonials__nav-btn {
+        width: 38px;
+        height: 38px;
+    }
+
+    .testimonials__nav-btn--prev {
+        left: -8px;
+    }
+
+    .testimonials__nav-btn--next {
+        right: -8px;
     }
 }
