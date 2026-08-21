@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="{{ asset('css/landing-page/cara.css') }}">
     <link rel="stylesheet" href="{{ asset('css/landing-page/testimoni.css') }}">
     <link rel="stylesheet" href="{{ asset('css/landing-page/blog.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/landing-page/footer.css') }}">
 
     @stack('styles')
 </head>
@@ -30,6 +31,9 @@
     <main>
         @yield('content')
     </main>
+
+    <!-- Footer -->
+    @include('landing-page.footer')
 
     <!-- Mobile Menu Script -->
     <script>
