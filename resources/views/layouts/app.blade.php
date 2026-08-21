@@ -33,10 +33,10 @@
 
     <!-- Mobile Menu Script -->
     <script>
-        (function () {
-            const toggle   = document.getElementById('mobileToggle');
-            const menu     = document.getElementById('mobileMenu');
-            const iconOpen  = document.getElementById('iconOpen');
+        document.addEventListener('DOMContentLoaded', function () {
+            const toggle = document.getElementById('mobileToggle');
+            const menu = document.getElementById('mobileMenu');
+            const iconOpen = document.getElementById('iconOpen');
             const iconClose = document.getElementById('iconClose');
 
             if (!toggle || !menu) return;
@@ -44,7 +44,7 @@
             toggle.addEventListener('click', function () {
                 const isOpen = menu.classList.toggle('open');
                 toggle.setAttribute('aria-expanded', isOpen);
-                iconOpen.style.display  = isOpen ? 'none' : 'block';
+                iconOpen.style.display = isOpen ? 'none' : 'block';
                 iconClose.style.display = isOpen ? 'block' : 'none';
             });
 
@@ -52,11 +52,11 @@
                 link.addEventListener('click', function () {
                     menu.classList.remove('open');
                     toggle.setAttribute('aria-expanded', 'false');
-                    iconOpen.style.display  = 'block';
+                    iconOpen.style.display = 'block';
                     iconClose.style.display = 'none';
                 });
             });
-        })();
+        });
     </script>
 
     @stack('scripts')
