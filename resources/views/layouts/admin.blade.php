@@ -44,14 +44,48 @@
     <link rel="stylesheet" href="{{ asset('admin-assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
     <link rel="stylesheet" href="{{ asset('admin-assets/vendor/libs/apex-charts/apex-charts.css') }}" />
 
-    <!-- SweetAlert2 CSS (Modal Popup & Toast Notification Modern) -->
+    <!-- SweetAlert2 & Toastr CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
     <!-- Custom Puskesmas CareLink Theme Override (Emerald Green & Dark Mode) -->
     <link rel="stylesheet" href="{{ asset('admin-assets/css/custom-theme.css') }}" />
 
     <style>
-        /* SweetAlert2 Modal & Toast Custom Styling */
+        /* Toastr & SweetAlert2 Custom Positioning (Turun 85px agar tidak tertutup Navbar Admin) */
+        #toast-container,
+        .toast-top-right {
+            top: 85px !important;
+            right: 25px !important;
+            z-index: 999999 !important;
+        }
+        .toast {
+            border-radius: 12px !important;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18) !important;
+            opacity: 1 !important;
+            font-family: 'Plus Jakarta Sans', sans-serif !important;
+            padding: 14px 18px 14px 50px !important;
+        }
+        .toast-success {
+            background-color: #0A5C45 !important;
+        }
+        .toast-error {
+            background-color: #DC2626 !important;
+        }
+        .toast-warning {
+            background-color: #F59E0B !important;
+        }
+        .toast-info {
+            background-color: #0284C7 !important;
+        }
+        .swal2-container {
+            z-index: 999999 !important;
+        }
+        .swal2-container.swal2-top-end,
+        .swal2-container.swal2-top-right {
+            top: 85px !important;
+            right: 25px !important;
+        }
         .swal2-popup {
             font-family: 'Plus Jakarta Sans', sans-serif !important;
             border-radius: 16px !important;
@@ -282,8 +316,9 @@
     <!-- Apex Charts -->
     <script src="{{ asset('admin-assets/vendor/libs/apex-charts/apexcharts.js') }}"></script>
 
-    <!-- SweetAlert2 JS (Global Modal & Toast) -->
+    <!-- SweetAlert2 & Toastr JS (Global Modal & Toast) -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
     <!-- Main JS -->
     <script src="{{ asset('admin-assets/js/main.js') }}"></script>
