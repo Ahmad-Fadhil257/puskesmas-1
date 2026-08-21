@@ -1,11 +1,14 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CaraKerjaController;
+use App\Models\CaraKerja;
 use Illuminate\Support\Facades\Route;
 
 // Landing Page
 Route::get('/', function () {
-    return view('welcome');
+    $caraKerja = CaraKerja::orderBy('urutan', 'asc')->get();
+    return view('welcome', compact('caraKerja'));
 })->name('home');
 
 // Auth Routes (URL Khusus Login: /puskem-min)
@@ -18,4 +21,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () {
         return view('admin.dashboard');
     })->name('dashboard');
+
+    // Cara Kerja CRUD
+    Route::prefix('admin')->name('admin.')->group(function () {
+        Route::resource('cara-kerja', CaraKerjaController::class)->except(['show']);
+    });
 });
