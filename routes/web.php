@@ -3,12 +3,12 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\Admin\ArticleController as AdminArticleController;
-use App\Models\Article;
 use App\Http\Controllers\CaraKerjaController;
+use App\Models\Article;
 use App\Models\CaraKerja;
 use Illuminate\Support\Facades\Route;
 
-// Landing Page Utama (dengan passing 3 artikel terbaru)
+// Landing Page Utama (dengan passing artikel terbaru dan cara kerja dinamis)
 Route::get('/', function () {
     $latestArticles = Article::published()->take(3)->get();
     $caraKerja = CaraKerja::orderBy('urutan', 'asc')->get();

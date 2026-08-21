@@ -44,14 +44,48 @@
     <link rel="stylesheet" href="{{ asset('admin-assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
     <link rel="stylesheet" href="{{ asset('admin-assets/vendor/libs/apex-charts/apex-charts.css') }}" />
 
-    <!-- SweetAlert2 CSS (Modal Popup & Toast Notification Modern) -->
+    <!-- SweetAlert2 & Toastr CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
     <!-- Custom Puskesmas CareLink Theme Override (Emerald Green & Dark Mode) -->
     <link rel="stylesheet" href="{{ asset('admin-assets/css/custom-theme.css') }}" />
 
     <style>
-        /* SweetAlert2 Modal & Toast Custom Styling */
+        /* Toastr & SweetAlert2 Custom Positioning (Turun 85px agar tidak tertutup Navbar Admin) */
+        #toast-container,
+        .toast-top-right {
+            top: 85px !important;
+            right: 25px !important;
+            z-index: 999999 !important;
+        }
+        .toast {
+            border-radius: 12px !important;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18) !important;
+            opacity: 1 !important;
+            font-family: 'Plus Jakarta Sans', sans-serif !important;
+            padding: 14px 18px 14px 50px !important;
+        }
+        .toast-success {
+            background-color: #0A5C45 !important;
+        }
+        .toast-error {
+            background-color: #DC2626 !important;
+        }
+        .toast-warning {
+            background-color: #F59E0B !important;
+        }
+        .toast-info {
+            background-color: #0284C7 !important;
+        }
+        .swal2-container {
+            z-index: 999999 !important;
+        }
+        .swal2-container.swal2-top-end,
+        .swal2-container.swal2-top-right {
+            top: 85px !important;
+            right: 25px !important;
+        }
         .swal2-popup {
             font-family: 'Plus Jakarta Sans', sans-serif !important;
             border-radius: 16px !important;
@@ -109,7 +143,7 @@
 
                 <!-- Menu Navigation -->
                 <ul class="menu-inner py-1">
-                    <!-- UTAMA -->
+                    <!-- MENU UTAMA -->
                     <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">Menu Utama</span>
                     </li>
@@ -120,67 +154,9 @@
                         </a>
                     </li>
 
-                    <!-- PELAYANAN & PASIEN -->
+                    <!-- KONTEN & INFORMASI WEBSITE -->
                     <li class="menu-header small text-uppercase">
-                        <span class="menu-header-text">Pelayanan Pasien</span>
-                    </li>
-                    <li class="menu-item">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bx bx-user-plus"></i>
-                            <div data-i18n="Pendaftaran">Pendaftaran & Antrean</div>
-                        </a>
-                        <ul class="menu-sub">
-                            <li class="menu-item">
-                                <a href="#antrean" class="menu-link">
-                                    <div>Antrean Hari Ini</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="#janji-online" class="menu-link">
-                                    <div>Janji Temu Online</div>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="menu-item">
-                        <a href="#data-pasien" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-group"></i>
-                            <div>Data Pasien (Rekam Medis)</div>
-                        </a>
-                    </li>
-                    <li class="menu-item">
-                        <a href="#poli-layanan" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-plus-medical"></i>
-                            <div>Poli & Layanan Medis</div>
-                        </a>
-                    </li>
-
-                    <!-- TENAGA MEDIS & JADWAL -->
-                    <li class="menu-header small text-uppercase">
-                        <span class="menu-header-text">Tenaga Medis</span>
-                    </li>
-                    <li class="menu-item">
-                        <a href="#data-dokter" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-id-card"></i>
-                            <div>Data Dokter & Bidan</div>
-                        </a>
-                    </li>
-                    <li class="menu-item">
-                        <a href="#jadwal-praktik" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-calendar-event"></i>
-                            <div>Jadwal Praktik</div>
-                        </a>
-                    </li>
-
-                    <!-- INFORMASI & PENGATURAN -->
-                    <li class="menu-header small text-uppercase">
-                        <span class="menu-header-text">Informasi & Website</span>
-                    </li>
-                    <li class="menu-item">
-                        <a href="{{ url('/') }}" target="_blank" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-globe"></i>
-                            <div>Lihat Landing Page</div>
-                        </a>
+                        <span class="menu-header-text">Manajemen Konten</span>
                     </li>
                     <li class="menu-item {{ request()->routeIs('admin.articles.*') ? 'active' : '' }}">
                         <a href="{{ route('admin.articles.index') }}" class="menu-link">
@@ -188,10 +164,16 @@
                             <div>Kelola Berita & Info</div>
                         </a>
                     </li>
-                    <li class="menu-item">
+                    <li class="menu-item {{ request()->routeIs('admin.cara-kerja.*') ? 'active' : '' }}">
                         <a href="{{ route('admin.cara-kerja.index') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-list-check"></i>
                             <div>Kelola Cara Kerja</div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="{{ url('/') }}" target="_blank" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-globe"></i>
+                            <div>Lihat Landing Page</div>
                         </a>
                     </li>
                 </ul>
@@ -334,8 +316,9 @@
     <!-- Apex Charts -->
     <script src="{{ asset('admin-assets/vendor/libs/apex-charts/apexcharts.js') }}"></script>
 
-    <!-- SweetAlert2 JS (Global Modal & Toast) -->
+    <!-- SweetAlert2 & Toastr JS (Global Modal & Toast) -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
     <!-- Main JS -->
     <script src="{{ asset('admin-assets/js/main.js') }}"></script>
