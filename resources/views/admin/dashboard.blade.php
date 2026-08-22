@@ -21,7 +21,7 @@
                         <div class="card-body">
                             <h5 class="card-title text-primary fw-bold mb-2">Selamat Datang, {{ Auth::user()->name }}! 🏥</h5>
                             <p class="mb-4 text-muted">
-                                Sistem manajemen pelayanan Puskesmas CareLink aktif dan berjalan normal. Hari ini terdapat <span class="fw-bold text-dark">24 antrean pasien</span> yang sedang berjalan.
+                                Sistem manajemen pelayanan Puskesmas aktif dan berjalan normal. Hari ini terdapat <span class="fw-bold text-dark">24 antrean pasien</span> yang sedang berjalan.
                             </p>
                             <a href="#tabel-antrean" class="btn btn-sm btn-primary rounded-pill">
                                 <i class="bx bx-list-ul me-1"></i> Pantau Antrean Hari Ini

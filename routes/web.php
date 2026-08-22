@@ -26,6 +26,7 @@ Route::get('/berita/{slug}', [BlogController::class, 'show'])->name('blog.show')
 
 // Auth Routes (URL Khusus Login: /puskem-min)
 Route::get('/puskem-min', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('/puskem-gate', [AuthController::class, 'verifyGate'])->name('gate.verify');
 Route::post('/puskem-login', [AuthController::class, 'login'])->name('login.post');
 Route::post('/puskem-logout', [AuthController::class, 'logout'])->name('logout');
 

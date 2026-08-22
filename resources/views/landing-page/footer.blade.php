@@ -6,7 +6,7 @@
 
                 <!-- Brand -->
                 <div class="footer__brand">
-                    <h3 class="footer__brand-title">Puskesmas<br>CareLink</h3>
+                    <h3 class="footer__brand-title"><span class="brand-text">Puskesmas</span></h3>
                     <p class="footer__brand-desc">
                         Melayani dengan Sepenuh Hati.<br>
                         Menyediakan layanan kesehatan<br>
@@ -66,7 +66,7 @@
     <!-- Copyright -->
     <div class="footer__bottom">
         <div class="footer__container">
-            <p class="footer__copyright">&copy; 2024 Puskesmas CareLink. Melayani dengan Sepenuh Hati.</p>
+            <p class="footer__copyright">&copy; {{ date('Y') }} Puskesmas. Melayani dengan Sepenuh Hati.</p>
         </div>
     </div>
 </footer>

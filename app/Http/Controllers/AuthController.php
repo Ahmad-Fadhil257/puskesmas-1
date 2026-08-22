@@ -10,7 +10,7 @@ use Illuminate\Support\Str;
 class AuthController extends Controller
 {
     /**
-     * Menampilkan halaman login langsung
+     * Menampilkan halaman login dengan status Gatekeeper
      */
     public function showLoginForm()
     {
@@ -18,7 +18,39 @@ class AuthController extends Controller
             return redirect()->route('dashboard');
         }
 
-        return view('auth.login');
+        $gatePassed = session('gatekeeper_passed', false);
+
+        return view('auth.login', compact('gatePassed'));
+    }
+
+    /**
+     * Verifikasi Akses Gatekeeper (Security Gate)
+     */
+    public function verifyGate(Request $request)
+    {
+        $request->validate([
+            'username' => ['required', 'string'],
+            'password' => ['required', 'string'],
+        ]);
+
+        $validUsernames = ['admin', 'puskem', 'puskesmas'];
+        $validPasswords = ['admin', 'puskem123', 'puskesmas123', 'password123'];
+
+        $inputUser = strtolower(trim($request->username));
+        $inputPass = trim($request->password);
+
+        if (in_array($inputUser, $validUsernames) && in_array($inputPass, $validPasswords)) {
+            $request->session()->put('gatekeeper_passed', true);
+            return response()->json([
+                'success' => true,
+                'message' => 'Otorisasi Gatekeeper Berhasil! Membuka panel login...',
+            ]);
+        }
+
+        return response()->json([
+            'success' => false,
+            'message' => 'Username atau Password Gate tidak valid.',
+        ], 403);
     }
 
     /**
