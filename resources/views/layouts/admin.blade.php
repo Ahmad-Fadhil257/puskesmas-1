@@ -158,6 +158,12 @@
                     <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">Manajemen Konten</span>
                     </li>
+                    <li class="menu-item {{ request()->routeIs('admin.hero.*') ? 'active' : '' }}">
+                        <a href="{{ route('admin.hero.index') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-layout"></i>
+                            <div>Kelola Hero & Fitur</div>
+                        </a>
+                    </li>
                     <li class="menu-item {{ request()->routeIs('admin.articles.*') ? 'active' : '' }}">
                         <a href="{{ route('admin.articles.index') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-news"></i>

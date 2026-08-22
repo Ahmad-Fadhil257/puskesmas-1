@@ -3,16 +3,21 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\Admin\ArticleController as AdminArticleController;
+use App\Http\Controllers\Admin\HeroController as AdminHeroController;
 use App\Http\Controllers\CaraKerjaController;
 use App\Models\Article;
 use App\Models\CaraKerja;
+use App\Models\HeroSection;
+use App\Models\InfoCard;
 use Illuminate\Support\Facades\Route;
 
-// Landing Page Utama (dengan passing artikel terbaru dan cara kerja dinamis)
+// Landing Page Utama (dengan passing artikel terbaru, cara kerja dinamis, hero & info cards)
 Route::get('/', function () {
     $latestArticles = Article::published()->take(3)->get();
     $caraKerja = CaraKerja::orderBy('urutan', 'asc')->get();
-    return view('welcome', compact('latestArticles', 'caraKerja'));
+    $hero = HeroSection::first();
+    $infoCards = InfoCard::orderBy('urutan', 'asc')->get();
+    return view('welcome', compact('latestArticles', 'caraKerja', 'hero', 'infoCards'));
 })->name('home');
 
 // Portal Publik Berita & Blog
@@ -39,5 +44,10 @@ Route::middleware(['auth'])->group(function () {
     // Cara Kerja CRUD
     Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('cara-kerja', CaraKerjaController::class)->except(['show']);
+
+        // Kelola Hero Section & Info Cards
+        Route::get('hero', [AdminHeroController::class, 'index'])->name('hero.index');
+        Route::put('hero/update', [AdminHeroController::class, 'updateHero'])->name('hero.update');
+        Route::put('hero/info-cards/{id}', [AdminHeroController::class, 'updateCard'])->name('hero.update-card');
     });
 });
