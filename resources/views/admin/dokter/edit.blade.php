@@ -190,14 +190,15 @@ function addJadwalRow() {
     const container = document.getElementById('jadwalRows');
     const row = document.createElement('div');
     row.className = 'jadwal-row d-flex gap-2 mb-2 align-items-center';
-    row.innerHTML = `
-        <select name="jadwal_hari[]" class="form-select form-select-sm" style="width: 140px;">
-            <option value="">-- Hari --</option>
-            ${hariOptions.map(d => `<option value="${d}">${d}</option>`).join('')}
-        </select>
-        <input type="text" name="jadwal_jam[]" class="form-control form-control-sm" placeholder="Contoh: 08:00 - 12:00" style="flex:1;">
-        <button type="button" class="btn btn-sm btn-outline-danger btn-remove-jadwal" title="Hapus"><i class="bx bx-x"></i></button>
-    `;
+
+    var options = '<option value="">-- Hari --</option>';
+    for (var i = 0; i < hariOptions.length; i++) {
+        options += '<option value="' + hariOptions[i] + '">' + hariOptions[i] + '</option>';
+    }
+
+    row.innerHTML = '<select name="jadwal_hari[]" class="form-select form-select-sm" style="width: 140px;">' + options + '</select>' +
+        '<input type="text" name="jadwal_jam[]" class="form-control form-control-sm" placeholder="Contoh: 08:00 - 12:00" style="flex:1;">' +
+        '<button type="button" class="btn btn-sm btn-outline-danger btn-remove-jadwal" title="Hapus"><i class="bx bx-x"></i></button>';
     container.appendChild(row);
     row.querySelector('.btn-remove-jadwal').addEventListener('click', function() { row.remove(); });
 }
