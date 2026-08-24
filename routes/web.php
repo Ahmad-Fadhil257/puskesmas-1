@@ -3,16 +3,19 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\Admin\ArticleController as AdminArticleController;
+use App\Http\Controllers\Admin\AboutController as AdminAboutController;
 use App\Http\Controllers\CaraKerjaController;
+use App\Models\About;
 use App\Models\Article;
 use App\Models\CaraKerja;
 use Illuminate\Support\Facades\Route;
 
-// Landing Page Utama (dengan passing artikel terbaru dan cara kerja dinamis)
+// Landing Page Utama (dengan passing artikel terbaru, cara kerja dinamis, dan tentang kami)
 Route::get('/', function () {
     $latestArticles = Article::published()->take(3)->get();
     $caraKerja = CaraKerja::orderBy('urutan', 'asc')->get();
-    return view('welcome', compact('latestArticles', 'caraKerja'));
+    $about = About::getActive();
+    return view('welcome', compact('latestArticles', 'caraKerja', 'about'));
 })->name('home');
 
 // Portal Publik Berita & Blog
@@ -40,4 +43,8 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('cara-kerja', CaraKerjaController::class)->except(['show']);
     });
+
+    // Pengaturan & Manajemen Tentang Kami (About)
+    Route::get('admin/about', [AdminAboutController::class, 'index'])->name('admin.about.index');
+    Route::put('admin/about', [AdminAboutController::class, 'update'])->name('admin.about.update');
 });

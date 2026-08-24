@@ -170,6 +170,12 @@
                             <div>Kelola Cara Kerja</div>
                         </a>
                     </li>
+                    <li class="menu-item {{ request()->routeIs('admin.about.*') ? 'active' : '' }}">
+                        <a href="{{ route('admin.about.index') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-info-circle"></i>
+                            <div>Kelola Tentang Kami</div>
+                        </a>
+                    </li>
                     <li class="menu-item">
                         <a href="{{ url('/') }}" target="_blank" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-globe"></i>

@@ -5,14 +5,14 @@
         {{-- Left Column: Staggered Photos --}}
         <div class="about__images">
             <div class="about__img-wrap about__img-wrap--main">
-                <img src="{{ asset('assets/about/about-1.jpg') }}"
-                     alt="Tim medis profesional Puskesmas CareLink"
+                <img src="{{ isset($about) ? $about->image_main_url : asset('assets/about/about-1.jpg') }}"
+                     alt="{{ $about->title ?? 'Tim medis profesional Puskesmas CareLink' }}"
                      class="about__img"
                      loading="lazy">
             </div>
             <div class="about__img-wrap about__img-wrap--accent">
-                <img src="{{ asset('assets/about/about-2.jpg') }}"
-                     alt="Tenaga kesehatan berstandar tinggi Puskesmas CareLink"
+                <img src="{{ isset($about) ? $about->image_accent_url : asset('assets/about/about-2.jpg') }}"
+                     alt="{{ $about->title ?? 'Tenaga kesehatan berstandar tinggi Puskesmas CareLink' }}"
                      class="about__img"
                      loading="lazy">
             </div>
@@ -26,17 +26,17 @@
                 <svg viewBox="0 0 24 24" aria-hidden="true">
                     <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
                 </svg>
-                <span>Tentang Kami</span>
+                <span>{{ $about->badge_label ?? 'Tentang Kami' }}</span>
             </div>
 
             {{-- Heading H2 --}}
             <h2 class="about__title">
-                Puskesmas CareLink&nbsp; Menciptakan Pelayanan Aman, Kesehatan Adalah Prioritas Kami
+                {!! nl2br(e($about->title ?? 'Puskesmas CareLink  Menciptakan Pelayanan Aman, Kesehatan Adalah Prioritas Kami')) !!}
             </h2>
 
             {{-- Description --}}
             <p class="about__desc">
-                Puskesmas CareLink menyediakan layanan kesehatan berkualitas tinggi dengan dokter berpengalaman, layanan gawat darurat, dan dukungan sepanjang waktu. Mitra tepercaya Anda untuk hidup yang lebih sehat.
+                {!! nl2br(e($about->description ?? 'Puskesmas CareLink menyediakan layanan kesehatan berkualitas tinggi dengan dokter berpengalaman, layanan gawat darurat, dan dukungan sepanjang waktu. Mitra tepercaya Anda untuk hidup yang lebih sehat.')) !!}
             </p>
 
             {{-- Visi & Misi Cards --}}
@@ -50,9 +50,9 @@
                             <path d="M2 12C2 12 5 5 12 5s10 7 10 7-3 7-10 7S2 12 2 12z"/>
                         </svg>
                     </div>
-                    <h3 class="about__card-title">Visi Kami</h3>
+                    <h3 class="about__card-title">{{ $about->visi_title ?? 'Visi Kami' }}</h3>
                     <p class="about__card-text">
-                        Menjadi pemimpin tepercaya dalam layanan kesehatan yang berkualitas, mudah diakses, dan penuh kepedulian.
+                        {!! nl2br(e($about->visi_text ?? 'Menjadi pemimpin tepercaya dalam layanan kesehatan yang berkualitas, mudah diakses, dan penuh kepedulian.')) !!}
                     </p>
                 </div>
 
@@ -64,9 +64,9 @@
                             <line x1="4" y1="22" x2="4" y2="15"/>
                         </svg>
                     </div>
-                    <h3 class="about__card-title">Misi Kami</h3>
+                    <h3 class="about__card-title">{{ $about->misi_title ?? 'Misi Kami' }}</h3>
                     <p class="about__card-text">
-                        CareLink menghadirkan layanan ahli yang berfokus pada pasien, didukung oleh teknologi canggih dan layanan 24/7, serta berorientasi pada kesehatan dan kesejahteraan.
+                        {!! nl2br(e($about->misi_text ?? 'CareLink menghadirkan layanan ahli yang berfokus pada pasien, didukung oleh teknologi canggih dan layanan 24/7, serta berorientasi pada kesehatan dan kesejahteraan.')) !!}
                     </p>
                 </div>
 
