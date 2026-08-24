@@ -115,49 +115,6 @@
 
     </div>
 
-    {{-- ====== POPUP MODAL GERBANG KEAMANAN (GATEKEEPER SECURITY OVERLAY) ====== --}}
-    <div class="gate-modal-overlay" id="gateModalOverlay">
-        <div class="gate-modal-box">
-            <div class="gate-icon-circle">
-                <i class="fa-solid fa-shield-halved"></i>
-            </div>
-            <h2 class="gate-modal-title">Verifikasi Akses Gerbang</h2>
-            <p class="gate-modal-desc">Halaman ini dilindungi. Masukkan otorisasi gerbang untuk membuka formulir login administrator.</p>
-
-            <form id="gateForm">
-                @csrf
-                <div class="form-group text-start">
-                    <label for="gate_user" class="form-label">Username / Email Gate</label>
-                    <div class="input-wrapper">
-                        <i class="fa-solid fa-user-shield input-icon"></i>
-                        <input type="text" id="gate_user" class="form-input" placeholder="admin / puskem atau email akun" required autofocus>
-                    </div>
-                </div>
-
-                <div class="form-group text-start">
-                    <label for="gate_pass" class="form-label">Password Gate</label>
-                    <div class="input-wrapper">
-                        <i class="fa-solid fa-key input-icon"></i>
-                        <input type="password" id="gate_pass" class="form-input" placeholder="••••••••" required>
-                        <i class="fa-solid fa-eye toggle-password" id="toggleGatePassword"></i>
-                    </div>
-                </div>
-
-                <button type="submit" class="btn-login mt-4" id="btnSubmitGate">
-                    <span id="btnGateText">Buka Akses Gerbang</span>
-                    <i class="fa-solid fa-unlock-keyhole"></i>
-                </button>
-            </form>
-
-            <div class="login-footer">
-                <a href="{{ url('/') }}">
-                    <i class="fa-solid fa-arrow-left"></i>
-                    <span>Kembali ke Halaman Utama</span>
-                </a>
-            </div>
-        </div>
-    </div>
-
     <!-- Scripts: SweetAlert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -175,86 +132,19 @@
         });
 
         document.addEventListener('DOMContentLoaded', () => {
-            // Password Show/Hide Toggle Helpers
-            function setupPasswordToggle(toggleId, inputId) {
-                const toggle = document.getElementById(toggleId);
-                const input = document.getElementById(inputId);
-                if (toggle && input) {
-                    toggle.addEventListener('click', () => {
-                        const isPass = input.getAttribute('type') === 'password';
-                        input.setAttribute('type', isPass ? 'text' : 'password');
-                        toggle.classList.toggle('fa-eye', !isPass);
-                        toggle.classList.toggle('fa-eye-slash', isPass);
-                    });
-                }
-            }
-
-            setupPasswordToggle('toggleGatePassword', 'gate_pass');
-            setupPasswordToggle('togglePassword', 'password');
-
-            // 1. Handle Gatekeeper Popup Submission
-            const gateForm = document.getElementById('gateForm');
-            const gateModalOverlay = document.getElementById('gateModalOverlay');
-            const btnSubmitGate = document.getElementById('btnSubmitGate');
-            const btnGateText = document.getElementById('btnGateText');
-
-            if (gateForm) {
-                gateForm.addEventListener('submit', async (e) => {
-                    e.preventDefault();
-
-                    const username = document.getElementById('gate_user').value;
-                    const password = document.getElementById('gate_pass').value;
-                    const token = "{{ csrf_token() }}";
-
-                    btnSubmitGate.disabled = true;
-                    btnGateText.textContent = 'Memvalidasi Gerbang...';
-
-                    try {
-                        const res = await fetch("{{ route('gate.verify') }}", {
-                            method: "POST",
-                            headers: {
-                                "Content-Type": "application/json",
-                                "X-CSRF-TOKEN": token,
-                                "Accept": "application/json"
-                            },
-                            body: JSON.stringify({ username, password })
-                        });
-
-                        const data = await res.json();
-
-                        if (res.ok && data.success) {
-                            Toast.fire({
-                                icon: 'success',
-                                title: data.message
-                            });
-
-                            if (data.mode === 'direct_login' && data.redirect_url) {
-                                btnGateText.textContent = 'Sukses! Mengalihkan...';
-                                setTimeout(() => {
-                                    window.location.href = data.redirect_url;
-                                }, 700);
-                            } else {
-                                // Tutup Popup Modal Gerbang dan fokus ke formulir login utama
-                                setTimeout(() => {
-                                    gateModalOverlay.classList.add('hidden');
-                                    document.getElementById('email').focus();
-                                }, 400);
-                            }
-                        } else {
-                            throw new Error(data.message || 'Username/Email atau Password tidak valid.');
-                        }
-                    } catch (err) {
-                        Toast.fire({
-                            icon: 'error',
-                            title: err.message
-                        });
-                        btnSubmitGate.disabled = false;
-                        btnGateText.textContent = 'Buka Akses Gerbang';
-                    }
+            // Password Show/Hide Toggle
+            const toggle = document.getElementById('togglePassword');
+            const input = document.getElementById('password');
+            if (toggle && input) {
+                toggle.addEventListener('click', () => {
+                    const isPass = input.getAttribute('type') === 'password';
+                    input.setAttribute('type', isPass ? 'text' : 'password');
+                    toggle.classList.toggle('fa-eye', !isPass);
+                    toggle.classList.toggle('fa-eye-slash', isPass);
                 });
             }
 
-            // 2. Handle Database Login Submission
+            // Handle Database Login Submission
             const dbLoginForm = document.getElementById('dbLoginForm');
             const btnSubmitLogin = document.getElementById('btnSubmitLogin');
             const btnText = document.getElementById('btnText');
