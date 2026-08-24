@@ -4,6 +4,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\Admin\ArticleController as AdminArticleController;
 use App\Http\Controllers\Admin\HeroController as AdminHeroController;
+use App\Http\Controllers\Admin\SettingController as AdminSettingController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\CaraKerjaController;
 use App\Models\Article;
 use App\Models\CaraKerja;
@@ -42,7 +44,7 @@ Route::middleware(['auth'])->group(function () {
     // CRUD Manajemen Berita
     Route::resource('admin/articles', AdminArticleController::class)->names('admin.articles');
 
-    // Cara Kerja CRUD
+    // Cara Kerja, Hero, dan Pengguna CRUD
     Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('cara-kerja', CaraKerjaController::class)->except(['show']);
 
@@ -50,5 +52,13 @@ Route::middleware(['auth'])->group(function () {
         Route::get('hero', [AdminHeroController::class, 'index'])->name('hero.index');
         Route::put('hero/update', [AdminHeroController::class, 'updateHero'])->name('hero.update');
         Route::put('hero/info-cards/{id}', [AdminHeroController::class, 'updateCard'])->name('hero.update-card');
+
+        // Kelola Pengguna (Admin & Staf)
+        Route::patch('users/{id}/toggle-status', [AdminUserController::class, 'toggleStatus'])->name('users.toggle-status');
+        Route::resource('users', AdminUserController::class)->except(['show']);
+
+        // Kelola Identitas & Logo Aplikasi
+        Route::get('settings', [AdminSettingController::class, 'index'])->name('settings.index');
+        Route::put('settings', [AdminSettingController::class, 'update'])->name('settings.update');
     });
 });

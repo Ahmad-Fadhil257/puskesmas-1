@@ -20,6 +20,22 @@ class DatabaseSeeder extends Seeder
             [
                 'name' => 'Admin Puskesmas',
                 'password' => Hash::make('password123'),
+                'role' => 'admin',
+                'is_active' => true,
+                'phone' => '081234567890',
+                'email_verified_at' => now(),
+            ]
+        );
+
+        // Staf Account Default untuk Demo & Testing
+        User::updateOrCreate(
+            ['email' => 'staf@carelink.com'],
+            [
+                'name' => 'Siti Rahmawati (Staf Medis)',
+                'password' => Hash::make('password123'),
+                'role' => 'staf',
+                'is_active' => true,
+                'phone' => '089876543210',
                 'email_verified_at' => now(),
             ]
         );

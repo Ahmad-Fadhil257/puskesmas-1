@@ -125,13 +125,13 @@
             <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
                 <!-- Brand Header -->
                 <div class="app-brand demo py-3">
-                    <a href="{{ route('dashboard') }}" class="app-brand-link gap-2">
+                    <a href="{{ route('dashboard') }}" class="app-brand-link gap-2 align-items-center">
                         <span class="app-brand-logo demo">
-                            <svg width="25" viewBox="0 0 24 24" fill="#0A5C45">
-                                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                            </svg>
+                            <img src="{{ $appSetting->logo_url ?? asset('assets/logo/logo-puskesmas.png') }}" alt="Logo" style="height: 36px; width: 36px; object-fit: contain; flex-shrink: 0;">
                         </span>
-                        <span class="app-brand-text demo menu-text fw-bolder fs-5 text-capitalize brand-text">Puskesmas</span>
+                        @if(($appSetting->show_app_name ?? true) && !empty($appSetting->app_name ?? 'Puskesmas'))
+                            <span class="app-brand-text demo menu-text fw-bolder fs-5 text-capitalize brand-text">{{ $appSetting->app_name }}</span>
+                        @endif
                     </a>
 
                     <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
@@ -174,6 +174,22 @@
                         <a href="{{ route('admin.cara-kerja.index') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-list-check"></i>
                             <div>Kelola Cara Kerja</div>
+                        </a>
+                    </li>
+                    <!-- PENGATURAN & AKUN -->
+                    <li class="menu-header small text-uppercase">
+                        <span class="menu-header-text">Pengaturan Sistem</span>
+                    </li>
+                    <li class="menu-item {{ request()->routeIs('admin.users.*') ? 'active' : '' }}">
+                        <a href="{{ route('admin.users.index') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-user-pin"></i>
+                            <div>Kelola Pengguna</div>
+                        </a>
+                    </li>
+                    <li class="menu-item {{ request()->routeIs('admin.settings.*') ? 'active' : '' }}">
+                        <a href="{{ route('admin.settings.index') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-palette"></i>
+                            <div>Identitas & Logo</div>
                         </a>
                     </li>
                     <li class="menu-item">

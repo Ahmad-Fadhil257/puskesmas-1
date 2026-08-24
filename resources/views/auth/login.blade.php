@@ -16,362 +16,8 @@
     <!-- SweetAlert2 CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        :root {
-            --color-primary: #0A5C45;
-            --color-primary-hover: #084A37;
-            --radius-16: 16px;
-        }
-
-        body {
-            font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-            color: #122822;
-            background: linear-gradient(135deg, #C5E5DD 0%, #D8EFE8 50%, #EEF8F5 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 40px 16px;
-            overflow-x: hidden;
-        }
-
-        /* SweetAlert2 Toast Modern Styling */
-        .swal2-popup.swal2-toast {
-            font-family: 'Plus Jakarta Sans', sans-serif !important;
-            border-radius: 14px !important;
-            padding: 12px 18px !important;
-            box-shadow: 0 12px 32px rgba(10, 92, 69, 0.18), 0 2px 6px rgba(0, 0, 0, 0.06) !important;
-            border: 1px solid rgba(10, 92, 69, 0.12) !important;
-        }
-
-        /* ====== LOGIN WRAPPER & CORNER DECORATIONS ====== */
-        .login-wrapper {
-            position: relative;
-            width: 100%;
-            max-width: 450px;
-        }
-
-        /* Top-Left Corner Decoration */
-        .decor-card-tl {
-            position: absolute;
-            top: -38px;
-            left: -38px;
-            width: 160px;
-            height: 160px;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .decor-gradient-tl {
-            position: absolute;
-            width: 120px;
-            height: 120px;
-            top: 10px;
-            left: 10px;
-            background: radial-gradient(circle, rgba(10, 92, 69, 0.28) 0%, rgba(197, 229, 221, 0.1) 60%, transparent 100%);
-            border-radius: 50%;
-            filter: blur(14px);
-        }
-
-        .decor-dashed-tl {
-            position: absolute;
-            width: 130px;
-            height: 130px;
-            top: 0;
-            left: 0;
-            border: 2px dashed rgba(10, 92, 69, 0.35);
-            border-radius: 50%;
-        }
-
-        .decor-solid-tl {
-            position: absolute;
-            width: 80px;
-            height: 80px;
-            top: 25px;
-            left: 25px;
-            border: 1.5px solid rgba(10, 92, 69, 0.2);
-            border-radius: 50%;
-        }
-
-        /* Bottom-Right Corner Decoration */
-        .decor-card-br {
-            position: absolute;
-            bottom: -38px;
-            right: -38px;
-            width: 160px;
-            height: 160px;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .decor-gradient-br {
-            position: absolute;
-            width: 130px;
-            height: 130px;
-            bottom: 10px;
-            right: 10px;
-            background: radial-gradient(circle, rgba(10, 92, 69, 0.3) 0%, rgba(187, 228, 216, 0.1) 60%, transparent 100%);
-            border-radius: 50%;
-            filter: blur(14px);
-        }
-
-        .decor-dashed-br {
-            position: absolute;
-            width: 135px;
-            height: 135px;
-            bottom: 0;
-            right: 0;
-            border: 2px dashed rgba(10, 92, 69, 0.35);
-            border-radius: 50%;
-        }
-
-        .decor-solid-br {
-            position: absolute;
-            width: 85px;
-            height: 85px;
-            bottom: 25px;
-            right: 25px;
-            border: 1.5px solid rgba(10, 92, 69, 0.2);
-            border-radius: 50%;
-        }
-
-        /* Medical Plus Dots Accent */
-        .decor-dots-tr {
-            position: absolute;
-            top: -16px;
-            right: -12px;
-            display: grid;
-            grid-template-columns: repeat(3, 6px);
-            gap: 6px;
-            pointer-events: none;
-            z-index: 0;
-            opacity: 0.45;
-        }
-
-        .decor-dots-tr span, .decor-dots-bl span {
-            width: 6px;
-            height: 6px;
-            background: var(--color-primary);
-            border-radius: 50%;
-        }
-
-        .decor-dots-bl {
-            position: absolute;
-            bottom: -16px;
-            left: -12px;
-            display: grid;
-            grid-template-columns: repeat(3, 6px);
-            gap: 6px;
-            pointer-events: none;
-            z-index: 0;
-            opacity: 0.45;
-        }
-
-        /* ====== MAIN CARD CONTAINER ====== */
-        .login-card {
-            position: relative;
-            z-index: 1;
-            width: 100%;
-            background: #FFFFFF;
-            border-radius: var(--radius-16);
-            padding: 42px 34px;
-            box-shadow: 0 12px 40px rgba(10, 92, 69, 0.12), 0 2px 6px rgba(10, 92, 69, 0.04);
-            border: 1px solid rgba(10, 92, 69, 0.08);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .login-header {
-            text-align: center;
-            margin-bottom: 28px;
-        }
-
-        .brand-logo-wrap {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 6px;
-        }
-
-        .login-title {
-            font-size: 1.55rem;
-            font-weight: 800;
-            color: #122822;
-            letter-spacing: -0.02em;
-        }
-
-        .login-subtitle {
-            font-size: 0.85rem;
-            color: #40564F;
-        }
-
-        /* Form Controls */
-        .form-group {
-            margin-bottom: 18px;
-        }
-
-        .form-label {
-            display: block;
-            font-size: 0.8125rem;
-            font-weight: 700;
-            color: #122822;
-            margin-bottom: 7px;
-        }
-
-        .input-wrapper {
-            position: relative;
-            display: flex;
-            align-items: center;
-        }
-
-        .input-icon {
-            position: absolute;
-            left: 16px;
-            color: #718D84;
-            font-size: 0.9375rem;
-            pointer-events: none;
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 12px 44px;
-            font-family: inherit;
-            font-size: 0.875rem;
-            border: 1.5px solid #CFE6DF;
-            border-radius: var(--radius-16);
-            background: #FAFCFB;
-            color: #122822;
-            transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
-            outline: none;
-        }
-
-        .form-input:focus {
-            border-color: var(--color-primary);
-            background: #FFFFFF;
-            box-shadow: 0 0 0 3px rgba(10, 92, 69, 0.12);
-        }
-
-        .toggle-password {
-            position: absolute;
-            right: 16px;
-            color: #718D84;
-            font-size: 0.9375rem;
-            cursor: pointer;
-            transition: color 0.2s;
-            padding: 4px;
-        }
-
-        .toggle-password:hover {
-            color: var(--color-primary);
-        }
-
-        .form-options {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 24px;
-            font-size: 0.8125rem;
-        }
-
-        .remember-me {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: #40564F;
-            cursor: pointer;
-            font-weight: 500;
-        }
-
-        .remember-me input {
-            accent-color: var(--color-primary);
-            width: 16px;
-            height: 16px;
-            border-radius: 4px;
-        }
-
-        .btn-login {
-            width: 100%;
-            padding: 13px;
-            background: var(--color-primary);
-            color: #FFFFFF;
-            border: none;
-            border-radius: var(--radius-16);
-            font-family: inherit;
-            font-size: 0.9375rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.2s;
-            box-shadow: 0 4px 14px rgba(10, 92, 69, 0.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .btn-login:hover {
-            background: var(--color-primary-hover);
-            transform: translateY(-1px);
-            box-shadow: 0 6px 18px rgba(10, 92, 69, 0.28);
-        }
-
-        .btn-login:disabled {
-            opacity: 0.7;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .login-footer {
-            margin-top: 24px;
-            text-align: center;
-            font-size: 0.8125rem;
-            color: #40564F;
-        }
-
-        .login-footer a {
-            color: var(--color-primary);
-            font-weight: 600;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .login-footer a:hover {
-            text-decoration: underline;
-        }
-
-        /* Gatekeeper Card Styling */
-        .gate-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background-color: rgba(10, 92, 69, 0.1);
-            color: var(--color-primary);
-            font-size: 0.75rem;
-            font-weight: 700;
-            padding: 6px 14px;
-            border-radius: 20px;
-            margin-bottom: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        /* Animation */
-        .fade-in {
-            animation: fadeIn 0.4s ease-out forwards;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-    </style>
+    <!-- Dedicated Login & Gatekeeper CSS -->
+    <link rel="stylesheet" href="{{ asset('css/auth/login.css') }}">
 </head>
 <body>
 
@@ -400,64 +46,16 @@
             <span></span><span></span><span></span>
         </div>
 
-        {{-- ====== STEP 1: GATEKEEPER SECURITY VERIFICATION ====== --}}
-        <div class="login-card fade-in" id="gateCard" style="{{ $gatePassed ? 'display: none;' : '' }}">
-            <div class="login-header">
-                <div class="gate-badge">
-                    <i class="fa-solid fa-shield-halved"></i> Gatekeeper Security
-                </div>
-                <div class="brand-logo-wrap">
-                    <svg width="30" viewBox="0 0 24 24" fill="#0A5C45">
-                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                    </svg>
-                    <h1 class="login-title"><span class="brand-text">Puskesmas</span></h1>
-                </div>
-                <p class="login-subtitle">Masukkan otorisasi gerbang keamanan sebelum mengakses portal administrator</p>
-            </div>
-
-            <form id="gateForm">
-                @csrf
-                <div class="form-group">
-                    <label for="gate_user" class="form-label">Username Gate</label>
-                    <div class="input-wrapper">
-                        <i class="fa-solid fa-user-shield input-icon"></i>
-                        <input type="text" id="gate_user" class="form-input" placeholder="Masukkan username gate (admin / puskem)" required autofocus>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="gate_pass" class="form-label">Password Gate</label>
-                    <div class="input-wrapper">
-                        <i class="fa-solid fa-key input-icon"></i>
-                        <input type="password" id="gate_pass" class="form-input" placeholder="••••••••" required>
-                        <i class="fa-solid fa-eye toggle-password" id="toggleGatePassword"></i>
-                    </div>
-                </div>
-
-                <button type="submit" class="btn-login mt-4" id="btnSubmitGate">
-                    <span id="btnGateText">Buka Akses Gerbang</span>
-                    <i class="fa-solid fa-unlock-keyhole"></i>
-                </button>
-            </form>
-
-            <div class="login-footer">
-                <a href="{{ url('/') }}">
-                    <i class="fa-solid fa-arrow-left"></i>
-                    <span>Kembali ke Halaman Utama</span>
-                </a>
-            </div>
-        </div>
-
-        {{-- ====== STEP 2: MAIN DATABASE LOGIN FORM ====== --}}
-        <div class="login-card fade-in" id="loginCard" style="{{ $gatePassed ? '' : 'display: none;' }}">
+        {{-- ====== MAIN DATABASE LOGIN FORM ====== --}}
+        <div class="login-card fade-in" id="loginCard">
             <div class="login-header">
                 <div class="brand-logo-wrap">
-                    <svg width="30" viewBox="0 0 24 24" fill="#0A5C45">
-                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                    </svg>
-                    <h1 class="login-title"><span class="brand-text">Puskesmas</span></h1>
+                    <img src="{{ $appSetting->logo_url ?? asset('assets/logo/logo-puskesmas.png') }}" alt="Logo" class="brand-logo-img">
+                    @if(($appSetting->show_app_name ?? true) && !empty($appSetting->app_name ?? 'Puskesmas'))
+                        <h1 class="login-title"><span class="brand-text">{{ $appSetting->app_name }}</span></h1>
+                    @endif
                 </div>
-                <p class="login-subtitle">Masuk ke akun administrator Anda</p>
+                <p class="login-subtitle">Masuk ke portal administrator</p>
             </div>
 
             <form id="dbLoginForm">
@@ -517,6 +115,49 @@
 
     </div>
 
+    {{-- ====== POPUP MODAL GERBANG KEAMANAN (GATEKEEPER SECURITY OVERLAY) ====== --}}
+    <div class="gate-modal-overlay" id="gateModalOverlay">
+        <div class="gate-modal-box">
+            <div class="gate-icon-circle">
+                <i class="fa-solid fa-shield-halved"></i>
+            </div>
+            <h2 class="gate-modal-title">Verifikasi Akses Gerbang</h2>
+            <p class="gate-modal-desc">Halaman ini dilindungi. Masukkan otorisasi gerbang untuk membuka formulir login administrator.</p>
+
+            <form id="gateForm">
+                @csrf
+                <div class="form-group text-start">
+                    <label for="gate_user" class="form-label">Username / Email Gate</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-user-shield input-icon"></i>
+                        <input type="text" id="gate_user" class="form-input" placeholder="admin / puskem atau email akun" required autofocus>
+                    </div>
+                </div>
+
+                <div class="form-group text-start">
+                    <label for="gate_pass" class="form-label">Password Gate</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-key input-icon"></i>
+                        <input type="password" id="gate_pass" class="form-input" placeholder="••••••••" required>
+                        <i class="fa-solid fa-eye toggle-password" id="toggleGatePassword"></i>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-login mt-4" id="btnSubmitGate">
+                    <span id="btnGateText">Buka Akses Gerbang</span>
+                    <i class="fa-solid fa-unlock-keyhole"></i>
+                </button>
+            </form>
+
+            <div class="login-footer">
+                <a href="{{ url('/') }}">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <span>Kembali ke Halaman Utama</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
     <!-- Scripts: SweetAlert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -551,10 +192,9 @@
             setupPasswordToggle('toggleGatePassword', 'gate_pass');
             setupPasswordToggle('togglePassword', 'password');
 
-            // 1. Handle Gatekeeper Submission
+            // 1. Handle Gatekeeper Popup Submission
             const gateForm = document.getElementById('gateForm');
-            const gateCard = document.getElementById('gateCard');
-            const loginCard = document.getElementById('loginCard');
+            const gateModalOverlay = document.getElementById('gateModalOverlay');
             const btnSubmitGate = document.getElementById('btnSubmitGate');
             const btnGateText = document.getElementById('btnGateText');
 
@@ -588,14 +228,20 @@
                                 title: data.message
                             });
 
-                            // Buka panel login utama dengan transisi mulus
-                            setTimeout(() => {
-                                gateCard.style.display = 'none';
-                                loginCard.style.display = 'block';
-                                document.getElementById('email').focus();
-                            }, 500);
+                            if (data.mode === 'direct_login' && data.redirect_url) {
+                                btnGateText.textContent = 'Sukses! Mengalihkan...';
+                                setTimeout(() => {
+                                    window.location.href = data.redirect_url;
+                                }, 700);
+                            } else {
+                                // Tutup Popup Modal Gerbang dan fokus ke formulir login utama
+                                setTimeout(() => {
+                                    gateModalOverlay.classList.add('hidden');
+                                    document.getElementById('email').focus();
+                                }, 400);
+                            }
                         } else {
-                            throw new Error(data.message || 'Username atau Password Gate salah.');
+                            throw new Error(data.message || 'Username/Email atau Password tidak valid.');
                         }
                     } catch (err) {
                         Toast.fire({

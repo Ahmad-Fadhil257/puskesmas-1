@@ -73,11 +73,33 @@ a { text-decoration: none; color: inherit; }
 }
 
 .navbar__brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
     font-size: 1.25rem;
     font-weight: 800;
     color: var(--color-primary);
     letter-spacing: -0.02em;
     transition: opacity 0.2s;
+}
+
+.navbar__brand-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.navbar__brand-icon img {
+    height: 36px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+}
+
+.navbar__brand-text {
+    line-height: 1;
+    display: inline-block;
 }
 
 .navbar__brand:hover { opacity: 0.9; }

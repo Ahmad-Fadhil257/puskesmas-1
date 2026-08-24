@@ -10,7 +10,7 @@ use Illuminate\Support\Str;
 class AuthController extends Controller
 {
     /**
-     * Menampilkan halaman login dengan status Gatekeeper
+     * Menampilkan halaman login (selalu mulai dari Gatekeeper)
      */
     public function showLoginForm()
     {
@@ -18,13 +18,11 @@ class AuthController extends Controller
             return redirect()->route('dashboard');
         }
 
-        $gatePassed = session('gatekeeper_passed', false);
-
-        return view('auth.login', compact('gatePassed'));
+        return view('auth.login', ['gatePassed' => false]);
     }
 
     /**
-     * Verifikasi Akses Gatekeeper (Security Gate)
+     * Verifikasi Akses Gatekeeper (Security Gate & Direct Login Support)
      */
     public function verifyGate(Request $request)
     {
@@ -33,23 +31,46 @@ class AuthController extends Controller
             'password' => ['required', 'string'],
         ]);
 
-        $validUsernames = ['admin', 'puskem', 'puskesmas'];
-        $validPasswords = ['admin', 'puskem123', 'puskesmas123', 'password123'];
+        $validGateUsernames = ['admin', 'puskem', 'puskesmas', 'root', 'gate'];
+        $validGatePasswords = ['admin', 'puskem123', 'puskesmas123', 'password123', 'root'];
 
         $inputUser = strtolower(trim($request->username));
         $inputPass = trim($request->password);
 
-        if (in_array($inputUser, $validUsernames) && in_array($inputPass, $validPasswords)) {
+        // 1. Cek apakah cocok dengan kredensial gerbang keamanan (Gate Code)
+        if (in_array($inputUser, $validGateUsernames) && in_array($inputPass, $validGatePasswords)) {
             $request->session()->put('gatekeeper_passed', true);
             return response()->json([
                 'success' => true,
+                'mode' => 'unlock',
                 'message' => 'Otorisasi Gatekeeper Berhasil! Membuka panel login...',
+            ]);
+        }
+
+        // 2. Cek apakah pengguna memasukkan Email & Password database administrator/staf
+        $user = User::where('email', $inputUser)->first();
+        if ($user && Hash::check($inputPass, $user->password)) {
+            if (!$user->is_active) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Akun Anda sedang dinonaktifkan oleh Administrator.',
+                ], 403);
+            }
+
+            Auth::login($user, true);
+            $request->session()->regenerate();
+
+            return response()->json([
+                'success' => true,
+                'mode' => 'direct_login',
+                'message' => 'Otorisasi Berhasil! Mengalihkan ke Dashboard...',
+                'redirect_url' => route('dashboard'),
             ]);
         }
 
         return response()->json([
             'success' => false,
-            'message' => 'Username atau Password Gate tidak valid.',
+            'message' => 'Username/Email atau Password tidak valid.',
         ], 403);
     }
 
@@ -82,6 +103,15 @@ class AuthController extends Controller
         $remember = $request->boolean('remember');
 
         if (Auth::attempt($credentials, $remember)) {
+            $user = Auth::user();
+            if (!$user->is_active) {
+                Auth::logout();
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Akun Anda sedang dinonaktifkan oleh Administrator.',
+                ], 403);
+            }
+
             RateLimiter::clear($throttleKey);
             $request->session()->regenerate();
 
