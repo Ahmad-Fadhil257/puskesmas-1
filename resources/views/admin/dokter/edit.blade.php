@@ -126,9 +126,8 @@
                                 <div class="jadwal-row d-flex gap-2 mb-2 align-items-center">
                                     <div class="custom-dropdown" style="width: 160px;">
                                         <input type="hidden" name="jadwal_hari[]" class="hari-value" value="{{ $j['hari'] ?? '' }}">
-                                        <button type="button" class="dropdown-toggle text-start d-flex align-items-center justify-content-between" onclick="toggleDropdown(this)">
+                                        <button type="button" class="dropdown-toggle text-start d-flex align-items-center" onclick="toggleDropdown(this)">
                                             <span class="dropdown-selected">{{ $j['hari'] ?? '-- Hari --' }}</span>
-                                            <i class="bx bx-chevron-down"></i>
                                         </button>
                                         <div class="dropdown-menu-custom">
                                             @foreach(['Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu'] as $day)
@@ -144,9 +143,8 @@
                                 <div class="jadwal-row d-flex gap-2 mb-2 align-items-center">
                                     <div class="custom-dropdown" style="width: 160px;">
                                         <input type="hidden" name="jadwal_hari[]" class="hari-value" value="">
-                                        <button type="button" class="dropdown-toggle text-start d-flex align-items-center justify-content-between" onclick="toggleDropdown(this)">
+                                        <button type="button" class="dropdown-toggle text-start d-flex align-items-center" onclick="toggleDropdown(this)">
                                             <span class="dropdown-selected dropdown-placeholder">-- Hari --</span>
-                                            <i class="bx bx-chevron-down"></i>
                                         </button>
                                         <div class="dropdown-menu-custom">
                                             @foreach(['Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu'] as $day)
@@ -186,20 +184,25 @@
 .custom-dropdown { position: relative; }
 .custom-dropdown .dropdown-toggle {
     cursor: pointer; background: #fff; border: 1px solid #dee2e6;
-    border-radius: 10px; padding: 8px 14px; font-size: 0.8125rem;
-    transition: border-color 0.2s, box-shadow 0.2s;
+    border-radius: 10px; padding: 8px 32px 8px 14px; font-size: 0.8125rem;
+    transition: border-color 0.2s, box-shadow 0.2s; width: 100%; min-height: 31px;
+    position: relative;
+}
+.custom-dropdown .dropdown-toggle::after {
+    content: ''; position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+    width: 0; height: 0; border-left: 5px solid transparent; border-right: 5px solid transparent;
+    border-top: 5px solid #6c757d; transition: transform 0.25s ease, border-color 0.25s ease;
+    pointer-events: none;
 }
 .dark-style .custom-dropdown .dropdown-toggle { background: #1f2937; border-color: #374151; color: #f3f4f6; }
 .custom-dropdown .dropdown-toggle:hover { border-color: #BBE4D8; }
 .dark-style .custom-dropdown .dropdown-toggle:hover { border-color: #0A5C45; }
 .custom-dropdown .dropdown-toggle:focus { border-color: #0A5C45; box-shadow: 0 0 0 3px rgba(10,92,69,0.1); outline: none; }
+.custom-dropdown.open .dropdown-toggle::after { transform: translateY(-50%) rotate(180deg); border-top-color: #0A5C45; }
 .custom-dropdown .dropdown-selected { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 500; color: #122822; }
 .dark-style .custom-dropdown .dropdown-selected { color: #f3f4f6; }
 .custom-dropdown .dropdown-placeholder { color: #6c757d; }
 .dark-style .custom-dropdown .dropdown-placeholder { color: #9ca3af; }
-.custom-dropdown .dropdown-toggle .bx { transition: transform 0.25s ease; font-size: 1rem; color: #6c757d; }
-.dark-style .custom-dropdown .dropdown-toggle .bx { color: #9ca3af; }
-.custom-dropdown.open .dropdown-toggle .bx { transform: rotate(180deg); color: #0A5C45; }
 .custom-dropdown .dropdown-menu-custom {
     display: none; position: absolute; top: calc(100% + 6px); left: 0; right: 0; z-index: 1050;
     background: #fff; border: 1px solid #E2F0EC; border-radius: 12px;
@@ -275,8 +278,8 @@ function addJadwalRow() {
 
     row.innerHTML = '<div class="custom-dropdown" style="width: 160px;">' +
         '<input type="hidden" name="jadwal_hari[]" class="hari-value" value="">' +
-        '<button type="button" class="dropdown-toggle text-start d-flex align-items-center justify-content-between" onclick="toggleDropdown(this)">' +
-        '<span class="dropdown-selected dropdown-placeholder">-- Hari --</span><i class="bx bx-chevron-down"></i></button>' +
+        '<button type="button" class="dropdown-toggle text-start d-flex align-items-center" onclick="toggleDropdown(this)">' +
+        '<span class="dropdown-selected dropdown-placeholder">-- Hari --</span></button>' +
         '<div class="dropdown-menu-custom">' + options + '</div></div>' +
         '<input type="text" name="jadwal_jam[]" class="form-control form-control-sm" placeholder="Contoh: 08:00 - 12:00" style="flex:1;">' +
         '<button type="button" class="btn btn-sm btn-outline-danger btn-remove-jadwal" title="Hapus"><i class="bx bx-x"></i></button>';
