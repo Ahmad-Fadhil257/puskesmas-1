@@ -25,14 +25,15 @@ class AppServiceProvider extends ServiceProvider
     {
         // Bagikan data $appSetting ke semua view secara global
         View::composer('*', function ($view) {
+            $setting = null;
             try {
                 if (Schema::hasTable('app_settings')) {
                     $setting = AppSetting::getSettings();
-                    $view->with('appSetting', $setting);
                 }
             } catch (\Throwable $e) {
                 // Ignore during migrations or build
             }
+            $view->with('appSetting', $setting);
         });
 
         // Bagikan data $kontak ke view landing page
