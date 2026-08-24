@@ -13,8 +13,16 @@ class Dokter extends Model
         'name',
         'specialty',
         'photo',
+        'jadwal_praktek',
         'is_active',
     ];
+
+    protected function casts(): array
+    {
+        return [
+            'jadwal_praktek' => 'array',
+        ];
+    }
 
     /**
      * Scope a query to only include active doctors.

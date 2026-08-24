@@ -9,7 +9,6 @@
 @section('content')
 <section class="jadwal-section">
     <div class="jadwal-container">
-
         <div class="jadwal-header">
             <div class="jadwal-label">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
@@ -20,119 +19,46 @@
             <h2 class="jadwal-title">Jadwal Praktik Dokter Kami</h2>
             <p class="jadwal-subtitle">Temukan jadwal praktik dokter spesialis kami untuk perencanaan kunjungan Anda.</p>
         </div>
-
         <div class="jadwal-grid">
-
-            {{-- Dokter 1 --}}
+            @forelse($dokters as $dokter)
             <div class="jadwal-card">
                 <div class="jadwal-card-photo">
-                    <img src="{{ asset('assets/dokter/dokter_john.png') }}" alt="Dr. John Smith" loading="lazy">
+                    @if($dokter->photo)
+                        <img src="{{ asset($dokter->photo) }}" alt="{{ $dokter->name }}" loading="lazy">
+                    @else
+                        <div class="d-flex align-items-center justify-content-center h-100" style="background: #E2F0EC; font-size: 2rem; font-weight: 700; color: #0A5C45;">
+                            {{ strtoupper(substr($dokter->name, 0, 1)) }}
+                        </div>
+                    @endif
                 </div>
                 <div class="jadwal-card-info">
-                    <h3 class="jadwal-card-name">dr. Muhammad Arsyi, Sp.JP-FIHA</h3>
+                    <h3 class="jadwal-card-name">{{ $dokter->name }}</h3>
+                    <p class="jadwal-card-specialty">{{ $dokter->specialty }}</p>
                     <div class="jadwal-card-schedule">
                         <h4 class="jadwal-schedule-label">Jadwal Praktek</h4>
                         <div class="jadwal-schedule-grid">
-                            <div class="jadwal-day">
-                                <span class="jadwal-day-name">Rabu</span>
-                                <span class="jadwal-day-time">08:30 - 12:00</span>
-                            </div>
-                            <div class="jadwal-day">
-                                <span class="jadwal-day-name">Kamis</span>
-                                <span class="jadwal-day-time">08:30 - 12:00</span>
-                            </div>
-                            <div class="jadwal-day">
-                                <span class="jadwal-day-name">Sabtu</span>
-                                <span class="jadwal-day-time">08:30 - 12:00</span>
-                            </div>
+                            @php $jadwal = $dokter->jadwal_praktek ?? []; @endphp
+                            @forelse($jadwal as $j)
+                                <div class="jadwal-day">
+                                    <span class="jadwal-day-name">{{ $j['hari'] ?? '' }}</span>
+                                    <span class="jadwal-day-time">{{ $j['jam'] ?? '' }}</span>
+                                </div>
+                            @empty
+                                <div class="jadwal-day">
+                                    <span class="jadwal-day-name text-muted fst-italic">Belum ada jadwal</span>
+                                </div>
+                            @endforelse
                         </div>
                     </div>
                 </div>
             </div>
-
-            {{-- Dokter 2 --}}
-            <div class="jadwal-card">
-                <div class="jadwal-card-photo">
-                    <img src="{{ asset('assets/dokter/dokter_sarah.png') }}" alt="Dr. Sarah Johnson" loading="lazy">
-                </div>
-                <div class="jadwal-card-info">
-                    <h3 class="jadwal-card-name">dr. Sarah Johnson, Sp.B</h3>
-                    <div class="jadwal-card-schedule">
-                        <h4 class="jadwal-schedule-label">Jadwal Praktek</h4>
-                        <div class="jadwal-schedule-grid">
-                            <div class="jadwal-day">
-                                <span class="jadwal-day-name">Senin</span>
-                                <span class="jadwal-day-time">09:00 - 12:00</span>
-                            </div>
-                            <div class="jadwal-day">
-                                <span class="jadwal-day-name">Rabu</span>
-                                <span class="jadwal-day-time">09:00 - 12:00</span>
-                            </div>
-                            <div class="jadwal-day">
-                                <span class="jadwal-day-name">Jumat</span>
-                                <span class="jadwal-day-time">09:00 - 12:00</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            @empty
+            <div class="col-12 text-center py-5">
+                <i class="bx bx-user-x display-4 mb-2 d-block" style="color: #94A3B8;"></i>
+                <p class="text-muted">Belum ada data dokter.</p>
             </div>
-
-            {{-- Dokter 3 --}}
-            <div class="jadwal-card">
-                <div class="jadwal-card-photo">
-                    <img src="{{ asset('assets/dokter/dokter_michael.png') }}" alt="Dr. Michael Lee" loading="lazy">
-                </div>
-                <div class="jadwal-card-info">
-                    <h3 class="jadwal-card-name">dr. Michael Lee, Sp.A</h3>
-                    <div class="jadwal-card-schedule">
-                        <h4 class="jadwal-schedule-label">Jadwal Praktek</h4>
-                        <div class="jadwal-schedule-grid">
-                            <div class="jadwal-day">
-                                <span class="jadwal-day-name">Selasa</span>
-                                <span class="jadwal-day-time">08:00 - 11:00</span>
-                            </div>
-                            <div class="jadwal-day">
-                                <span class="jadwal-day-name">Kamis</span>
-                                <span class="jadwal-day-time">08:00 - 11:00</span>
-                            </div>
-                            <div class="jadwal-day">
-                                <span class="jadwal-day-name">Sabtu</span>
-                                <span class="jadwal-day-time">08:00 - 11:00</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            {{-- Dokter 4 --}}
-            <div class="jadwal-card">
-                <div class="jadwal-card-photo">
-                    <img src="{{ asset('assets/dokter/dokter_emily.png') }}" alt="Dr. Emily Davis" loading="lazy">
-                </div>
-                <div class="jadwal-card-info">
-                    <h3 class="jadwal-card-name">dr. Emily Davis, Sp.OG</h3>
-                    <div class="jadwal-card-schedule">
-                        <h4 class="jadwal-schedule-label">Jadwal Praktek</h4>
-                        <div class="jadwal-schedule-grid">
-                            <div class="jadwal-day">
-                                <span class="jadwal-day-name">Senin</span>
-                                <span class="jadwal-day-time">10:00 - 13:00</span>
-                            </div>
-                            <div class="jadwal-day">
-                                <span class="jadwal-day-name">Rabu</span>
-                                <span class="jadwal-day-time">10:00 - 13:00</span>
-                            </div>
-                            <div class="jadwal-day">
-                                <span class="jadwal-day-name">Jumat</span>
-                                <span class="jadwal-day-time">10:00 - 13:00</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+            @endforelse
         </div>
-
     </div>
 </section>
 @endsection

@@ -11,32 +11,48 @@ class DokterSeeder extends Seeder
     {
         $dokters = [
             [
-                'name'      => 'Dr. John Smith',
-                'specialty' => 'Ahli Jantung',
+                'name'      => 'dr. Muhammad Arsyi, Sp.JP-FIHA',
+                'specialty' => 'Spesialis Jantung dan Pembuluh Darah',
                 'photo'     => 'assets/dokter/dokter_john.png',
                 'is_active' => true,
-                'order'     => 1,
+                'jadwal_praktek' => [
+                    ['hari' => 'Rabu',  'jam' => '08:30 - 12:00'],
+                    ['hari' => 'Kamis', 'jam' => '08:30 - 12:00'],
+                    ['hari' => 'Sabtu', 'jam' => '08:30 - 12:00'],
+                ],
             ],
             [
-                'name'      => 'Dr. Sarah Johnson',
-                'specialty' => 'Dokter Bedah Ortopedi',
+                'name'      => 'dr. Sarah Johnson, Sp.B',
+                'specialty' => 'Spesialis Bedah Umum',
                 'photo'     => 'assets/dokter/dokter_sarah.png',
                 'is_active' => true,
-                'order'     => 2,
+                'jadwal_praktek' => [
+                    ['hari' => 'Senin', 'jam' => '09:00 - 12:00'],
+                    ['hari' => 'Rabu',  'jam' => '09:00 - 12:00'],
+                    ['hari' => 'Jumat', 'jam' => '09:00 - 12:00'],
+                ],
             ],
             [
-                'name'      => 'Dr. Michael Lee',
-                'specialty' => 'Dokter Spesialis Anak',
+                'name'      => 'dr. Michael Lee, Sp.A',
+                'specialty' => 'Spesialis Anak',
                 'photo'     => 'assets/dokter/dokter_michael.png',
                 'is_active' => true,
-                'order'     => 3,
+                'jadwal_praktek' => [
+                    ['hari' => 'Selasa', 'jam' => '08:00 - 11:00'],
+                    ['hari' => 'Kamis',  'jam' => '08:00 - 11:00'],
+                    ['hari' => 'Sabtu',  'jam' => '08:00 - 11:00'],
+                ],
             ],
             [
-                'name'      => 'Dr. Emily Davis',
-                'specialty' => 'Ginekolog',
+                'name'      => 'dr. Emily Davis, Sp.OG',
+                'specialty' => 'Spesialis Kandungan',
                 'photo'     => 'assets/dokter/dokter_emily.png',
                 'is_active' => true,
-                'order'     => 4,
+                'jadwal_praktek' => [
+                    ['hari' => 'Senin', 'jam' => '10:00 - 13:00'],
+                    ['hari' => 'Rabu',  'jam' => '10:00 - 13:00'],
+                    ['hari' => 'Jumat', 'jam' => '10:00 - 13:00'],
+                ],
             ],
         ];
 

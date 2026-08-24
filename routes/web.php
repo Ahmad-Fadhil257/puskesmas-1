@@ -34,9 +34,10 @@ Route::get('/', function () {
     return view('welcome', compact('latestArticles', 'caraKerja', 'about', 'hero', 'infoCards', 'dokters', 'nilaiSection', 'layanans'));
 })->name('home');
 
-// Jadwal Dokter
+// Jadwal Dokter (dari database)
 Route::get('/jadwal-dokter', function () {
-    return view('jadwal-dokter');
+    $dokters = Dokter::where('is_active', true)->orderBy('created_at', 'asc')->get();
+    return view('jadwal-dokter', compact('dokters'));
 })->name('jadwal-dokter');
 
 // Portal Publik Berita & Blog

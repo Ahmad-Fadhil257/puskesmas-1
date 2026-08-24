@@ -85,27 +85,47 @@
                         @enderror
                     </div>
 
-                    {{-- Divider: Foto & Status --}}
+                    {{-- Divider --}}
                     <div class="col-12"><hr class="my-1"></div>
 
                     {{-- Upload Foto --}}
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                         <label class="form-label fw-semibold" for="photo">Foto Dokter</label>
                         <input type="file"
                             class="form-control @error('photo') is-invalid @enderror"
                             id="photo" name="photo"
                             accept="image/png, image/jpeg, image/webp"
                             onchange="previewPhoto(this)" />
-                        <div class="form-text">Format: JPG, PNG, WEBP. Maks 3MB. Rekomendasi rasio portrait 4:5 agar tampilan rapi.</div>
+                        <div class="form-text">Format: JPG, PNG, WEBP. Maks 3MB.</div>
                         @error('photo')
                             <div class="invalid-feedback d-block">{{ $message }}</div>
                         @enderror
 
-                        {{-- Preview --}}
                         <div id="previewWrap" class="mt-3 d-none">
                             <span class="d-block text-muted small mb-1">Preview:</span>
                             <img id="photoPreview" src="" alt="Preview Foto" class="rounded border" style="height: 140px; object-fit: cover; object-position: top;">
                         </div>
+                    </div>
+
+                    {{-- Jadwal Praktek --}}
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">Jadwal Praktek</label>
+                        <div id="jadwalRows">
+                            <div class="jadwal-row d-flex gap-2 mb-2 align-items-center">
+                                <select name="jadwal_hari[]" class="form-select form-select-sm" style="width: 140px;">
+                                    <option value="">-- Hari --</option>
+                                    @foreach(['Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu'] as $day)
+                                        <option value="{{ $day }}">{{ $day }}</option>
+                                    @endforeach
+                                </select>
+                                <input type="text" name="jadwal_jam[]" class="form-control form-control-sm" placeholder="Contoh: 08:00 - 12:00" style="flex:1;">
+                                <button type="button" class="btn btn-sm btn-outline-danger btn-remove-jadwal" title="Hapus"><i class="bx bx-x"></i></button>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-sm btn-outline-success mt-1" onclick="addJadwalRow()">
+                            <i class="bx bx-plus"></i> Tambah Jam
+                        </button>
+                        <div class="form-text">Isi hari dan jam praktik dokter (opsional).</div>
                     </div>
 
                     {{-- Tombol Aksi --}}
@@ -138,6 +158,28 @@ function previewPhoto(input) {
         reader.readAsDataURL(input.files[0]);
     }
 }
+
+const hariOptions = @json(['Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu']);
+
+function addJadwalRow() {
+    const container = document.getElementById('jadwalRows');
+    const row = document.createElement('div');
+    row.className = 'jadwal-row d-flex gap-2 mb-2 align-items-center';
+    row.innerHTML = `
+        <select name="jadwal_hari[]" class="form-select form-select-sm" style="width: 140px;">
+            <option value="">-- Hari --</option>
+            ${hariOptions.map(d => `<option value="${d}">${d}</option>`).join('')}
+        </select>
+        <input type="text" name="jadwal_jam[]" class="form-control form-control-sm" placeholder="Contoh: 08:00 - 12:00" style="flex:1;">
+        <button type="button" class="btn btn-sm btn-outline-danger btn-remove-jadwal" title="Hapus"><i class="bx bx-x"></i></button>
+    `;
+    container.appendChild(row);
+    row.querySelector('.btn-remove-jadwal').addEventListener('click', function() { row.remove(); });
+}
+
+document.querySelectorAll('.btn-remove-jadwal').forEach(function(btn) {
+    btn.addEventListener('click', function() { this.closest('.jadwal-row').remove(); });
+});
 </script>
 
 @endsection
