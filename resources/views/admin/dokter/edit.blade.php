@@ -184,23 +184,34 @@
 
 <style>
 .custom-dropdown { position: relative; }
-.custom-dropdown .dropdown-toggle { cursor: pointer; background: #fff; }
-.custom-dropdown .dropdown-toggle .dropdown-selected { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.custom-dropdown .dropdown-toggle .bx { transition: transform 0.2s; font-size: 1.1rem; color: #6c757d; }
-.custom-dropdown.open .dropdown-toggle .bx { transform: rotate(180deg); }
+.custom-dropdown .dropdown-toggle {
+    cursor: pointer; background: #fff; border: 1px solid #dee2e6;
+    border-radius: 10px; padding: 8px 14px; font-size: 0.8125rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+.custom-dropdown .dropdown-toggle:hover { border-color: #BBE4D8; }
+.custom-dropdown .dropdown-toggle:focus { border-color: #0A5C45; box-shadow: 0 0 0 3px rgba(10,92,69,0.1); outline: none; }
+.custom-dropdown .dropdown-selected { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 500; color: #122822; }
+.custom-dropdown .dropdown-placeholder { color: #6c757d; }
+.custom-dropdown .dropdown-toggle .bx { transition: transform 0.25s ease; font-size: 1rem; color: #6c757d; }
+.custom-dropdown.open .dropdown-toggle .bx { transform: rotate(180deg); color: #0A5C45; }
 .custom-dropdown .dropdown-menu-custom {
-    display: none; position: absolute; top: 100%; left: 0; right: 0; z-index: 1050;
-    background: #fff; border: 1px solid #dee2e6; border-radius: 8px;
-    box-shadow: 0 6px 16px rgba(0,0,0,0.12); max-height: 220px; overflow-y: auto;
-    margin-top: 4px;
+    display: none; position: absolute; top: calc(100% + 6px); left: 0; right: 0; z-index: 1050;
+    background: #fff; border: 1px solid #E2F0EC; border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(10,92,69,0.12); max-height: 220px; overflow-y: auto;
+    padding: 6px;
 }
-.custom-dropdown.open .dropdown-menu-custom { display: block; }
+.custom-dropdown.open .dropdown-menu-custom { display: block; animation: ddFadeIn 0.2s ease; }
+@keyframes ddFadeIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
 .custom-dropdown .dropdown-item-custom {
-    padding: 8px 14px; font-size: 0.8125rem; cursor: pointer; transition: background 0.15s;
+    padding: 9px 14px; font-size: 0.8125rem; cursor: pointer; font-weight: 500;
+    border-radius: 8px; transition: background 0.15s, color 0.15s; color: #122822;
 }
-.custom-dropdown .dropdown-item-custom:first-child { border-radius: 8px 8px 0 0; }
-.custom-dropdown .dropdown-item-custom:last-child { border-radius: 0 0 8px 8px; }
-.custom-dropdown .dropdown-item-custom:hover { background: #E2F0EC; color: #0A5C45; font-weight: 600; }
+.custom-dropdown .dropdown-item-custom:hover { background: #E8F5F1; color: #0A5C45; }
+.custom-dropdown .dropdown-item-custom.active { background: #0A5C45; color: #fff; font-weight: 600; }
+.custom-dropdown .dropdown-menu-custom::-webkit-scrollbar { width: 5px; }
+.custom-dropdown .dropdown-menu-custom::-webkit-scrollbar-track { background: transparent; }
+.custom-dropdown .dropdown-menu-custom::-webkit-scrollbar-thumb { background: #C5E5DD; border-radius: 10px; }
 </style>
 
 <script>
@@ -229,7 +240,11 @@ function toggleDropdown(btn) {
 function selectOption(item) {
     const wrap = item.closest('.custom-dropdown');
     wrap.querySelector('.hari-value').value = item.dataset.value;
-    wrap.querySelector('.dropdown-selected').textContent = item.textContent;
+    const selected = wrap.querySelector('.dropdown-selected');
+    selected.textContent = item.textContent;
+    selected.classList.remove('dropdown-placeholder');
+    wrap.querySelectorAll('.dropdown-item-custom').forEach(i => i.classList.remove('active'));
+    item.classList.add('active');
     wrap.classList.remove('open');
 }
 
@@ -252,7 +267,7 @@ function addJadwalRow() {
     row.innerHTML = '<div class="custom-dropdown" style="width: 160px;">' +
         '<input type="hidden" name="jadwal_hari[]" class="hari-value" value="">' +
         '<button type="button" class="dropdown-toggle form-control form-control-sm text-start d-flex align-items-center justify-content-between" onclick="toggleDropdown(this)">' +
-        '<span class="dropdown-selected">-- Hari --</span><i class="bx bx-chevron-down"></i></button>' +
+        '<span class="dropdown-selected dropdown-placeholder">-- Hari --</span><i class="bx bx-chevron-down"></i></button>' +
         '<div class="dropdown-menu-custom">' + options + '</div></div>' +
         '<input type="text" name="jadwal_jam[]" class="form-control form-control-sm" placeholder="Contoh: 08:00 - 12:00" style="flex:1;">' +
         '<button type="button" class="btn btn-sm btn-outline-danger btn-remove-jadwal" title="Hapus"><i class="bx bx-x"></i></button>';
