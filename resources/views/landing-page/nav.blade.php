@@ -15,7 +15,7 @@
         <ul class="navbar__menu">
             <li><a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'active' : '' }}">Home</a></li>
             <li><a href="{{ route('home') }}#layanan-kami">Layanan</a></li>
-            <li><a href="{{ route('home') }}#dokter-kami">Jadwal Dokter</a></li>
+            <li><a href="{{ route('jadwal-dokter') }}" class="{{ request()->routeIs('jadwal-dokter') ? 'active' : '' }}">Jadwal Dokter</a></li>
             <li><a href="{{ route('blog.index') }}" class="{{ request()->routeIs('blog.*') ? 'active' : '' }}">Berita</a></li>
         </ul>
 
@@ -37,7 +37,7 @@
     <div class="navbar__mobile" id="mobileMenu">
         <a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'active' : '' }}">Home</a>
         <a href="{{ route('home') }}#layanan-kami">Layanan</a>
-        <a href="{{ route('home') }}#dokter-kami">Jadwal Dokter</a>
+        <a href="{{ route('jadwal-dokter') }}" class="{{ request()->routeIs('jadwal-dokter') ? 'active' : '' }}">Jadwal Dokter</a>
         <a href="{{ route('blog.index') }}" class="{{ request()->routeIs('blog.*') ? 'active' : '' }}">Berita</a>
         <a href="{{ $appSetting->wa_link }}" target="_blank" rel="noopener" class="btn-nav-cta">Janji Temu</a>
     </div>

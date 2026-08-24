@@ -34,6 +34,11 @@ Route::get('/', function () {
     return view('welcome', compact('latestArticles', 'caraKerja', 'about', 'hero', 'infoCards', 'dokters', 'nilaiSection', 'layanans'));
 })->name('home');
 
+// Jadwal Dokter
+Route::get('/jadwal-dokter', function () {
+    return view('jadwal-dokter');
+})->name('jadwal-dokter');
+
 // Portal Publik Berita & Blog
 Route::get('/berita', [BlogController::class, 'index'])->name('blog.index');
 Route::get('/berita/{slug}', [BlogController::class, 'show'])->name('blog.show');
