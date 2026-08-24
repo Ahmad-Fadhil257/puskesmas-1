@@ -59,12 +59,12 @@ a { text-decoration: none; color: inherit; }
 }
 
 .site-header.scrolled {
-    padding-top: 12px;
-    padding-bottom: 0;
+    padding: 0;
 }
 
 .site-header.scrolled .navbar {
-    box-shadow: 0 4px 20px rgba(10, 92, 69, 0.15);
+    border-radius: 0;
+    box-shadow: 0 2px 12px rgba(10, 92, 69, 0.12);
 }
 
 .navbar {
