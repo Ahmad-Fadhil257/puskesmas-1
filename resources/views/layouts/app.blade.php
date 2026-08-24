@@ -44,24 +44,32 @@
             const menu = document.getElementById('mobileMenu');
             const iconOpen = document.getElementById('iconOpen');
             const iconClose = document.getElementById('iconClose');
+            const header = document.querySelector('.site-header');
 
-            if (!toggle || !menu) return;
-
-            toggle.addEventListener('click', function () {
-                const isOpen = menu.classList.toggle('open');
-                toggle.setAttribute('aria-expanded', isOpen);
-                iconOpen.style.display = isOpen ? 'none' : 'block';
-                iconClose.style.display = isOpen ? 'block' : 'none';
-            });
-
-            menu.querySelectorAll('a').forEach(function (link) {
-                link.addEventListener('click', function () {
-                    menu.classList.remove('open');
-                    toggle.setAttribute('aria-expanded', 'false');
-                    iconOpen.style.display = 'block';
-                    iconClose.style.display = 'none';
+            if (toggle && menu) {
+                toggle.addEventListener('click', function () {
+                    const isOpen = menu.classList.toggle('open');
+                    toggle.setAttribute('aria-expanded', isOpen);
+                    iconOpen.style.display = isOpen ? 'none' : 'block';
+                    iconClose.style.display = isOpen ? 'block' : 'none';
                 });
-            });
+
+                menu.querySelectorAll('a').forEach(function (link) {
+                    link.addEventListener('click', function () {
+                        menu.classList.remove('open');
+                        toggle.setAttribute('aria-expanded', 'false');
+                        iconOpen.style.display = 'block';
+                        iconClose.style.display = 'none';
+                    });
+                });
+            }
+
+            // Sticky navbar effect
+            if (header) {
+                window.addEventListener('scroll', function () {
+                    header.classList.toggle('scrolled', window.scrollY > 50);
+                }, { passive: true });
+            }
         });
     </script>
 
