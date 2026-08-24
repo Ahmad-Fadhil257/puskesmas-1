@@ -1,67 +1,73 @@
 @extends('layouts.admin')
 
-@section('title', 'Tambah Cara Kerja - Puskesmas CareLink')
+@section('title', 'Tambah Langkah Cara Kerja - Puskesmas CareLink')
 
 @section('content')
 
-    <!-- Page Header -->
+    {{-- Breadcrumb & Header --}}
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
-            <h4 class="fw-bold text-dark mb-1">Tambah Langkah Cara Kerja</h4>
-            <small class="text-muted">Tambahkan langkah baru ke dalam proses layanan</small>
+            <h4 class="fw-bold py-1 mb-1" style="color: #0A5C45;">
+                <i class="bx bx-plus-circle me-2"></i>Tambah Langkah Cara Kerja
+            </h4>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb breadcrumb-style1 mb-0">
+                    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('admin.cara-kerja.index') }}">Kelola Cara Kerja</a></li>
+                    <li class="breadcrumb-item active">Tambah Baru</li>
+                </ol>
+            </nav>
         </div>
-        <a href="{{ route('admin.cara-kerja.index') }}" class="btn btn-outline-secondary rounded-pill">
-            <i class="bx bx-arrow-back me-1"></i> Kembali
+        <a href="{{ route('admin.cara-kerja.index') }}" class="btn btn-outline-secondary d-inline-flex align-items-center gap-1">
+            <i class="bx bx-arrow-back"></i> Kembali
         </a>
     </div>
 
-    <!-- Form Card -->
-    <div class="card">
-        <div class="card-body">
+    {{-- Form Card Sneat --}}
+    <div class="card mb-4">
+        <div class="card-header border-bottom py-3">
+            <h5 class="mb-0 fw-bold">Informasi Langkah Alur Pelayanan</h5>
+        </div>
+        <div class="card-body pt-4">
             <form action="{{ route('admin.cara-kerja.store') }}" method="POST">
                 @csrf
 
-                <!-- Urutan -->
-                <div class="mb-3">
-                    <label for="urutan" class="form-label fw-semibold">Nomor Urutan <span class="text-danger">*</span></label>
-                    <input type="number" class="form-control @error('urutan') is-invalid @enderror"
-                           id="urutan" name="urutan" value="{{ old('urutan', isset($item) ? $item->urutan : '') }}"
-                           min="1" required placeholder="Contoh: 1, 2, 3...">
-                    @error('urutan')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
+                <div class="row g-3">
+                    {{-- Nomor Urutan --}}
+                    <div class="col-md-3">
+                        <label class="form-label fw-semibold" for="urutan">Nomor Urutan <span class="text-danger">*</span></label>
+                        <input type="number" class="form-control @error('urutan') is-invalid @enderror" id="urutan" name="urutan" value="{{ old('urutan', 1) }}" min="1" placeholder="Contoh: 1, 2, 3..." required>
+                        <div class="form-text">Urutan tampilan pada landing page.</div>
+                        @error('urutan')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    {{-- Judul Langkah --}}
+                    <div class="col-md-9">
+                        <label class="form-label fw-semibold" for="judul">Judul Langkah <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control @error('judul') is-invalid @enderror" id="judul" name="judul" value="{{ old('judul') }}" placeholder="Contoh: Buat Janji Temu" required>
+                        @error('judul')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    {{-- Deskripsi --}}
+                    <div class="col-md-12">
+                        <label class="form-label fw-semibold" for="deskripsi">Deskripsi Langkah <span class="text-danger">*</span></label>
+                        <textarea class="form-control @error('deskripsi') is-invalid @enderror" id="deskripsi" name="deskripsi" rows="4" placeholder="Jelaskan instruksi atau alur yang harus dilakukan pasien pada langkah ini..." required>{{ old('deskripsi') }}</textarea>
+                        @error('deskripsi')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
                 </div>
 
-                <!-- Judul -->
-                <div class="mb-3">
-                    <label for="judul" class="form-label fw-semibold">Judul Langkah <span class="text-danger">*</span></label>
-                    <input type="text" class="form-control @error('judul') is-invalid @enderror"
-                           id="judul" name="judul" value="{{ old('judul', isset($item) ? $item->judul : '') }}"
-                           required placeholder="Contoh: Buat Janji Temu">
-                    @error('judul')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
-
-                <!-- Deskripsi -->
-                <div class="mb-3">
-                    <label for="deskripsi" class="form-label fw-semibold">Deskripsi <span class="text-danger">*</span></label>
-                    <textarea class="form-control @error('deskripsi') is-invalid @enderror"
-                              id="deskripsi" name="deskripsi" rows="4" required
-                              placeholder="Jelaskan langkah ini secara detail...">{{ old('deskripsi', isset($item) ? $item->deskripsi : '') }}</textarea>
-                    @error('deskripsi')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
-
-                <!-- Actions -->
-                <div class="d-flex gap-2">
-                    <button type="submit" class="btn btn-primary rounded-pill px-4">
-                        <i class="bx bx-save me-1"></i> Simpan
+                {{-- Action Buttons --}}
+                <div class="d-flex justify-content-end gap-2 mt-4 pt-3 border-top">
+                    <a href="{{ route('admin.cara-kerja.index') }}" class="btn btn-outline-secondary">Batal</a>
+                    <button type="submit" class="btn btn-primary px-4">
+                        <i class="bx bx-save me-1"></i> Simpan Langkah
                     </button>
-                    <a href="{{ route('admin.cara-kerja.index') }}" class="btn btn-outline-secondary rounded-pill">
-                        Batal
-                    </a>
                 </div>
             </form>
         </div>

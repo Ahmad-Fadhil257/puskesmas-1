@@ -2,16 +2,16 @@
 <header class="site-header">
     <nav class="navbar">
         <!-- Brand / Logo -->
-        <a href="{{ url('/') }}" class="navbar__brand">
+        <a href="{{ route('home') }}" class="navbar__brand">
             Puskesmas CareLink
         </a>
 
         <!-- Desktop Menu -->
         <ul class="navbar__menu">
-            <li><a href="#home" class="active">Home</a></li>
-            <li><a href="#layanan">Layanan</a></li>
-            <li><a href="#jadwal">Jadwal Dokter</a></li>
-            <li><a href="#berita">Berita</a></li>
+            <li><a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'active' : '' }}">Home</a></li>
+            <li><a href="{{ url('/#layanan') }}">Layanan</a></li>
+            <li><a href="{{ url('/#jadwal') }}">Jadwal Dokter</a></li>
+            <li><a href="{{ route('blog.index') }}" class="{{ request()->routeIs('blog.*') ? 'active' : '' }}">Berita</a></li>
         </ul>
 
         <!-- Desktop CTA -->
@@ -30,10 +30,10 @@
 
     <!-- Mobile Dropdown Menu -->
     <div class="navbar__mobile" id="mobileMenu">
-        <a href="#home" class="active">Home</a>
-        <a href="#layanan">Layanan</a>
-        <a href="#jadwal">Jadwal Dokter</a>
-        <a href="#berita">Berita</a>
+        <a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'active' : '' }}">Home</a>
+        <a href="{{ url('/#layanan') }}">Layanan</a>
+        <a href="{{ url('/#jadwal') }}">Jadwal Dokter</a>
+        <a href="{{ route('blog.index') }}" class="{{ request()->routeIs('blog.*') ? 'active' : '' }}">Berita</a>
         <a href="{{ $kontak->wa_link }}" target="_blank" rel="noopener" class="btn-nav-cta">Janji Temu</a>
     </div>
 </header>

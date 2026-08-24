@@ -24,6 +24,12 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
+        // Seed Data Artikel Berita Awal
+        $this->call(ArticleSeeder::class);
+
+        // Seed Data Tentang Kami (About)
+        $this->call(AboutSeeder::class);
+
         // Seed Data Cara Kerja
         $caraKerja = [
             [
