@@ -63,7 +63,6 @@ a { text-decoration: none; color: inherit; }
 }
 
 .site-header.scrolled .navbar {
-    border-radius: 0;
     box-shadow: 0 2px 12px rgba(10, 92, 69, 0.12);
 }
 
