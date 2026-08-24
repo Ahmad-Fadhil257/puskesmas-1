@@ -184,7 +184,7 @@ function previewNewPhoto(input) {
     }
 }
 
-const hariOptions = @json(['Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu']);
+const hariOptions = @php echo json_encode(['Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu']); @endphp;
 
 function addJadwalRow() {
     const container = document.getElementById('jadwalRows');
