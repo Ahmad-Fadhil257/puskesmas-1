@@ -1,0 +1,425 @@
+/* ==========================================================================
+   LOGIN & GATEKEEPER STYLES - PUSKESMAS
+   ========================================================================== */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --color-primary: #0A5C45;
+    --color-primary-hover: #084A37;
+    --radius-16: 16px;
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    color: #122822;
+    background: linear-gradient(135deg, #C5E5DD 0%, #D8EFE8 50%, #EEF8F5 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 16px;
+    overflow-x: hidden;
+}
+
+/* Helper Utilities */
+.d-none {
+    display: none !important;
+}
+
+/* SweetAlert2 Toast Modern Styling */
+.swal2-popup.swal2-toast {
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    border-radius: 14px !important;
+    padding: 12px 18px !important;
+    box-shadow: 0 12px 32px rgba(10, 92, 69, 0.18), 0 2px 6px rgba(0, 0, 0, 0.06) !important;
+    border: 1px solid rgba(10, 92, 69, 0.12) !important;
+}
+
+/* ====== LOGIN WRAPPER & CORNER DECORATIONS ====== */
+.login-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 450px;
+}
+
+/* Top-Left Corner Decoration */
+.decor-card-tl {
+    position: absolute;
+    top: -38px;
+    left: -38px;
+    width: 160px;
+    height: 160px;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.decor-gradient-tl {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    top: 10px;
+    left: 10px;
+    background: radial-gradient(circle, rgba(10, 92, 69, 0.28) 0%, rgba(197, 229, 221, 0.1) 60%, transparent 100%);
+    border-radius: 50%;
+    filter: blur(14px);
+}
+
+.decor-dashed-tl {
+    position: absolute;
+    width: 130px;
+    height: 130px;
+    top: 0;
+    left: 0;
+    border: 2px dashed rgba(10, 92, 69, 0.35);
+    border-radius: 50%;
+}
+
+.decor-solid-tl {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    top: 25px;
+    left: 25px;
+    border: 1.5px solid rgba(10, 92, 69, 0.2);
+    border-radius: 50%;
+}
+
+/* Bottom-Right Corner Decoration */
+.decor-card-br {
+    position: absolute;
+    bottom: -38px;
+    right: -38px;
+    width: 160px;
+    height: 160px;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.decor-gradient-br {
+    position: absolute;
+    width: 130px;
+    height: 130px;
+    bottom: 10px;
+    right: 10px;
+    background: radial-gradient(circle, rgba(10, 92, 69, 0.3) 0%, rgba(187, 228, 216, 0.1) 60%, transparent 100%);
+    border-radius: 50%;
+    filter: blur(14px);
+}
+
+.decor-dashed-br {
+    position: absolute;
+    width: 135px;
+    height: 135px;
+    bottom: 0;
+    right: 0;
+    border: 2px dashed rgba(10, 92, 69, 0.35);
+    border-radius: 50%;
+}
+
+.decor-solid-br {
+    position: absolute;
+    width: 85px;
+    height: 85px;
+    bottom: 25px;
+    right: 25px;
+    border: 1.5px solid rgba(10, 92, 69, 0.2);
+    border-radius: 50%;
+}
+
+/* Medical Plus Dots Accent */
+.decor-dots-tr {
+    position: absolute;
+    top: -16px;
+    right: -12px;
+    display: grid;
+    grid-template-columns: repeat(3, 6px);
+    gap: 6px;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.45;
+}
+
+.decor-dots-tr span, .decor-dots-bl span {
+    width: 6px;
+    height: 6px;
+    background: var(--color-primary);
+    border-radius: 50%;
+}
+
+.decor-dots-bl {
+    position: absolute;
+    bottom: -16px;
+    left: -12px;
+    display: grid;
+    grid-template-columns: repeat(3, 6px);
+    gap: 6px;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.45;
+}
+
+/* ====== MAIN CARD CONTAINER ====== */
+.login-card {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    background: #FFFFFF;
+    border-radius: var(--radius-16);
+    padding: 42px 34px;
+    box-shadow: 0 12px 40px rgba(10, 92, 69, 0.12), 0 2px 6px rgba(10, 92, 69, 0.04);
+    border: 1px solid rgba(10, 92, 69, 0.08);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.brand-logo-wrap {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 6px;
+}
+
+.brand-logo-img {
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+}
+
+.login-title {
+    font-size: 1.55rem;
+    font-weight: 800;
+    color: #122822;
+    letter-spacing: -0.02em;
+}
+
+.login-subtitle {
+    font-size: 0.85rem;
+    color: #40564F;
+}
+
+/* Form Controls */
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-label {
+    display: block;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    color: #122822;
+    margin-bottom: 7px;
+}
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-icon {
+    position: absolute;
+    left: 16px;
+    color: #718D84;
+    font-size: 0.9375rem;
+    pointer-events: none;
+}
+
+.form-input {
+    width: 100%;
+    padding: 12px 44px;
+    font-family: inherit;
+    font-size: 0.875rem;
+    border: 1.5px solid #CFE6DF;
+    border-radius: var(--radius-16);
+    background: #FAFCFB;
+    color: #122822;
+    transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+    outline: none;
+}
+
+.form-input:focus {
+    border-color: var(--color-primary);
+    background: #FFFFFF;
+    box-shadow: 0 0 0 3px rgba(10, 92, 69, 0.12);
+}
+
+.toggle-password {
+    position: absolute;
+    right: 16px;
+    color: #718D84;
+    font-size: 0.9375rem;
+    cursor: pointer;
+    transition: color 0.2s;
+    padding: 4px;
+}
+
+.toggle-password:hover {
+    color: var(--color-primary);
+}
+
+.form-options {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    font-size: 0.8125rem;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #40564F;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.remember-me input {
+    accent-color: var(--color-primary);
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+}
+
+.btn-login {
+    width: 100%;
+    padding: 13px;
+    background: var(--color-primary);
+    color: #FFFFFF;
+    border: none;
+    border-radius: var(--radius-16);
+    font-family: inherit;
+    font-size: 0.9375rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 4px 14px rgba(10, 92, 69, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.btn-login:hover {
+    background: var(--color-primary-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(10, 92, 69, 0.28);
+}
+
+.btn-login:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.login-footer {
+    margin-top: 24px;
+    text-align: center;
+    font-size: 0.8125rem;
+    color: #40564F;
+}
+
+.login-footer a {
+    color: var(--color-primary);
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.login-footer a:hover {
+    text-decoration: underline;
+}
+
+/* Animation */
+.fade-in {
+    animation: fadeIn 0.4s ease-out forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ====== SECURITY GATE MODAL POPUP (OVERLAY) ====== */
+.gate-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(10, 45, 35, 0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    padding: 20px;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+
+.gate-modal-overlay.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.gate-modal-box {
+    background: #FFFFFF;
+    border-radius: 20px;
+    padding: 34px 28px;
+    width: 100%;
+    max-width: 410px;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.28), 0 0 0 1px rgba(10, 92, 69, 0.12);
+    text-align: center;
+    position: relative;
+    transform: scale(1);
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.gate-modal-overlay.hidden .gate-modal-box {
+    transform: scale(0.92);
+}
+
+.gate-icon-circle {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 16px;
+    border-radius: 50%;
+    background: #E8F5F1;
+    color: var(--color-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.65rem;
+    box-shadow: 0 0 0 8px rgba(10, 92, 69, 0.08);
+}
+
+.gate-modal-title {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: #122822;
+    margin-bottom: 6px;
+    letter-spacing: -0.01em;
+}
+
+.gate-modal-desc {
+    font-size: 0.8125rem;
+    color: #557269;
+    margin-bottom: 22px;
+    line-height: 1.45;
+}

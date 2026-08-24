@@ -1,6 +1,6 @@
 /* ==========================================================================
-   SNEAT CUSTOM THEME OVERRIDE - PUSKESMAS CARELINK
-   Warna Utama: Emerald Green (#0A5C45) & Mode Gelap (Dark Mode)
+   SNEAT CUSTOM THEME OVERRIDE - PUSKESMAS
+   Warna Utama: Emerald Green (#0A5C45) & Mode Gelap Elegan (Executive Slate Dark)
    ========================================================================== */
 
 :root {
@@ -126,21 +126,22 @@ a:hover {
 }
 
 /* ==========================================================================
-   DARK MODE STYLES (Aktif saat <html> memiliki class "dark-style")
+   EXECUTIVE DARK MODE STYLES (Aktif saat <html> memiliki class "dark-style")
+   Palette: Deep Obsidian Slate (#0F172A), Elevated Slate (#1E293B), Crisp Emerald (#10B981)
    ========================================================================== */
 
 .dark-style,
 .dark-style body,
 .dark-style .layout-page,
 .dark-style .content-wrapper {
-    background-color: #0E1614 !important;
+    background-color: #0F172A !important;
     color: #CBD5E1 !important;
 }
 
-/* Sidebar Dark */
+/* Sidebar Dark - Clean Charcoal Slate */
 .dark-style .bg-menu-theme {
-    background-color: #141F1C !important;
-    border-right: 1px solid rgba(255, 255, 255, 0.06) !important;
+    background-color: #111827 !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
 }
 
 .dark-style .menu-vertical .menu-link {
@@ -149,17 +150,19 @@ a:hover {
 
 .dark-style .menu-vertical .menu-link:hover {
     color: #34D399 !important;
-    background-color: rgba(255, 255, 255, 0.04) !important;
+    background-color: rgba(255, 255, 255, 0.05) !important;
 }
 
 .dark-style .menu-vertical .menu-item.active > .menu-link:not(.menu-toggle) {
-    background-color: #0A5C45 !important;
+    background: linear-gradient(135deg, #0A5C45 0%, #059669 100%) !important;
     color: #FFFFFF !important;
-    box-shadow: 0 2px 8px 0 rgba(10, 92, 69, 0.5) !important;
+    box-shadow: 0 4px 14px rgba(10, 92, 69, 0.45) !important;
 }
 
 .dark-style .menu-header-text {
     color: #64748B !important;
+    font-weight: 700;
+    letter-spacing: 0.5px;
 }
 
 .dark-style .app-brand-text {
@@ -168,62 +171,112 @@ a:hover {
 
 /* Top Navbar Dark */
 .dark-style .bg-navbar-theme {
-    background-color: #141F1C !important;
-    border: 1px solid rgba(255, 255, 255, 0.06) !important;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3) !important;
+    background-color: #1E293B !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35) !important;
     color: #E2E8F0 !important;
 }
 
-.dark-style .form-control {
-    background-color: #0E1614 !important;
-    border-color: #243530 !important;
-    color: #F1F5F9 !important;
+.dark-style #themeToggleBtn {
+    color: #FBBF24 !important; /* Glowing Gold Sun */
+}
+
+.dark-style #themeToggleBtn:hover {
+    background-color: rgba(251, 191, 36, 0.12) !important;
+}
+
+/* Cards & Content Containers Dark */
+.dark-style .card {
+    background-color: #1E293B !important;
+    border: 1px solid rgba(255, 255, 255, 0.07) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25) !important;
+    color: #CBD5E1 !important;
+}
+
+.dark-style .card-header {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+.dark-style .card-footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+.dark-style .border,
+.dark-style .border-top,
+.dark-style .border-bottom,
+.dark-style .border-start,
+.dark-style .border-end {
+    border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Typography Dark */
+.dark-style h1,
+.dark-style h2,
+.dark-style h3,
+.dark-style h4,
+.dark-style h5,
+.dark-style h6,
+.dark-style .card-title,
+.dark-style .text-dark {
+    color: #F8FAFC !important;
+}
+
+.dark-style .text-muted,
+.dark-style .form-text,
+.dark-style small {
+    color: #94A3B8 !important;
+}
+
+.dark-style .divider-text {
+    color: #94A3B8 !important;
+    background-color: #1E293B !important;
+}
+
+/* Form Controls (Inputs, Selects, Textareas) Dark */
+.dark-style .form-control,
+.dark-style .form-select {
+    background-color: #0F172A !important;
+    border: 1px solid #334155 !important;
+    color: #F8FAFC !important;
+}
+
+.dark-style .form-control:focus,
+.dark-style .form-select:focus {
+    background-color: #0B1120 !important;
+    border-color: #10B981 !important;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2) !important;
+    color: #FFFFFF !important;
 }
 
 .dark-style .form-control::placeholder {
     color: #64748B !important;
 }
 
-.dark-style #themeToggleBtn {
-    color: #FBBF24 !important; /* Warna Matahari Kuning Emas */
-}
-
-.dark-style #themeToggleBtn:hover {
-    background-color: rgba(251, 191, 36, 0.1) !important;
-}
-
-/* Cards & Components Dark */
-.dark-style .card {
-    background-color: #172421 !important;
-    border: 1px solid rgba(255, 255, 255, 0.06) !important;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25) !important;
-    color: #CBD5E1 !important;
-}
-
-.dark-style .card .text-dark,
-.dark-style h1,
-.dark-style h2,
-.dark-style h3,
-.dark-style h4,
-.dark-style h5,
-.dark-style h6 {
-    color: #F8FAFC !important;
-}
-
-.dark-style .text-muted {
+.dark-style .input-group-text {
+    background-color: #0F172A !important;
+    border: 1px solid #334155 !important;
     color: #94A3B8 !important;
+}
+
+.dark-style .form-label {
+    color: #E2E8F0 !important;
+}
+
+.dark-style .form-check-label {
+    color: #E2E8F0 !important;
 }
 
 /* Tables Dark */
 .dark-style .table {
     color: #CBD5E1 !important;
-    border-color: rgba(255, 255, 255, 0.06) !important;
+    border-color: rgba(255, 255, 255, 0.07) !important;
 }
 
-.dark-style .table th {
-    background-color: #111A18 !important;
+.dark-style .table th,
+.dark-style thead.table-light tr th {
+    background-color: #0F172A !important;
     color: #94A3B8 !important;
-    border-color: rgba(255, 255, 255, 0.06) !important;
+    border-color: rgba(255, 255, 255, 0.07) !important;
 }
 
 .dark-style .table td {
@@ -231,40 +284,65 @@ a:hover {
 }
 
 .dark-style .table-hover tbody tr:hover {
-    background-color: rgba(255, 255, 255, 0.03) !important;
+    background-color: rgba(255, 255, 255, 0.04) !important;
 }
 
 /* Badges Dark */
 .dark-style .bg-label-primary {
-    background-color: rgba(10, 92, 69, 0.3) !important;
+    background-color: rgba(16, 185, 129, 0.18) !important;
     color: #34D399 !important;
 }
 
 .dark-style .bg-label-success {
-    background-color: rgba(34, 197, 94, 0.2) !important;
+    background-color: rgba(34, 197, 94, 0.18) !important;
     color: #4ADE80 !important;
 }
 
 .dark-style .bg-label-warning {
-    background-color: rgba(234, 179, 8, 0.2) !important;
+    background-color: rgba(234, 179, 8, 0.18) !important;
     color: #FACC15 !important;
 }
 
 .dark-style .bg-label-info {
-    background-color: rgba(56, 189, 248, 0.2) !important;
+    background-color: rgba(56, 189, 248, 0.18) !important;
     color: #38BDF8 !important;
 }
 
 .dark-style .bg-label-danger {
-    background-color: rgba(239, 68, 68, 0.2) !important;
+    background-color: rgba(239, 68, 68, 0.18) !important;
     color: #F87171 !important;
+}
+
+.dark-style .bg-label-secondary {
+    background-color: rgba(148, 163, 184, 0.18) !important;
+    color: #CBD5E1 !important;
+}
+
+/* Modals & Dialogs Dark */
+.dark-style .modal-content {
+    background-color: #1E293B !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5) !important;
+    color: #CBD5E1 !important;
+}
+
+.dark-style .modal-header {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+.dark-style .modal-footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+.dark-style .btn-close {
+    filter: invert(1) grayscale(100%) brightness(200%);
 }
 
 /* Dropdown Menu Dark */
 .dark-style .dropdown-menu {
-    background-color: #172421 !important;
-    border: 1px solid rgba(255, 255, 255, 0.08) !important;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.45) !important;
+    background-color: #1E293B !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
 }
 
 .dark-style .dropdown-item {
@@ -272,7 +350,7 @@ a:hover {
 }
 
 .dark-style .dropdown-item:hover {
-    background-color: #20312D !important;
+    background-color: #334155 !important;
     color: #FFFFFF !important;
 }
 
@@ -282,16 +360,16 @@ a:hover {
 
 /* Footer Dark */
 .dark-style .bg-footer-theme {
-    background-color: #141F1C !important;
-    border-top: 1px solid rgba(255, 255, 255, 0.06) !important;
+    background-color: #111827 !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
     color: #94A3B8 !important;
 }
 
 /* SweetAlert2 Modal Dark */
 .dark-style .swal2-popup {
-    background-color: #172421 !important;
+    background-color: #1E293B !important;
     color: #F8FAFC !important;
-    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
 
 .dark-style .swal2-title {
