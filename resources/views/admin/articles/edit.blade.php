@@ -26,11 +26,8 @@
 
     {{-- Form Card --}}
     <div class="card mb-4">
-        <div class="card-header border-bottom py-3 d-flex justify-content-between align-items-center">
+        <div class="card-header border-bottom py-3">
             <h5 class="mb-0 fw-bold">Edit Informasi Artikel</h5>
-            <a href="{{ route('blog.show', $article->slug) }}" target="_blank" class="btn btn-sm btn-outline-primary">
-                <i class="bx bx-link-external me-1"></i> Preview di Website
-            </a>
         </div>
         <div class="card-body pt-4">
             <form action="{{ route('admin.articles.update', $article->id) }}" method="POST" enctype="multipart/form-data">

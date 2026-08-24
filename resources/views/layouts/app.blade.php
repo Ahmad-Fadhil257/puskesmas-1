@@ -6,8 +6,9 @@
     <title>@yield('title', config('app.name') . ' - Melayani Kesehatan Masyarakat')</title>
     <meta name="description" content="@yield('meta_description', 'Pelayanan medis komprehensif dengan dokter ahli, fasilitas modern, dan pelayanan penuh kasih sayang. Kesehatan Anda, prioritas kami.')">
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+    <!-- Boxicons Font Icons -->
+    <link rel="stylesheet" href="{{ asset('admin-assets/vendor/fonts/boxicons.css') }}">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
     <!-- Main CSS -->
     <link rel="stylesheet" href="{{ asset('css/layouts/nav.css') }}">

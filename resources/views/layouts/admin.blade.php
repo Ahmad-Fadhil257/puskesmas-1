@@ -164,6 +164,12 @@
                             <div>Kelola Hero & Fitur</div>
                         </a>
                     </li>
+                    <li class="menu-item {{ request()->routeIs('admin.layanan.*') ? 'active' : '' }}">
+                        <a href="{{ route('admin.layanan.index') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-briefcase-alt-2"></i>
+                            <div>Kelola Layanan</div>
+                        </a>
+                    </li>
                     <li class="menu-item {{ request()->routeIs('admin.articles.*') ? 'active' : '' }}">
                         <a href="{{ route('admin.articles.index') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-news"></i>
@@ -176,10 +182,22 @@
                             <div>Kelola Cara Kerja</div>
                         </a>
                     </li>
+                    <li class="menu-item {{ request()->routeIs('admin.dokter.*') ? 'active' : '' }}">
+                        <a href="{{ route('admin.dokter.index') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-user-plus"></i>
+                            <div>Kelola Dokter</div>
+                        </a>
+                    </li>
                     <li class="menu-item {{ request()->routeIs('admin.about.*') ? 'active' : '' }}">
                         <a href="{{ route('admin.about.index') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-info-circle"></i>
                             <div>Kelola Tentang Kami</div>
+                        </a>
+                    </li>
+                    <li class="menu-item {{ request()->routeIs('admin.nilai.*') ? 'active' : '' }}">
+                        <a href="{{ route('admin.nilai.index') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-star"></i>
+                            <div>Kelola Nilai & Mitra</div>
                         </a>
                     </li>
                     <!-- PENGATURAN & AKUN -->
