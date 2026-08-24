@@ -101,8 +101,9 @@
 
                     {{-- Konten Lengkap --}}
                     <div class="col-md-12">
-                        <label class="form-label fw-semibold" for="content">Isi Lengkap Artikel (HTML / Teks) <span class="text-danger">*</span></label>
-                        <textarea class="form-control @error('content') is-invalid @enderror" id="content" name="content" rows="12" placeholder="Tuliskan isi artikel kesehatan secara lengkap..." required>{{ old('content') }}</textarea>
+                        <label class="form-label fw-semibold" for="content">Isi Lengkap Artikel <span class="text-danger">*</span></label>
+                        <div class="form-text mb-2">Gunakan toolbar di atas kotak untuk membuat judul sub-bagian, menebalkan teks, menambah daftar, dll — tanpa perlu menulis kode HTML.</div>
+                        <textarea class="form-control @error('content') is-invalid @enderror" id="content" name="content" rows="12" hidden>{{ old('content') }}</textarea>
                         @error('content')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -131,7 +132,35 @@
 </div>
 
 @push('scripts')
+<!-- CKEditor 5 (WYSIWYG Editor) -->
+<script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
 <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        ClassicEditor
+            .create(document.querySelector('#content'), {
+                toolbar: {
+                    items: ['heading', '|', 'bold', 'italic', 'underline', '|', 'bulletedList', 'numberedList', '|', 'link', 'blockQuote', 'insertTable', '|', 'undo', 'redo']
+                },
+                heading: {
+                    options: [
+                        { model: 'paragraph', title: 'Paragraf', class: 'ck-heading_paragraph' },
+                        { model: 'heading2', view: 'h2', title: 'Judul Besar (H2)', class: 'ck-heading_heading2' },
+                        { model: 'heading3', view: 'h3', title: 'Judul Sedang (H3)', class: 'ck-heading_heading3' },
+                        { model: 'heading4', view: 'h4', title: 'Judul Kecil (H4)', class: 'ck-heading_heading4' }
+                    ]
+                },
+                language: 'id'
+            })
+            .then(editor => {
+                editor.ui.getEditableElement().style.border = '1px solid #d9dee3';
+                editor.ui.getEditableElement().style.borderRadius = '0.375rem';
+                editor.ui.getEditableElement().style.minHeight = '350px';
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    });
+
     function previewThumbnail(event) {
         const input = event.target;
         const container = document.getElementById('previewContainer');
