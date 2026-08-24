@@ -126,7 +126,7 @@
                                 <div class="jadwal-row d-flex gap-2 mb-2 align-items-center">
                                     <div class="custom-dropdown" style="width: 160px;">
                                         <input type="hidden" name="jadwal_hari[]" class="hari-value" value="{{ $j['hari'] ?? '' }}">
-                                        <button type="button" class="dropdown-toggle form-control form-control-sm text-start d-flex align-items-center justify-content-between" onclick="toggleDropdown(this)">
+                                        <button type="button" class="dropdown-toggle text-start d-flex align-items-center justify-content-between" onclick="toggleDropdown(this)">
                                             <span class="dropdown-selected">{{ $j['hari'] ?? '-- Hari --' }}</span>
                                             <i class="bx bx-chevron-down"></i>
                                         </button>
@@ -144,8 +144,8 @@
                                 <div class="jadwal-row d-flex gap-2 mb-2 align-items-center">
                                     <div class="custom-dropdown" style="width: 160px;">
                                         <input type="hidden" name="jadwal_hari[]" class="hari-value" value="">
-                                        <button type="button" class="dropdown-toggle form-control form-control-sm text-start d-flex align-items-center justify-content-between" onclick="toggleDropdown(this)">
-                                            <span class="dropdown-selected">-- Hari --</span>
+                                        <button type="button" class="dropdown-toggle text-start d-flex align-items-center justify-content-between" onclick="toggleDropdown(this)">
+                                            <span class="dropdown-selected dropdown-placeholder">-- Hari --</span>
                                             <i class="bx bx-chevron-down"></i>
                                         </button>
                                         <div class="dropdown-menu-custom">
@@ -275,7 +275,7 @@ function addJadwalRow() {
 
     row.innerHTML = '<div class="custom-dropdown" style="width: 160px;">' +
         '<input type="hidden" name="jadwal_hari[]" class="hari-value" value="">' +
-        '<button type="button" class="dropdown-toggle form-control form-control-sm text-start d-flex align-items-center justify-content-between" onclick="toggleDropdown(this)">' +
+        '<button type="button" class="dropdown-toggle text-start d-flex align-items-center justify-content-between" onclick="toggleDropdown(this)">' +
         '<span class="dropdown-selected dropdown-placeholder">-- Hari --</span><i class="bx bx-chevron-down"></i></button>' +
         '<div class="dropdown-menu-custom">' + options + '</div></div>' +
         '<input type="text" name="jadwal_jam[]" class="form-control form-control-sm" placeholder="Contoh: 08:00 - 12:00" style="flex:1;">' +
