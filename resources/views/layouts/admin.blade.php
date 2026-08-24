@@ -164,6 +164,12 @@
                             <div>Kelola Hero & Fitur</div>
                         </a>
                     </li>
+                    <li class="menu-item {{ request()->routeIs('admin.layanan.*') ? 'active' : '' }}">
+                        <a href="{{ route('admin.layanan.index') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-briefcase-alt-2"></i>
+                            <div>Kelola Layanan</div>
+                        </a>
+                    </li>
                     <li class="menu-item {{ request()->routeIs('admin.articles.*') ? 'active' : '' }}">
                         <a href="{{ route('admin.articles.index') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-news"></i>

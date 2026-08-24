@@ -1,4 +1,10 @@
+{{-- Dokter Kami Section with Swiper Carousel --}}
 <section class="dokter-section" id="dokter-kami">
+    {{-- Swiper CSS CDN --}}
+    @once
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    @endonce
+
     <div class="dokter-container">
 
         {{-- ---- HEADER ---- --}}
@@ -22,34 +28,107 @@
         </div>
         {{-- END HEADER --}}
 
-        {{-- ---- DOCTORS GRID (Dinamis dari database) ---- --}}
-        <div class="dokter-grid dokter-grid--{{ $dokters->count() <= 4 ? 'four' : 'many' }}">
+        {{-- ---- SLIDER WRAPPER ---- --}}
+        <div class="dokter-slider-wrapper">
 
-            @forelse($dokters as $dokter)
-            <div class="dokter-card">
-                <div class="dokter-photo-wrap">
-                    @if($dokter->photo)
-                        <img src="{{ asset($dokter->photo) }}" alt="{{ $dokter->name }}" loading="lazy">
-                    @else
-                        {{-- Placeholder avatar jika tidak ada foto --}}
-                        <div class="dokter-no-photo">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" style="width:48px;height:48px;opacity:0.4;">
-                                <path d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm-5 8s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Z"/>
-                            </svg>
+            {{-- Navigation Arrows --}}
+            <button class="dokter__nav-btn dokter__nav-btn--prev" id="dokterPrevBtn" aria-label="Dokter Sebelumnya">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+            </button>
+
+            <button class="dokter__nav-btn dokter__nav-btn--next" id="dokterNextBtn" aria-label="Dokter Berikutnya">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+            </button>
+
+            {{-- Swiper Container --}}
+            <div class="swiper dokter-swiper">
+                <div class="swiper-wrapper">
+
+                    @forelse($dokters as $dokter)
+                    <div class="swiper-slide">
+                        <div class="dokter-card">
+                            <div class="dokter-photo-wrap">
+                                @if($dokter->photo)
+                                    <img src="{{ asset($dokter->photo) }}" alt="{{ $dokter->name }}" loading="lazy">
+                                @else
+                                    {{-- Placeholder avatar jika tidak ada foto --}}
+                                    <div class="dokter-no-photo">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" style="width:48px;height:48px;opacity:0.4;">
+                                            <path d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm-5 8s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Z"/>
+                                        </svg>
+                                    </div>
+                                @endif
+                            </div>
+                            <h3 class="dokter-name">{{ $dokter->name }}</h3>
+                            <p class="dokter-specialty">{{ $dokter->specialty }}</p>
                         </div>
-                    @endif
+                    </div>
+                    @empty
+                    <div class="swiper-slide">
+                        <p class="text-center" style="color: rgba(255,255,255,0.6); padding: 40px 0; width: 100%;">
+                            Belum ada data dokter yang ditampilkan.
+                        </p>
+                    </div>
+                    @endforelse
+
                 </div>
-                <h3 class="dokter-name">{{ $dokter->name }}</h3>
-                <p class="dokter-specialty">{{ $dokter->specialty }}</p>
             </div>
-            @empty
-            <p class="text-center" style="color: rgba(255,255,255,0.6); grid-column: 1/-1; padding: 40px 0;">
-                Belum ada data dokter yang ditampilkan.
-            </p>
-            @endforelse
+
+            {{-- Pagination Dots --}}
+            <div class="swiper-pagination dokter__pagination" id="dokterPagination"></div>
 
         </div>
-        {{-- END GRID --}}
+        {{-- END SLIDER WRAPPER --}}
 
     </div>
+
+    {{-- Swiper JS CDN --}}
+    @once
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    @endonce
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const count = {{ $dokters->count() }};
+            const dokterSwiper = new Swiper('.dokter-swiper', {
+                slidesPerView: 1.2,
+                spaceBetween: 16,
+                loop: count > 4,
+                speed: 600,
+                grabCursor: true,
+                autoplay: count > 4 ? {
+                    delay: 4000,
+                    disableOnInteraction: false,
+                    pauseOnMouseEnter: true,
+                } : false,
+                navigation: {
+                    nextEl: '#dokterNextBtn',
+                    prevEl: '#dokterPrevBtn',
+                },
+                pagination: {
+                    el: '#dokterPagination',
+                    clickable: true,
+                    dynamicBullets: false,
+                },
+                breakpoints: {
+                    480: {
+                        slidesPerView: 2,
+                        spaceBetween: 20,
+                    },
+                    768: {
+                        slidesPerView: 3,
+                        spaceBetween: 24,
+                    },
+                    1024: {
+                        slidesPerView: 4,
+                        spaceBetween: 24,
+                    }
+                }
+            });
+        });
+    </script>
 </section>

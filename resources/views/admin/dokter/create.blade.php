@@ -89,7 +89,7 @@
                     <div class="col-12"><hr class="my-1"></div>
 
                     {{-- Upload Foto --}}
-                    <div class="col-md-8">
+                    <div class="col-md-12">
                         <label class="form-label fw-semibold" for="photo">Foto Dokter</label>
                         <input type="file"
                             class="form-control @error('photo') is-invalid @enderror"
@@ -106,16 +106,6 @@
                             <span class="d-block text-muted small mb-1">Preview:</span>
                             <img id="photoPreview" src="" alt="Preview Foto" class="rounded border" style="height: 140px; object-fit: cover; object-position: top;">
                         </div>
-                    </div>
-
-                    {{-- Status Tampil --}}
-                    <div class="col-md-4">
-                        <label class="form-label fw-semibold d-block">Status Tampil</label>
-                        <div class="form-check form-switch mt-1">
-                            <input class="form-check-input" type="checkbox" role="switch" id="is_active" name="is_active" value="1" checked style="width: 2.5em; height: 1.4em;">
-                            <label class="form-check-label ms-2" for="is_active">Aktif (tampilkan di landing page)</label>
-                        </div>
-                        <div class="form-text">Jika dinonaktifkan, dokter tidak akan tampil di halaman utama.</div>
                     </div>
 
                     {{-- Tombol Aksi --}}

@@ -24,12 +24,9 @@ class AdminDokterController extends Controller
         }
 
         $dokters = $query->paginate(10)->withQueryString();
+        $totalDokter = Dokter::count();
 
-        $totalDokter  = Dokter::count();
-        $totalAktif   = Dokter::where('is_active', true)->count();
-        $totalNonAktif = Dokter::where('is_active', false)->count();
-
-        return view('admin.dokter.index', compact('dokters', 'search', 'totalDokter', 'totalAktif', 'totalNonAktif'));
+        return view('admin.dokter.index', compact('dokters', 'search', 'totalDokter'));
     }
 
     /**
@@ -49,7 +46,6 @@ class AdminDokterController extends Controller
             'name'      => 'required|string|max:255',
             'specialty' => 'required|string|max:255',
             'photo'     => 'nullable|image|mimes:jpeg,png,jpg,webp|max:3072',
-            'is_active' => 'nullable',
         ]);
 
         $photoPath = null;
@@ -70,7 +66,7 @@ class AdminDokterController extends Controller
             'name'      => $validated['name'],
             'specialty' => $validated['specialty'],
             'photo'     => $photoPath,
-            'is_active' => $request->has('is_active'),
+            'is_active' => true,
         ]);
 
         return redirect()->route('admin.dokter.index')
@@ -97,7 +93,6 @@ class AdminDokterController extends Controller
             'name'      => 'required|string|max:255',
             'specialty' => 'required|string|max:255',
             'photo'     => 'nullable|image|mimes:jpeg,png,jpg,webp|max:3072',
-            'is_active' => 'nullable',
         ]);
 
         if ($request->hasFile('photo')) {
@@ -120,7 +115,6 @@ class AdminDokterController extends Controller
 
         $dokter->name      = $validated['name'];
         $dokter->specialty = $validated['specialty'];
-        $dokter->is_active = $request->has('is_active');
         $dokter->save();
 
         return redirect()->route('admin.dokter.index')
@@ -143,18 +137,5 @@ class AdminDokterController extends Controller
 
         return redirect()->route('admin.dokter.index')
                          ->with('success', 'Data dokter berhasil dihapus!');
-    }
-
-    /**
-     * Toggle status aktif/non-aktif
-     */
-    public function toggleStatus($id)
-    {
-        $dokter = Dokter::findOrFail($id);
-        $dokter->is_active = !$dokter->is_active;
-        $dokter->save();
-
-        $status = $dokter->is_active ? 'diaktifkan' : 'dinonaktifkan';
-        return back()->with('success', "Status dokter berhasil {$status}.");
     }
 }

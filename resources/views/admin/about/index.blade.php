@@ -49,11 +49,8 @@
 
     {{-- Form Card Sneat --}}
     <div class="card mb-4">
-        <div class="card-header border-bottom py-3 d-flex justify-content-between align-items-center">
+        <div class="card-header border-bottom py-3">
             <h5 class="mb-0 fw-bold">Informasi & Pengaturan Tentang Kami (About Section)</h5>
-            <a href="{{ url('/#tentang') }}" target="_blank" class="btn btn-sm btn-outline-primary">
-                <i class="bx bx-link-external me-1"></i> Preview di Website
-            </a>
         </div>
         <div class="card-body pt-4">
             <form action="{{ route('admin.about.update') }}" method="POST" enctype="multipart/form-data">
