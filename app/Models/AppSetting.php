@@ -57,4 +57,18 @@ class AppSetting extends Model
             ]
         );
     }
+
+    /**
+     * WhatsApp link dari nomor telepon
+     */
+    public function getWaLinkAttribute(): string
+    {
+        $phone = preg_replace('/[^0-9]/', '', $this->phone);
+
+        if (str_starts_with($phone, '0')) {
+            $phone = '62' . substr($phone, 1);
+        }
+
+        return 'https://api.whatsapp.com/send?phone=' . $phone;
+    }
 }

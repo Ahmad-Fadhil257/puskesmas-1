@@ -3,7 +3,6 @@
 namespace App\Providers;
 
 use App\Models\AppSetting;
-use App\Models\Kontak;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -34,11 +33,6 @@ class AppServiceProvider extends ServiceProvider
                 // Ignore during migrations or build
             }
             $view->with('appSetting', $setting);
-        });
-
-        // Bagikan data $kontak ke view landing page
-        View::composer(['landing-page.footer', 'landing-page.nav', 'landing-page.hero-section'], function ($view) {
-            $view->with('kontak', Kontak::data());
         });
     }
 }

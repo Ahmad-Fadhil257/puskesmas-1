@@ -20,7 +20,7 @@
         </ul>
 
         <!-- Desktop CTA -->
-        <a href="{{ $kontak->wa_link }}" target="_blank" rel="noopener" class="btn-nav-cta">Janji Temu</a>
+        <a href="{{ $appSetting->wa_link }}" target="_blank" rel="noopener" class="btn-nav-cta">Janji Temu</a>
 
         <!-- Mobile Toggle Button -->
         <button class="navbar__toggle" id="mobileToggle" aria-label="Toggle navigation" aria-expanded="false">
@@ -39,6 +39,6 @@
         <a href="{{ route('home') }}#layanan-kami">Layanan</a>
         <a href="{{ route('home') }}#dokter-kami">Jadwal Dokter</a>
         <a href="{{ route('blog.index') }}" class="{{ request()->routeIs('blog.*') ? 'active' : '' }}">Berita</a>
-        <a href="{{ $kontak->wa_link }}" target="_blank" rel="noopener" class="btn-nav-cta">Janji Temu</a>
+        <a href="{{ $appSetting->wa_link }}" target="_blank" rel="noopener" class="btn-nav-cta">Janji Temu</a>
     </div>
 </header>

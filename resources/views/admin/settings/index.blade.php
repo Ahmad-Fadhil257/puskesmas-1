@@ -150,8 +150,9 @@
 
                             {{-- Telepon --}}
                             <div class="col-md-6 col-12">
-                                <label class="form-label fw-semibold" for="phone">Nomor Telepon Puskesmas</label>
-                                <input type="text" class="form-control" id="phone" name="phone" value="{{ old('phone', $setting->phone) }}" placeholder="(021) 555-0123">
+                                <label class="form-label fw-semibold" for="phone">Nomor Telepon / WhatsApp</label>
+                                <input type="text" class="form-control" id="phone" name="phone" value="{{ old('phone', $setting->phone) }}" placeholder="Contoh: 6281235890101 atau 081235890101">
+                                <small class="text-muted">Nomor ini juga digunakan untuk tombol "Janji Temu" &amp; "Janji Temu Online" (redirect ke WhatsApp).</small>
                             </div>
 
                             {{-- Email --}}

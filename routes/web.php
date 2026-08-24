@@ -8,7 +8,6 @@ use App\Http\Controllers\Admin\HeroController as AdminHeroController;
 use App\Http\Controllers\Admin\SettingController as AdminSettingController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\CaraKerjaController;
-use App\Http\Controllers\KontakController;
 use App\Models\About;
 use App\Models\Article;
 use App\Models\CaraKerja;
@@ -51,8 +50,6 @@ Route::middleware(['auth'])->group(function () {
     // Cara Kerja, Hero, dan Pengguna CRUD
     Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('cara-kerja', CaraKerjaController::class)->except(['show']);
-        Route::get('kontak', [KontakController::class, 'index'])->name('kontak.index');
-        Route::put('kontak', [KontakController::class, 'update'])->name('kontak.update');
 
         // Kelola Hero Section & Info Cards
         Route::get('hero', [AdminHeroController::class, 'index'])->name('hero.index');
