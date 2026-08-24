@@ -51,3 +51,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('admin/about', [AdminAboutController::class, 'index'])->name('admin.about.index');
     Route::put('admin/about', [AdminAboutController::class, 'update'])->name('admin.about.update');
 });
+
+Route::get('/layanan', function () {
+    return view('layanan');
+});
+
+Route::get('/dokter', function () {
+    return view('dokter');
+});

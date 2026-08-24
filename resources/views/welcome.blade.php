@@ -25,4 +25,10 @@
     <!-- Blog & Berita Section -->
     @include('landing-page.blog-section')
 
+    <!-- Layanan Kami -->
+    @include('partials.layanan-kami')
+
+    <!-- Dokter Kami -->
+    @include('partials.dokter-kami')
+
 @endsection
