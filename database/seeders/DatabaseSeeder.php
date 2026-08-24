@@ -49,6 +49,15 @@ class DatabaseSeeder extends Seeder
         // Seed Data Hero Section & Info Cards
         $this->call(HeroSeeder::class);
 
+        // Seed Data Dokter
+        $this->call(DokterSeeder::class);
+
+        // Seed Data Layanan
+        $this->call(LayananSeeder::class);
+
+        // Seed Data Nilai & Mitra
+        $this->call(NilaiSectionSeeder::class);
+
         // Seed Data Cara Kerja
         $caraKerja = [
             [
