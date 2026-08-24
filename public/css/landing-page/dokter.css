@@ -94,8 +94,18 @@
 /* ===== DOCTORS GRID ===== */
 .dokter-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
     gap: 24px;
+}
+
+/* Jika 4 dokter atau kurang: paksa 4 kolom */
+.dokter-grid--four {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+/* Jika lebih dari 4 dokter: kolom fleksibel, wrap otomatis */
+.dokter-grid--many {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    justify-items: stretch;
 }
 
 /* ===== DOCTOR CARD ===== */
@@ -128,6 +138,17 @@
     transform: scale(1.04);
 }
 
+/* Placeholder jika tidak ada foto */
+.dokter-no-photo {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,0.08);
+    color: #fff;
+}
+
 /* --- Text --- */
 .dokter-name {
     font-size: 0.9375rem;
@@ -146,7 +167,8 @@
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 1024px) {
-    .dokter-grid {
+    .dokter-grid--four,
+    .dokter-grid--many {
         grid-template-columns: repeat(2, 1fr);
     }
 }
