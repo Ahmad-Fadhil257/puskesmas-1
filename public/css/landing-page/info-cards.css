@@ -36,8 +36,8 @@
     padding: 0 var(--section-padding-x);
     position: relative;
     z-index: 10;
-    margin-top: -24px;     /* sedikit naik dari hero */
-    margin-bottom: 0;
+    margin-top: 0;
+    margin-bottom: -60px; /* Menarik background putih dari section About ke atas agar membelah card di tengah */
 }
 
 .info-cards__inner {
@@ -47,7 +47,8 @@
     gap: 20px;
     max-width: var(--container-max);
     margin: 0 auto;
-    background: transparent;   /* tidak ada container—tiap card berdiri sendiri */
+    background: transparent;
+    /* tidak ada container—tiap card berdiri sendiri */
 }
 
 /* --------------------------------------------------------------------------
@@ -201,4 +202,3 @@
         font-size: 0.875rem;
     }
 }
-

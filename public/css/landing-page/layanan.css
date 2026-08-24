@@ -1,0 +1,260 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+:root {
+    --color-primary:        #0A5C45;
+    --color-primary-hover:  #084A37;
+    --color-dark:           #122822;
+    --color-body:           #40564F;
+    --color-muted:          #3B5249;
+    --color-bg-1:           #C5E5DD;
+    --color-bg-2:           #f8f3ee;
+    --color-surface:        #FFFFFF;
+    --color-secondary:      #BBE4D8;
+    --color-secondary-hover:#A9DCCF;
+    --color-border:         #96CFC1;
+
+    --font-family:       'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    --container-max:     1200px;
+    --section-padding-y: 80px;
+    --section-padding-x: 24px;
+    --radius-sm:         8px;
+    --radius-md:         12px;
+    --radius-lg:         16px;
+    --radius-xl:         24px;
+    --radius-full:       9999px;
+    --shadow-sm:         0 2px 8px rgba(10, 92, 69, 0.08);
+    --shadow-md:         0 4px 16px rgba(10, 92, 69, 0.12);
+    --shadow-lg:         0 10px 30px rgba(10, 92, 69, 0.15);
+    --transition:        all 0.2s ease;
+}
+
+@media (max-width: 768px) {
+    :root {
+        --section-padding-x: 16px;
+    }
+}
+
+/* ==========================================================================
+   SECTION: LAYANAN KAMI
+   ========================================================================== */
+
+.layanan-section {
+    background-color: var(--color-surface);
+    padding: var(--section-padding-y) var(--section-padding-x);
+    font-family: var(--font-family);
+}
+
+/* --- Container --- */
+.layanan-container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+}
+
+/* ===== HEADER ===== */
+.layanan-header {
+    text-align: center;
+    margin-bottom: 52px;
+}
+
+.layanan-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: 16px;
+}
+
+.layanan-label svg {
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+}
+
+.layanan-title {
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
+    font-weight: 800;
+    color: var(--color-dark);
+    margin: 0 0 16px 0;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+}
+
+.layanan-subtitle {
+    font-size: 1rem;
+    color: var(--color-body);
+    line-height: 1.7;
+    margin: 0;
+}
+
+/* ===== GRID ===== */
+.layanan-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+/* ===== BASE CARD ===== */
+.layanan-card {
+    background-color: #F5F7F7;
+    border: 1px solid rgba(10, 92, 69, 0.05);
+    border-radius: var(--radius-lg);
+    padding: 30px 26px;
+    display: flex;
+    flex-direction: column;
+    transition: var(--transition);
+    cursor: default;
+}
+
+.layanan-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+
+/* ===== CARD ICON ===== */
+.layanan-card-icon {
+    width: 50px;
+    height: 50px;
+    background-color: #E5EFEA;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+    color: var(--color-primary);
+    flex-shrink: 0;
+    transition: background 0.2s;
+}
+
+.layanan-card:hover .layanan-card-icon {
+    background-color: rgba(10, 92, 69, 0.16);
+}
+
+.layanan-card-icon i {
+    font-size: 22px;
+    line-height: 1;
+    display: flex;
+}
+
+/* ===== CARD TEXT ===== */
+.layanan-card-title {
+    font-size: 0.9375rem;
+    font-weight: 700;
+    color: var(--color-dark);
+    margin: 0 0 10px 0;
+    line-height: 1.3;
+}
+
+.layanan-card-desc {
+    font-size: 0.875rem;
+    color: var(--color-body);
+    line-height: 1.65;
+    margin: 0;
+}
+
+/* ===== FEATURED CARD — Dark Green ===== */
+.layanan-card--featured {
+    background-color: var(--color-primary);
+}
+
+.layanan-card--featured:hover {
+    background-color: var(--color-primary-hover);
+    box-shadow: var(--shadow-lg);
+}
+
+.layanan-card--featured .layanan-card-icon {
+    background-color: rgba(255, 255, 255, 0.16);
+    color: #ffffff;
+}
+
+.layanan-card--featured:hover .layanan-card-icon {
+    background-color: rgba(255, 255, 255, 0.24);
+}
+
+.layanan-card--featured .layanan-card-title {
+    color: #ffffff;
+}
+
+.layanan-card--featured .layanan-card-desc {
+    color: rgba(255, 255, 255, 0.82);
+}
+
+/* ===== EMERGENCY CARD — Red ===== */
+.layanan-card--emergency {
+    background-color: #cc0000;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+
+.layanan-card--emergency:hover {
+    background-color: #b30000;
+    box-shadow: 0 8px 28px rgba(204, 0, 0, 0.38);
+}
+
+.layanan-card--emergency .layanan-card-title {
+    color: #ffffff;
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+}
+
+.layanan-card--emergency .layanan-card-desc {
+    color: rgba(255, 255, 255, 0.85);
+    text-align: center;
+    max-width: 240px;
+}
+
+/* ===== EMERGENCY BUTTON ===== */
+.layanan-emergency-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 18px;
+    padding: 8px 24px;
+    background-color: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: var(--radius-full);
+    color: #ffffff;
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.layanan-emergency-btn:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    border-color: #ffffff;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+    .layanan-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .layanan-header {
+        margin-bottom: 36px;
+    }
+}
+
+@media (max-width: 480px) {
+    .layanan-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .layanan-card--emergency {
+        align-items: flex-start;
+        text-align: left;
+    }
+
+    .layanan-card--emergency .layanan-card-desc {
+        text-align: left;
+    }
+}

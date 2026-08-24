@@ -18,8 +18,9 @@
                 </ol>
             </nav>
         </div>
-        <a href="{{ route('dashboard') }}" class="btn btn-outline-secondary d-inline-flex align-items-center gap-1">
-            <i class="bx bx-arrow-back"></i> Kembali
+        <a href="{{ url('/') }}" target="_blank" class="btn btn-outline-primary d-inline-flex align-items-center gap-1">
+            <i class="bx bx-globe"></i>
+            <span>Lihat di Website</span>
         </a>
     </div>
 

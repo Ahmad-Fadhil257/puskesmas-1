@@ -39,7 +39,7 @@
    ========================================================================== */
 .values {
     padding: 40px var(--section-padding-x) 60px;
-    background: transparent;
+    background: #E1E3E4;
     width: 100%;
 }
 
