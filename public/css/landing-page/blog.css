@@ -20,8 +20,9 @@
     --section-padding-x:  24px;
     --radius-16:          16px;
     --radius-full:        9999px;
-    --card-shadow-35:     0 0 35px rgba(10, 92, 69, 0.08);
-    --card-shadow-hover:  0 0 40px rgba(10, 92, 69, 0.16);
+    --shadow-sm:         0 2px 8px rgba(10, 92, 69, 0.08);
+    --shadow-md:         0 4px 16px rgba(10, 92, 69, 0.12);
+    --shadow-lg:         0 10px 30px rgba(10, 92, 69, 0.15);
     --transition:         all 0.25s ease;
 }
 
@@ -104,7 +105,7 @@
     text-decoration: none;
     transition: var(--transition);
     white-space: nowrap;
-    box-shadow: var(--card-shadow-35);
+    box-shadow: var(--shadow-md);
 }
 
 .btn-blog-see-all:hover {
@@ -112,7 +113,7 @@
     color: #FFFFFF;
     border-color: var(--color-primary);
     transform: translateY(-2px);
-    box-shadow: var(--card-shadow-hover);
+    box-shadow: var(--shadow-lg);
 }
 
 .btn-blog-see-all svg {
@@ -140,7 +141,7 @@
     position: relative;
     border-radius: var(--radius-16);
     overflow: hidden;
-    box-shadow: var(--card-shadow-35);
+    box-shadow: var(--shadow-md);
     transition: var(--transition);
     display: flex;
     flex-direction: column;
@@ -151,7 +152,7 @@
 
 .blog-card--featured:hover {
     transform: translateY(-4px);
-    box-shadow: var(--card-shadow-hover);
+    box-shadow: var(--shadow-lg);
 }
 
 .blog-card__image-wrap {
@@ -262,7 +263,7 @@
     border-radius: var(--radius-16);
     border: 1px solid rgba(10, 92, 69, 0.06);
     overflow: hidden;
-    box-shadow: var(--card-shadow-35);
+    box-shadow: var(--shadow-md);
     transition: var(--transition);
     display: flex;
     flex-direction: column;
@@ -271,7 +272,7 @@
 
 .blog-card--side:hover {
     transform: translateY(-4px);
-    box-shadow: var(--card-shadow-hover);
+    box-shadow: var(--shadow-lg);
     border-color: #BBE4D8;
 }
 

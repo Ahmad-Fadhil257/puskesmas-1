@@ -1,6 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+:root {
+    --color-primary:        #0A5C45;
+    --color-primary-hover:  #084A37;
+    --color-dark:           #122822;
+    --color-body:           #40564F;
+    --color-muted:          #3B5249;
+    --color-bg-1:           #C5E5DD;
+    --color-bg-2:           #EEF8F5;
+    --color-surface:        #FFFFFF;
+    --color-secondary:      #BBE4D8;
+    --color-secondary-hover:#A9DCCF;
+    --color-border:         #96CFC1;
+
+    --font-family:       'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    --container-max:     1200px;
+    --section-padding-y: 80px;
+    --section-padding-x: 24px;
+    --radius-sm:         8px;
+    --radius-md:         12px;
+    --radius-lg:         16px;
+    --radius-xl:         24px;
+    --radius-full:       9999px;
+    --shadow-sm:         0 2px 8px rgba(10, 92, 69, 0.08);
+    --shadow-md:         0 4px 16px rgba(10, 92, 69, 0.12);
+    --shadow-lg:         0 10px 30px rgba(10, 92, 69, 0.15);
+    --transition:        all 0.2s ease;
+}
+
+@media (max-width: 768px) {
+    :root {
+        --section-padding-x: 16px;
+    }
+}
+
 /* ==========================================================================
    FOOTER
    ========================================================================== */
+
 
 .site-footer {
     margin-top: auto;
