@@ -116,7 +116,6 @@
                                     <input type="hidden" name="jadwal_hari[]" class="hari-value" value="">
                                     <button type="button" class="dropdown-toggle text-start d-flex align-items-center" onclick="toggleDropdown(this)">
                                         <span class="dropdown-selected dropdown-placeholder">-- Hari --</span>
-                                        <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
                                     </button>
                                     <div class="dropdown-menu-custom">
                                         @foreach(['Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu'] as $day)
@@ -179,12 +178,19 @@ function previewPhoto(input) {
 .dark-style .custom-dropdown .dropdown-toggle:hover { border-color: #0A5C45; }
 .custom-dropdown .dropdown-toggle:focus { border-color: #0A5C45; box-shadow: 0 0 0 3px rgba(10,92,69,0.1); outline: none; }
 .custom-dropdown .dropdown-toggle .chevron-icon {
-    position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
-    width: 16px; height: 16px; stroke: #6c757d; transition: transform 0.25s ease, stroke 0.25s ease;
-    pointer-events: none;
+    display: none;
 }
-.dark-style .custom-dropdown .dropdown-toggle .chevron-icon { stroke: #9ca3af; }
-.custom-dropdown.open .dropdown-toggle .chevron-icon { transform: translateY(-50%) rotate(180deg); stroke: #0A5C45; }
+.custom-dropdown .dropdown-toggle::after {
+    content: '';
+    position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+    width: 14px; height: 14px; pointer-events: none;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236c757d' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") center/contain no-repeat;
+    transition: transform 0.25s ease;
+}
+.dark-style .custom-dropdown .dropdown-toggle::after {
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239ca3af' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") center/contain no-repeat;
+}
+.custom-dropdown.open .dropdown-toggle::after { transform: translateY(-50%) rotate(180deg); }
 .custom-dropdown .dropdown-selected { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 500; color: #122822; }
 .dark-style .custom-dropdown .dropdown-selected { color: #f3f4f6; }
 .custom-dropdown .dropdown-placeholder { color: #6c757d; }
@@ -252,8 +258,7 @@ function addJadwalRow() {
     row.innerHTML = '<div class="custom-dropdown" style="width: 160px;">' +
         '<input type="hidden" name="jadwal_hari[]" class="hari-value" value="">' +
         '<button type="button" class="dropdown-toggle text-start d-flex align-items-center" onclick="toggleDropdown(this)">' +
-        '<span class="dropdown-selected dropdown-placeholder">-- Hari --</span>' +
-        '<svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></button>' +
+        '<span class="dropdown-selected dropdown-placeholder">-- Hari --</span></button>' +
         '<div class="dropdown-menu-custom">' + options + '</div></div>' +
         '<input type="text" name="jadwal_jam[]" class="form-control form-control-sm" placeholder="Contoh: 08:00 - 12:00" style="flex:1;">' +
         '<button type="button" class="btn btn-sm btn-outline-danger btn-remove-jadwal" title="Hapus"><i class="bx bx-x"></i></button>';
