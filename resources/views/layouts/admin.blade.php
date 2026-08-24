@@ -194,6 +194,12 @@
                             <div>Kelola Cara Kerja</div>
                         </a>
                     </li>
+                    <li class="menu-item">
+                        <a href="{{ route('admin.kontak.index') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-phone"></i>
+                            <div>Kelola Kontak</div>
+                        </a>
+                    </li>
                 </ul>
             </aside>
             <!-- / SIDEBAR MENU -->

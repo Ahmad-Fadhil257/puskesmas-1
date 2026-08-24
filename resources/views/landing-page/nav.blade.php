@@ -12,12 +12,10 @@
             <li><a href="#layanan">Layanan</a></li>
             <li><a href="#jadwal">Jadwal Dokter</a></li>
             <li><a href="#berita">Berita</a></li>
-            <li><a href="#tentang">Tentang Kami</a></li>
-            <li><a href="#kontak">Kontak</a></li>
         </ul>
 
         <!-- Desktop CTA -->
-        <a href="#janji-temu" class="btn-nav-cta">Janji Temu</a>
+        <a href="{{ $kontak->wa_link }}" target="_blank" rel="noopener" class="btn-nav-cta">Janji Temu</a>
 
         <!-- Mobile Toggle Button -->
         <button class="navbar__toggle" id="mobileToggle" aria-label="Toggle navigation" aria-expanded="false">
@@ -36,8 +34,6 @@
         <a href="#layanan">Layanan</a>
         <a href="#jadwal">Jadwal Dokter</a>
         <a href="#berita">Berita</a>
-        <a href="#tentang">Tentang Kami</a>
-        <a href="#kontak">Kontak</a>
-        <a href="#janji-temu" class="btn-nav-cta">Janji Temu</a>
+        <a href="{{ $kontak->wa_link }}" target="_blank" rel="noopener" class="btn-nav-cta">Janji Temu</a>
     </div>
 </header>

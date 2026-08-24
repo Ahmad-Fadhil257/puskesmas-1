@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CaraKerjaController;
+use App\Http\Controllers\KontakController;
 use App\Models\CaraKerja;
 use Illuminate\Support\Facades\Route;
 
@@ -25,5 +26,7 @@ Route::middleware(['auth'])->group(function () {
     // Cara Kerja CRUD
     Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('cara-kerja', CaraKerjaController::class)->except(['show']);
+        Route::get('kontak', [KontakController::class, 'index'])->name('kontak.index');
+        Route::put('kontak', [KontakController::class, 'update'])->name('kontak.update');
     });
 });

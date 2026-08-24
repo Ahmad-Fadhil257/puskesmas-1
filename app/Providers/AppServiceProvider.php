@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Kontak;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,6 +21,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        View::composer(['landing-page.footer', 'landing-page.nav', 'landing-page.hero-section'], function ($view) {
+            $view->with('kontak', Kontak::data());
+        });
     }
 }

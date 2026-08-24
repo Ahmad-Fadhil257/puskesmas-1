@@ -24,7 +24,7 @@
 
             <!-- Dual Action Buttons -->
             <div class="hero__actions">
-                <a href="#janji-temu" class="btn-primary">Janji Temu Online</a>
+                <a href="{{ $kontak->wa_link }}" target="_blank" rel="noopener" class="btn-primary">Janji Temu Online</a>
                 <a href="#layanan" class="btn-secondary">Layanan Kami</a>
             </div>
         </div>
