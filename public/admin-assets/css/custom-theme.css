@@ -1,0 +1,303 @@
+/* ==========================================================================
+   SNEAT CUSTOM THEME OVERRIDE - PUSKESMAS CARELINK
+   Warna Utama: Emerald Green (#0A5C45) & Mode Gelap (Dark Mode)
+   ========================================================================== */
+
+:root {
+    --bs-primary: #0A5C45;
+    --bs-primary-rgb: 10, 92, 69;
+    --bs-primary-hover: #084A37;
+    --theme-transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+body, .layout-page, .card, .layout-navbar, .bg-menu-theme, .dropdown-menu {
+    transition: var(--theme-transition);
+}
+
+/* Primary Button */
+.btn-primary {
+    background-color: #0A5C45 !important;
+    border-color: #0A5C45 !important;
+    box-shadow: 0 0.125rem 0.25rem 0 rgba(10, 92, 69, 0.3) !important;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+    background-color: #084A37 !important;
+    border-color: #084A37 !important;
+    box-shadow: 0 0.25rem 0.5rem 0 rgba(10, 92, 69, 0.4) !important;
+}
+
+.btn-outline-primary {
+    color: #0A5C45 !important;
+    border-color: #0A5C45 !important;
+}
+
+.btn-outline-primary:hover {
+    background-color: #0A5C45 !important;
+    border-color: #0A5C45 !important;
+    color: #fff !important;
+}
+
+/* Primary Text & Background */
+.text-primary {
+    color: #0A5C45 !important;
+}
+
+.bg-primary {
+    background-color: #0A5C45 !important;
+}
+
+.bg-label-primary {
+    background-color: #E6F5F1 !important;
+    color: #0A5C45 !important;
+}
+
+.badge.bg-label-primary {
+    background-color: #E6F5F1 !important;
+    color: #0A5C45 !important;
+}
+
+/* Sidebar Menu Active State */
+.menu-vertical .menu-item.active > .menu-link:not(.menu-toggle) {
+    background-color: #0A5C45 !important;
+    color: #fff !important;
+    box-shadow: 0 2px 6px 0 rgba(10, 92, 69, 0.35) !important;
+}
+
+.menu-vertical .menu-item.active > .menu-link:not(.menu-toggle) i {
+    color: #fff !important;
+}
+
+.menu-vertical .menu-link:hover {
+    color: #0A5C45;
+}
+
+.menu-vertical .menu-item.open > .menu-link {
+    color: #0A5C45;
+}
+
+/* Pagination & Links */
+.page-item.active .page-link {
+    background-color: #0A5C45 !important;
+    border-color: #0A5C45 !important;
+}
+
+a {
+    color: #0A5C45;
+}
+
+a:hover {
+    color: #084A37;
+}
+
+/* Custom Healthcare Dashboard Enhancements */
+.app-brand-text {
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    font-weight: 800 !important;
+    color: #0A5C45 !important;
+    letter-spacing: -0.5px;
+}
+
+.card {
+    border-radius: 14px;
+    box-shadow: 0 2px 8px 0 rgba(10, 92, 69, 0.05) !important;
+}
+
+.table th {
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+    color: #566a7f;
+}
+
+/* Theme Toggle Button Hover & Icon */
+#themeToggleBtn {
+    transition: transform 0.2s, background-color 0.2s;
+    color: #566a7f;
+}
+
+#themeToggleBtn:hover {
+    background-color: rgba(10, 92, 69, 0.08);
+    color: #0A5C45;
+    transform: rotate(15deg);
+}
+
+/* ==========================================================================
+   DARK MODE STYLES (Aktif saat <html> memiliki class "dark-style")
+   ========================================================================== */
+
+.dark-style,
+.dark-style body,
+.dark-style .layout-page,
+.dark-style .content-wrapper {
+    background-color: #0E1614 !important;
+    color: #CBD5E1 !important;
+}
+
+/* Sidebar Dark */
+.dark-style .bg-menu-theme {
+    background-color: #141F1C !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.06) !important;
+}
+
+.dark-style .menu-vertical .menu-link {
+    color: #94A3B8 !important;
+}
+
+.dark-style .menu-vertical .menu-link:hover {
+    color: #34D399 !important;
+    background-color: rgba(255, 255, 255, 0.04) !important;
+}
+
+.dark-style .menu-vertical .menu-item.active > .menu-link:not(.menu-toggle) {
+    background-color: #0A5C45 !important;
+    color: #FFFFFF !important;
+    box-shadow: 0 2px 8px 0 rgba(10, 92, 69, 0.5) !important;
+}
+
+.dark-style .menu-header-text {
+    color: #64748B !important;
+}
+
+.dark-style .app-brand-text {
+    color: #34D399 !important;
+}
+
+/* Top Navbar Dark */
+.dark-style .bg-navbar-theme {
+    background-color: #141F1C !important;
+    border: 1px solid rgba(255, 255, 255, 0.06) !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3) !important;
+    color: #E2E8F0 !important;
+}
+
+.dark-style .form-control {
+    background-color: #0E1614 !important;
+    border-color: #243530 !important;
+    color: #F1F5F9 !important;
+}
+
+.dark-style .form-control::placeholder {
+    color: #64748B !important;
+}
+
+.dark-style #themeToggleBtn {
+    color: #FBBF24 !important; /* Warna Matahari Kuning Emas */
+}
+
+.dark-style #themeToggleBtn:hover {
+    background-color: rgba(251, 191, 36, 0.1) !important;
+}
+
+/* Cards & Components Dark */
+.dark-style .card {
+    background-color: #172421 !important;
+    border: 1px solid rgba(255, 255, 255, 0.06) !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25) !important;
+    color: #CBD5E1 !important;
+}
+
+.dark-style .card .text-dark,
+.dark-style h1,
+.dark-style h2,
+.dark-style h3,
+.dark-style h4,
+.dark-style h5,
+.dark-style h6 {
+    color: #F8FAFC !important;
+}
+
+.dark-style .text-muted {
+    color: #94A3B8 !important;
+}
+
+/* Tables Dark */
+.dark-style .table {
+    color: #CBD5E1 !important;
+    border-color: rgba(255, 255, 255, 0.06) !important;
+}
+
+.dark-style .table th {
+    background-color: #111A18 !important;
+    color: #94A3B8 !important;
+    border-color: rgba(255, 255, 255, 0.06) !important;
+}
+
+.dark-style .table td {
+    border-color: rgba(255, 255, 255, 0.06) !important;
+}
+
+.dark-style .table-hover tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.03) !important;
+}
+
+/* Badges Dark */
+.dark-style .bg-label-primary {
+    background-color: rgba(10, 92, 69, 0.3) !important;
+    color: #34D399 !important;
+}
+
+.dark-style .bg-label-success {
+    background-color: rgba(34, 197, 94, 0.2) !important;
+    color: #4ADE80 !important;
+}
+
+.dark-style .bg-label-warning {
+    background-color: rgba(234, 179, 8, 0.2) !important;
+    color: #FACC15 !important;
+}
+
+.dark-style .bg-label-info {
+    background-color: rgba(56, 189, 248, 0.2) !important;
+    color: #38BDF8 !important;
+}
+
+.dark-style .bg-label-danger {
+    background-color: rgba(239, 68, 68, 0.2) !important;
+    color: #F87171 !important;
+}
+
+/* Dropdown Menu Dark */
+.dark-style .dropdown-menu {
+    background-color: #172421 !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.45) !important;
+}
+
+.dark-style .dropdown-item {
+    color: #CBD5E1 !important;
+}
+
+.dark-style .dropdown-item:hover {
+    background-color: #20312D !important;
+    color: #FFFFFF !important;
+}
+
+.dark-style .dropdown-divider {
+    border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Footer Dark */
+.dark-style .bg-footer-theme {
+    background-color: #141F1C !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.06) !important;
+    color: #94A3B8 !important;
+}
+
+/* SweetAlert2 Modal Dark */
+.dark-style .swal2-popup {
+    background-color: #172421 !important;
+    color: #F8FAFC !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+.dark-style .swal2-title {
+    color: #F8FAFC !important;
+}
+
+.dark-style .swal2-html-container {
+    color: #94A3B8 !important;
+}
