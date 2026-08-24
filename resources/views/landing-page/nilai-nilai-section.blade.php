@@ -16,26 +16,53 @@
                 Berdedikasi pada Keunggulan dalam Layanan Kesehatan melalui Kemitraan Terpercaya
             </h2>
 
-            {{-- Partners / Logos Pill Card --}}
-            <div class="values__partners">
-                <div class="values__partner-item">
-                    <img src="{{ asset('assets/nilai-nilai/logo-bpjs.png') }}" 
-                         alt="BPJS Kesehatan" 
-                         class="values__partner-logo">
-                </div>
-                <div class="values__partner-item">
-                    <img src="{{ asset('assets/nilai-nilai/logo-kemenkes.png') }}" 
-                         alt="Kementerian Kesehatan Republik Indonesia" 
-                         class="values__partner-logo">
-                </div>
-                <div class="values__partner-item">
-                    <img src="{{ asset('assets/nilai-nilai/logo-puskesmas.png') }}" 
-                         alt="Mitra Kesehatan Puskesmas" 
-                         class="values__partner-logo">
+            {{-- Partners / Logos Carousel --}}
+            <div class="values__partners-clip">
+                <div class="values__partners" id="valuesCarousel">
+                    <div class="values__partner-item">
+                        <img src="{{ asset('assets/nilai-nilai/logo-bpjs.png') }}" 
+                             alt="BPJS Kesehatan" 
+                             class="values__partner-logo">
+                    </div>
+                    <div class="values__partner-item">
+                        <img src="{{ asset('assets/nilai-nilai/logo-kemenkes.png') }}" 
+                             alt="Kementerian Kesehatan Republik Indonesia" 
+                             class="values__partner-logo">
+                    </div>
+                    <div class="values__partner-item">
+                        <img src="{{ asset('assets/nilai-nilai/logo-puskesmas.png') }}" 
+                             alt="Mitra Kesehatan Puskesmas" 
+                             class="values__partner-logo">
+                    </div>
                 </div>
             </div>
 
+            {{-- Dots Indicator --}}
+            <div class="values__dots" id="valuesDots">
+                <span class="values__dot values__dot--active"></span>
+                <span class="values__dot"></span>
+                <span class="values__dot"></span>
+            </div>
 
         </div>
     </div>
 </section>
+
+<script>
+(function() {
+    var carousel = document.getElementById('valuesCarousel');
+    var dots     = document.querySelectorAll('#valuesDots .values__dot');
+    var current  = 0;
+    if (!carousel || !dots.length) return;
+
+    carousel.addEventListener('scroll', function() {
+        var idx = Math.round(carousel.scrollLeft / carousel.offsetWidth);
+        if (idx !== current) {
+            current = idx;
+            dots.forEach(function(d, i) {
+                d.classList.toggle('values__dot--active', i === current);
+            });
+        }
+    });
+})();
+</script>

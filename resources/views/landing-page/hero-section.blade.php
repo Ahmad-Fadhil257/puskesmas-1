@@ -29,32 +29,62 @@
             </div>
         </div>
 
-        <!-- Right Column: Staggered Photos (Hanya Gambar Murni) -->
-        <div class="hero__grid-wrapper">
-            <!-- Row Atas (Geser Kanan 50px) -->
-            <div class="hero__grid-row hero__grid-row--top">
-                <img src="{{ asset('assets/hero/image 5.png') }}"
-                     alt="Pemeriksaan Kesehatan di Puskesmas CareLink"
-                     class="hero__img"
-                     loading="lazy">
-                <img src="{{ asset('assets/hero/image 6.png') }}"
-                     alt="Konsultasi Kesehatan Ibu dan Anak"
-                     class="hero__img"
-                     loading="lazy">
+        <!-- Right Column: Staggered Photos - Mobile Carousel -->
+        <div class="hero__carousel-clip">
+
+            <div class="hero__grid-wrapper" id="heroCarousel">
+                <!-- Row Atas (Geser Kanan 50px) -->
+                <div class="hero__grid-row hero__grid-row--top">
+                    <img src="{{ asset('assets/hero/image 5.png') }}"
+                         alt="Pemeriksaan Kesehatan di Puskesmas CareLink"
+                         class="hero__img"
+                         loading="lazy">
+                    <img src="{{ asset('assets/hero/image 6.png') }}"
+                         alt="Konsultasi Kesehatan Ibu dan Anak"
+                         class="hero__img"
+                         loading="lazy">
+                </div>
+
+                <!-- Row Bawah (Geser Kiri 50px) -->
+                <div class="hero__grid-row hero__grid-row--bottom">
+                    <img src="{{ asset('assets/hero/image 4.png') }}"
+                         alt="Ruang Tunggu dan Lobi Puskesmas"
+                         class="hero__img"
+                         loading="lazy">
+                    <img src="{{ asset('assets/hero/image 1.png') }}"
+                         alt="Pelayanan Imunisasi Bayi dan Balita"
+                         class="hero__img"
+                         loading="lazy">
+                </div>
             </div>
 
-            <!-- Row Bawah (Geser Kiri 50px) -->
-            <div class="hero__grid-row hero__grid-row--bottom">
-                <img src="{{ asset('assets/hero/image 4.png') }}"
-                     alt="Ruang Tunggu dan Lobi Puskesmas"
-                     class="hero__img"
-                     loading="lazy">
-                <img src="{{ asset('assets/hero/image 1.png') }}"
-                     alt="Pelayanan Imunisasi Bayi dan Balita"
-                     class="hero__img"
-                     loading="lazy">
+            <!-- Dots Indicator -->
+            <div class="hero__dots" id="heroDots">
+                <span class="hero__dot hero__dot--active"></span>
+                <span class="hero__dot"></span>
+                <span class="hero__dot"></span>
+                <span class="hero__dot"></span>
             </div>
         </div>
+
+        <script>
+        (function() {
+            var carousel = document.getElementById('heroCarousel');
+            var dots     = document.querySelectorAll('#heroDots .hero__dot');
+            var current  = 0;
+
+            // Sync dots saat digeser manual
+            carousel.addEventListener('scroll', function() {
+                var idx = Math.round(carousel.scrollLeft / carousel.offsetWidth);
+                if (idx !== current) {
+                    current = idx;
+                    dots.forEach(function(d, i) {
+                        d.classList.toggle('hero__dot--active', i === current);
+                    });
+                }
+            });
+        })();
+        </script>
 
     </div>
 </section>

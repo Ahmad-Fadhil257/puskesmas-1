@@ -55,6 +55,8 @@ a { text-decoration: none; color: inherit; }
     position: sticky;
     top: 0;
     z-index: 100;
+    /* Jadikan anchor untuk mobile menu yang absolute */
+    position: sticky;
 }
 
 .navbar {
@@ -154,11 +156,13 @@ a { text-decoration: none; color: inherit; }
     -webkit-backdrop-filter: blur(12px);
     border-radius: var(--radius-lg);
     padding: 20px;
-    margin-top: 12px;
     box-shadow: var(--shadow-md);
-    max-width: var(--container-max);
-    margin-left: auto;
-    margin-right: auto;
+    /* Mengambang di atas halaman, tidak mendorong konten ke bawah */
+    position: absolute;
+    top: calc(100% + 8px); /* tepat di bawah header */
+    left: 16px;
+    right: 16px;
+    z-index: 200;
 }
 
 .navbar__mobile.open { display: flex; }
