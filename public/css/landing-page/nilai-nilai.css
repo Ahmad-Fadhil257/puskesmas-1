@@ -72,18 +72,22 @@
     align-items: center;
     justify-content: center;
     gap: 8px;
-    color: var(--color-secondary);
-    font-size: 0.8125rem;
+    color: #92e4c8;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    font-size: 12px;
     font-weight: 700;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    margin-bottom: 20px;
+    padding: 6px 16px;
+    border-radius: var(--radius-full);
+    margin-bottom: 16px;
 }
 
 .values__badge svg {
-    width: 15px;
-    height: 15px;
-    stroke: var(--color-secondary);
+    width: 14px;
+    height: 14px;
+    stroke: #92e4c8;
     fill: none;
 }
 
@@ -93,12 +97,12 @@
 .values__title {
     color: #ffffff;
     font-family: var(--font-family);
-    font-size: 2.125rem;
-    font-weight: 700;
-    line-height: 1.35;
+    font-size: clamp(24px, 3.5vw, 36px);
+    font-weight: 800;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
     max-width: 840px;
-    margin: 0 auto 36px auto;
-    letter-spacing: -0.01em;
+    margin: 0 auto 32px auto;
 }
 
 /* --------------------------------------------------------------------------

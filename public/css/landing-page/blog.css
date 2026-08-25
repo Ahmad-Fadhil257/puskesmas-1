@@ -30,7 +30,7 @@
    BLOG & BERITA SECTION (LANDING PAGE - FIGMA PIXEL ACCURATE)
    ========================================================================== */
 .blog {
-    padding: 70px var(--section-padding-x) 90px;
+    padding: 80px var(--section-padding-x);
     background: transparent;
     width: 100%;
 }
@@ -48,7 +48,7 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    margin-bottom: 36px;
+    margin-bottom: 48px;
     gap: 24px;
 }
 
@@ -61,33 +61,38 @@
     align-items: center;
     gap: 8px;
     color: var(--color-primary);
-    font-size: 0.8125rem;
+    background: rgba(10, 92, 69, 0.1);
+    border: 1px solid rgba(10, 92, 69, 0.18);
+    padding: 6px 16px;
+    border-radius: var(--radius-full);
+    font-size: 12px;
     font-weight: 700;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
 }
 
 .blog__badge svg {
-    width: 15px;
-    height: 15px;
+    width: 14px;
+    height: 14px;
     stroke: var(--color-primary);
 }
 
 .blog__title {
     color: var(--color-dark);
     font-family: var(--font-family);
-    font-size: 2.25rem;
+    font-size: clamp(24px, 4vw, 36px);
     font-weight: 800;
     line-height: 1.25;
-    margin-bottom: 10px;
-    letter-spacing: -0.01em;
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
 }
 
 .blog__subtitle {
     color: var(--color-body);
-    font-size: 0.9375rem;
+    font-size: 16px;
     line-height: 1.6;
+    margin: 0;
 }
 
 .btn-blog-see-all {
@@ -98,10 +103,10 @@
     color: var(--color-primary);
     border: 1.5px solid #C5E5DD;
     font-family: var(--font-family);
-    font-size: 0.875rem;
+    font-size: 14px;
     font-weight: 700;
     padding: 12px 24px;
-    border-radius: var(--radius-16);
+    border-radius: var(--radius-full);
     text-decoration: none;
     transition: var(--transition);
     white-space: nowrap;

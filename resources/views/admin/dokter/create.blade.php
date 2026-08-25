@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Tambah Dokter - Puskesmas CareLink')
+@section('title', 'Tambah Dokter Baru - Puskesmas CareLink')
 
 @section('content')
 <div class="container-xxl flex-grow-1 container-p-y">
@@ -9,13 +9,13 @@
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
             <h4 class="fw-bold py-1 mb-1" style="color: #0A5C45;">
-                <i class="bx bx-plus-circle me-2"></i>Tambah Dokter
+                <i class="bx bx-user-plus me-2"></i>Tambah Dokter Baru
             </h4>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb breadcrumb-style1 mb-0">
                     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
                     <li class="breadcrumb-item"><a href="{{ route('admin.dokter.index') }}">Kelola Dokter</a></li>
-                    <li class="breadcrumb-item active">Tambah</li>
+                    <li class="breadcrumb-item active">Tambah Baru</li>
                 </ol>
             </nav>
         </div>
@@ -29,7 +29,7 @@
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
             <div class="d-flex align-items-center mb-1">
                 <i class="bx bx-error-circle fs-4 me-2"></i>
-                <span class="fw-bold">Terdapat beberapa kesalahan pengisian:</span>
+                <span class="fw-bold">Terdapat beberapa kesalahan:</span>
             </div>
             <ul class="mb-0 ps-3">
                 @foreach ($errors->all() as $error)
@@ -42,27 +42,24 @@
 
     {{-- Form Card --}}
     <div class="card mb-4">
-        <div class="card-header border-bottom py-3 d-flex justify-content-between align-items-center">
-            <h5 class="mb-0 fw-bold">Form Tambah Data Dokter</h5>
+        <div class="card-header border-bottom py-3">
+            <h5 class="mb-0 fw-bold">Informasi Dokter & Jadwal Praktek</h5>
         </div>
         <div class="card-body pt-4">
             <form action="{{ route('admin.dokter.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
 
-                <div class="row g-4">
+                <div class="row g-3">
 
                     {{-- Nama Dokter --}}
                     <div class="col-md-6">
-                        <label class="form-label fw-semibold" for="name">
-                            Nama Dokter <span class="text-danger">*</span>
-                        </label>
+                        <label class="form-label fw-semibold" for="name">Nama Lengkap & Gelar <span class="text-danger">*</span></label>
                         <input type="text"
                             class="form-control @error('name') is-invalid @enderror"
                             id="name" name="name"
                             value="{{ old('name') }}"
-                            placeholder="Contoh: Dr. John Smith, Sp.JP"
+                            placeholder="Contoh: dr. Budi Santoso, Sp.A"
                             required />
-                        <div class="form-text">Tuliskan nama lengkap beserta gelar dokter.</div>
                         @error('name')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -70,23 +67,44 @@
 
                     {{-- Spesialisasi --}}
                     <div class="col-md-6">
-                        <label class="form-label fw-semibold" for="specialty">
-                            Spesialisasi <span class="text-danger">*</span>
-                        </label>
-                        <input type="text"
-                            class="form-control @error('specialty') is-invalid @enderror"
-                            id="specialty" name="specialty"
-                            value="{{ old('specialty') }}"
-                            placeholder="Contoh: Dokter Spesialis Jantung"
-                            required />
-                        <div class="form-text">Bidang keahlian atau spesialisasi dokter.</div>
+                        <label class="form-label fw-semibold" for="specialty">Spesialisasi / Poli <span class="text-danger">*</span></label>
+                        <div class="custom-dropdown">
+                            <input type="hidden" name="specialty" id="specialty" value="{{ old('specialty') }}" required>
+                            <button type="button" class="dropdown-toggle text-start d-flex align-items-center justify-content-between" id="specialtyDropdownBtn" onclick="toggleDropdown(this)">
+                                <span class="dropdown-selected {{ old('specialty') ? '' : 'dropdown-placeholder' }}">
+                                    {{ old('specialty') ? old('specialty') : '-- Pilih Spesialisasi / Poli --' }}
+                                </span>
+                                <i class="bx bx-chevron-down chevron-icon"></i>
+                            </button>
+                            <div class="dropdown-menu-custom">
+                                @php
+                                    $spList = [
+                                        'Dokter Umum',
+                                        'Spesialis Gigi dan Mulut',
+                                        'Spesialis Anak',
+                                        'Spesialis Kebidanan & Kandungan',
+                                        'Spesialis Penyakit Dalam',
+                                        'Spesialis Jantung dan Pembuluh Darah',
+                                        'Spesialis Bedah Umum',
+                                        'Spesialis Mata',
+                                        'Spesialis THT-KL',
+                                        'Spesialis Kulit dan Kelamin',
+                                        'Spesialis Saraf',
+                                        'Spesialis Kedokteran Jiwa (Psikiatri)',
+                                        'Konselor Gizi & Dietetik',
+                                    ];
+                                @endphp
+                                @foreach($spList as $sp)
+                                    <div class="dropdown-item-custom {{ old('specialty') == $sp ? 'active' : '' }}" data-value="{{ $sp }}" onclick="selectOption(this)">
+                                        {{ $sp }}
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
                         @error('specialty')
-                            <div class="invalid-feedback">{{ $message }}</div>
+                            <div class="invalid-feedback d-block">{{ $message }}</div>
                         @enderror
                     </div>
-
-                    {{-- Divider --}}
-                    <div class="col-12"><hr class="my-1"></div>
 
                     {{-- Upload Foto --}}
                     <div class="col-md-6">
@@ -107,30 +125,34 @@
                         </div>
                     </div>
 
-                    {{-- Jadwal Praktek --}}
+                    {{-- Jadwal Praktek (Time Input) --}}
                     <div class="col-md-6">
                         <label class="form-label fw-semibold">Jadwal Praktek</label>
                         <div id="jadwalRows">
-                            <div class="jadwal-row d-flex gap-2 mb-2 align-items-center">
-                                <div class="custom-dropdown" style="width: 160px;">
-                                    <input type="hidden" name="jadwal_hari[]" class="hari-value" value="">
+                            <div class="jadwal-row d-flex gap-2 mb-2 align-items-center flex-wrap flex-sm-nowrap">
+                                <div class="custom-dropdown" style="width: 140px; flex-shrink: 0;">
+                                    <input type="hidden" name="jadwal_hari[]" class="hari-value" value="Senin">
                                     <button type="button" class="dropdown-toggle text-start d-flex align-items-center" onclick="toggleDropdown(this)">
-                                        <span class="dropdown-selected dropdown-placeholder">-- Hari --</span>
+                                        <span class="dropdown-selected">Senin</span>
                                     </button>
                                     <div class="dropdown-menu-custom">
                                         @foreach(['Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu'] as $day)
-                                            <div class="dropdown-item-custom" data-value="{{ $day }}" onclick="selectOption(this)">{{ $day }}</div>
+                                            <div class="dropdown-item-custom {{ $day === 'Senin' ? 'active' : '' }}" data-value="{{ $day }}" onclick="selectOption(this)">{{ $day }}</div>
                                         @endforeach
                                     </div>
                                 </div>
-                                <input type="text" name="jadwal_jam[]" class="form-control form-control-sm" placeholder="Contoh: 08:00 - 12:00" style="flex:1;">
+                                <div class="d-flex align-items-center gap-1" style="flex: 1;">
+                                    <input type="time" name="jadwal_mulai[]" class="form-control form-control-sm" value="08:00" title="Jam Mulai">
+                                    <span class="text-muted small px-1">s/d</span>
+                                    <input type="time" name="jadwal_selesai[]" class="form-control form-control-sm" value="12:00" title="Jam Selesai">
+                                </div>
                                 <button type="button" class="btn btn-sm btn-outline-danger btn-remove-jadwal" title="Hapus"><i class="bx bx-x"></i></button>
                             </div>
                         </div>
                         <button type="button" class="btn btn-sm btn-outline-success mt-1" onclick="addJadwalRow()">
                             <i class="bx bx-plus"></i> Tambah Jam
                         </button>
-                        <div class="form-text">Isi hari dan jam praktik dokter (opsional).</div>
+                        <div class="form-text">Pilih hari dan tentukan jam mulai & jam selesai praktik.</div>
                     </div>
 
                     {{-- Tombol Aksi --}}
@@ -178,25 +200,13 @@ function previewPhoto(input) {
 .dark-style .custom-dropdown .dropdown-toggle:hover { border-color: #0A5C45; }
 .custom-dropdown .dropdown-toggle:focus { border-color: #0A5C45; box-shadow: 0 0 0 3px rgba(10,92,69,0.1); outline: none; }
 .custom-dropdown .dropdown-toggle .chevron-icon {
-    display: none;
-}
-.custom-dropdown .dropdown-toggle::after {
-    content: '';
     position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
-    width: 14px; height: 14px; pointer-events: none;
-    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236c757d' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") center/contain no-repeat;
-    transition: transform 0.25s ease;
+    font-size: 1.1rem; color: #6b7280; transition: transform 0.2s;
 }
-.dark-style .custom-dropdown .dropdown-toggle::after {
-    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239ca3af' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") center/contain no-repeat;
-}
-.custom-dropdown.open .dropdown-toggle::after { transform: translateY(-50%) rotate(180deg); }
-.custom-dropdown .dropdown-selected { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 500; color: #122822; }
-.dark-style .custom-dropdown .dropdown-selected { color: #f3f4f6; }
-.custom-dropdown .dropdown-placeholder { color: #6c757d; }
-.dark-style .custom-dropdown .dropdown-placeholder { color: #9ca3af; }
+.custom-dropdown.open .dropdown-toggle .chevron-icon { transform: translateY(-50%) rotate(180deg); }
+.custom-dropdown .dropdown-placeholder { color: #9ca3af; }
 .custom-dropdown .dropdown-menu-custom {
-    display: none; position: absolute; top: calc(100% + 6px); left: 0; right: 0; z-index: 1050;
+    display: none; position: absolute; top: calc(100% + 4px); left: 0; right: 0; z-index: 1050;
     background: #fff; border: 1px solid #E2F0EC; border-radius: 12px;
     box-shadow: 0 8px 24px rgba(10,92,69,0.12); max-height: 220px; overflow-y: auto;
     padding: 6px;
@@ -230,10 +240,15 @@ function toggleDropdown(btn) {
 
 function selectOption(item) {
     const wrap = item.closest('.custom-dropdown');
-    wrap.querySelector('.hari-value').value = item.dataset.value;
+    const inputTarget = wrap.querySelector('input[type="hidden"]');
+    if (inputTarget) {
+        inputTarget.value = item.dataset.value;
+    }
     const selected = wrap.querySelector('.dropdown-selected');
-    selected.textContent = item.textContent;
-    selected.classList.remove('dropdown-placeholder');
+    if (selected) {
+        selected.textContent = item.textContent;
+        selected.classList.remove('dropdown-placeholder');
+    }
     wrap.querySelectorAll('.dropdown-item-custom').forEach(i => i.classList.remove('active'));
     item.classList.add('active');
     wrap.classList.remove('open');
@@ -248,19 +263,22 @@ document.addEventListener('click', function(e) {
 function addJadwalRow() {
     const container = document.getElementById('jadwalRows');
     const row = document.createElement('div');
-    row.className = 'jadwal-row d-flex gap-2 mb-2 align-items-center';
+    row.className = 'jadwal-row d-flex gap-2 mb-2 align-items-center flex-wrap flex-sm-nowrap';
 
     var options = '';
     for (var i = 0; i < hariOptions.length; i++) {
-        options += '<div class="dropdown-item-custom" data-value="' + hariOptions[i] + '" onclick="selectOption(this)">' + hariOptions[i] + '</div>';
+        options += '<div class="dropdown-item-custom' + (i === 0 ? ' active' : '') + '" data-value="' + hariOptions[i] + '" onclick="selectOption(this)">' + hariOptions[i] + '</div>';
     }
 
-    row.innerHTML = '<div class="custom-dropdown" style="width: 160px;">' +
-        '<input type="hidden" name="jadwal_hari[]" class="hari-value" value="">' +
+    row.innerHTML = '<div class="custom-dropdown" style="width: 140px; flex-shrink: 0;">' +
+        '<input type="hidden" name="jadwal_hari[]" class="hari-value" value="Senin">' +
         '<button type="button" class="dropdown-toggle text-start d-flex align-items-center" onclick="toggleDropdown(this)">' +
-        '<span class="dropdown-selected dropdown-placeholder">-- Hari --</span></button>' +
+        '<span class="dropdown-selected">Senin</span></button>' +
         '<div class="dropdown-menu-custom">' + options + '</div></div>' +
-        '<input type="text" name="jadwal_jam[]" class="form-control form-control-sm" placeholder="Contoh: 08:00 - 12:00" style="flex:1;">' +
+        '<div class="d-flex align-items-center gap-1" style="flex: 1;">' +
+        '<input type="time" name="jadwal_mulai[]" class="form-control form-control-sm" value="08:00" title="Jam Mulai">' +
+        '<span class="text-muted small px-1">s/d</span>' +
+        '<input type="time" name="jadwal_selesai[]" class="form-control form-control-sm" value="12:00" title="Jam Selesai"></div>' +
         '<button type="button" class="btn btn-sm btn-outline-danger btn-remove-jadwal" title="Hapus"><i class="bx bx-x"></i></button>';
     container.appendChild(row);
     row.querySelector('.btn-remove-jadwal').addEventListener('click', function() { row.remove(); });

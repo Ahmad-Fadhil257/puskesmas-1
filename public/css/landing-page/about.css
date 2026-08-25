@@ -138,11 +138,16 @@ a {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    font-size: 0.75rem;
+    font-size: 12px;
     font-weight: 700;
     color: var(--color-primary);
+    background: rgba(10, 92, 69, 0.1);
+    border: 1px solid rgba(10, 92, 69, 0.18);
+    padding: 6px 16px;
+    border-radius: var(--radius-full);
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.08em;
+    width: fit-content;
 }
 
 .about__badge svg {
@@ -155,33 +160,34 @@ a {
 }
 
 .about__title {
-    font-size: clamp(1.75rem, 3vw, 2.25rem);
+    font-size: clamp(24px, 4vw, 36px);
     font-weight: 800;
     color: var(--color-dark);
-    line-height: 1.2;
+    line-height: 1.25;
     letter-spacing: -0.02em;
-    margin-top: -4px;
+    margin: 0;
 }
 
 .about__desc {
-    font-size: 1rem;
+    font-size: 16px;
     font-weight: 400;
     color: var(--color-body);
-    line-height: 1.7;
-    max-width: 500px;
+    line-height: 1.6;
+    max-width: 520px;
+    margin: 0;
 }
 
 .about__cards {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 20px;
+    gap: 24px;
     margin-top: 8px;
 }
 
 .about__card {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
 }
 
 .about__card-icon {

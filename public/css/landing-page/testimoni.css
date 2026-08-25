@@ -20,8 +20,8 @@
    ========================================================================== */
 .testimonials {
     width: 100%;
-    margin: 60px 0;
-    padding: 90px 0 100px;
+    margin: 0;
+    padding: 80px 0;
     background: linear-gradient(145deg, #006648 0%, #00533B 60%, #004531 100%);
     position: relative;
     overflow: hidden;
@@ -31,7 +31,7 @@
 .testimonials__container {
     max-width: var(--container-max);
     margin: 0 auto;
-    padding: 0 32px;
+    padding: 0 24px;
     width: 100%;
     position: relative;
     z-index: 1;
@@ -93,26 +93,30 @@
     justify-content: center;
     gap: 8px;
     color: #92e4c8;
-    font-size: 0.8125rem;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    font-size: 12px;
     font-weight: 700;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    margin-bottom: 14px;
+    padding: 6px 16px;
+    border-radius: var(--radius-full);
+    margin-bottom: 16px;
 }
 
 .testimonials__badge svg {
-    width: 15px;
-    height: 15px;
+    width: 14px;
+    height: 14px;
     fill: currentColor;
 }
 
 .testimonials__title {
     color: #ffffff;
     font-family: var(--font-family);
-    font-size: 2.375rem;
+    font-size: clamp(24px, 4vw, 36px);
     font-weight: 800;
     line-height: 1.25;
-    margin-bottom: 14px;
+    margin-bottom: 12px;
     letter-spacing: -0.02em;
     max-width: 780px;
     margin-left: auto;
@@ -120,9 +124,9 @@
 }
 
 .testimonials__subtitle {
-    color: rgba(255, 255, 255, 0.85);
-    font-size: 0.9375rem;
-    line-height: 1.65;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 16px;
+    line-height: 1.6;
     max-width: 680px;
     margin: 0 auto;
 }

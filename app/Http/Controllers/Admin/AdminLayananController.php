@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Layanan;
+use App\Models\Dokter;
 use Illuminate\Http\Request;
 
 class AdminLayananController extends Controller
@@ -15,14 +16,17 @@ class AdminLayananController extends Controller
     {
         $search = $request->query('search');
 
-        $query = Layanan::query()->orderBy('created_at', 'asc');
+        $query = Layanan::query()->orderBy('order', 'asc')->orderBy('id', 'asc');
 
         if ($search) {
-            $query->where('title', 'like', "%{$search}%")
+            $query->where(function ($q) use ($search) {
+                $q->where('title', 'like', "%{$search}%")
+                  ->orWhere('kategori', 'like', "%{$search}%")
                   ->orWhere('description', 'like', "%{$search}%");
+            });
         }
 
-        $layanans = $query->paginate(10)->withQueryString();
+        $layanans = $query->paginate(15)->withQueryString();
         $totalLayanan = Layanan::count();
 
         return view('admin.layanan.index', compact('layanans', 'search', 'totalLayanan'));
@@ -33,7 +37,10 @@ class AdminLayananController extends Controller
      */
     public function create()
     {
-        return view('admin.layanan.create');
+        $dokters = Dokter::where('is_active', true)->orderBy('name', 'asc')->get();
+        $categories = array_keys(Layanan::getKategoriList());
+        $nextOrder = (Layanan::max('order') ?? 0) + 1;
+        return view('admin.layanan.create', compact('dokters', 'categories', 'nextOrder'));
     }
 
     /**
@@ -41,23 +48,41 @@ class AdminLayananController extends Controller
      */
     public function store(Request $request)
     {
+        $kategoriList = Layanan::getKategoriList();
+        $validCategories = implode(',', array_keys($kategoriList));
+
         $validated = $request->validate([
-            'title'       => 'required|string|max:255',
-            'description' => 'required|string',
-            'icon'        => 'required|string|max:100',
-            'variant'     => 'required|string|in:default,featured,emergency',
-            'btn_text'    => 'nullable|string|max:100',
-            'btn_link'    => 'nullable|string|max:255',
+            'order'           => 'nullable|integer|min:1',
+            'title'           => 'required|string|max:255',
+            'kategori'        => 'required|string|in:' . $validCategories,
+            'description'     => 'required|string',
+            'icon'            => 'required|string|max:100',
+            'jam_operasional' => 'nullable|string|max:255',
+            'dokter_ids'      => 'nullable|array',
+            'dokter_ids.*'    => 'integer|exists:dokters,id',
+            'tindakan_medis'  => 'nullable|string',
+            'persyaratan'     => 'nullable|string',
+            'btn_text'        => 'nullable|string|max:100',
         ]);
 
+        $order = $validated['order'] ?? ((Layanan::max('order') ?? 0) + 1);
+        $kategoriData = $kategoriList[$validated['kategori']] ?? ['variant' => 'default', 'badge' => 'BPJS & UMUM'];
+
         Layanan::create([
-            'title'       => $validated['title'],
-            'description' => $validated['description'],
-            'icon'        => $validated['icon'],
-            'variant'     => $validated['variant'],
-            'btn_text'    => $validated['btn_text'] ?? null,
-            'btn_link'    => $validated['btn_link'] ?? null,
-            'is_active'   => true,
+            'order'           => $order,
+            'title'           => $validated['title'],
+            'kategori'        => $validated['kategori'],
+            'description'     => $validated['description'],
+            'icon'            => $validated['icon'],
+            'variant'         => $kategoriData['variant'],
+            'tipe_jaminan'    => $kategoriData['badge'],
+            'jam_operasional' => $validated['jam_operasional'] ?? 'Senin - Sabtu: 08.00 - 14.00 WIB',
+            'dokter_ids'      => $validated['dokter_ids'] ?? [],
+            'tindakan_medis'  => $validated['tindakan_medis'] ?? null,
+            'persyaratan'     => $validated['persyaratan'] ?? null,
+            'btn_text'        => $validated['btn_text'] ?? ($kategoriData['variant'] === 'emergency' ? 'Hubungi kami' : 'Janji Temu / Pendaftaran'),
+            'btn_link'        => null,
+            'is_active'       => true,
         ]);
 
         return redirect()->route('admin.layanan.index')
@@ -70,7 +95,9 @@ class AdminLayananController extends Controller
     public function edit($id)
     {
         $layanan = Layanan::findOrFail($id);
-        return view('admin.layanan.edit', compact('layanan'));
+        $dokters = Dokter::where('is_active', true)->orderBy('name', 'asc')->get();
+        $categories = array_keys(Layanan::getKategoriList());
+        return view('admin.layanan.edit', compact('layanan', 'dokters', 'categories'));
     }
 
     /**
@@ -79,26 +106,77 @@ class AdminLayananController extends Controller
     public function update(Request $request, $id)
     {
         $layanan = Layanan::findOrFail($id);
+        $kategoriList = Layanan::getKategoriList();
+        $validCategories = implode(',', array_keys($kategoriList));
 
         $validated = $request->validate([
-            'title'       => 'required|string|max:255',
-            'description' => 'required|string',
-            'icon'        => 'required|string|max:100',
-            'variant'     => 'required|string|in:default,featured,emergency',
-            'btn_text'    => 'nullable|string|max:100',
-            'btn_link'    => 'nullable|string|max:255',
+            'order'           => 'required|integer|min:1',
+            'title'           => 'required|string|max:255',
+            'kategori'        => 'required|string|in:' . $validCategories,
+            'description'     => 'required|string',
+            'icon'            => 'required|string|max:100',
+            'jam_operasional' => 'nullable|string|max:255',
+            'dokter_ids'      => 'nullable|array',
+            'dokter_ids.*'    => 'integer|exists:dokters,id',
+            'tindakan_medis'  => 'nullable|string',
+            'persyaratan'     => 'nullable|string',
+            'btn_text'        => 'nullable|string|max:100',
         ]);
 
-        $layanan->title       = $validated['title'];
-        $layanan->description = $validated['description'];
-        $layanan->icon        = $validated['icon'];
-        $layanan->variant     = $validated['variant'];
-        $layanan->btn_text    = $validated['btn_text'] ?? null;
-        $layanan->btn_link    = $validated['btn_link'] ?? null;
+        $kategoriData = $kategoriList[$validated['kategori']] ?? ['variant' => 'default', 'badge' => 'BPJS & UMUM'];
+
+        $layanan->order           = $validated['order'];
+        $layanan->title           = $validated['title'];
+        $layanan->kategori        = $validated['kategori'];
+        $layanan->description     = $validated['description'];
+        $layanan->icon            = $validated['icon'];
+        $layanan->variant         = $kategoriData['variant'];
+        $layanan->tipe_jaminan    = $kategoriData['badge'];
+        $layanan->jam_operasional = $validated['jam_operasional'] ?? 'Senin - Sabtu: 08.00 - 14.00 WIB';
+        $layanan->dokter_ids      = $validated['dokter_ids'] ?? [];
+        $layanan->tindakan_medis  = $validated['tindakan_medis'] ?? null;
+        $layanan->persyaratan     = $validated['persyaratan'] ?? null;
+        $layanan->btn_text        = $validated['btn_text'] ?? ($kategoriData['variant'] === 'emergency' ? 'Hubungi kami' : 'Janji Temu / Pendaftaran');
         $layanan->save();
 
         return redirect()->route('admin.layanan.index')
                          ->with('success', 'Data layanan berhasil diperbarui!');
+    }
+
+    /**
+     * Ubah urutan naik atau turun
+     */
+    public function reorder(Request $request, $id)
+    {
+        $direction = $request->input('direction');
+        $current = Layanan::findOrFail($id);
+
+        if ($direction === 'up') {
+            $prev = Layanan::where('order', '<', $current->order)
+                           ->orderBy('order', 'desc')
+                           ->first();
+            if ($prev) {
+                $temp = $current->order;
+                $current->order = $prev->order;
+                $prev->order = $temp;
+                $current->save();
+                $prev->save();
+            }
+        } elseif ($direction === 'down') {
+            $next = Layanan::where('order', '>', $current->order)
+                           ->orderBy('order', 'asc')
+                           ->first();
+            if ($next) {
+                $temp = $current->order;
+                $current->order = $next->order;
+                $next->order = $temp;
+                $current->save();
+                $next->save();
+            }
+        }
+
+        return redirect()->route('admin.layanan.index')
+                         ->with('success', 'Urutan kartu layanan berhasil diubah!');
     }
 
     /**

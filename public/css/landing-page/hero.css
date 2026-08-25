@@ -82,13 +82,13 @@ a { text-decoration: none; color: inherit; }
     flex: 1;
     display: flex;
     align-items: center;
-    padding: 48px var(--section-padding-x) 72px;
+    padding: 64px var(--section-padding-x) 56px;
 }
 
 .hero__inner {
     display: grid;
     grid-template-columns: 5fr 7fr;
-    gap: 56px;
+    gap: 48px;
     align-items: center;
     max-width: var(--container-max);
     margin: 0 auto;
@@ -98,50 +98,55 @@ a { text-decoration: none; color: inherit; }
 .hero__content {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 16px;
 }
 
 .hero__badge {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    font-size: 1rem;
+    font-size: 12px;
     font-weight: 700;
     color: var(--color-primary);
+    background: rgba(10, 92, 69, 0.1);
+    border: 1px solid rgba(10, 92, 69, 0.18);
+    padding: 6px 16px;
+    border-radius: var(--radius-full);
     text-transform: uppercase;
     letter-spacing: 0.08em;
+    width: fit-content;
 }
 
 .hero__badge svg {
-    width: 16px;
-    height: 16px;
+    width: 14px;
+    height: 14px;
     fill: var(--color-primary);
     flex-shrink: 0;
 }
 
 .hero__title {
-    font-size: 3rem;
+    font-size: clamp(32px, 4.5vw, 48px);
     font-weight: 800;
     color: var(--color-dark);
     line-height: 1.15;
-    letter-spacing: -0.03em;
-    margin-top: 4px;
+    letter-spacing: -0.02em;
+    margin: 0;
 }
 
 .hero__desc {
-    font-size: 1.25rem;
+    font-size: 16px;
     font-weight: 400;
     color: var(--color-body);
-    line-height: 1.65;
-    max-width: 440px;
-    margin-top: 4px;
+    line-height: 1.6;
+    max-width: 480px;
+    margin: 0;
 }
 
 .hero__actions {
     display: flex;
     flex-wrap: wrap;
+    gap: 16px;
     align-items: center;
-    gap: 12px;
     margin-top: 8px;
 }
 

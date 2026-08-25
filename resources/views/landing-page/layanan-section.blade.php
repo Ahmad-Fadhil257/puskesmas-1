@@ -1,75 +1,107 @@
-<section class="layanan-section" id="layanan-kami">
-    <div class="layanan-container">
+<section class="layanan-bento-section" id="layanan-kami">
+    <div class="layanan-bento-container">
 
-        {{-- ---- HEADER ---- --}}
-        <div class="layanan-header">
+        {{-- ===== HEADER SECTION ===== --}}
+        <div class="layanan-bento-header">
+            <div class="layanan-bento-badge">
+                <i class="bx bx-plus-medical"></i>
+                <span>LAYANAN PUBLIK</span>
+            </div>
+            <h2 class="layanan-bento-title">Pusat Layanan Kesehatan Terpadu</h2>
+            <p class="layanan-bento-subtitle">
+                Pilih kategori layanan yang Anda butuhkan. Kami menyediakan berbagai jalur pendaftaran, konsultasi dokter, dan informasi fasilitas kesehatan secara mudah dan terpadu.
+            </p>
+        </div>
 
-            <div class="layanan-label">
-                {{-- Ikon gedung/rumah --}}
-                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
-                    <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z"/>
-                    <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z"/>
-                </svg>
-                LAYANAN KAMI
+        {{-- ===== BENTO GRID LAYOUT ===== --}}
+        <div class="layanan-bento-grid">
+
+            {{-- 1. KARTU BESAR KIRI (FEATURED HERO CARD: POLI KIA & IMUNISASI) --}}
+            <div class="bento-card bento-card--hero">
+                {{-- Decorative Medical Background Pattern --}}
+                <div class="bento-hero-bg-decor" aria-hidden="true">
+                    <svg viewBox="0 0 400 500" fill="none" xmlns="http://www.w3.org/2000/svg" class="bento-hero-svg">
+                        <circle cx="200" cy="220" r="140" fill="rgba(255,255,255,0.04)"/>
+                        <circle cx="200" cy="220" r="90" fill="rgba(255,255,255,0.06)"/>
+                        <path d="M200 130v180M140 200h120" stroke="rgba(255,255,255,0.12)" stroke-width="16" stroke-linecap="round"/>
+                        <path d="M160 170c20-20 60-20 80 0s60 20 80 0" stroke="rgba(255,255,255,0.08)" stroke-width="6" stroke-linecap="round"/>
+                        <path d="M120 270c20 20 60 20 80 0s60-20 80 0" stroke="rgba(255,255,255,0.08)" stroke-width="6" stroke-linecap="round"/>
+                    </svg>
+                </div>
+
+                {{-- Floating Pill Icon --}}
+                <div class="bento-hero-top-badge">
+                    <i class="bx bx-injection"></i>
+                </div>
+
+                {{-- Content Body --}}
+                <div class="bento-hero-content">
+                    <span class="bento-mini-tag">POLI KESEHATAN IBU & ANAK (KIA)</span>
+                    <h3 class="bento-hero-title">Pemeriksaan Kehamilan & Imunisasi Balita</h3>
+                    <p class="bento-hero-desc">
+                        Layanan terpadu USG dasar, posyandu rutin, imunisasi vaksinasi anak, serta konsultasi tumbuh kembang balita bersama dokter spesialis anak di Poli KIA.
+                    </p>
+                    <a href="{{ $appSetting->wa_link }}" target="_blank" rel="noopener" class="btn-bento-terracotta">
+                        <span>Daftar Antrean Poli KIA</span>
+                        <i class="bx bx-right-arrow-alt"></i>
+                    </a>
+                </div>
             </div>
 
-            <h2 class="layanan-title">Solusi Layanan Kesehatan Komprehensif</h2>
-
-            <p class="layanan-subtitle">
-                Di CareLink, kami menawarkan beragam layanan medis yang disesuaikan dengan kebutuhan Anda,<br>
-                mulai dari pemeriksaan rutin hingga perawatan khusus.
-            </p>
-
-        </div>
-        {{-- END HEADER --}}
-
-        {{-- ---- CARDS GRID (Dinamis dari Database) ---- --}}
-        <div class="layanan-grid">
-
-            @forelse($layanans as $item)
-                @if($item->variant === 'emergency')
-                    {{-- Emergency Card (Merah) --}}
-                    <div class="layanan-card layanan-card--emergency">
-                        <h3 class="layanan-card-title">{{ $item->title }}</h3>
-                        <p class="layanan-card-desc">{{ $item->description }}</p>
-                        @if($item->btn_text)
-                            <a href="{{ $item->btn_link ?? '#kontak' }}" class="layanan-emergency-btn">
-                                {{ $item->btn_text }} <i class="bx bx-right-arrow-alt" style="font-size: 1.2em;"></i>
-                            </a>
-                        @endif
-                    </div>
-                @elseif($item->variant === 'featured')
-                    {{-- Featured Card (Hijau Gelap) --}}
-                    <div class="layanan-card layanan-card--featured">
-                        <div class="layanan-card-icon">
-                            {!! $item->icon_html !!}
-                        </div>
-                        <h3 class="layanan-card-title">{{ $item->title }}</h3>
-                        <p class="layanan-card-desc">{{ $item->description }}</p>
-                        @if($item->btn_text)
-                            <a href="{{ $item->btn_link ?? '#' }}" class="layanan-emergency-btn mt-3">
-                                {{ $item->btn_text }} <i class="bx bx-right-arrow-alt" style="font-size: 1.2em;"></i>
-                            </a>
-                        @endif
-                    </div>
-                @else
-                    {{-- Default Card (Standar) --}}
-                    <div class="layanan-card">
-                        <div class="layanan-card-icon">
-                            {!! $item->icon_html !!}
-                        </div>
-                        <h3 class="layanan-card-title">{{ $item->title }}</h3>
-                        <p class="layanan-card-desc">{{ $item->description }}</p>
-                    </div>
-                @endif
-            @empty
-                <p class="text-center text-muted" style="grid-column: 1/-1; padding: 40px 0;">
-                    Belum ada layanan yang ditambahkan.
+            {{-- 2. KARTU KANAN ATAS 1: POLI UMUM & SURAT SEHAT (MINT TINT) --}}
+            <div class="bento-card bento-card--mint">
+                <div class="bento-card-icon-wrap icon-mint">
+                    <i class="bx bx-clinic"></i>
+                </div>
+                <h4 class="bento-card-title">Pemeriksaan & Surat Sehat</h4>
+                <p class="bento-card-desc">
+                    Pemeriksaan fisik lengkap dokter umum, skrining tekanan darah, serta penerbitan surat keterangan sehat (KIR) untuk keperluan kerja atau studi.
                 </p>
-            @endforelse
+            </div>
+
+            {{-- 3. KARTU KANAN ATAS 2: FARMASI & APOTEK (PEACH TINT) --}}
+            <div class="bento-card bento-card--peach">
+                <div class="bento-card-icon-wrap icon-peach">
+                    <i class="bx bx-capsule"></i>
+                </div>
+                <h4 class="bento-card-title">Apotek & Konsultasi Obat</h4>
+                <p class="bento-card-desc">
+                    Pelayanan tebus resep obat BPJS & Umum, informasi aturan minum obat (PIO), serta ketersediaan obat esensial terpadu bersama apoteker.
+                </p>
+            </div>
+
+            {{-- 4. KARTU KANAN BAWAH: KATALOG LENGKAP PUSKESMAS (WIDE SLATE CARD - SATU-SATUNYA YANG MENGARAHKAN KE /LAYANAN) --}}
+            <div class="bento-card bento-card--slate">
+                <div class="bento-slate-left">
+                    <div class="bento-card-icon-wrap icon-slate-dark">
+                        <i class="bx bx-map-pin"></i>
+                    </div>
+                    <h4 class="bento-slate-title">Katalog Lengkap Poliklinik & UGD</h4>
+                    <p class="bento-slate-desc">
+                        Temukan rincian seluruh 6+ poliklinik rawat jalan, dokter spesialis, jadwal operasional, laboratorium, serta fasilitas siaga UGD 24 jam.
+                    </p>
+                    <a href="{{ route('layanan.index') }}" class="btn-bento-white">
+                        <i class="bx bx-grid-alt me-1"></i>
+                        <span>Buka Katalog Semua Layanan</span>
+                        <i class="bx bx-right-arrow-alt ms-1"></i>
+                    </a>
+                </div>
+
+                {{-- Visual Map / Facilities Art --}}
+                <div class="bento-slate-graphic" aria-hidden="true">
+                    <div class="clinic-map-visual">
+                        <div class="map-pulse-point point-1"><i class="bx bx-plus-medical"></i></div>
+                        <div class="map-pulse-point point-2"><i class="bx bx-user-voice"></i></div>
+                        <div class="map-pulse-point point-3"><i class="bx bx-shield-plus"></i></div>
+                        <div class="map-card-center">
+                            <i class="bx bx-clinic"></i>
+                            <span>PUSKESMAS</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </div>
-        {{-- END GRID --}}
 
     </div>
 </section>

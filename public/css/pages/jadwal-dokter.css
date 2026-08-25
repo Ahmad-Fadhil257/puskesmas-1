@@ -3,18 +3,14 @@
 :root {
     --color-primary:        #0A5C45;
     --color-primary-hover:  #084A37;
-    --color-dark:           #122822;
-    --color-body:           #40564F;
-    --color-muted:          #3B5249;
-    --color-bg-1:           #C5E5DD;
-    --color-bg-2:           #EEF8F5;
+    --color-dark:           #0F172A;
+    --color-body:           #334155;
+    --color-muted:          #64748B;
     --color-surface:        #FFFFFF;
-    --color-secondary:      #BBE4D8;
-    --color-secondary-hover:#A9DCCF;
-    --color-border:         #96CFC1;
+    --color-border:         #E2E8F0;
 
     --font-family:       'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-    --container-max:     1200px;
+    --container-max:     1240px;
     --section-padding-y: 80px;
     --section-padding-x: 24px;
     --radius-sm:         8px;
@@ -22,31 +18,117 @@
     --radius-lg:         16px;
     --radius-xl:         24px;
     --radius-full:       9999px;
-    --shadow-sm:         0 2px 8px rgba(10, 92, 69, 0.08);
-    --shadow-md:         0 4px 16px rgba(10, 92, 69, 0.12);
-    --shadow-lg:         0 10px 30px rgba(10, 92, 69, 0.15);
-    --transition:        all 0.2s ease;
+    --shadow-sm:         0 2px 8px rgba(0, 0, 0, 0.04);
+    --shadow-md:         0 4px 20px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
+    --shadow-lg:         0 14px 30px rgba(10, 92, 69, 0.12);
+    --transition:        all 0.25s ease;
 }
 
-@media (max-width: 768px) {
-    :root {
-        --section-padding-x: 16px;
-    }
+body {
+    background: #F8FAFC !important;
+    font-family: var(--font-family);
+    color: var(--color-body);
+    min-height: 100vh;
 }
 
 /* ==========================================================================
-   PAGE: JADWAL DOKTER
+   FULL WIDTH DARK EMERALD HEADER (KONSISTEN DENGAN HALAMAN BERITA)
    ========================================================================== */
-
-body {
-    background: var(--color-bg-2) !important;
+.jadwal-full-header {
+    width: 100%;
+    margin-top: -95px;
+    padding-top: 130px;
+    padding-bottom: 55px;
+    padding-left: 24px;
+    padding-right: 24px;
+    background: linear-gradient(135deg, #0A5C45 0%, #064E3B 60%, #043628 100%);
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    box-shadow: 0 12px 36px rgba(0, 50, 35, 0.18);
+    text-align: left;
+    box-sizing: border-box;
 }
 
-.jadwal-section {
-    background-color: var(--color-bg-2);
-    padding: 48px var(--section-padding-x) var(--section-padding-y);
+.jadwal-full-header__glow {
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    width: 380px;
+    height: 380px;
+    background: radial-gradient(circle, rgba(52, 211, 153, 0.22) 0%, transparent 70%);
+    border-radius: 50%;
+    filter: blur(45px);
+    pointer-events: none;
+    z-index: -1;
+}
+
+.jadwal-full-header__decor-pattern {
+    position: absolute;
+    inset: 0;
+    background-image: 
+        radial-gradient(rgba(255, 255, 255, 0.10) 1.2px, transparent 1.2px),
+        linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 24px 24px, 48px 48px, 48px 48px;
+    opacity: 0.65;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.jadwal-full-header__container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+    text-align: left;
+}
+
+.jadwal-header-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    color: #FFFFFF;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 5px 14px;
+    border-radius: 9999px;
+    letter-spacing: 0.08em;
+    margin-bottom: 14px;
+}
+
+.jadwal-full-header__title {
+    color: #ffffff;
     font-family: var(--font-family);
-    min-height: 100vh;
+    font-size: 2.25rem;
+    font-weight: 800;
+    line-height: 1.25;
+    margin: 0 0 10px 0;
+    letter-spacing: -0.01em;
+    text-align: left;
+}
+
+.jadwal-full-header__subtitle {
+    color: rgba(255, 255, 255, 0.88);
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    max-width: 780px;
+    margin: 0;
+    text-align: left;
+}
+
+/* ==========================================================================
+   MAIN CONTENT WRAPPER (SOFT OFF-WHITE #F8FAFC)
+   ========================================================================== */
+.jadwal-content-wrapper {
+    background: #F8FAFC;
+    padding: 48px var(--section-padding-x) 90px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .jadwal-container {
@@ -54,76 +136,36 @@ body {
     margin: 0 auto;
 }
 
-/* ===== HEADER ===== */
-.jadwal-header {
-    text-align: center;
-    margin-bottom: 52px;
-}
-
-.jadwal-label {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--color-primary);
-    margin-bottom: 16px;
-}
-
-.jadwal-label svg {
-    width: 15px;
-    height: 15px;
-    flex-shrink: 0;
-}
-
-.jadwal-title {
-    font-size: clamp(1.75rem, 3vw, 2.25rem);
-    font-weight: 800;
-    color: var(--color-dark);
-    margin: 0 0 14px 0;
-    line-height: 1.2;
-    letter-spacing: -0.02em;
-}
-
-.jadwal-subtitle {
-    font-size: 1rem;
-    color: var(--color-body);
-    line-height: 1.7;
-    margin: 0;
-}
-
-/* ===== GRID ===== */
+/* ===== GRID KARTU DOKTER ===== */
 .jadwal-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 24px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
 }
 
-/* ===== DOCTOR CARD ===== */
 .jadwal-card {
-    background: var(--color-surface);
+    background: #FFFFFF;
     border-radius: var(--radius-lg);
+    border: 1px solid #E2E8F0;
     overflow: hidden;
-    box-shadow: var(--shadow-sm);
-    display: flex;
-    flex-direction: row;
+    box-shadow: var(--shadow-md);
     transition: var(--transition);
+    display: flex;
+    flex-direction: column;
 }
 
 .jadwal-card:hover {
-    box-shadow: var(--shadow-md);
-    transform: translateY(-2px);
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+    border-color: rgba(10, 92, 69, 0.3);
 }
 
-/* --- Photo --- */
 .jadwal-card-photo {
-    width: 200px;
-    min-height: 220px;
-    flex-shrink: 0;
-    background-color: var(--color-bg-2);
+    width: 100%;
+    height: 240px;
+    background: #F1F5F9;
     overflow: hidden;
+    position: relative;
 }
 
 .jadwal-card-photo img {
@@ -131,134 +173,117 @@ body {
     height: 100%;
     object-fit: cover;
     object-position: top center;
-    display: block;
-    transition: transform 0.35s ease;
+    transition: transform 0.4s ease;
 }
 
 .jadwal-card:hover .jadwal-card-photo img {
     transform: scale(1.04);
 }
 
-/* --- Info --- */
 .jadwal-card-info {
     padding: 24px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     flex: 1;
-    min-width: 0;
 }
 
 .jadwal-card-name {
-    font-size: 1rem;
-    font-weight: 700;
+    font-size: 1.15rem;
+    font-weight: 800;
     color: var(--color-dark);
-    margin: 0 0 4px 0;
-    line-height: 1.3;
+    margin-bottom: 4px;
+    letter-spacing: -0.01em;
 }
 
 .jadwal-card-specialty {
     font-size: 0.875rem;
-    color: var(--color-body);
-    margin: 0 0 16px 0;
-    line-height: 1.5;
+    font-weight: 600;
+    color: var(--color-primary);
+    margin-bottom: 18px;
 }
 
-/* --- Schedule --- */
+/* ===== JADWAL PRAKTEK PILLS ===== */
 .jadwal-card-schedule {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+    border-top: 1px solid #F1F5F9;
+    padding-top: 16px;
+    margin-top: auto;
 }
 
 .jadwal-schedule-label {
-    font-size: 0.8125rem;
+    font-size: 0.75rem;
     font-weight: 700;
-    color: var(--color-dark);
-    margin: 0;
+    color: var(--color-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 10px;
 }
 
 .jadwal-schedule-grid {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     gap: 8px;
 }
 
 .jadwal-day {
     display: flex;
-    flex-direction: column;
-    gap: 2px;
-    background: var(--color-bg-2);
-    border: 1px solid var(--color-border);
+    justify-content: space-between;
+    align-items: center;
+    background: #F8FAFC;
+    border: 1px solid #E2E8F0;
     border-radius: var(--radius-sm);
-    padding: 8px 14px;
-    min-width: 0;
+    padding: 7px 12px;
+    font-size: 0.8125rem;
+    transition: var(--transition);
+}
+
+.jadwal-card:hover .jadwal-day {
+    border-color: #CBD5E1;
 }
 
 .jadwal-day-name {
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: var(--color-muted);
-    line-height: 1.3;
+    font-weight: 700;
+    color: var(--color-dark);
 }
 
 .jadwal-day-time {
-    font-size: 0.8125rem;
-    font-weight: 500;
     color: var(--color-primary);
-    white-space: nowrap;
+    font-weight: 600;
+    font-size: 0.75rem;
+    background: #E6F5F1;
+    padding: 2px 8px;
+    border-radius: 4px;
 }
 
-/* ===== RESPONSIVE ===== */
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
 @media (max-width: 1024px) {
     .jadwal-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
     }
 }
 
 @media (max-width: 768px) {
-    .jadwal-section {
-        padding-top: 32px;
+    .jadwal-full-header {
+        padding-top: 110px;
+        padding-bottom: 40px;
     }
 
-    .jadwal-header {
-        margin-bottom: 36px;
+    .jadwal-full-header__title {
+        font-size: 1.75rem;
     }
 
-    .jadwal-card {
-        flex-direction: column;
+    .jadwal-content-wrapper {
+        padding: 28px 16px 60px;
+    }
+
+    .jadwal-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
     }
 
     .jadwal-card-photo {
-        width: 100%;
-        min-height: 200px;
-        max-height: 240px;
-    }
-
-    .jadwal-card-info {
-        padding: 20px;
-    }
-}
-
-@media (max-width: 480px) {
-    .jadwal-card-photo {
-        min-height: 180px;
-        max-height: 200px;
-    }
-
-    .jadwal-card-info {
-        padding: 16px;
-    }
-
-    .jadwal-card-name {
-        font-size: 0.9375rem;
-    }
-
-    .jadwal-schedule-grid {
-        gap: 6px;
-    }
-
-    .jadwal-day {
-        padding: 6px 10px;
+        height: 220px;
     }
 }

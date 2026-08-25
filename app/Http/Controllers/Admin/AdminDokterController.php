@@ -43,13 +43,15 @@ class AdminDokterController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'name'          => 'required|string|max:255',
-            'specialty'     => 'required|string|max:255',
-            'photo'         => 'nullable|image|mimes:jpeg,png,jpg,webp|max:3072',
-            'jadwal_hari'   => 'nullable|array',
-            'jadwal_hari.*' => 'nullable|string|max:20',
-            'jadwal_jam'    => 'nullable|array',
-            'jadwal_jam.*'  => 'nullable|string|max:50',
+            'name'             => 'required|string|max:255',
+            'specialty'        => 'required|string|max:255',
+            'photo'            => 'nullable|image|mimes:jpeg,png,jpg,webp|max:3072',
+            'jadwal_hari'      => 'nullable|array',
+            'jadwal_hari.*'    => 'nullable|string|max:20',
+            'jadwal_mulai'     => 'nullable|array',
+            'jadwal_mulai.*'   => 'nullable|string|max:10',
+            'jadwal_selesai'   => 'nullable|array',
+            'jadwal_selesai.*' => 'nullable|string|max:10',
         ]);
 
         $photoPath = null;
@@ -95,13 +97,15 @@ class AdminDokterController extends Controller
         $dokter = Dokter::findOrFail($id);
 
         $validated = $request->validate([
-            'name'          => 'required|string|max:255',
-            'specialty'     => 'required|string|max:255',
-            'photo'         => 'nullable|image|mimes:jpeg,png,jpg,webp|max:3072',
-            'jadwal_hari'   => 'nullable|array',
-            'jadwal_hari.*' => 'nullable|string|max:20',
-            'jadwal_jam'    => 'nullable|array',
-            'jadwal_jam.*'  => 'nullable|string|max:50',
+            'name'             => 'required|string|max:255',
+            'specialty'        => 'required|string|max:255',
+            'photo'            => 'nullable|image|mimes:jpeg,png,jpg,webp|max:3072',
+            'jadwal_hari'      => 'nullable|array',
+            'jadwal_hari.*'    => 'nullable|string|max:20',
+            'jadwal_mulai'     => 'nullable|array',
+            'jadwal_mulai.*'   => 'nullable|string|max:10',
+            'jadwal_selesai'   => 'nullable|array',
+            'jadwal_selesai.*' => 'nullable|string|max:10',
         ]);
 
         if ($request->hasFile('photo')) {
@@ -148,19 +152,28 @@ class AdminDokterController extends Controller
     }
 
     /**
-     * Bangun array jadwal dari input form
+     * Bangun array jadwal dari input form time picker
      */
     private function buildJadwal(Request $request): ?array
     {
-        $hari = $request->input('jadwal_hari', []);
-        $jam  = $request->input('jadwal_jam', []);
+        $hari    = $request->input('jadwal_hari', []);
+        $mulai   = $request->input('jadwal_mulai', []);
+        $selesai = $request->input('jadwal_selesai', []);
 
         $jadwal = [];
         foreach ($hari as $i => $h) {
             $h = trim($h ?? '');
-            $j = trim($jam[$i] ?? '');
-            if ($h !== '' && $j !== '') {
-                $jadwal[] = ['hari' => $h, 'jam' => $j];
+            $m = trim($mulai[$i] ?? '');
+            $s = trim($selesai[$i] ?? '');
+
+            if ($h !== '' && ($m !== '' || $s !== '')) {
+                $jamStr = ($m !== '' && $s !== '') ? "{$m} - {$s} WIB" : ($m !== '' ? $m : $s);
+                $jadwal[] = [
+                    'hari'    => $h,
+                    'jam'     => $jamStr,
+                    'mulai'   => $m,
+                    'selesai' => $s,
+                ];
             }
         }
 

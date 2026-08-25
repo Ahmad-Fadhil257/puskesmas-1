@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\SurveyController;
 use App\Http\Controllers\Admin\ArticleController as AdminArticleController;
 use App\Http\Controllers\Admin\AboutController as AdminAboutController;
 use App\Http\Controllers\Admin\HeroController as AdminHeroController;
@@ -10,6 +11,7 @@ use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\AdminDokterController;
 use App\Http\Controllers\Admin\AdminNilaiController;
 use App\Http\Controllers\Admin\AdminLayananController;
+use App\Http\Controllers\Admin\AdminSurveyController;
 use App\Http\Controllers\CaraKerjaController;
 use App\Models\About;
 use App\Models\Article;
@@ -18,7 +20,9 @@ use App\Models\Dokter;
 use App\Models\HeroSection;
 use App\Models\InfoCard;
 use App\Models\Layanan;
+use App\Models\Mitra;
 use App\Models\NilaiSection;
+use App\Models\Survey;
 use Illuminate\Support\Facades\Route;
 
 // Landing Page Utama (dengan passing artikel terbaru, cara kerja dinamis, hero & info cards)
@@ -30,9 +34,25 @@ Route::get('/', function () {
     $infoCards = InfoCard::orderBy('urutan', 'asc')->get();
     $dokters = Dokter::orderBy('created_at', 'asc')->get();
     $nilaiSection = NilaiSection::first();
-    $layanans = Layanan::orderBy('created_at', 'asc')->get();
-    return view('welcome', compact('latestArticles', 'caraKerja', 'about', 'hero', 'infoCards', 'dokters', 'nilaiSection', 'layanans'));
+    $mitras = Mitra::where('is_active', true)->orderBy('order', 'asc')->get();
+    $layanans = Layanan::orderBy('order', 'asc')->orderBy('id', 'asc')->get();
+    $surveys = Survey::approved()->orderBy('is_featured', 'desc')->orderBy('created_at', 'desc')->get();
+    $avgRating = Survey::getAverageRating();
+    $satisfactionPct = Survey::getSatisfactionPercentage();
+    return view('welcome', compact('latestArticles', 'caraKerja', 'about', 'hero', 'infoCards', 'dokters', 'nilaiSection', 'mitras', 'layanans', 'surveys', 'avgRating', 'satisfactionPct'));
 })->name('home');
+
+// Halaman Khusus & Formulir Survei Kepuasan Masyarakat (SKM / IKM)
+Route::get('/survei', [SurveyController::class, 'index'])->name('survei.index');
+Route::post('/survei', [SurveyController::class, 'store'])->name('survei.store');
+
+// Layanan & Poli Puskesmas (dari database)
+Route::get('/layanan', function () {
+    $layanans = Layanan::where('is_active', true)->orderBy('order', 'asc')->orderBy('id', 'asc')->get();
+    $dokters = Dokter::where('is_active', true)->orderBy('created_at', 'asc')->get();
+    $specialties = Dokter::where('is_active', true)->pluck('specialty')->filter()->unique()->values();
+    return view('layanan', compact('layanans', 'dokters', 'specialties'));
+})->name('layanan.index');
 
 // Jadwal Dokter (dari database)
 Route::get('/jadwal-dokter', function () {
@@ -78,11 +98,21 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('dokter', AdminDokterController::class)->except(['show']);
 
         // Kelola Layanan Kami
+        Route::post('layanan/{id}/reorder', [AdminLayananController::class, 'reorder'])->name('layanan.reorder');
         Route::resource('layanan', AdminLayananController::class)->except(['show']);
 
-        // Kelola Nilai-Nilai & Mitra
+        // Kelola Nilai-Nilai & Mitra (Banner & Mitra CRUD)
         Route::get('nilai', [AdminNilaiController::class, 'index'])->name('nilai.index');
-        Route::put('nilai', [AdminNilaiController::class, 'update'])->name('nilai.update');
+        Route::put('nilai/banner', [AdminNilaiController::class, 'updateBanner'])->name('nilai.update-banner');
+        Route::post('nilai/mitra', [AdminNilaiController::class, 'storeMitra'])->name('nilai.mitra.store');
+        Route::put('nilai/mitra/{id}', [AdminNilaiController::class, 'updateMitra'])->name('nilai.mitra.update');
+        Route::post('nilai/mitra/{id}/reorder', [AdminNilaiController::class, 'reorderMitra'])->name('nilai.mitra.reorder');
+        Route::patch('nilai/mitra/{id}/toggle-status', [AdminNilaiController::class, 'toggleMitraStatus'])->name('nilai.mitra.toggle-status');
+        Route::delete('nilai/mitra/{id}', [AdminNilaiController::class, 'destroyMitra'])->name('nilai.mitra.destroy');
+
+        // Kelola Survei Kepuasan & Testimoni
+        Route::patch('surveys/{id}/toggle', [AdminSurveyController::class, 'toggleApproval'])->name('surveys.toggle');
+        Route::resource('surveys', AdminSurveyController::class)->except(['show', 'create', 'edit']);
 
         // Kelola Identitas & Logo Aplikasi
         Route::get('settings', [AdminSettingController::class, 'index'])->name('settings.index');
