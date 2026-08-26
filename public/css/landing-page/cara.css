@@ -34,7 +34,7 @@
    CARA KERJA SECTION
    ========================================================================== */
 .process {
-    padding: 70px var(--section-padding-x) 80px;
+    padding: 80px var(--section-padding-x);
     background: transparent;
     width: 100%;
 }
@@ -50,7 +50,7 @@
    -------------------------------------------------------------------------- */
 .process__header {
     text-align: center;
-    margin-bottom: 52px;
+    margin-bottom: 48px;
 }
 
 .process__badge {
@@ -59,27 +59,31 @@
     justify-content: center;
     gap: 8px;
     color: var(--color-primary);
-    font-size: 0.8125rem;
+    background: rgba(10, 92, 69, 0.1);
+    border: 1px solid rgba(10, 92, 69, 0.18);
+    padding: 6px 16px;
+    border-radius: var(--radius-full);
+    font-size: 12px;
     font-weight: 700;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     margin-bottom: 12px;
 }
 
 .process__badge svg {
-    width: 16px;
-    height: 16px;
+    width: 14px;
+    height: 14px;
     fill: currentColor;
 }
 
 .process__title {
     color: var(--color-dark);
     font-family: var(--font-family);
-    font-size: 2.25rem;
-    font-weight: 700;
+    font-size: clamp(24px, 4vw, 36px);
+    font-weight: 800;
     line-height: 1.25;
-    margin-bottom: 14px;
-    letter-spacing: -0.01em;
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
     max-width: 780px;
     margin-left: auto;
     margin-right: auto;
@@ -87,9 +91,9 @@
 
 .process__subtitle {
     color: var(--color-body);
-    font-size: 0.9375rem;
+    font-size: 16px;
     line-height: 1.6;
-    max-width: 660px;
+    max-width: 680px;
     margin: 0 auto;
 }
 
@@ -106,7 +110,7 @@
     background: var(--color-surface);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-xl);
-    padding: 36px 32px;
+    padding: 32px 24px;
     display: flex;
     align-items: flex-start;
     gap: 20px;

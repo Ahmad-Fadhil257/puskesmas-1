@@ -49,7 +49,7 @@
                     <div class="col-md-9 col-12">
                         <div class="input-group input-group-merge">
                             <span class="input-group-text"><i class="bx bx-search"></i></span>
-                            <input type="text" name="search" class="form-control" placeholder="Cari nama layanan atau deskripsi..." value="{{ request('search') }}">
+                            <input type="text" name="search" class="form-control" placeholder="Cari nama layanan, kategori, atau deskripsi..." value="{{ request('search') }}">
                         </div>
                     </div>
                     <div class="col-md-3 col-12 d-flex gap-2">
@@ -71,23 +71,48 @@
     <div class="card">
         <div class="card-header border-bottom py-3 d-flex justify-content-between align-items-center">
             <h5 class="mb-0 fw-bold">Daftar Layanan Medis ({{ $totalLayanan }} Total)</h5>
-            <small class="text-muted">Menampilkan {{ $layanans->firstItem() ?? 0 }} - {{ $layanans->lastItem() ?? 0 }} dari {{ $layanans->total() }} layanan</small>
+            <small class="text-muted">Gunakan tombol panah untuk memindahkan posisi urutan kartu layanan.</small>
         </div>
         <div class="table-responsive text-nowrap">
             <table class="table table-hover align-middle">
                 <thead class="table-light">
                     <tr>
-                        <th style="width: 60px;" class="text-center">No</th>
-                        <th style="width: 80px;" class="text-center">Ikon</th>
+                        <th style="width: 100px;" class="text-center">Urutan</th>
+                        <th style="width: 70px;" class="text-center">Ikon</th>
                         <th>Nama Layanan</th>
-                        <th style="width: 160px;">Tipe Tampilan</th>
-                        <th class="text-center" style="width: 120px;">Aksi</th>
+                        <th style="width: 220px;">Kategori Layanan</th>
+                        <th class="text-center" style="width: 100px;">Aksi</th>
                     </tr>
                 </thead>
                 <tbody class="table-border-bottom-0">
                     @forelse($layanans as $index => $item)
                     <tr>
-                        <td class="text-center fw-semibold text-muted">{{ $layanans->firstItem() + $index }}</td>
+                        {{-- Urutan dengan tombol panah naik/turun --}}
+                        <td class="text-center">
+                            <div class="d-inline-flex align-items-center gap-1">
+                                <span class="badge bg-label-primary px-2 py-1 fw-bold fs-7">#{{ $item->order }}</span>
+                                <div class="btn-group-vertical btn-group-xs">
+                                    {{-- Panah Naik --}}
+                                    <form action="{{ route('admin.layanan.reorder', $item->id) }}" method="POST" class="d-inline">
+                                        @csrf
+                                        <input type="hidden" name="direction" value="up">
+                                        <button type="submit" class="btn btn-xs btn-outline-secondary py-0 px-1" title="Geser ke Atas" {{ $index === 0 && $layanans->currentPage() === 1 ? 'disabled' : '' }}>
+                                            <i class="bx bx-chevron-up" style="font-size: 14px;"></i>
+                                        </button>
+                                    </form>
+                                    {{-- Panah Turun --}}
+                                    <form action="{{ route('admin.layanan.reorder', $item->id) }}" method="POST" class="d-inline">
+                                        @csrf
+                                        <input type="hidden" name="direction" value="down">
+                                        <button type="submit" class="btn btn-xs btn-outline-secondary py-0 px-1" title="Geser ke Bawah">
+                                            <i class="bx bx-chevron-down" style="font-size: 14px;"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </td>
+
+                        {{-- Ikon --}}
                         <td class="text-center">
                             <div class="avatar avatar-sm mx-auto">
                                 <span class="avatar-initial rounded {{ $item->variant === 'emergency' ? 'bg-label-danger' : ($item->variant === 'featured' ? 'bg-label-success' : 'bg-label-primary') }} fs-5">
@@ -95,25 +120,31 @@
                                 </span>
                             </div>
                         </td>
+
+                        {{-- Nama & Deskripsi --}}
                         <td>
                             <strong class="text-dark d-block fs-6">{{ $item->title }}</strong>
-                            <small class="text-muted text-truncate d-inline-block" style="max-width: 380px;">{{ $item->description }}</small>
+                            <small class="text-muted text-truncate d-inline-block" style="max-width: 420px;">{{ $item->description }}</small>
                         </td>
+
+                        {{-- Kategori Layanan --}}
                         <td>
                             @if($item->variant === 'featured')
                                 <span class="badge bg-label-success rounded-pill px-2 py-1">
-                                    <i class="bx bx-star me-1"></i> Unggulan (Hijau)
+                                    <i class="bx bx-star me-1"></i> {{ $item->kategori ?? 'Poli Unggulan' }}
                                 </span>
                             @elseif($item->variant === 'emergency')
                                 <span class="badge bg-label-danger rounded-pill px-2 py-1">
-                                    <i class="bx bx-alarm-exclamation me-1"></i> Darurat (Merah)
+                                    <i class="bx bx-alarm-exclamation me-1"></i> {{ $item->kategori ?? 'Gawat Darurat (UGD)' }}
                                 </span>
                             @else
                                 <span class="badge bg-label-secondary rounded-pill px-2 py-1">
-                                    Standar
+                                    {{ $item->kategori ?? 'Rawat Jalan (BPJS & Umum)' }}
                                 </span>
                             @endif
                         </td>
+
+                        {{-- Aksi --}}
                         <td>
                             <div class="d-flex justify-content-center align-items-center gap-1">
                                 {{-- Edit Button --}}
@@ -138,9 +169,14 @@
                     </tr>
                     @empty
                     <tr>
-                        <td colspan="5" class="text-center py-5 text-muted">
-                            <i class="bx bx-briefcase display-4 mb-2 d-block" style="color: #94A3B8;"></i>
-                            <span>Belum ada data layanan. <a href="{{ route('admin.layanan.create') }}">Tambah sekarang</a>.</span>
+                        <td colspan="5" class="text-center py-4">
+                            <div class="d-flex flex-column align-items-center">
+                                <i class="bx bx-folder-open display-4 text-muted mb-2"></i>
+                                <span class="text-muted fw-semibold">Tidak ada data layanan ditemukan.</span>
+                                @if(request('search'))
+                                    <a href="{{ route('admin.layanan.index') }}" class="btn btn-sm btn-outline-primary mt-2">Reset Pencarian</a>
+                                @endif
+                            </div>
                         </td>
                     </tr>
                     @endforelse
@@ -149,9 +185,14 @@
         </div>
 
         {{-- Pagination --}}
-        @if($layanans->hasPages())
-        <div class="card-footer border-top d-flex justify-content-end py-3">
-            {{ $layanans->links('pagination::bootstrap-5') }}
+        @if ($layanans->hasPages())
+        <div class="card-footer border-top py-3">
+            <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+                <small class="text-muted">Halaman {{ $layanans->currentPage() }} dari {{ $layanans->lastPage() }}</small>
+                <div>
+                    {{ $layanans->links('pagination::bootstrap-5') }}
+                </div>
+            </div>
         </div>
         @endif
     </div>
@@ -159,19 +200,26 @@
 </div>
 
 @push('scripts')
+{{-- SweetAlert2 JS --}}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        document.querySelectorAll('.btn-delete-layanan').forEach(function (button) {
+        const deleteButtons = document.querySelectorAll('.btn-delete-layanan');
+        
+        deleteButtons.forEach(button => {
             button.addEventListener('click', function () {
                 const id = this.getAttribute('data-id');
                 const name = this.getAttribute('data-name');
+                const form = document.getElementById(`delete-form-${id}`);
 
                 Swal.fire({
                     title: 'Hapus Layanan?',
-                    html: `Apakah Anda yakin ingin menghapus layanan <strong>"${name}"</strong>? Tindakan ini tidak dapat dibatalkan.`,
+                    text: `Apakah Anda yakin ingin menghapus layanan "${name}"?`,
                     icon: 'warning',
                     showCancelButton: true,
-                    confirmButtonText: 'Ya, Hapus',
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#6c757d',
+                    confirmButtonText: 'Ya, Hapus!',
                     cancelButtonText: 'Batal',
                     customClass: {
                         confirmButton: 'btn btn-danger me-2',
@@ -180,7 +228,7 @@
                     buttonsStyling: false
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        document.getElementById(`delete-form-${id}`).submit();
+                        form.submit();
                     }
                 });
             });

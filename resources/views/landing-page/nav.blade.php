@@ -14,8 +14,9 @@
         <!-- Desktop Menu -->
         <ul class="navbar__menu">
             <li><a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'active' : '' }}">Home</a></li>
-            <li><a href="{{ route('home') }}#layanan-kami">Layanan</a></li>
+            <li><a href="{{ route('layanan.index') }}" class="{{ request()->routeIs('layanan.*') ? 'active' : '' }}">Layanan</a></li>
             <li><a href="{{ route('jadwal-dokter') }}" class="{{ request()->routeIs('jadwal-dokter') ? 'active' : '' }}">Jadwal Dokter</a></li>
+            <li><a href="{{ route('survei.index') }}" class="{{ request()->routeIs('survei.*') ? 'active' : '' }}">Survei Kepuasan</a></li>
             <li><a href="{{ route('blog.index') }}" class="{{ request()->routeIs('blog.*') ? 'active' : '' }}">Berita</a></li>
         </ul>
 
@@ -36,8 +37,9 @@
     <!-- Mobile Dropdown Menu -->
     <div class="navbar__mobile" id="mobileMenu">
         <a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'active' : '' }}">Home</a>
-        <a href="{{ route('home') }}#layanan-kami">Layanan</a>
+        <a href="{{ route('layanan.index') }}" class="{{ request()->routeIs('layanan.*') ? 'active' : '' }}">Layanan</a>
         <a href="{{ route('jadwal-dokter') }}" class="{{ request()->routeIs('jadwal-dokter') ? 'active' : '' }}">Jadwal Dokter</a>
+        <a href="{{ route('survei.index') }}" class="{{ request()->routeIs('survei.*') ? 'active' : '' }}">Survei Kepuasan</a>
         <a href="{{ route('blog.index') }}" class="{{ request()->routeIs('blog.*') ? 'active' : '' }}">Berita</a>
         <a href="{{ $appSetting->wa_link }}" target="_blank" rel="noopener" class="btn-nav-cta">Janji Temu</a>
     </div>

@@ -200,6 +200,12 @@
                             <div>Kelola Nilai & Mitra</div>
                         </a>
                     </li>
+                    <li class="menu-item {{ request()->routeIs('admin.surveys.*') ? 'active' : '' }}">
+                        <a href="{{ route('admin.surveys.index') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-smile"></i>
+                            <div>Survei & Testimoni</div>
+                        </a>
+                    </li>
                     <!-- PENGATURAN & AKUN -->
                     <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">Pengaturan Sistem</span>

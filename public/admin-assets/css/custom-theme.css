@@ -165,6 +165,15 @@ a:hover {
     letter-spacing: 0.5px;
 }
 
+.dark-style .bg-menu-theme .menu-header:before {
+    background-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+.dark-style .menu-inner-shadow,
+.dark-style .bg-menu-theme .menu-inner-shadow {
+    background: linear-gradient(#111827 41%, rgba(17, 24, 39, 0.11) 95%, rgba(17, 24, 39, 0)) !important;
+}
+
 .dark-style .app-brand-text {
     color: #34D399 !important;
 }
@@ -378,4 +387,48 @@ a:hover {
 
 .dark-style .swal2-html-container {
     color: #94A3B8 !important;
+}
+
+/* Background Light & Card Header Dark Mode Overrides */
+.dark-style .bg-light,
+.dark-style .card-header.bg-light {
+    background-color: #1E293B !important;
+    color: #F8FAFC !important;
+}
+
+.dark-style .card-header h6,
+.dark-style .card-header .text-dark {
+    color: #F8FAFC !important;
+}
+
+/* Doctor Select Cards in Dark Mode */
+.dark-style .doc-select-card {
+    background-color: #0F172A !important;
+    border-color: #334155 !important;
+    color: #F8FAFC !important;
+}
+
+.dark-style .doc-select-card:hover {
+    background-color: #1E293B !important;
+    border-color: #10B981 !important;
+}
+
+.dark-style .doc-select-card.selected {
+    background-color: rgba(16, 185, 129, 0.12) !important;
+    border-color: #10B981 !important;
+}
+
+.dark-style .doc-select-card .fw-bold {
+    color: #F8FAFC !important;
+}
+
+/* Preset buttons in dark mode */
+.dark-style .btn-outline-secondary {
+    border-color: #334155 !important;
+    color: #CBD5E1 !important;
+}
+
+.dark-style .btn-outline-secondary:hover {
+    background-color: #334155 !important;
+    color: #FFFFFF !important;
 }
