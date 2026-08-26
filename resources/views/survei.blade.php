@@ -412,6 +412,14 @@
                                   onfocus="this.style.borderColor='#00A86B'" onblur="this.style.borderColor='#E2E8F0'">{{ old('pesan') }}</textarea>
                     </div>
 
+                    {{-- Baris 4.5: Google reCAPTCHA --}}
+                    <div style="margin-bottom: 24px;">
+                        <div class="g-recaptcha" data-sitekey="{{ env('RECAPTCHA_SITE_KEY', '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI') }}"></div>
+                        @error('g-recaptcha-response')
+                            <span style="color: #EF4444; font-size: 12.5px; margin-top: 4px; display: block;">{{ $message }}</span>
+                        @enderror
+                    </div>
+
                     {{-- Baris 5: Tombol Kirim Real-Time --}}
                     <button type="submit" class="btn-submit-survei">
                         <span>Kirim Penilaian Real–Time</span>
@@ -423,4 +431,8 @@
 
     </div>
 </div>
+
+@push('scripts')
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+@endpush
 @endsection
