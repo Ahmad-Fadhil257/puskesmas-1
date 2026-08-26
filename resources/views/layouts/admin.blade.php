@@ -155,73 +155,99 @@
                     </li>
 
                     <!-- KONTEN & INFORMASI WEBSITE -->
+                    @php $user = Auth::user(); @endphp
+                    @if($user->canAccessPage('hero') || $user->canAccessPage('layanan') || $user->canAccessPage('articles') || $user->canAccessPage('cara-kerja') || $user->canAccessPage('dokter') || $user->canAccessPage('about') || $user->canAccessPage('nilai') || $user->canAccessPage('surveys'))
                     <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">Manajemen Konten</span>
                     </li>
+                    @endif
+                    @if($user->canAccessPage('hero'))
                     <li class="menu-item {{ request()->routeIs('admin.hero.*') ? 'active' : '' }}">
                         <a href="{{ route('admin.hero.index') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-layout"></i>
                             <div>Kelola Hero & Fitur</div>
                         </a>
                     </li>
+                    @endif
+                    @if($user->canAccessPage('layanan'))
                     <li class="menu-item {{ request()->routeIs('admin.layanan.*') ? 'active' : '' }}">
                         <a href="{{ route('admin.layanan.index') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-briefcase-alt-2"></i>
                             <div>Kelola Layanan</div>
                         </a>
                     </li>
+                    @endif
+                    @if($user->canAccessPage('articles'))
                     <li class="menu-item {{ request()->routeIs('admin.articles.*') ? 'active' : '' }}">
                         <a href="{{ route('admin.articles.index') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-news"></i>
                             <div>Kelola Berita & Info</div>
                         </a>
                     </li>
+                    @endif
+                    @if($user->canAccessPage('cara-kerja'))
                     <li class="menu-item {{ request()->routeIs('admin.cara-kerja.*') ? 'active' : '' }}">
                         <a href="{{ route('admin.cara-kerja.index') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-list-check"></i>
                             <div>Kelola Cara Kerja</div>
                         </a>
                     </li>
+                    @endif
+                    @if($user->canAccessPage('dokter'))
                     <li class="menu-item {{ request()->routeIs('admin.dokter.*') ? 'active' : '' }}">
                         <a href="{{ route('admin.dokter.index') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-user-plus"></i>
                             <div>Kelola Dokter</div>
                         </a>
                     </li>
+                    @endif
+                    @if($user->canAccessPage('about'))
                     <li class="menu-item {{ request()->routeIs('admin.about.*') ? 'active' : '' }}">
                         <a href="{{ route('admin.about.index') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-info-circle"></i>
                             <div>Kelola Tentang Kami</div>
                         </a>
                     </li>
+                    @endif
+                    @if($user->canAccessPage('nilai'))
                     <li class="menu-item {{ request()->routeIs('admin.nilai.*') ? 'active' : '' }}">
                         <a href="{{ route('admin.nilai.index') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-star"></i>
                             <div>Kelola Nilai & Mitra</div>
                         </a>
                     </li>
+                    @endif
+                    @if($user->canAccessPage('surveys'))
                     <li class="menu-item {{ request()->routeIs('admin.surveys.*') ? 'active' : '' }}">
                         <a href="{{ route('admin.surveys.index') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-smile"></i>
+                            <i class="menu-icon tf-icons bx bx-message-rounded-detail"></i>
                             <div>Survei & Testimoni</div>
                         </a>
                     </li>
+                    @endif
+
                     <!-- PENGATURAN & AKUN -->
+                    @if($user->canAccessPage('users') || $user->canAccessPage('settings'))
                     <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">Pengaturan Sistem</span>
                     </li>
+                    @endif
+                    @if($user->canAccessPage('users'))
                     <li class="menu-item {{ request()->routeIs('admin.users.*') ? 'active' : '' }}">
                         <a href="{{ route('admin.users.index') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-user-pin"></i>
                             <div>Kelola Pengguna</div>
                         </a>
                     </li>
+                    @endif
+                    @if($user->canAccessPage('settings'))
                     <li class="menu-item {{ request()->routeIs('admin.settings.*') ? 'active' : '' }}">
                         <a href="{{ route('admin.settings.index') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-palette"></i>
                             <div>Identitas & Logo</div>
                         </a>
                     </li>
+                    @endif
                     <li class="menu-item">
                         <a href="{{ url('/') }}" target="_blank" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-globe"></i>
@@ -291,21 +317,6 @@
                                                     <small class="text-muted">{{ Auth::user()->email ?? 'admin@carelink.com' }}</small>
                                                 </div>
                                             </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <div class="dropdown-divider"></div>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="#">
-                                            <i class="bx bx-user me-2"></i>
-                                            <span class="align-middle">Profil Saya</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="#">
-                                            <i class="bx bx-cog me-2"></i>
-                                            <span class="align-middle">Pengaturan</span>
                                         </a>
                                     </li>
                                     <li>
