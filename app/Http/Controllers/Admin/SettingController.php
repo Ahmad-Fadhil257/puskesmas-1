@@ -32,6 +32,9 @@ class SettingController extends Controller
             'phone' => ['nullable', 'string', 'max:50'],
             'email' => ['nullable', 'string', 'email', 'max:100'],
             'address' => ['nullable', 'string', 'max:500'],
+            'operational_days' => ['nullable', 'string', 'max:100'],
+            'operational_hours' => ['nullable', 'string', 'max:100'],
+            'show_operational_hours' => ['nullable', 'boolean'],
         ], [
             'logo.image' => 'File logo harus berupa gambar.',
             'logo.mimes' => 'Format logo yang diizinkan: PNG, JPG, JPEG, SVG, WEBP.',
@@ -44,6 +47,9 @@ class SettingController extends Controller
             'phone' => $request->phone,
             'email' => $request->email,
             'address' => $request->address,
+            'operational_days' => $request->operational_days,
+            'operational_hours' => $request->operational_hours,
+            'show_operational_hours' => $request->boolean('show_operational_hours', true),
         ];
 
         // Handle upload logo baru
