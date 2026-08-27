@@ -67,28 +67,38 @@
     margin: 0 0 10px 0;
     line-height: 1.25;
     letter-spacing: -0.02em;
+    max-width: 620px;
 }
 
 .lokasi-full-header__subtitle {
     font-size: 15.5px;
     color: #254839;
     line-height: 1.6;
-    max-width: 680px;
+    max-width: 580px;
     margin: 0;
 }
 
-/* Original Swirling Floral Vine Vector (Tumbuh alami dari tepi bawah tanpa potongan) */
+/* Original Swirling Floral Vine Vector (Menempel di garis bawah dan tidak berdempetan dengan teks) */
 .lokasi-full-header__watermark {
     position: absolute;
     right: 0;
-    bottom: -5px;
-    width: 520px;
-    max-width: 48%;
+    bottom: 0;
+    width: 460px;
+    max-width: 40%;
     height: auto;
-    opacity: 0.26;
+    opacity: 0.28;
     pointer-events: none;
     z-index: 1;
     user-select: none;
+    transform: translateY(2px); /* Nempel pas di garis batas bawah */
+}
+
+@media (max-width: 991px) {
+    .lokasi-full-header__watermark {
+        opacity: 0.15;
+        width: 320px;
+        max-width: 50%;
+    }
 }
 
 @media (max-width: 768px) {
@@ -97,9 +107,9 @@
         padding-bottom: 40px;
     }
     .lokasi-full-header__watermark {
-        opacity: 0.15;
-        width: 320px;
-        right: -20px;
+        opacity: 0.12;
+        width: 250px;
+        right: -10px;
     }
 }
 
