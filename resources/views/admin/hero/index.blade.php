@@ -175,17 +175,17 @@
                             </td>
                             <td class="text-center">
                                 <span class="avatar-initial rounded-circle bg-label-primary p-2 d-inline-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
-                                    @if($card->icon == 'doctor')
-                                        <i class="bx bx-user fs-4"></i>
-                                    @elseif($card->icon == 'emergency')
-                                        <i class="bx bx-plus-medical fs-4"></i>
-                                    @elseif($card->icon == 'clock')
-                                        <i class="bx bx-time fs-4"></i>
-                                    @elseif($card->icon == 'shield')
-                                        <i class="bx bx-shield-quarter fs-4"></i>
-                                    @else
-                                        <i class="bx bx-heart fs-4"></i>
-                                    @endif
+                                    @php
+                                        $iconMap = [
+                                            'doctor' => 'bx bx-user',
+                                            'emergency' => 'bx bx-plus-medical',
+                                            'clock' => 'bx bx-time',
+                                            'shield' => 'bx bx-shield-quarter',
+                                            'heart' => 'bx bx-heart',
+                                        ];
+                                        $iconClass = $iconMap[$card->icon] ?? 'bx bx-heart';
+                                    @endphp
+                                    <i class="{{ $iconClass }} fs-4"></i>
                                 </span>
                             </td>
                             <td>
@@ -251,13 +251,40 @@
 
                             <div class="mb-3">
                                 <label class="form-label fw-semibold">Pilihan Ikon</label>
-                                <select name="icon" class="form-select">
-                                    <option value="doctor" {{ $card->icon == 'doctor' ? 'selected' : '' }}>Dokter / Tenaga Medis (Ikon User Medis)</option>
-                                    <option value="emergency" {{ $card->icon == 'emergency' ? 'selected' : '' }}>Pelayanan Gawat Darurat (Ikon Plus Medis)</option>
-                                    <option value="clock" {{ $card->icon == 'clock' ? 'selected' : '' }}>24/7 Siap Melayani (Ikon Jam Waktu)</option>
-                                    <option value="shield" {{ $card->icon == 'shield' ? 'selected' : '' }}>Perlindungan & BPJS (Ikon Perisai)</option>
-                                    <option value="heart" {{ $card->icon == 'heart' ? 'selected' : '' }}>Kesehatan Prima (Ikon Hati)</option>
-                                </select>
+                                <div class="input-group mb-2">
+                                    <span class="input-group-text">
+                                        @if($card->icon == 'doctor')
+                                            <i class="bx bx-user fs-4"></i>
+                                        @elseif($card->icon == 'emergency')
+                                            <i class="bx bx-plus-medical fs-4"></i>
+                                        @elseif($card->icon == 'clock')
+                                            <i class="bx bx-time fs-4"></i>
+                                        @elseif($card->icon == 'shield')
+                                            <i class="bx bx-shield-quarter fs-4"></i>
+                                        @else
+                                            <i class="bx bx-heart fs-4"></i>
+                                        @endif
+                                    </span>
+                                    <input type="hidden" name="icon" value="{{ $card->icon }}" id="iconInput-{{ $card->id }}">
+                                </div>
+                                <div class="d-flex flex-wrap gap-1">
+                                    <span class="small text-muted w-100 mb-1">Klik untuk Memilih Ikon:</span>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary px-2 py-1 icon-pick-btn {{ $card->icon == 'doctor' ? 'active' : '' }}" data-card="{{ $card->id }}" data-icon="doctor" onclick="pickHeroIcon('{{ $card->id }}', 'doctor', this)" title="Dokter / Tenaga Medis">
+                                        <i class="bx bx-user fs-5"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary px-2 py-1 icon-pick-btn {{ $card->icon == 'emergency' ? 'active' : '' }}" data-card="{{ $card->id }}" data-icon="emergency" onclick="pickHeroIcon('{{ $card->id }}', 'emergency', this)" title="Pelayanan Gawat Darurat">
+                                        <i class="bx bx-plus-medical fs-5"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary px-2 py-1 icon-pick-btn {{ $card->icon == 'clock' ? 'active' : '' }}" data-card="{{ $card->id }}" data-icon="clock" onclick="pickHeroIcon('{{ $card->id }}', 'clock', this)" title="24/7 Siap Melayani">
+                                        <i class="bx bx-time fs-5"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary px-2 py-1 icon-pick-btn {{ $card->icon == 'shield' ? 'active' : '' }}" data-card="{{ $card->id }}" data-icon="shield" onclick="pickHeroIcon('{{ $card->id }}', 'shield', this)" title="Perlindungan & BPJS">
+                                        <i class="bx bx-shield-quarter fs-5"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary px-2 py-1 icon-pick-btn {{ $card->icon == 'heart' ? 'active' : '' }}" data-card="{{ $card->id }}" data-icon="heart" onclick="pickHeroIcon('{{ $card->id }}', 'heart', this)" title="Kesehatan Prima">
+                                        <i class="bx bx-heart fs-5"></i>
+                                    </button>
+                                </div>
                             </div>
 
                             <div class="form-check form-switch pt-2">
@@ -290,6 +317,26 @@
             };
             reader.readAsDataURL(input.files[0]);
         }
+    }
+
+    const heroIconMap = {
+        'doctor': 'bx bx-user',
+        'emergency': 'bx bx-plus-medical',
+        'clock': 'bx bx-time',
+        'shield': 'bx bx-shield-quarter',
+        'heart': 'bx bx-heart',
+    };
+
+    function pickHeroIcon(cardId, iconKey, btn) {
+        const input = document.getElementById('iconInput-' + cardId);
+        if (input) input.value = iconKey;
+
+        const btns = btn.parentElement.querySelectorAll('.icon-pick-btn');
+        btns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const span = btn.closest('.mb-3').querySelector('.input-group-text i');
+        if (span) span.className = (heroIconMap[iconKey] || 'bx bx-heart') + ' fs-4';
     }
 </script>
 @endpush
