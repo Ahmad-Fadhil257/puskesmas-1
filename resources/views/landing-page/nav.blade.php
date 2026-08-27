@@ -1,4 +1,4 @@
-<!-- Floating Navigation Bar -->
+<!-- Floating Navigation Bar (Persis seperti Desain Resmi / Foto Referensi) -->
 <header class="site-header">
     <nav class="navbar">
         <!-- Brand / Logo -->
@@ -8,18 +8,63 @@
             </span>
             @if(($appSetting->show_app_name ?? true) && !empty($appSetting->app_name ?? 'Puskesmas'))
                 <span class="navbar__brand-text brand-text">{{ $appSetting->app_name }}</span>
+            @else
+                <span class="navbar__brand-text brand-text">Puskesmas</span>
             @endif
         </a>
 
-        <!-- Desktop Menu -->
+        <!-- Desktop Menu (Sesuai Referensi Gambar Teman) -->
         <ul class="navbar__menu">
-            <li><a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'active' : '' }}">Home</a></li>
+            {{-- 1. BERANDA --}}
+            <li>
+                <a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'active' : '' }}">
+                    BERANDA
+                </a>
+            </li>
 
-            {{-- Dropdown Layanan --}}
+            {{-- 2. PROFIL (DROPDOWN) --}}
+            <li class="navbar__item-dropdown">
+                <a href="{{ route('home') }}#tentang" class="navbar__dropdown-toggle">
+                    <span>PROFIL</span>
+                    <svg class="navbar__dropdown-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </a>
+                <ul class="navbar__dropdown-menu">
+                    <li>
+                        <a href="{{ route('home') }}#tentang" class="navbar__dropdown-item">
+                            <i class="bx bx-info-circle navbar__dropdown-icon"></i>
+                            <span class="navbar__dropdown-text">Tentang Kami</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('home') }}#nilai-nilai" class="navbar__dropdown-item">
+                            <i class="bx bx-star navbar__dropdown-icon"></i>
+                            <span class="navbar__dropdown-text">Moto & Tata Nilai</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('home') }}#dokter" class="navbar__dropdown-item">
+                            <i class="bx bx-user-pin navbar__dropdown-icon"></i>
+                            <span class="navbar__dropdown-text">Dokter Kami</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('home') }}#cara-kerja" class="navbar__dropdown-item">
+                            <i class="bx bx-list-check navbar__dropdown-icon"></i>
+                            <span class="navbar__dropdown-text">Alur & Cara Pelayanan</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            {{-- 3. LAYANAN (DROPDOWN DINAMIS) --}}
             <li class="navbar__item-dropdown">
                 <a href="{{ route('layanan.index') }}" class="navbar__dropdown-toggle {{ request()->routeIs('layanan.*') ? 'active' : '' }}">
-                    <span>Layanan</span>
-                    <i class="bx bx-chevron-down navbar__dropdown-chevron"></i>
+                    <span>LAYANAN</span>
+                    <svg class="navbar__dropdown-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
                 </a>
                 <ul class="navbar__dropdown-menu">
                     @if(isset($navLayanans) && $navLayanans->isNotEmpty())
@@ -43,14 +88,53 @@
                 </ul>
             </li>
 
-            <li><a href="{{ route('jadwal-dokter') }}" class="{{ request()->routeIs('jadwal-dokter') ? 'active' : '' }}">Jadwal Dokter</a></li>
-            <li><a href="{{ route('survei.index') }}" class="{{ request()->routeIs('survei.*') ? 'active' : '' }}">Survei Kepuasan</a></li>
-            <li><a href="{{ route('blog.index') }}" class="{{ request()->routeIs('blog.*') ? 'active' : '' }}">Berita</a></li>
-            <li><a href="{{ route('lokasi') }}" class="{{ request()->routeIs('lokasi') ? 'active' : '' }}">Lokasi</a></li>
+            {{-- 4. INFORMASI PUBLIK (DROPDOWN) --}}
+            <li class="navbar__item-dropdown">
+                <a href="{{ route('blog.index') }}" class="navbar__dropdown-toggle {{ request()->routeIs('blog.*') || request()->routeIs('jadwal-dokter') ? 'active' : '' }}">
+                    <span>INFORMASI PUBLIK</span>
+                    <svg class="navbar__dropdown-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </a>
+                <ul class="navbar__dropdown-menu">
+                    <li>
+                        <a href="{{ route('blog.index') }}" class="navbar__dropdown-item {{ request()->routeIs('blog.*') ? 'active' : '' }}">
+                            <i class="bx bx-news navbar__dropdown-icon"></i>
+                            <span class="navbar__dropdown-text">Berita & Artikel</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('jadwal-dokter') }}" class="navbar__dropdown-item {{ request()->routeIs('jadwal-dokter') ? 'active' : '' }}">
+                            <i class="bx bx-calendar navbar__dropdown-icon"></i>
+                            <span class="navbar__dropdown-text">Jadwal Praktik Dokter</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('lokasi') }}" class="navbar__dropdown-item {{ request()->routeIs('lokasi') ? 'active' : '' }}">
+                            <i class="bx bx-map-pin navbar__dropdown-icon"></i>
+                            <span class="navbar__dropdown-text">Lokasi & Peta Puskesmas</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            {{-- 5. KONTAK --}}
+            <li>
+                <a href="{{ route('lokasi') }}" class="{{ request()->routeIs('lokasi') ? 'active' : '' }}">
+                    KONTAK
+                </a>
+            </li>
+
+            {{-- 6. SURVEI --}}
+            <li>
+                <a href="{{ route('survei.index') }}" class="{{ request()->routeIs('survei.*') ? 'active' : '' }}">
+                    SURVEI
+                </a>
+            </li>
         </ul>
 
         <!-- Desktop CTA -->
-        <a href="{{ $appSetting->wa_link }}" target="_blank" rel="noopener" class="btn-nav-cta">Janji Temu</a>
+        <a href="{{ $appSetting->wa_link }}" target="_blank" rel="noopener" class="btn-nav-cta">JANJI TEMU</a>
 
         <!-- Mobile Toggle Button -->
         <button class="navbar__toggle" id="mobileToggle" aria-label="Toggle navigation" aria-expanded="false">
@@ -65,12 +149,34 @@
 
     <!-- Mobile Dropdown Menu -->
     <div class="navbar__mobile" id="mobileMenu">
-        <a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'active' : '' }}">Home</a>
+        <a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'active' : '' }}">BERANDA</a>
+
+        {{-- Mobile Profil Accordion --}}
+        <div class="navbar__mobile-accordion">
+            <button type="button" class="navbar__mobile-accordion-toggle" id="mobileProfilToggle">
+                <span>PROFIL</span>
+                <i class="bx bx-chevron-down" id="mobileProfilChevron"></i>
+            </button>
+            <div class="navbar__mobile-accordion-content" id="mobileProfilContent">
+                <a href="{{ route('home') }}#tentang" class="navbar__mobile-subitem">
+                    <i class="bx bx-info-circle"></i> <span>Tentang Kami</span>
+                </a>
+                <a href="{{ route('home') }}#nilai-nilai" class="navbar__mobile-subitem">
+                    <i class="bx bx-star"></i> <span>Moto & Tata Nilai</span>
+                </a>
+                <a href="{{ route('home') }}#dokter" class="navbar__mobile-subitem">
+                    <i class="bx bx-user-pin"></i> <span>Dokter Kami</span>
+                </a>
+                <a href="{{ route('home') }}#cara-kerja" class="navbar__mobile-subitem">
+                    <i class="bx bx-list-check"></i> <span>Alur Pelayanan</span>
+                </a>
+            </div>
+        </div>
 
         {{-- Mobile Layanan Accordion --}}
         <div class="navbar__mobile-accordion">
             <button type="button" class="navbar__mobile-accordion-toggle {{ request()->routeIs('layanan.*') ? 'active' : '' }}" id="mobileLayananToggle">
-                <span>Layanan</span>
+                <span>LAYANAN</span>
                 <i class="bx bx-chevron-down" id="mobileLayananChevron"></i>
             </button>
             <div class="navbar__mobile-accordion-content" id="mobileLayananContent">
@@ -89,10 +195,27 @@
             </div>
         </div>
 
-        <a href="{{ route('jadwal-dokter') }}" class="{{ request()->routeIs('jadwal-dokter') ? 'active' : '' }}">Jadwal Dokter</a>
-        <a href="{{ route('survei.index') }}" class="{{ request()->routeIs('survei.*') ? 'active' : '' }}">Survei Kepuasan</a>
-        <a href="{{ route('blog.index') }}" class="{{ request()->routeIs('blog.*') ? 'active' : '' }}">Berita</a>
-        <a href="{{ route('lokasi') }}" class="{{ request()->routeIs('lokasi') ? 'active' : '' }}">Lokasi</a>
-        <a href="{{ $appSetting->wa_link }}" target="_blank" rel="noopener" class="btn-nav-cta">Janji Temu</a>
+        {{-- Mobile Informasi Publik Accordion --}}
+        <div class="navbar__mobile-accordion">
+            <button type="button" class="navbar__mobile-accordion-toggle {{ request()->routeIs('blog.*') || request()->routeIs('jadwal-dokter') ? 'active' : '' }}" id="mobileInfoToggle">
+                <span>INFORMASI PUBLIK</span>
+                <i class="bx bx-chevron-down" id="mobileInfoChevron"></i>
+            </button>
+            <div class="navbar__mobile-accordion-content" id="mobileInfoContent">
+                <a href="{{ route('blog.index') }}" class="navbar__mobile-subitem {{ request()->routeIs('blog.*') ? 'active' : '' }}">
+                    <i class="bx bx-news"></i> <span>Berita & Artikel</span>
+                </a>
+                <a href="{{ route('jadwal-dokter') }}" class="navbar__mobile-subitem {{ request()->routeIs('jadwal-dokter') ? 'active' : '' }}">
+                    <i class="bx bx-calendar"></i> <span>Jadwal Praktik Dokter</span>
+                </a>
+                <a href="{{ route('lokasi') }}" class="navbar__mobile-subitem {{ request()->routeIs('lokasi') ? 'active' : '' }}">
+                    <i class="bx bx-map-pin"></i> <span>Lokasi & Peta</span>
+                </a>
+            </div>
+        </div>
+
+        <a href="{{ route('lokasi') }}" class="{{ request()->routeIs('lokasi') ? 'active' : '' }}">KONTAK</a>
+        <a href="{{ route('survei.index') }}" class="{{ request()->routeIs('survei.*') ? 'active' : '' }}">SURVEI</a>
+        <a href="{{ $appSetting->wa_link }}" target="_blank" rel="noopener" class="btn-nav-cta">JANJI TEMU</a>
     </div>
 </header>

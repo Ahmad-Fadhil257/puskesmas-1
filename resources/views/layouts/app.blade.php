@@ -11,7 +11,7 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
     <!-- Main CSS -->
-    <link rel="stylesheet" href="{{ asset('css/layouts/nav.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/layouts/nav.css') }}?v={{ file_exists(public_path('css/layouts/nav.css')) ? filemtime(public_path('css/layouts/nav.css')) : time() }}">
     <link rel="stylesheet" href="{{ asset('css/landing-page/hero.css') }}">
     <link rel="stylesheet" href="{{ asset('css/landing-page/info-cards.css') }}">
     <link rel="stylesheet" href="{{ asset('css/landing-page/about.css') }}">
@@ -200,16 +200,21 @@
                 }, { passive: true });
             }
 
-            // Mobile Layanan Accordion Toggle
-            const mobileLayananToggle = document.getElementById('mobileLayananToggle');
-            const mobileLayananContent = document.getElementById('mobileLayananContent');
-            if (mobileLayananToggle && mobileLayananContent) {
-                mobileLayananToggle.addEventListener('click', function (e) {
-                    e.stopPropagation();
-                    const isOpen = mobileLayananContent.classList.toggle('open');
-                    mobileLayananToggle.classList.toggle('open', isOpen);
-                });
+            // Mobile Accordion Dropdowns Helper
+            function setupMobileAccordion(toggleId, contentId) {
+                const toggle = document.getElementById(toggleId);
+                const content = document.getElementById(contentId);
+                if (toggle && content) {
+                    toggle.addEventListener('click', function (e) {
+                        e.stopPropagation();
+                        const isOpen = content.classList.toggle('open');
+                        toggle.classList.toggle('open', isOpen);
+                    });
+                }
             }
+            setupMobileAccordion('mobileProfilToggle', 'mobileProfilContent');
+            setupMobileAccordion('mobileLayananToggle', 'mobileLayananContent');
+            setupMobileAccordion('mobileInfoToggle', 'mobileInfoContent');
 
             // Close operational badge
             document.getElementById('closeOperationalBadge')?.addEventListener('click', function() {
