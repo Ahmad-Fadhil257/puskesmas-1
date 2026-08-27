@@ -38,9 +38,9 @@
         </div>
     @endif
 
-    {{-- STATISTIK IKM (Indeks Kepuasan Masyarakat) --}}
+    {{-- STATISTIK IKM (Indeks Kepuasan Masyarakat) - DISEMBUNYIKAN --}}
+    {{--
     <div class="row g-3 mb-4">
-        {{-- Widget 1: Skor Rata-rata --}}
         <div class="col-md-4 col-12">
             <div class="card h-100">
                 <div class="card-body d-flex align-items-center gap-3">
@@ -59,7 +59,6 @@
             </div>
         </div>
 
-        {{-- Widget 2: Persentase Kepuasan --}}
         <div class="col-md-4 col-12">
             <div class="card h-100">
                 <div class="card-body d-flex align-items-center gap-3">
@@ -77,7 +76,6 @@
             </div>
         </div>
 
-        {{-- Widget 3: Total Responden --}}
         <div class="col-md-4 col-12">
             <div class="card h-100">
                 <div class="card-body d-flex align-items-center gap-3">
@@ -95,6 +93,7 @@
             </div>
         </div>
     </div>
+    --}}
 
     {{-- TABEL DATA SURVEI & TESTIMONI --}}
     <div class="card">

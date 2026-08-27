@@ -134,8 +134,9 @@
                     <tr>
                         <th style="width: 60px;" class="text-center">No</th>
                         <th>Pengguna</th>
-                        <th>Peran (Role)</th>
-                        <th>Kontak</th>
+                            <th>Peran (Role)</th>
+                            <th>Akses Halaman</th>
+                            <th>Kontak</th>
                         <th class="text-center">Status</th>
                         <th class="text-center" style="width: 150px;">Aksi</th>
                     </tr>
@@ -177,6 +178,19 @@
                                     <span class="badge bg-label-info rounded-pill px-3 py-1">
                                         <i class="bx bx-user me-1"></i> Staf
                                     </span>
+                                @endif
+                            </td>
+                            <td>
+                                @if($item->role === 'admin')
+                                    <span class="text-muted small">Semua halaman</span>
+                                @elseif(!empty($item->accessible_pages))
+                                    <div class="d-flex flex-wrap gap-1">
+                                        @foreach($item->accessible_pages as $page)
+                                            <span class="badge bg-label-success rounded-pill" style="font-size: 0.7rem;">{{ $allPages[$page] ?? $page }}</span>
+                                        @endforeach
+                                    </div>
+                                @else
+                                    <span class="text-muted small fst-italic">Belum diatur</span>
                                 @endif
                             </td>
                             <td>
@@ -233,7 +247,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="6" class="text-center py-5">
+                            <td colspan="7" class="text-center py-5">
                                 <div class="text-muted">
                                     <i class="bx bx-user-x display-4 mb-2 d-block" style="color: #94A3B8;"></i>
                                     Tidak ada data pengguna yang sesuai.
@@ -281,10 +295,24 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label fw-semibold">Peran / Hak Akses <span class="text-danger">*</span></label>
-                            <select name="role" class="form-select" required>
+                            <select name="role" class="form-select" id="createRole" required>
                                 <option value="admin">Administrator (Akses Penuh)</option>
                                 <option value="staf" selected>Staf Puskesmas</option>
                             </select>
+                        </div>
+                        <div class="mb-3 accessible-pages-section" id="createAccessiblePages" style="display:{{ old('role', 'staf') === 'staf' ? 'block' : 'none' }}">
+                            <label class="form-label fw-semibold">Halaman yang Bisa Diakses</label>
+                            <div class="row g-2">
+                                @foreach($allPages as $key => $label)
+                                    <div class="col-6">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="accessible_pages[]" value="{{ $key }}" id="createPage-{{ $key }}" {{ in_array($key, old('accessible_pages', [])) ? 'checked' : '' }}>
+                                            <label class="form-check-label" for="createPage-{{ $key }}">{{ $label }}</label>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                            <div class="form-text">Pilih halaman mana saja yang bisa diakses staf ini.</div>
                         </div>
                         <div class="mb-3">
                             <label class="form-label fw-semibold">Nomor Telepon / WhatsApp</label>
@@ -339,10 +367,24 @@
                             </div>
                             <div class="mb-3">
                                 <label class="form-label fw-semibold">Peran / Hak Akses <span class="text-danger">*</span></label>
-                                <select name="role" class="form-select" required>
+                                <select name="role" class="form-select" id="editRole-{{ $item->id }}" required>
                                     <option value="admin" {{ $item->role === 'admin' ? 'selected' : '' }}>Administrator (Akses Penuh)</option>
                                     <option value="staf" {{ $item->role === 'staf' ? 'selected' : '' }}>Staf Puskesmas</option>
                                 </select>
+                            </div>
+                            <div class="mb-3 accessible-pages-section" id="editAccessiblePages-{{ $item->id }}" style="display:{{ $item->role === 'staf' ? 'block' : 'none' }}">
+                                <label class="form-label fw-semibold">Halaman yang Bisa Diakses</label>
+                                <div class="row g-2">
+                                    @foreach($allPages as $key => $label)
+                                        <div class="col-6">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" name="accessible_pages[]" value="{{ $key }}" id="editPage-{{ $item->id }}-{{ $key }}" {{ in_array($key, old('accessible_pages', $item->accessible_pages ?? [])) ? 'checked' : '' }}>
+                                                <label class="form-check-label" for="editPage-{{ $item->id }}-{{ $key }}">{{ $label }}</label>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                                <div class="form-text">Pilih halaman mana saja yang bisa diakses staf ini.</div>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label fw-semibold">Nomor Telepon / WhatsApp</label>
@@ -374,6 +416,22 @@
 @push('scripts')
 <script>
     document.addEventListener('DOMContentLoaded', function () {
+        // Toggle accessible pages visibility based on role
+        function setupRoleToggle(roleId, pagesId) {
+            var roleEl = document.getElementById(roleId);
+            var pagesEl = document.getElementById(pagesId);
+            if (roleEl && pagesEl) {
+                roleEl.addEventListener('change', function () {
+                    pagesEl.style.display = this.value === 'staf' ? 'block' : 'none';
+                });
+            }
+        }
+        setupRoleToggle('createRole', 'createAccessiblePages');
+        @foreach ($users as $item)
+            setupRoleToggle('editRole-{{ $item->id }}', 'editAccessiblePages-{{ $item->id }}');
+        @endforeach
+
+        // Delete confirmation
         document.querySelectorAll('.btn-delete-user').forEach(function (button) {
             button.addEventListener('click', function () {
                 const id = this.getAttribute('data-id');

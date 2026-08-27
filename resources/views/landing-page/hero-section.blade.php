@@ -24,7 +24,7 @@
 
             <!-- Dual Action Buttons -->
             <div class="hero__actions">
-                <a href="{{ $appSetting->wa_link ?? '#janji-temu' }}" target="_blank" rel="noopener" class="btn-primary">
+                <a href="{{ $hero->btn_primary_link ?? '#janji-temu' }}" class="btn-primary">
                     {{ $hero->btn_primary_text ?? 'Janji Temu Online' }}
                 </a>
                 <a href="{{ $hero->btn_secondary_link ?? '#layanan' }}" class="btn-secondary">

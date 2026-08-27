@@ -11,14 +11,10 @@ use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
-    /**
-     * Menampilkan daftar pengguna (Admin & Staf)
-     */
     public function index(Request $request)
     {
         $query = User::query();
 
-        // Pencarian Nama / Email
         if ($request->filled('search')) {
             $search = $request->search;
             $query->where(function ($q) use ($search) {
@@ -28,12 +24,10 @@ class UserController extends Controller
             });
         }
 
-        // Filter Role
         if ($request->filled('role')) {
             $query->where('role', $request->role);
         }
 
-        // Filter Status
         if ($request->filled('status')) {
             $query->where('is_active', $request->status === 'active' ? 1 : 0);
         }
@@ -47,21 +41,17 @@ class UserController extends Controller
         $totalAdmin = User::where('role', 'admin')->count();
         $totalStaf = User::where('role', 'staf')->count();
         $totalActive = User::where('is_active', true)->count();
+        $allPages = User::PAGES;
 
-        return view('admin.users.index', compact('users', 'totalUsers', 'totalAdmin', 'totalStaf', 'totalActive'));
+        return view('admin.users.index', compact('users', 'totalUsers', 'totalAdmin', 'totalStaf', 'totalActive', 'allPages'));
     }
 
-    /**
-     * Form tambah pengguna baru
-     */
     public function create()
     {
-        return view('admin.users.create');
+        $allPages = User::PAGES;
+        return view('admin.users.create', compact('allPages'));
     }
 
-    /**
-     * Menyimpan pengguna baru ke database
-     */
     public function store(Request $request)
     {
         $request->validate([
@@ -71,33 +61,33 @@ class UserController extends Controller
             'role' => ['required', 'in:admin,staf'],
             'phone' => ['nullable', 'string', 'max:20'],
             'is_active' => ['nullable', 'boolean'],
+            'accessible_pages' => ['nullable', 'array'],
+            'accessible_pages.*' => ['string', 'in:' . implode(',', array_keys(User::PAGES))],
         ]);
 
-        User::create([
+        $data = [
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'role' => $request->role,
             'phone' => $request->phone,
             'is_active' => $request->boolean('is_active', true),
-        ]);
+            'accessible_pages' => $request->role === 'staf' ? ($request->accessible_pages ?? []) : null,
+        ];
+
+        User::create($data);
 
         return redirect()->route('admin.users.index')
             ->with('success', "Pengguna '{$request->name}' berhasil ditambahkan!");
     }
 
-    /**
-     * Form edit data pengguna
-     */
     public function edit($id)
     {
         $user = User::findOrFail($id);
-        return view('admin.users.edit', compact('user'));
+        $allPages = User::PAGES;
+        return view('admin.users.edit', compact('user', 'allPages'));
     }
 
-    /**
-     * Memperbarui data pengguna
-     */
     public function update(Request $request, $id)
     {
         $user = User::findOrFail($id);
@@ -109,6 +99,8 @@ class UserController extends Controller
             'role' => ['required', 'in:admin,staf'],
             'phone' => ['nullable', 'string', 'max:20'],
             'is_active' => ['nullable', 'boolean'],
+            'accessible_pages' => ['nullable', 'array'],
+            'accessible_pages.*' => ['string', 'in:' . implode(',', array_keys(User::PAGES))],
         ]);
 
         $data = [
@@ -117,14 +109,13 @@ class UserController extends Controller
             'role' => $request->role,
             'phone' => $request->phone,
             'is_active' => $request->boolean('is_active', true),
+            'accessible_pages' => $request->role === 'staf' ? ($request->accessible_pages ?? []) : null,
         ];
 
-        // Jika password diisi, update hash baru
         if ($request->filled('password')) {
             $data['password'] = Hash::make($request->password);
         }
 
-        // Proteksi: Admin tidak boleh menonaktifkan dirinya sendiri
         if ($user->id === Auth::id() && !$request->boolean('is_active', true)) {
             return redirect()->back()
                 ->withInput()
@@ -137,14 +128,10 @@ class UserController extends Controller
             ->with('success', "Data pengguna '{$user->name}' berhasil diperbarui!");
     }
 
-    /**
-     * Toggle status aktif / nonaktif cepat
-     */
     public function toggleStatus($id)
     {
         $user = User::findOrFail($id);
 
-        // Proteksi akun login sendiri
         if ($user->id === Auth::id()) {
             return redirect()->route('admin.users.index')
                 ->with('error', 'Anda tidak dapat mengubah status akun yang sedang aktif digunakan!');
@@ -159,14 +146,10 @@ class UserController extends Controller
             ->with('success', "Akun '{$user->name}' berhasil {$statusText}!");
     }
 
-    /**
-     * Menghapus pengguna
-     */
     public function destroy($id)
     {
         $user = User::findOrFail($id);
 
-        // Proteksi: Tidak boleh menghapus akun yang sedang login
         if ($user->id === Auth::id()) {
             return redirect()->route('admin.users.index')
                 ->with('error', 'Anda tidak dapat menghapus akun Anda sendiri yang sedang aktif!');
