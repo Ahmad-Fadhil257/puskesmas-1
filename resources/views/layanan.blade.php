@@ -67,7 +67,7 @@
             @forelse($layanans as $item)
                 @if($item->variant === 'emergency')
                     {{-- KARTU MERAH: PANGGILAN DARURAT / UGD --}}
-                    <div class="layanan-box-card card--emergency" onclick="openLayananModalById({{ $item->id }})">
+                    <div class="layanan-box-card card--emergency" data-aos="fade-up" onclick="openLayananModalById({{ $item->id }})">
                         <h3 class="box-card-title">{{ $item->title }}</h3>
                         <p class="box-card-desc">{{ $item->description }}</p>
                         <a href="{{ $item->btn_link ? $item->btn_link : $appSetting->wa_link }}" 
@@ -80,7 +80,7 @@
                     </div>
                 @elseif($item->variant === 'featured')
                     {{-- KARTU HIJAU GELAP: DOKTER SPESIALIS / UNGGULAN --}}
-                    <div class="layanan-box-card card--featured" onclick="openLayananModalById({{ $item->id }})">
+                    <div class="layanan-box-card card--featured" data-aos="fade-up" onclick="openLayananModalById({{ $item->id }})">
                         <div class="box-card-icon icon--featured">
                             @if($item->custom_icon)
                                 <img src="{{ asset($item->custom_icon) }}" alt="{{ $item->title }}">
@@ -93,7 +93,7 @@
                     </div>
                 @else
                     {{-- KARTU STANDAR: LIGHT GRAY DENGAN IKON SOFT GREEN --}}
-                    <div class="layanan-box-card card--default" onclick="openLayananModalById({{ $item->id }})">
+                    <div class="layanan-box-card card--default" data-aos="fade-up" onclick="openLayananModalById({{ $item->id }})">
                         <div class="box-card-icon icon--default">
                             @if($item->custom_icon)
                                 <img src="{{ asset($item->custom_icon) }}" alt="{{ $item->title }}">

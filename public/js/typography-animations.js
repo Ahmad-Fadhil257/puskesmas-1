@@ -1,10 +1,3 @@
-/**
- * ============================================================================
- * TYPOGRAPHY AOS ENGINE - PUSKESMAS CARELINK (EXTENDED 2.2s DURATION)
- * ============================================================================
- * Menginisialisasi Animate On Scroll dengan durasi 2200ms & kurva deselerasi sutra.
- */
-
 (function () {
     'use strict';
 
@@ -18,17 +11,16 @@
         }
 
         AOS.init({
-            duration: 2200,                            // 2.2 detik: Lebih tenang, lambat & anggun
-            easing: 'cubic-bezier(0.08, 0.95, 0.15, 1)', // Easing super smooth
-            once: false,                               // Animasi berulang saat di-scroll bolak-balik
-            mirror: true,                              // Re-trigger animasi keluar & masuk
-            offset: 90,                                // Titik pandang ideal
+            duration: 2200,
+            easing: 'cubic-bezier(0.08, 0.95, 0.15, 1)',
+            once: false,
+            mirror: true,
+            offset: 90,
             delay: 0,
             anchorPlacement: 'top-bottom',
             disable: prefersReducedMotion
         });
 
-        // Trigger reflow untuk render awal
         setTimeout(() => {
             AOS.refreshHard();
         }, 120);

@@ -1,34 +1,17 @@
-/**
- * ============================================================================
- * CRISP, ULTRA-SMOOTH & EXTENDED DURATION TYPOGRAPHY & CARD ANIMATIONS (2.2s)
- * PUSKESMAS CARELINK
- * ============================================================================
- * - Tanpa efek blur (100% kristal-jernih & tajam)
- * - Durasi 2.2 detik: Tenang, elegan & silky smooth
- * - Kurva deselerasi presisi: cubic-bezier(0.08, 0.95, 0.15, 1)
- * - Card (Visi-Misi, Info-Card, Bento, Process, Blog, dll) beranimasi sebagai 1 kesatuan utuh
- * - Teks/font di dalam card TIDAK beranimasi terpisah (statis di dalam card)
- */
-
 :root {
-    --ease-ultra-smooth:     cubic-bezier(0.08, 0.95, 0.15, 1);    /* Silky-smooth cinematic glide */
-    --ease-ultra-spring:     cubic-bezier(0.15, 1.1, 0.25, 1);     /* Gentle soft spring */
-    --anim-duration-slow:    2200ms;                               /* 2.2 detik: Tenang, elegan & sangat smooth */
-    --anim-duration-badge:   1800ms;                               /* 1.8 detik untuk badge */
-    --anim-slide-dist-x:     42px;
-    --anim-slide-dist-y:     32px;
+    --ease-ultra-smooth:   cubic-bezier(0.08, 0.95, 0.15, 1);
+    --ease-ultra-spring:   cubic-bezier(0.15, 1.1, 0.25, 1);
+    --anim-duration-slow:  2200ms;
+    --anim-duration-badge: 1800ms;
+    --anim-slide-dist-x:   42px;
+    --anim-slide-dist-y:   32px;
 }
 
-/* Smooth HTML scroll */
 html {
     scroll-behavior: smooth;
 }
 
-/* ============================================================================
-   1. GLOBAL HIGH-SPECIFICITY OVERRIDE FOR AOS (NO BLUR, CRISP GLIDE)
-   ============================================================================ */
-
-/* High specificity selector to beat AOS double-attribute classes */
+/* Global AOS Defaults */
 html:not(.no-js) [data-aos],
 [data-aos],
 [data-aos][data-aos],
@@ -44,7 +27,7 @@ body[data-aos-duration] [data-aos] {
     transition-timing-function: var(--ease-ultra-smooth) !important;
 }
 
-/* --- FADE RIGHT (Slide In from Left -> Right, Crystal Clear) --- */
+/* Fade Right */
 html:not(.no-js) [data-aos="fade-right"],
 [data-aos="fade-right"],
 [data-aos][data-aos="fade-right"] {
@@ -64,7 +47,7 @@ html:not(.no-js) [data-aos="fade-right"].aos-animate,
     filter: none !important;
 }
 
-/* --- FADE LEFT (Slide In from Right -> Left, Crystal Clear) --- */
+/* Fade Left */
 html:not(.no-js) [data-aos="fade-left"],
 [data-aos="fade-left"],
 [data-aos][data-aos="fade-left"] {
@@ -84,7 +67,7 @@ html:not(.no-js) [data-aos="fade-left"].aos-animate,
     filter: none !important;
 }
 
-/* --- FADE UP (Upward Float, Crystal Clear) --- */
+/* Fade Up */
 html:not(.no-js) [data-aos="fade-up"],
 [data-aos="fade-up"],
 [data-aos][data-aos="fade-up"] {
@@ -104,7 +87,7 @@ html:not(.no-js) [data-aos="fade-up"].aos-animate,
     filter: none !important;
 }
 
-/* --- FADE DOWN --- */
+/* Fade Down */
 html:not(.no-js) [data-aos="fade-down"],
 [data-aos="fade-down"],
 [data-aos][data-aos="fade-down"] {
@@ -124,10 +107,7 @@ html:not(.no-js) [data-aos="fade-down"].aos-animate,
     filter: none !important;
 }
 
-/* ============================================================================
-   2. BADGES & PILL LABELS (SPRING DURATION: 1.8s)
-   ============================================================================ */
-
+/* Badges */
 .hero__badge[data-aos],
 .about__badge[data-aos],
 .values__badge[data-aos],
@@ -144,10 +124,7 @@ html:not(.no-js) [data-aos="fade-down"].aos-animate,
     transition-duration: var(--anim-duration-badge) !important;
 }
 
-/* ============================================================================
-   3. CARD CONTAINERS ANIMATION (Visi-Misi, Bento, Info, Process, Blog)
-   ============================================================================ */
-
+/* Card Containers */
 .about__card[data-aos],
 .about__cards[data-aos],
 .info-card[data-aos],
@@ -156,6 +133,15 @@ html:not(.no-js) [data-aos="fade-down"].aos-animate,
 .blog-card[data-aos],
 .lokasi-card[data-aos],
 .jadwal-card[data-aos],
+.values__card[data-aos],
+.layanan-box-card[data-aos],
+.lokasi-maps-container[data-aos],
+.survei-visual-card[data-aos],
+.survei-form-card[data-aos],
+.blog-filter-card[data-aos],
+.article-card[data-aos],
+.article-main-card[data-aos],
+.article-related-card[data-aos],
 .testimonials__slider-wrapper[data-aos],
 .dokter-slider-wrapper[data-aos] {
     will-change: transform, opacity !important;
@@ -163,10 +149,7 @@ html:not(.no-js) [data-aos="fade-down"].aos-animate,
     pointer-events: auto !important;
 }
 
-/* ============================================================================
-   4. STRICT EXCLUSION: FONTS/ELEMENTS INSIDE CARDS DO NOT ANIMATE SEPARATELY
-   ============================================================================ */
-
+/* Strict Exclusion for Elements Inside Cards */
 .info-card [data-aos],
 .bento-card [data-aos],
 .dokter-card [data-aos],
@@ -177,6 +160,10 @@ html:not(.no-js) [data-aos="fade-down"].aos-animate,
 .about__card [data-aos],
 .lokasi-card [data-aos],
 .jadwal-card [data-aos],
+.layanan-box-card [data-aos],
+.article-card [data-aos],
+.survei-visual-card [data-aos],
+.survei-form-card [data-aos],
 .card [data-aos] {
     opacity: 1 !important;
     transform: none !important;
@@ -185,10 +172,7 @@ html:not(.no-js) [data-aos="fade-down"].aos-animate,
     animation: none !important;
 }
 
-/* ============================================================================
-   5. INTERACTIVE CTA BUTTONS
-   ============================================================================ */
-
+/* Interactive CTA Buttons */
 .hero__actions .btn-primary,
 .hero__actions .btn-secondary,
 .btn-blog-see-all {
@@ -210,9 +194,7 @@ html:not(.no-js) [data-aos="fade-down"].aos-animate,
     transform: translateY(0) scale(0.98);
 }
 
-/* ============================================================================
-   6. ACCESSIBILITY: REDUCED MOTION PREFERENCE
-   ============================================================================ */
+/* Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
     [data-aos] {
         opacity: 1 !important;

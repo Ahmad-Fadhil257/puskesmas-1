@@ -5,7 +5,7 @@
             <div class="footer__grid">
 
                 <!-- Brand -->
-                <div class="footer__brand" data-aos="fade-right">
+                <div class="footer__brand">
                     <h3 class="footer__brand-title"><span class="brand-text">{{ $appSetting->app_name ?? 'Puskesmas' }}</span></h3>
                     <p class="footer__brand-desc">
                         Melayani dengan Sepenuh Hati.<br>
@@ -30,7 +30,7 @@
                 </div>
 
                 <!-- Tautan Terkait -->
-                <div class="footer__links" data-aos="fade-up">
+                <div class="footer__links">
                     <h4 class="footer__heading">Tautan Terkait</h4>
                     <ul class="footer__list">
                         <li><a href="#">Kebijakan Privasi</a></li>
@@ -41,7 +41,7 @@
                 </div>
 
                 <!-- Kontak Kami -->
-                <div class="footer__contact" data-aos="fade-up">
+                <div class="footer__contact">
                     <h4 class="footer__heading">Kontak Kami</h4>
                     <ul class="footer__list footer__list--contact">
                         <li>

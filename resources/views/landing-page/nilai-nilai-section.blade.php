@@ -1,7 +1,7 @@
 {{-- Nilai-Nilai Kami Section --}}
 <section class="values" id="nilai-nilai">
     <div class="values__container">
-        <div class="values__card">
+        <div class="values__card" data-aos="fade-up">
             
             {{-- Badge / Subtitle --}}
             <div class="values__badge" data-aos="fade-right">

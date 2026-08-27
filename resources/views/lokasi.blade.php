@@ -355,7 +355,7 @@
                 </div>
 
                 {{-- Card 4: Action Buttons --}}
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;" data-aos="fade-up">
                     <a href="{{ $appSetting->direct_maps_link }}" target="_blank" rel="noopener" class="btn-rute-maps">
                         <i class="bx bx-navigation"></i>
                         <span>Petunjuk Rute</span>
@@ -371,7 +371,7 @@
             </div>
 
             {{-- Kolom Kanan: Interactive Google Maps Frame (Edge to Edge, Clean) --}}
-            <div class="lokasi-maps-container">
+            <div class="lokasi-maps-container" data-aos="fade-left">
                 <iframe class="lokasi-maps-iframe"
                         src="{{ $appSetting->embed_map_url }}" 
                         loading="lazy" 

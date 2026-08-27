@@ -74,7 +74,7 @@
     <div class="blog-content-container">
 
         {{-- Kartu 1: Konten Utama Artikel (Card Terpisah Latar Putih) --}}
-        <article class="article-main-card">
+        <article class="article-main-card" data-aos="fade-up">
             {{-- Featured Image Banner --}}
             <div class="article-featured-image">
                 <img src="{{ $article->thumbnail_url }}" alt="{{ $article->title }}">
@@ -118,7 +118,7 @@
 
         {{-- Kartu 2: Direkomendasikan untuk Anda (Card Terpisah Maksimal 6 Artikel) --}}
         @if(isset($relatedArticles) && $relatedArticles->count() > 0)
-            <section class="article-related-card">
+            <section class="article-related-card" data-aos="fade-up">
                 <div class="article-related-card__header">
                     <h3 class="article-related-card__title">Direkomendasikan untuk Anda</h3>
                     <p class="article-related-card__subtitle">Rekomendasi bacaan edukasi kesehatan seputar topik <strong>{{ $article->category }}</strong> untuk Anda dan keluarga.</p>
@@ -126,7 +126,7 @@
 
                 <div class="articles-grid">
                     @foreach($relatedArticles as $rel)
-                        <article class="article-card">
+                        <article class="article-card" data-aos="fade-up">
                             <a href="{{ route('blog.show', $rel->slug) }}" class="article-card__thumb-wrap">
                                 <img src="{{ $rel->thumbnail_url }}" alt="{{ $rel->title }}" class="article-card__img" loading="lazy">
                                 <span class="article-card__category">{{ $rel->category }}</span>

@@ -288,7 +288,7 @@
         <div class="survei-main-grid">
 
             {{-- Kolom Kiri: Visual Gambar / Ilustrasi + Badge Rating --}}
-            <div class="survei-visual-card">
+            <div class="survei-visual-card" data-aos="fade-right">
                 <div class="survei-visual-blob"></div>
                 <img src="{{ asset('assets/img/survey-illustration.jpg') }}" alt="Survei Kepuasan Pasien" class="survei-visual-img" onerror="this.src='{{ asset('assets/img/stethoscope.png') }}'">
                 
@@ -310,7 +310,7 @@
             </div>
 
             {{-- Kolom Kanan: Formulir Survei (Persis Gambar 2) --}}
-            <div class="survei-form-card">
+            <div class="survei-form-card" data-aos="fade-left">
                 
                 @if ($errors->any())
                     <div style="background: #FEF2F2; border-left: 4px solid #EF4444; border-radius: 10px; padding: 12px 16px; margin-bottom: 20px;">
