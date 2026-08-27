@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\AdminDokterController;
 use App\Http\Controllers\Admin\AdminNilaiController;
 use App\Http\Controllers\Admin\AdminLayananController;
 use App\Http\Controllers\Admin\AdminSurveyController;
+use App\Http\Controllers\Admin\AdminLokasiController;
 use App\Http\Controllers\CaraKerjaController;
 use App\Models\About;
 use App\Models\Article;
@@ -63,6 +64,11 @@ Route::get('/jadwal-dokter', function () {
 // Portal Publik Berita & Blog
 Route::get('/berita', [BlogController::class, 'index'])->name('blog.index');
 Route::get('/berita/{slug}', [BlogController::class, 'show'])->name('blog.show');
+
+// Halaman Lokasi & Peta Puskesmas
+Route::get('/lokasi', function () {
+    return view('lokasi');
+})->name('lokasi');
 
 // Auth Routes (URL Khusus Login: /puskem-min)
 Route::get('/puskem-min', [AuthController::class, 'showLoginForm'])->name('login');
@@ -117,6 +123,10 @@ Route::middleware(['auth'])->group(function () {
         // Kelola Identitas & Logo Aplikasi
         Route::get('settings', [AdminSettingController::class, 'index'])->name('settings.index');
         Route::put('settings', [AdminSettingController::class, 'update'])->name('settings.update');
+
+        // Kelola Lokasi, Peta & Kontak Puskesmas
+        Route::get('lokasi', [AdminLokasiController::class, 'index'])->name('lokasi.index');
+        Route::put('lokasi', [AdminLokasiController::class, 'update'])->name('lokasi.update');
     });
 
     // Pengaturan & Manajemen Tentang Kami (About)
