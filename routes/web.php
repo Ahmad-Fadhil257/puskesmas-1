@@ -104,10 +104,12 @@ Route::middleware(['auth'])->group(function () {
     })->name('dashboard');
 
     // CRUD Manajemen Berita
-    Route::resource('admin/articles', AdminArticleController::class)->names('admin.articles');
+    Route::middleware(['page.access'])->group(function () {
+        Route::resource('admin/articles', AdminArticleController::class)->names('admin.articles');
+    });
 
     // Cara Kerja, Hero, dan Pengguna CRUD
-    Route::prefix('admin')->name('admin.')->group(function () {
+    Route::prefix('admin')->name('admin.')->middleware(['page.access'])->group(function () {
         Route::resource('cara-kerja', CaraKerjaController::class)->except(['show']);
 
         // Kelola Hero Section & Info Cards
@@ -115,9 +117,11 @@ Route::middleware(['auth'])->group(function () {
         Route::put('hero/update', [AdminHeroController::class, 'updateHero'])->name('hero.update');
         Route::put('hero/info-cards/{id}', [AdminHeroController::class, 'updateCard'])->name('hero.update-card');
 
-        // Kelola Pengguna (Admin & Staf)
-        Route::patch('users/{id}/toggle-status', [AdminUserController::class, 'toggleStatus'])->name('users.toggle-status');
-        Route::resource('users', AdminUserController::class)->except(['show']);
+        // Kelola Pengguna (Admin Only)
+        Route::middleware(['admin.only'])->group(function () {
+            Route::patch('users/{id}/toggle-status', [AdminUserController::class, 'toggleStatus'])->name('users.toggle-status');
+            Route::resource('users', AdminUserController::class)->except(['show']);
+        });
 
         // Kelola Dokter
         Route::resource('dokter', AdminDokterController::class)->except(['show']);
@@ -149,6 +153,8 @@ Route::middleware(['auth'])->group(function () {
     });
 
     // Pengaturan & Manajemen Tentang Kami (About)
-    Route::get('admin/about', [AdminAboutController::class, 'index'])->name('admin.about.index');
-    Route::put('admin/about', [AdminAboutController::class, 'update'])->name('admin.about.update');
+    Route::middleware(['page.access'])->group(function () {
+        Route::get('admin/about', [AdminAboutController::class, 'index'])->name('admin.about.index');
+        Route::put('admin/about', [AdminAboutController::class, 'update'])->name('admin.about.update');
+    });
 });

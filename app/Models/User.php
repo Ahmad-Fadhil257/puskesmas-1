@@ -13,11 +13,20 @@ class User extends Authenticatable
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
-     */
+    public const PAGES = [
+        'hero'       => 'Kelola Hero & Fitur',
+        'layanan'    => 'Kelola Layanan',
+        'articles'   => 'Kelola Berita & Info',
+        'cara-kerja' => 'Kelola Cara Kerja',
+        'dokter'     => 'Kelola Dokter',
+        'about'      => 'Kelola Tentang Kami',
+        'nilai'      => 'Kelola Nilai & Mitra',
+        'surveys'    => 'Survei & Testimoni',
+        'users'      => 'Kelola Pengguna',
+        'settings'   => 'Identitas & Logo',
+        'lokasi'     => 'Lokasi & Peta',
+    ];
+
     protected $fillable = [
         'name',
         'email',
@@ -26,53 +35,52 @@ class User extends Authenticatable
         'is_active',
         'phone',
         'avatar',
+        'accessible_pages',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var list<string>
-     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
     protected function casts(): array
     {
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
             'is_active' => 'boolean',
+            'accessible_pages' => 'array',
         ];
     }
 
-    /**
-     * Scope aktif
-     */
     public function scopeActive($query)
     {
         return $query->where('is_active', true);
     }
 
-    /**
-     * Cek apakah role Admin
-     */
     public function isAdmin(): bool
     {
         return $this->role === 'admin';
     }
 
-    /**
-     * Cek apakah role Staf
-     */
     public function isStaff(): bool
     {
         return $this->role === 'staf';
+    }
+
+    public function canAccessPage(string $page): bool
+    {
+        if ($this->isAdmin()) {
+            return true;
+        }
+        return in_array($page, $this->accessible_pages ?? []);
+    }
+
+    public function getAccessiblePageKeys(): array
+    {
+        if ($this->isAdmin()) {
+            return array_keys(self::PAGES);
+        }
+        return $this->accessible_pages ?? [];
     }
 }
