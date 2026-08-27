@@ -175,6 +175,7 @@
             const iconClose = document.getElementById('iconClose');
             const header = document.querySelector('.site-header');
 
+            // ── Mobile toggle open/close ──────────────────────────────────────
             if (toggle && menu) {
                 toggle.addEventListener('click', function () {
                     const isOpen = menu.classList.toggle('open');
@@ -183,7 +184,8 @@
                     iconClose.style.display = isOpen ? 'block' : 'none';
                 });
 
-                menu.querySelectorAll('a').forEach(function (link) {
+                // Close mobile menu when a plain link is clicked
+                menu.querySelectorAll('a:not(.mobile-accordion__body a)').forEach(function (link) {
                     link.addEventListener('click', function () {
                         menu.classList.remove('open');
                         toggle.setAttribute('aria-expanded', 'false');
@@ -193,14 +195,43 @@
                 });
             }
 
-            // Sticky navbar effect
+            // ── Mobile accordion (Profil, Layanan, Informasi Publik) ──────────
+            document.querySelectorAll('.mobile-accordion__btn').forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    const accordion = btn.closest('.mobile-accordion');
+                    const isOpen = accordion.classList.toggle('open');
+                    btn.setAttribute('aria-expanded', isOpen);
+                });
+            });
+
+            // ── Sticky navbar on scroll ───────────────────────────────────────
             if (header) {
                 window.addEventListener('scroll', function () {
                     header.classList.toggle('scrolled', window.scrollY > 50);
                 }, { passive: true });
             }
 
-            // Close operational badge
+            // ── Close dropdown when clicking outside ─────────────────────────
+            document.addEventListener('click', function (e) {
+                if (!e.target.closest('.has-dropdown')) {
+                    document.querySelectorAll('.has-dropdown.is-open').forEach(function (el) {
+                        el.classList.remove('is-open');
+                    });
+                }
+            });
+
+            // ── Dropdown: toggle on click for touch devices ───────────────────
+            document.querySelectorAll('.has-dropdown .nav-link-dropdown').forEach(function (link) {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const item = link.closest('.has-dropdown');
+                    const wasOpen = item.classList.contains('is-open');
+                    document.querySelectorAll('.has-dropdown.is-open').forEach(function (el) { el.classList.remove('is-open'); });
+                    if (!wasOpen) item.classList.add('is-open');
+                });
+            });
+
+            // ── Close operational badge ───────────────────────────────────────
             document.getElementById('closeOperationalBadge')?.addEventListener('click', function() {
                 const badge = document.getElementById('operationalBadge');
                 if (badge) {
