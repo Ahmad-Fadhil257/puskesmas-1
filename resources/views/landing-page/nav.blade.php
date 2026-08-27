@@ -1,4 +1,4 @@
-<!-- Floating Navigation Bar (Persis seperti Desain Resmi / Foto Referensi) -->
+<!-- Floating Navigation Bar -->
 <header class="site-header">
     <nav class="navbar">
         <!-- Brand / Logo -->
@@ -13,7 +13,7 @@
             @endif
         </a>
 
-        <!-- Desktop Menu (Sesuai Referensi Gambar Teman) -->
+        <!-- Desktop Menu -->
         <ul class="navbar__menu">
             {{-- 1. BERANDA --}}
             <li>
@@ -22,43 +22,7 @@
                 </a>
             </li>
 
-            {{-- 2. PROFIL (DROPDOWN) --}}
-            <li class="navbar__item-dropdown">
-                <a href="{{ route('home') }}#tentang" class="navbar__dropdown-toggle">
-                    <span>PROFIL</span>
-                    <svg class="navbar__dropdown-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="6 9 12 15 18 9"></polyline>
-                    </svg>
-                </a>
-                <ul class="navbar__dropdown-menu">
-                    <li>
-                        <a href="{{ route('home') }}#tentang" class="navbar__dropdown-item">
-                            <i class="bx bx-info-circle navbar__dropdown-icon"></i>
-                            <span class="navbar__dropdown-text">Tentang Kami</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('home') }}#nilai-nilai" class="navbar__dropdown-item">
-                            <i class="bx bx-star navbar__dropdown-icon"></i>
-                            <span class="navbar__dropdown-text">Moto & Tata Nilai</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('home') }}#dokter" class="navbar__dropdown-item">
-                            <i class="bx bx-user-pin navbar__dropdown-icon"></i>
-                            <span class="navbar__dropdown-text">Dokter Kami</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('home') }}#cara-kerja" class="navbar__dropdown-item">
-                            <i class="bx bx-list-check navbar__dropdown-icon"></i>
-                            <span class="navbar__dropdown-text">Alur & Cara Pelayanan</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-
-            {{-- 3. LAYANAN (DROPDOWN DINAMIS) --}}
+            {{-- 2. LAYANAN (DROPDOWN DINAMIS) --}}
             <li class="navbar__item-dropdown">
                 <a href="{{ route('layanan.index') }}" class="navbar__dropdown-toggle {{ request()->routeIs('layanan.*') ? 'active' : '' }}">
                     <span>LAYANAN</span>
@@ -88,7 +52,7 @@
                 </ul>
             </li>
 
-            {{-- 4. INFORMASI PUBLIK (DROPDOWN) --}}
+            {{-- 3. INFORMASI PUBLIK (DROPDOWN) --}}
             <li class="navbar__item-dropdown">
                 <a href="{{ route('blog.index') }}" class="navbar__dropdown-toggle {{ request()->routeIs('blog.*') || request()->routeIs('jadwal-dokter') ? 'active' : '' }}">
                     <span>INFORMASI PUBLIK</span>
@@ -109,23 +73,17 @@
                             <span class="navbar__dropdown-text">Jadwal Praktik Dokter</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="{{ route('lokasi') }}" class="navbar__dropdown-item {{ request()->routeIs('lokasi') ? 'active' : '' }}">
-                            <i class="bx bx-map-pin navbar__dropdown-icon"></i>
-                            <span class="navbar__dropdown-text">Lokasi & Peta Puskesmas</span>
-                        </a>
-                    </li>
                 </ul>
             </li>
 
-            {{-- 5. KONTAK --}}
+            {{-- 4. KONTAK --}}
             <li>
                 <a href="{{ route('lokasi') }}" class="{{ request()->routeIs('lokasi') ? 'active' : '' }}">
                     KONTAK
                 </a>
             </li>
 
-            {{-- 6. SURVEI --}}
+            {{-- 5. SURVEI --}}
             <li>
                 <a href="{{ route('survei.index') }}" class="{{ request()->routeIs('survei.*') ? 'active' : '' }}">
                     SURVEI
@@ -150,28 +108,6 @@
     <!-- Mobile Dropdown Menu -->
     <div class="navbar__mobile" id="mobileMenu">
         <a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'active' : '' }}">BERANDA</a>
-
-        {{-- Mobile Profil Accordion --}}
-        <div class="navbar__mobile-accordion">
-            <button type="button" class="navbar__mobile-accordion-toggle" id="mobileProfilToggle">
-                <span>PROFIL</span>
-                <i class="bx bx-chevron-down" id="mobileProfilChevron"></i>
-            </button>
-            <div class="navbar__mobile-accordion-content" id="mobileProfilContent">
-                <a href="{{ route('home') }}#tentang" class="navbar__mobile-subitem">
-                    <i class="bx bx-info-circle"></i> <span>Tentang Kami</span>
-                </a>
-                <a href="{{ route('home') }}#nilai-nilai" class="navbar__mobile-subitem">
-                    <i class="bx bx-star"></i> <span>Moto & Tata Nilai</span>
-                </a>
-                <a href="{{ route('home') }}#dokter" class="navbar__mobile-subitem">
-                    <i class="bx bx-user-pin"></i> <span>Dokter Kami</span>
-                </a>
-                <a href="{{ route('home') }}#cara-kerja" class="navbar__mobile-subitem">
-                    <i class="bx bx-list-check"></i> <span>Alur Pelayanan</span>
-                </a>
-            </div>
-        </div>
 
         {{-- Mobile Layanan Accordion --}}
         <div class="navbar__mobile-accordion">
@@ -207,9 +143,6 @@
                 </a>
                 <a href="{{ route('jadwal-dokter') }}" class="navbar__mobile-subitem {{ request()->routeIs('jadwal-dokter') ? 'active' : '' }}">
                     <i class="bx bx-calendar"></i> <span>Jadwal Praktik Dokter</span>
-                </a>
-                <a href="{{ route('lokasi') }}" class="navbar__mobile-subitem {{ request()->routeIs('lokasi') ? 'active' : '' }}">
-                    <i class="bx bx-map-pin"></i> <span>Lokasi & Peta</span>
                 </a>
             </div>
         </div>
