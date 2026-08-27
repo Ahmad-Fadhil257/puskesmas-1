@@ -221,7 +221,7 @@
                     <li class="menu-item {{ request()->routeIs('admin.surveys.*') ? 'active' : '' }}">
                         <a href="{{ route('admin.surveys.index') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-message-rounded-detail"></i>
-                            <div>Survei & Testimoni</div>
+                            <div>Survei Kepuasan Pasien</div>
                         </a>
                     </li>
                     @endif

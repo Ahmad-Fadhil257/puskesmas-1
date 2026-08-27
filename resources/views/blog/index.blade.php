@@ -9,14 +9,20 @@
 
 @section('content')
 
-{{-- Full Width Dark Emerald Header (Fill Semua Sesuai Referensi Dinkes) --}}
-<section class="blog-full-header">
-    <div class="blog-full-header__decor-pattern" aria-hidden="true"></div>
-    <div class="blog-full-header__glow" aria-hidden="true"></div>
+{{-- =========================================================================
+   HEADER SECTION: CLEAN MINT SUBPAGE HEADER WITH BOTANICAL ORNAMENT
+   ========================================================================= --}}
+<section class="subpage-header">
+    <img src="{{ asset('assets/botanical-clean.png') }}" alt="" class="subpage-header__watermark" aria-hidden="true">
 
-    <div class="blog-full-header__container">
-        <h1 class="blog-full-header__title">Rilis Berita & Informasi Terkini</h1>
-        <p class="blog-full-header__subtitle">
+    <div class="subpage-header__container">
+        <div class="subpage-header__breadcrumb">
+            <a href="{{ route('home') }}">Beranda</a>
+            <span class="subpage-header__breadcrumb-sep">•</span>
+            <span class="subpage-header__breadcrumb-current">Rilis Berita & Artikel</span>
+        </div>
+        <h1 class="subpage-header__title">Rilis Berita & Informasi Terkini</h1>
+        <p class="subpage-header__subtitle">
             Informasi seputar kesehatan terkini dan kegiatan pelayanan yang dilaksanakan oleh Puskesmas CareLink
         </p>
     </div>

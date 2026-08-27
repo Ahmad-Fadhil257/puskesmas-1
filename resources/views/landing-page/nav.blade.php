@@ -41,14 +41,6 @@
                             </li>
                         @endforeach
                     @endif
-                    <li class="navbar__dropdown-divider"></li>
-                    <li>
-                        <a href="{{ route('layanan.index') }}" class="navbar__dropdown-item navbar__dropdown-all {{ request()->routeIs('layanan.index') ? 'active' : '' }}">
-                            <i class="bx bx-grid-alt navbar__dropdown-icon"></i>
-                            <span class="navbar__dropdown-text"><strong>Lihat Semua Layanan</strong></span>
-                            <i class="bx bx-right-arrow-alt ms-auto"></i>
-                        </a>
-                    </li>
                 </ul>
             </li>
 
@@ -124,10 +116,6 @@
                         </a>
                     @endforeach
                 @endif
-                <a href="{{ route('layanan.index') }}" class="navbar__mobile-subitem navbar__mobile-subitem-all {{ request()->routeIs('layanan.index') ? 'active' : '' }}">
-                    <i class="bx bx-grid-alt"></i>
-                    <span><strong>Lihat Semua Layanan →</strong></span>
-                </a>
             </div>
         </div>
 

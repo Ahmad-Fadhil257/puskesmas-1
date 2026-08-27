@@ -139,9 +139,10 @@ Route::middleware(['auth'])->group(function () {
         Route::patch('nilai/mitra/{id}/toggle-status', [AdminNilaiController::class, 'toggleMitraStatus'])->name('nilai.mitra.toggle-status');
         Route::delete('nilai/mitra/{id}', [AdminNilaiController::class, 'destroyMitra'])->name('nilai.mitra.destroy');
 
-        // Kelola Survei Kepuasan & Testimoni
+        // Kelola Survei Kepuasan Pasien
         Route::patch('surveys/{id}/toggle', [AdminSurveyController::class, 'toggleApproval'])->name('surveys.toggle');
-        Route::resource('surveys', AdminSurveyController::class)->except(['show', 'create', 'edit']);
+        Route::patch('surveys/{id}/toggle-featured', [AdminSurveyController::class, 'toggleFeatured'])->name('surveys.toggle-featured');
+        Route::resource('surveys', AdminSurveyController::class)->except(['create', 'edit']);
 
         // Kelola Identitas & Logo Aplikasi
         Route::get('settings', [AdminSettingController::class, 'index'])->name('settings.index');

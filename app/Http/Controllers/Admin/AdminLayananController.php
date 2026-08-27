@@ -54,22 +54,21 @@ class AdminLayananController extends Controller
         $validated = $request->validate([
             'order'              => 'nullable|integer|min:1',
             'title'              => 'required|string|max:255',
+            'subtitle'           => 'nullable|string|max:255',
             'slug'               => 'nullable|string|max:255|unique:layanans,slug',
-            'kategori'           => 'required|string|in:' . $validCategories,
+            'kategori'           => 'nullable|string|max:100',
             'description'        => 'required|string',
             'icon'               => 'required|string|max:100',
             'image'              => 'nullable|image|mimes:jpeg,png,jpg,webp|max:3072',
-            'jam_operasional'    => 'nullable|string|max:255',
             'jadwal_pendaftaran' => 'nullable|string',
-            'dokter_ids'         => 'nullable|array',
-            'dokter_ids.*'       => 'integer|exists:dokters,id',
-            'tindakan_medis'     => 'nullable|string',
+            'jam_operasional'    => 'nullable|string',
             'persyaratan'        => 'nullable|string',
-            'btn_text'           => 'nullable|string|max:100',
         ]);
 
         $order = $validated['order'] ?? ((Layanan::max('order') ?? 0) + 1);
-        $kategoriData = $kategoriList[$validated['kategori']] ?? ['variant' => 'default', 'badge' => 'BPJS & UMUM'];
+        $kategori = $validated['kategori'] ?? 'Rawat Jalan (BPJS & Umum)';
+        $kategoriList = Layanan::getKategoriList();
+        $kategoriData = $kategoriList[$kategori] ?? ['variant' => 'default', 'badge' => 'BPJS & UMUM'];
 
         $imageName = null;
         if ($request->hasFile('image')) {
@@ -82,24 +81,25 @@ class AdminLayananController extends Controller
             $file->move($uploadPath, $imageName);
         }
 
-        $slug = !empty($validated['slug']) ? \Illuminate\Support\Str::slug($validated['slug']) : \Illuminate\Support\Str::slug($validated['title']);
+        $slug = !empty($validated['slug']) 
+            ? \Illuminate\Support\Str::slug($validated['slug']) 
+            : \Illuminate\Support\Str::slug($validated['title']);
 
         Layanan::create([
             'order'              => $order,
             'title'              => $validated['title'],
+            'subtitle'           => $validated['subtitle'] ?? null,
             'slug'               => $slug,
-            'kategori'           => $validated['kategori'],
+            'kategori'           => $kategori,
             'description'        => $validated['description'],
             'image'              => $imageName,
             'icon'               => $validated['icon'],
             'variant'            => $kategoriData['variant'],
             'tipe_jaminan'       => $kategoriData['badge'],
-            'jam_operasional'    => $validated['jam_operasional'] ?? 'Senin - Sabtu: 08.00 - 14.00 WIB',
             'jadwal_pendaftaran' => $validated['jadwal_pendaftaran'] ?? null,
-            'dokter_ids'         => $validated['dokter_ids'] ?? [],
-            'tindakan_medis'     => $validated['tindakan_medis'] ?? null,
+            'jam_operasional'    => $validated['jam_operasional'] ?? null,
             'persyaratan'        => $validated['persyaratan'] ?? null,
-            'btn_text'           => $validated['btn_text'] ?? ($kategoriData['variant'] === 'emergency' ? 'Hubungi kami' : 'Janji Temu / Pendaftaran'),
+            'btn_text'           => 'Pendaftaran / Chat WA',
             'btn_link'           => null,
             'is_active'          => true,
         ]);
@@ -126,26 +126,23 @@ class AdminLayananController extends Controller
     {
         $layanan = Layanan::findOrFail($id);
         $kategoriList = Layanan::getKategoriList();
-        $validCategories = implode(',', array_keys($kategoriList));
 
         $validated = $request->validate([
             'order'              => 'required|integer|min:1',
             'title'              => 'required|string|max:255',
+            'subtitle'           => 'nullable|string|max:255',
             'slug'               => 'nullable|string|max:255|unique:layanans,slug,' . $layanan->id,
-            'kategori'           => 'required|string|in:' . $validCategories,
+            'kategori'           => 'nullable|string|max:100',
             'description'        => 'required|string',
             'icon'               => 'required|string|max:100',
             'image'              => 'nullable|image|mimes:jpeg,png,jpg,webp|max:3072',
-            'jam_operasional'    => 'nullable|string|max:255',
             'jadwal_pendaftaran' => 'nullable|string',
-            'dokter_ids'         => 'nullable|array',
-            'dokter_ids.*'       => 'integer|exists:dokters,id',
-            'tindakan_medis'     => 'nullable|string',
+            'jam_operasional'    => 'nullable|string',
             'persyaratan'        => 'nullable|string',
-            'btn_text'           => 'nullable|string|max:100',
         ]);
 
-        $kategoriData = $kategoriList[$validated['kategori']] ?? ['variant' => 'default', 'badge' => 'BPJS & UMUM'];
+        $kategori = $validated['kategori'] ?? ($layanan->kategori ?? 'Rawat Jalan (BPJS & Umum)');
+        $kategoriData = $kategoriList[$kategori] ?? ['variant' => 'default', 'badge' => 'BPJS & UMUM'];
 
         if ($request->hasFile('image')) {
             $file = $request->file('image');
@@ -161,24 +158,29 @@ class AdminLayananController extends Controller
                 @unlink($uploadPath . '/' . $layanan->image);
             }
             $layanan->image = $imageName;
+        } elseif ($request->boolean('delete_image')) {
+            if ($layanan->image && file_exists(public_path('uploads/layanan/' . $layanan->image))) {
+                @unlink(public_path('uploads/layanan/' . $layanan->image));
+            }
+            $layanan->image = null;
         }
 
-        $slug = !empty($validated['slug']) ? \Illuminate\Support\Str::slug($validated['slug']) : ($layanan->slug ?: \Illuminate\Support\Str::slug($validated['title']));
+        $slug = !empty($validated['slug']) 
+            ? \Illuminate\Support\Str::slug($validated['slug']) 
+            : ($layanan->slug ?: \Illuminate\Support\Str::slug($validated['title']));
 
         $layanan->order              = $validated['order'];
         $layanan->title              = $validated['title'];
+        $layanan->subtitle           = $validated['subtitle'] ?? null;
         $layanan->slug               = $slug;
-        $layanan->kategori           = $validated['kategori'];
+        $layanan->kategori           = $kategori;
         $layanan->description        = $validated['description'];
         $layanan->icon               = $validated['icon'];
         $layanan->variant            = $kategoriData['variant'];
         $layanan->tipe_jaminan       = $kategoriData['badge'];
-        $layanan->jam_operasional    = $validated['jam_operasional'] ?? 'Senin - Sabtu: 08.00 - 14.00 WIB';
         $layanan->jadwal_pendaftaran = $validated['jadwal_pendaftaran'] ?? null;
-        $layanan->dokter_ids         = $validated['dokter_ids'] ?? [];
-        $layanan->tindakan_medis     = $validated['tindakan_medis'] ?? null;
+        $layanan->jam_operasional    = $validated['jam_operasional'] ?? null;
         $layanan->persyaratan        = $validated['persyaratan'] ?? null;
-        $layanan->btn_text           = $validated['btn_text'] ?? ($kategoriData['variant'] === 'emergency' ? 'Hubungi kami' : 'Janji Temu / Pendaftaran');
         $layanan->save();
 
         return redirect()->route('admin.layanan.index')

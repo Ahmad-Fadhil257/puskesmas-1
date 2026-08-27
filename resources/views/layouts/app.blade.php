@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="{{ asset('css/landing-page/testimoni.css') }}">
     <link rel="stylesheet" href="{{ asset('css/landing-page/blog.css') }}">
     <link rel="stylesheet" href="{{ asset('css/landing-page/footer.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/landing-page/subpage-header.css') }}?v={{ file_exists(public_path('css/landing-page/subpage-header.css')) ? filemtime(public_path('css/landing-page/subpage-header.css')) : time() }}">
 
     <!-- Floating Operational Badge Styles -->
     <style>

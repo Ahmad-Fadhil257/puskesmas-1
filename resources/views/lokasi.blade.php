@@ -5,116 +5,8 @@
 
 @push('styles')
 <style>
-/* Clean Minimal Light Header (Solid Mint & Warm Orange Accent) */
-.lokasi-full-header {
-    width: 100%;
-    margin-top: -95px;
-    padding-top: 145px;
-    padding-bottom: 50px;
-    padding-left: 24px;
-    padding-right: 24px;
-    background-color: #C3E5D8; /* Lebih hijau segar, solid, bersih, tidak terlalu putih */
-    position: relative;
-    overflow: hidden;
-    text-align: left;
-    box-sizing: border-box;
-    border-bottom: 1px solid #A6D9C6;
-}
-
-.lokasi-full-header__container {
-    max-width: 1200px;
-    margin: 0 auto;
-    width: 100%;
-    position: relative;
-    z-index: 2;
-}
-
-/* Breadcrumb Navigation */
-.lokasi-header-breadcrumb {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 13px;
-    font-weight: 600;
-    margin-bottom: 12px;
-    letter-spacing: 0.02em;
-}
-
-.lokasi-header-breadcrumb a {
-    color: #2F5947;
-    text-decoration: none;
-    transition: color 0.2s;
-}
-
-.lokasi-header-breadcrumb a:hover {
-    color: #004F38;
-}
-
-.lokasi-header-breadcrumb-sep {
-    color: #E8672C; /* Warm orange separator from testimoni */
-    font-size: 11px;
-}
-
-.lokasi-header-breadcrumb-current {
-    color: #E8672C; /* Solid orange active page */
-    font-weight: 700;
-}
-
-.lokasi-full-header__title {
-    font-size: clamp(1.85rem, 4vw, 2.5rem);
-    font-weight: 800;
-    color: #004531; /* Solid deep forest green, super crisp & clean */
-    margin: 0 0 10px 0;
-    line-height: 1.25;
-    letter-spacing: -0.02em;
-    max-width: 620px;
-}
-
-.lokasi-full-header__subtitle {
-    font-size: 15.5px;
-    color: #254839;
-    line-height: 1.6;
-    max-width: 580px;
-    margin: 0;
-}
-
-/* Original Swirling Floral Vine Vector (Menempel di garis bawah dan tidak berdempetan dengan teks) */
-.lokasi-full-header__watermark {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    width: 460px;
-    max-width: 40%;
-    height: auto;
-    opacity: 0.28;
-    pointer-events: none;
-    z-index: 1;
-    user-select: none;
-    transform: translateY(2px); /* Nempel pas di garis batas bawah */
-}
-
-@media (max-width: 991px) {
-    .lokasi-full-header__watermark {
-        opacity: 0.15;
-        width: 320px;
-        max-width: 50%;
-    }
-}
-
-@media (max-width: 768px) {
-    .lokasi-full-header {
-        padding-top: 125px;
-        padding-bottom: 40px;
-    }
-    .lokasi-full-header__watermark {
-        opacity: 0.12;
-        width: 250px;
-        right: -10px;
-    }
-}
-
 .lokasi-content-wrapper {
-    background: #F8FAFC;
+    background: #EDF2F7;
     padding: 60px 24px 90px;
     font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
 }
@@ -140,15 +32,15 @@
     background: #FFFFFF;
     border-radius: 16px;
     padding: 26px 30px;
-    border: 1px solid #E2E8F0;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+    border: 1px solid #CBD5E1;
+    box-shadow: 0 4px 16px rgba(15, 23, 42, 0.05), 0 1px 3px rgba(15, 23, 42, 0.02);
     transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
 }
 
 .lokasi-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 12px 30px rgba(10, 92, 69, 0.06), 0 4px 12px rgba(0, 0, 0, 0.02);
-    border-color: rgba(10, 92, 69, 0.15);
+    box-shadow: 0 12px 30px rgba(10, 92, 69, 0.08), 0 4px 12px rgba(0, 0, 0, 0.03);
+    border-color: rgba(10, 92, 69, 0.25);
 }
 
 .lokasi-icon-wrapper {
@@ -167,8 +59,8 @@
 .lokasi-maps-container {
     background: #FFFFFF;
     border-radius: 16px;
-    border: 1px solid #E2E8F0;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+    border: 1px solid #CBD5E1;
+    box-shadow: 0 4px 16px rgba(15, 23, 42, 0.05), 0 1px 3px rgba(15, 23, 42, 0.02);
     height: 100%;
     position: relative;
     min-height: 500px;
@@ -267,7 +159,7 @@
    CLEAN MINIMAL LIGHT HEADER (SOLID MINT, WATERMARK & AKSEN ORANYE)
    ========================================================================= --}}
 <section class="lokasi-full-header">
-    <img src="{{ asset('assets/swirl-vine.svg') }}" alt="" class="lokasi-full-header__watermark" aria-hidden="true">
+    <img src="{{ asset('assets/botanical-clean.png') }}" alt="" class="lokasi-full-header__watermark" aria-hidden="true">
 
     <div class="lokasi-full-header__container">
         {{-- Breadcrumb Nav dengan aksen oranye --}}

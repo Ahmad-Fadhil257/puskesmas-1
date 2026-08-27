@@ -23,6 +23,11 @@ class AppSetting extends Model
         'operational_hours',
         'emergency_info',
         'show_operational_hours',
+        'facebook_link',
+        'instagram_link',
+        'twitter_link',
+        'youtube_link',
+        'tiktok_link',
     ];
 
     protected function casts(): array

@@ -35,6 +35,11 @@ class SettingController extends Controller
             'operational_days' => ['nullable', 'string', 'max:100'],
             'operational_hours' => ['nullable', 'string', 'max:100'],
             'show_operational_hours' => ['nullable', 'boolean'],
+            'facebook_link' => ['nullable', 'string', 'max:255'],
+            'instagram_link' => ['nullable', 'string', 'max:255'],
+            'twitter_link' => ['nullable', 'string', 'max:255'],
+            'youtube_link' => ['nullable', 'string', 'max:255'],
+            'tiktok_link' => ['nullable', 'string', 'max:255'],
         ], [
             'logo.image' => 'File logo harus berupa gambar.',
             'logo.mimes' => 'Format logo yang diizinkan: PNG, JPG, JPEG, SVG, WEBP.',
@@ -50,6 +55,11 @@ class SettingController extends Controller
             'operational_days' => $request->operational_days,
             'operational_hours' => $request->operational_hours,
             'show_operational_hours' => $request->boolean('show_operational_hours', true),
+            'facebook_link' => $request->facebook_link,
+            'instagram_link' => $request->instagram_link,
+            'twitter_link' => $request->twitter_link,
+            'youtube_link' => $request->youtube_link,
+            'tiktok_link' => $request->tiktok_link,
         ];
 
         // Handle upload logo baru

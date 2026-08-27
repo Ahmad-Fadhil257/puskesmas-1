@@ -14,6 +14,7 @@ class Layanan extends Model
     protected $fillable = [
         'order',
         'title',
+        'subtitle',
         'slug',
         'kategori',
         'description',

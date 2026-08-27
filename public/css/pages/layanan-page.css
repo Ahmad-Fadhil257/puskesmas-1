@@ -7,8 +7,9 @@
     --color-dark:           #122822;
     --color-body:           #4B5563;
     --color-muted:          #6B7280;
-    --color-canvas:         #FFFFFF;
-    --color-card-bg:        #F3F4F6;
+    --color-canvas:         #EDF2F7;
+    --color-card-bg:        #FFFFFF;
+    --color-card-border:    #CBD5E1;
     --color-danger:         #B91C1C;
     --color-danger-btn:     #991B1B;
 
@@ -16,17 +17,17 @@
     --container-max:        1200px;
     --radius-sm:            8px;
     --radius-md:            12px;
-    --radius-lg:            20px;
+    --radius-lg:            16px;
     --radius-full:          9999px;
 
-    --shadow-card:          0 4px 16px rgba(0, 0, 0, 0.03);
-    --shadow-hover:         0 12px 28px rgba(10, 92, 69, 0.08);
+    --shadow-card:          0 4px 16px rgba(15, 23, 42, 0.05);
+    --shadow-hover:         0 12px 28px rgba(10, 92, 69, 0.12);
     --shadow-modal:         0 24px 50px rgba(15, 23, 42, 0.22);
     --transition:           all 0.24s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 body {
-    background-color: var(--color-canvas) !important;
+    background-color: #EDF2F7 !important;
     font-family: var(--font-sans);
     color: var(--color-body);
     min-height: 100vh;
@@ -119,8 +120,13 @@ body {
 /* ==========================================================================
    2. GRID SECTION: 6 CARDS (3x2)
    ========================================================================== */
+/* ==========================================================================
+   2. GRID SECTION: 6 CARDS (3x2)
+   ========================================================================== */
 .layanan-grid-section {
-    padding: 0 24px 80px;
+    background-color: #EDF2F7;
+    padding: 56px 24px 96px;
+    min-height: calc(100vh - 350px);
 }
 
 .layanan-grid-container {
@@ -143,16 +149,40 @@ body {
     cursor: pointer;
     transition: var(--transition);
     position: relative;
+    text-decoration: none !important;
+    border: 1px solid #CBD5E1;
 }
 
-.layanan-box-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-hover);
+.box-card-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 24px;
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--color-primary);
+    transition: var(--transition);
 }
 
-/* 1. Default Card (Light Gray) */
+.card--featured .box-card-action {
+    color: #A7F3D0;
+}
+
+.layanan-box-card:hover .box-card-action {
+    transform: translateX(4px);
+}
+
+/* 1. Default Card (Pure White with 1px Stroke) */
 .card--default {
-    background-color: var(--color-card-bg);
+    background-color: #FFFFFF !important;
+    border: 1px solid #CBD5E1 !important;
+    box-shadow: 0 4px 16px rgba(15, 23, 42, 0.05), 0 1px 3px rgba(15, 23, 42, 0.02);
+}
+
+.card--default:hover {
+    transform: translateY(-4px);
+    border-color: #94A3B8 !important;
+    box-shadow: 0 12px 28px rgba(10, 92, 69, 0.12);
 }
 
 .box-card-icon {
@@ -163,19 +193,20 @@ body {
     align-items: center;
     justify-content: center;
     font-size: 22px;
-    margin-bottom: 24px;
+    margin-bottom: 22px;
     flex-shrink: 0;
 }
 
 .icon--default {
-    background-color: var(--color-primary-light);
-    color: var(--color-primary);
+    background-color: #E6F5F1;
+    color: #0A5C45;
+    border: 1px solid #C3E5D8;
 }
 
 .card--default .box-card-title {
     font-size: 18px;
     font-weight: 700;
-    color: var(--color-dark);
+    color: #0F172A;
     margin: 0 0 12px 0;
     line-height: 24px;
 }
@@ -183,19 +214,28 @@ body {
 .card--default .box-card-desc {
     font-size: 14px;
     line-height: 22px;
-    color: var(--color-body);
+    color: #475569;
     margin: 0;
 }
 
-/* 2. Featured Card (Deep Green) */
+/* 2. Featured Card (Deep Emerald) */
 .card--featured {
-    background-color: var(--color-primary);
+    background-color: #0A5C45 !important;
+    border: 1px solid #064E3B !important;
     color: #FFFFFF;
+    box-shadow: 0 4px 16px rgba(10, 92, 69, 0.2);
+}
+
+.card--featured:hover {
+    background-color: #084D3A !important;
+    transform: translateY(-4px);
+    box-shadow: 0 14px 32px rgba(10, 92, 69, 0.28);
 }
 
 .icon--featured {
     background-color: rgba(255, 255, 255, 0.15);
     color: #A7F3D0;
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .card--featured .box-card-title {
@@ -209,17 +249,25 @@ body {
 .card--featured .box-card-desc {
     font-size: 14px;
     line-height: 22px;
-    color: rgba(255, 255, 255, 0.85);
+    color: rgba(255, 255, 255, 0.9);
     margin: 0;
 }
 
-/* 3. Emergency Card (Red) */
+/* 3. Emergency Card (Crimson Red) */
 .card--emergency {
-    background-color: var(--color-danger);
+    background-color: #B91C1C !important;
+    border: 1px solid #991B1B !important;
     color: #FFFFFF;
     text-align: center;
     align-items: center;
     justify-content: center;
+    box-shadow: 0 4px 16px rgba(185, 28, 28, 0.18);
+}
+
+.card--emergency:hover {
+    background-color: #991B1B !important;
+    transform: translateY(-4px);
+    box-shadow: 0 14px 32px rgba(185, 28, 28, 0.28);
 }
 
 .card--emergency .box-card-title {
@@ -233,7 +281,7 @@ body {
 .card--emergency .box-card-desc {
     font-size: 14px;
     line-height: 22px;
-    color: rgba(255, 255, 255, 0.9);
+    color: rgba(255, 255, 255, 0.92);
     margin: 0 0 24px 0;
     max-width: 280px;
 }
