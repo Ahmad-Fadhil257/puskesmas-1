@@ -70,18 +70,20 @@
     margin-bottom: 16px;
 }
 
-.survei-full-header__title {
+.survei-full-header__title,
+.survei-header__title {
     font-size: clamp(1.75rem, 3.5vw, 2.5rem);
     font-weight: 800;
-    color: #FFFFFF;
+    color: #FFFFFF !important;
     margin: 0 0 12px 0;
     line-height: 1.2;
     letter-spacing: -0.02em;
 }
 
-.survei-full-header__subtitle {
+.survei-full-header__subtitle,
+.survei-header__subtitle {
     font-size: 16px;
-    color: rgba(255, 255, 255, 0.85);
+    color: rgba(255, 255, 255, 0.9) !important;
     line-height: 1.6;
     max-width: 680px;
     margin: 0;
@@ -246,7 +248,7 @@
     <div class="survei-full-header__glow" aria-hidden="true"></div>
 
     <div class="survei-full-header__container">
-        <div class="survei-header-badge">
+        <div class="survei-header-badge" data-aos="fade-right">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                 <polyline points="14 2 14 8 20 8"></polyline>
@@ -256,8 +258,8 @@
             </svg>
             <span>SURVEI KEPUASAN MASYARAKAT</span>
         </div>
-        <h1 class="survei-full-header__title">Survei Kepuasan Masyarakat (SKM)</h1>
-        <p class="survei-full-header__subtitle">
+        <h1 class="survei-full-header__title" data-aos="fade-right">Survei Kepuasan Masyarakat (SKM)</h1>
+        <p class="survei-full-header__subtitle" data-aos="fade-up">
             Partisipasi Anda sangat berarti bagi peningkatan mutu, transparansi, dan pelayanan kesehatan Puskesmas. Mohon luangkan waktu untuk mengisi formulir evaluasi berikut.
         </p>
     </div>

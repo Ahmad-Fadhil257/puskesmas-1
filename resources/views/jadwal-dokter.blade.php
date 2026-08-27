@@ -15,7 +15,7 @@
     <div class="jadwal-full-header__glow" aria-hidden="true"></div>
 
     <div class="jadwal-full-header__container">
-        <div class="jadwal-header-badge">
+        <div class="jadwal-header-badge" data-aos="fade-right">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                 <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
                 <line x1="16" y1="2" x2="16" y2="6"></line>
@@ -24,8 +24,8 @@
             </svg>
             <span>JADWAL DOKTER</span>
         </div>
-        <h1 class="jadwal-full-header__title">Jadwal Praktik Dokter Spesialis & Umum</h1>
-        <p class="jadwal-full-header__subtitle">
+        <h1 class="jadwal-full-header__title" data-aos="fade-right">Jadwal Praktik Dokter Spesialis & Umum</h1>
+        <p class="jadwal-full-header__subtitle" data-aos="fade-up">
             Temukan jadwal lengkap praktik dokter spesialis dan umum kami untuk perencanaan kunjungan kesehatan Anda dan keluarga.
         </p>
     </div>
@@ -36,7 +36,7 @@
     <div class="jadwal-container">
         <div class="jadwal-grid">
             @forelse($dokters as $dokter)
-            <div class="jadwal-card">
+            <div class="jadwal-card" data-aos="fade-up">
                 <div class="jadwal-card-photo">
                     @if($dokter->photo)
                         <img src="{{ asset($dokter->photo) }}" alt="{{ $dokter->name }}" loading="lazy">

@@ -44,14 +44,14 @@
     <div class="layanan-full-header__glow" aria-hidden="true"></div>
 
     <div class="layanan-full-header__container">
-        <div class="layanan-header-badge">
+        <div class="layanan-header-badge" data-aos="fade-right">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M12 2v20M2 12h20"/>
             </svg>
             <span>LAYANAN KAMI</span>
         </div>
-        <h1 class="layanan-full-header__title">Solusi Layanan Kesehatan Komprehensif</h1>
-        <p class="layanan-full-header__subtitle">
+        <h1 class="layanan-full-header__title" data-aos="fade-right">Solusi Layanan Kesehatan Komprehensif</h1>
+        <p class="layanan-full-header__subtitle" data-aos="fade-up">
             Di Puskesmas kami, kami menawarkan beragam layanan medis yang disesuaikan dengan kebutuhan Anda, mulai dari pemeriksaan rutin hingga perawatan khusus.
         </p>
     </div>

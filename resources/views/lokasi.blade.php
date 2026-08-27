@@ -245,15 +245,15 @@
     <div class="lokasi-full-header__glow" aria-hidden="true"></div>
 
     <div class="lokasi-full-header__container">
-        <div class="lokasi-header-badge">
+        <div class="lokasi-header-badge" data-aos="fade-right">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
                 <circle cx="12" cy="10" r="3"></circle>
             </svg>
             <span>Informasi & Peta Lokasi</span>
         </div>
-        <h1 class="lokasi-full-header__title">Lokasi & Kontak Puskesmas</h1>
-        <p class="lokasi-full-header__subtitle">
+        <h1 class="lokasi-full-header__title" data-aos="fade-right">Lokasi & Kontak Puskesmas</h1>
+        <p class="lokasi-full-header__subtitle" data-aos="fade-up">
             Kunjungi Puskesmas kami dengan mudah. Temukan rute navigasi terdekat, alamat lengkap, jadwal operasional pelayanan, serta kontak informasi bantuan kami.
         </p>
     </div>
@@ -271,7 +271,7 @@
             <div style="display: flex; flex-direction: column; gap: 24px;">
 
                 {{-- Card 1: Alamat Utama --}}
-                <div class="lokasi-card">
+                <div class="lokasi-card" data-aos="fade-up">
                     <div style="display: flex; align-items: flex-start; gap: 18px;">
                         <div class="lokasi-icon-wrapper">
                             <i class="bx bx-map"></i>
@@ -294,7 +294,7 @@
                 </div>
 
                 {{-- Card 2: Jam Pelayanan --}}
-                <div class="lokasi-card">
+                <div class="lokasi-card" data-aos="fade-up">
                     <div style="display: flex; align-items: flex-start; gap: 18px;">
                         <div class="lokasi-icon-wrapper" style="background: #FFFBEB; color: #D97706;">
                             <i class="bx bx-time-five"></i>
@@ -326,7 +326,7 @@
                 </div>
 
                 {{-- Card 3: Kontak & Bantuan --}}
-                <div class="lokasi-card">
+                <div class="lokasi-card" data-aos="fade-up">
                     <div style="display: flex; align-items: flex-start; gap: 18px;">
                         <div class="lokasi-icon-wrapper" style="background: #F0FDF4; color: #16A34A;">
                             <i class="bx bx-phone-call"></i>
