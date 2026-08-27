@@ -13,9 +13,17 @@ class AdminSurveyController extends Controller
     /**
      * Tampilkan rekap data survei & testimoni pasien
      */
-    public function index()
+    public function index(Request $request)
     {
-        $surveys = Survey::orderBy('created_at', 'desc')->paginate(15);
+        $ratingFilter = $request->query('rating');
+
+        $query = Survey::orderBy('created_at', 'desc');
+
+        if ($ratingFilter && in_array($ratingFilter, ['1','2','3','4','5'])) {
+            $query->where('rating', (int) $ratingFilter);
+        }
+
+        $surveys = $query->paginate(15)->withQueryString();
         $totalResponden = Survey::count();
         $avgRating = Survey::getAverageRating();
         $satisfactionPct = Survey::getSatisfactionPercentage();
@@ -33,7 +41,8 @@ class AdminSurveyController extends Controller
             'totalResponden',
             'avgRating',
             'satisfactionPct',
-            'ratingCounts'
+            'ratingCounts',
+            'ratingFilter'
         ));
     }
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Survey;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class SurveyController extends Controller
 {
@@ -31,6 +32,19 @@ class SurveyController extends Controller
             'poli_name'      => 'required|string|max:100',
             'rating'         => 'required|integer|min:1|max:5',
             'pesan'          => 'required|string|max:1000',
+            'g-recaptcha-response' => ['required', function ($attribute, $value, $fail) {
+                $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
+                    'secret'   => env('RECAPTCHA_SECRET_KEY', '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe'),
+                    'response' => $value,
+                    'remoteip' => request()->ip()
+                ]);
+
+                if (!$response->json('success')) {
+                    $fail('Verifikasi reCAPTCHA gagal, silakan coba lagi.');
+                }
+            }],
+        ], [
+            'g-recaptcha-response.required' => 'Silakan centang kotak reCAPTCHA (Saya bukan robot) untuk melanjutkan.'
         ]);
 
         Survey::create([

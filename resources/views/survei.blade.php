@@ -5,7 +5,7 @@
 
 @push('styles')
 <style>
-/* Full Width Dark Emerald Header (Ijo Tua Persis Berita & Layanan) */
+/* Full Width Dark Emerald Header */
 .survei-full-header {
     width: 100%;
     margin-top: -95px;
@@ -89,18 +89,149 @@
 
 .survei-content-wrapper {
     background: #F8FAFC;
-    padding: 48px 24px 80px;
+    padding: 56px 24px 88px;
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
 }
 
-.rating-choice-card:has(input:checked) {
+/* 2-Column Grid Layout */
+.survei-main-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 40px;
+    align-items: center;
+    max-width: 1140px;
+    margin: 0 auto;
+}
+
+@media (max-width: 991px) {
+    .survei-main-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+}
+
+/* Left Visual Side */
+.survei-visual-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 24px;
+}
+
+.survei-visual-blob {
+    position: absolute;
+    width: 320px;
+    height: 320px;
+    background: #D8F3E5;
+    border-radius: 50% 40% 60% 50% / 50% 60% 40% 50%;
+    z-index: 0;
+    opacity: 0.8;
+}
+
+.survei-visual-img {
+    position: relative;
+    z-index: 1;
+    max-width: 100%;
+    width: 360px;
+    height: auto;
+    border-radius: 20px;
+    object-fit: cover;
+    box-shadow: 0 16px 36px rgba(10, 92, 69, 0.12);
+}
+
+.survei-visual-floating-badge {
+    position: relative;
+    z-index: 2;
+    margin-top: -24px;
+    background: #FFFFFF;
+    border: 1px solid #D6E8E2;
+    border-radius: 9999px;
+    padding: 10px 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+/* Right Form Card */
+.survei-form-card {
+    background: #FFFFFF;
+    border-radius: 20px;
+    padding: 36px 32px;
+    border: 1px solid #E2E8F0;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+}
+
+/* Rating Pill Buttons */
+.rating-pill-group {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+@media (max-width: 576px) {
+    .rating-pill-group {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.rating-pill-item {
+    cursor: pointer;
+    border: 1.5px solid #E2E8F0;
+    border-radius: 10px;
+    padding: 12px 8px;
+    text-align: center;
+    background: #FFFFFF;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.rating-pill-item:hover {
+    border-color: #0A5C45;
+    background: #F8FAF9;
+}
+
+.rating-pill-item:has(input:checked) {
+    border-color: #0A5C45 !important;
     background: #E6F5F1 !important;
-    border-color: #0A5C45 !important;
-    box-shadow: 0 4px 14px rgba(10, 92, 69, 0.15) !important;
+    box-shadow: 0 2px 8px rgba(10, 92, 69, 0.15);
 }
 
-.rating-choice-card:hover {
-    border-color: #0A5C45 !important;
-    transform: translateY(-2px);
+.rating-pill-item:has(input:checked) .rating-pill-text {
+    color: #0A5C45 !important;
+    font-weight: 800 !important;
+}
+
+/* Submit Button */
+.btn-submit-survei {
+    width: 100%;
+    background: #00A86B;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 10px;
+    padding: 14px 20px;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 14px rgba(0, 168, 107, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn-submit-survei:hover {
+    background: #008f5b;
+    box-shadow: 0 6px 18px rgba(0, 168, 107, 0.4);
+    transform: translateY(-1px);
 }
 </style>
 @endpush
@@ -133,250 +264,175 @@
 </section>
 
 {{-- =========================================================================
-   MAIN CONTENT WRAPPER
+   MAIN 2-COLUMN SECTION (SESUAI GAMBAR REFERENSI)
    ========================================================================= --}}
 <div class="survei-content-wrapper">
-    <div style="max-width: 1080px; margin: 0 auto; width: 100%;">
+    <div style="max-width: 1140px; margin: 0 auto; width: 100%;">
 
         {{-- Alert Notifikasi Sukses --}}
         @if(session('survey_success'))
-            <div style="margin-bottom: 32px; background: #FFFFFF; border-left: 6px solid #0A5C45; border-radius: 16px; padding: 20px 24px; box-shadow: 0 10px 30px rgba(10, 92, 69, 0.12); display: flex; align-items: center; gap: 16px;">
-                <div style="width: 48px; height: 48px; border-radius: 50%; background: #E6F5F1; display: flex; align-items: center; justify-content: center; font-size: 24px; color: #0A5C45; flex-shrink: 0;">
+            <div style="margin-bottom: 32px; background: #FFFFFF; border-left: 6px solid #00A86B; border-radius: 16px; padding: 20px 24px; box-shadow: 0 10px 30px rgba(0, 168, 107, 0.12); display: flex; align-items: center; gap: 16px;">
+                <div style="width: 44px; height: 44px; border-radius: 50%; background: #E6F5F1; display: flex; align-items: center; justify-content: center; font-size: 22px; color: #00A86B; flex-shrink: 0;">
                     <i class="bx bx-check"></i>
                 </div>
                 <div>
-                    <h4 style="margin: 0 0 4px 0; color: #0A5C45; font-size: 16px; font-weight: 800;">Survei Berhasil Dikirim!</h4>
-                    <p style="margin: 0; color: #40564F; font-size: 14px; line-height: 1.5;">{{ session('survey_success') }}</p>
+                    <h4 style="margin: 0 0 2px 0; color: #0A5C45; font-size: 15px; font-weight: 800;">Survei Berhasil Dikirim!</h4>
+                    <p style="margin: 0; color: #40564F; font-size: 13.5px; line-height: 1.5;">{{ session('survey_success') }}</p>
                 </div>
             </div>
         @endif
 
-        {{-- STATISTIK IKM (Indeks Kepuasan Masyarakat) --}}
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-bottom: 40px;">
-            {{-- Widget 1: Skor IKM --}}
-            <div style="background: #FFFFFF; border-radius: 20px; padding: 24px; box-shadow: 0 4px 20px rgba(10, 92, 69, 0.06); border: 1px solid #D6E8E2; display: flex; align-items: center; gap: 16px;">
-                <div style="width: 52px; height: 52px; border-radius: 14px; background: #FEF3C7; display: flex; align-items: center; justify-content: center; font-size: 26px; color: #F59E0B; flex-shrink: 0;">
-                    <i class="bx bxs-star"></i>
-                </div>
-                <div>
-                    <span style="font-size: 12px; font-weight: 700; color: #6E857E; text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 2px;">Indeks Kepuasan (IKM)</span>
-                    <div style="display: flex; align-items: baseline; gap: 6px;">
-                        <span style="font-size: 28px; font-weight: 800; color: #122822; line-height: 1;">{{ $avgRating }}</span>
-                        <span style="font-size: 14px; color: #6E857E; font-weight: 600;">/ 5.0</span>
+        {{-- Main 2-Column Grid --}}
+        <div class="survei-main-grid">
+
+            {{-- Kolom Kiri: Visual Gambar / Ilustrasi + Badge Rating --}}
+            <div class="survei-visual-card">
+                <div class="survei-visual-blob"></div>
+                <img src="{{ asset('assets/img/survey-illustration.jpg') }}" alt="Survei Kepuasan Pasien" class="survei-visual-img" onerror="this.src='{{ asset('assets/img/stethoscope.png') }}'">
+                
+                <div class="survei-visual-floating-badge">
+                    <div style="display: flex; align-items: center; gap: 4px; color: #F59E0B; font-weight: 800; font-size: 15px;">
+                        <i class="bx bxs-star"></i>
+                        <span>{{ $avgRating ?? '5.0' }}</span>
                     </div>
-                    <small style="color: #0A5C45; font-weight: 700; font-size: 12px;">Mutu A (Sangat Baik)</small>
+                    <span style="display: inline-block; width: 4px; height: 4px; background: #CBD5E1; border-radius: 50%;"></span>
+                    <span style="font-size: 13px; font-weight: 700; color: #0A5C45;">{{ $satisfactionPct ?? '98' }}% Sangat Puas</span>
+                </div>
+
+                <div style="margin-top: 20px; z-index: 2; position: relative;">
+                    <h4 style="font-size: 17px; font-weight: 800; color: #122822; margin: 0 0 6px 0;">Penilaian Anda Sangat Berarti</h4>
+                    <p style="font-size: 13.5px; color: #64748B; margin: 0; max-width: 320px; line-height: 1.5;">
+                        Setiap masukan dan evaluasi membantu kami terus meningkatkan kualitas pelayanan kesehatan masyarakat.
+                    </p>
                 </div>
             </div>
 
-            {{-- Widget 2: Persentase Kepuasan --}}
-            <div style="background: #FFFFFF; border-radius: 20px; padding: 24px; box-shadow: 0 4px 20px rgba(10, 92, 69, 0.06); border: 1px solid #D6E8E2; display: flex; align-items: center; gap: 16px;">
-                <div style="width: 52px; height: 52px; border-radius: 14px; background: #DCFCE7; display: flex; align-items: center; justify-content: center; font-size: 26px; color: #16A34A; flex-shrink: 0;">
-                    <i class="bx bx-happy-beaming"></i>
-                </div>
-                <div>
-                    <span style="font-size: 12px; font-weight: 700; color: #6E857E; text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 2px;">Tingkat Kepuasan</span>
-                    <div style="display: flex; align-items: baseline; gap: 6px;">
-                        <span style="font-size: 28px; font-weight: 800; color: #122822; line-height: 1;">{{ $satisfactionPct }}%</span>
+            {{-- Kolom Kanan: Formulir Survei (Persis Gambar 2) --}}
+            <div class="survei-form-card">
+                
+                @if ($errors->any())
+                    <div style="background: #FEF2F2; border-left: 4px solid #EF4444; border-radius: 10px; padding: 12px 16px; margin-bottom: 20px;">
+                        <strong style="color: #B91C1C; font-size: 13px; display: block; margin-bottom: 2px;">Harap perbaiki beberapa isian:</strong>
+                        <ul style="margin: 0; padding-left: 18px; font-size: 12.5px; color: #B91C1C;">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
                     </div>
-                    <small style="color: #16A34A; font-weight: 700; font-size: 12px;">Pasien Puas & Sangat Puas</small>
-                </div>
-            </div>
+                @endif
 
-            {{-- Widget 3: Total Responden --}}
-            <div style="background: #FFFFFF; border-radius: 20px; padding: 24px; box-shadow: 0 4px 20px rgba(10, 92, 69, 0.06); border: 1px solid #D6E8E2; display: flex; align-items: center; gap: 16px;">
-                <div style="width: 52px; height: 52px; border-radius: 14px; background: #E0F2FE; display: flex; align-items: center; justify-content: center; font-size: 26px; color: #0284C7; flex-shrink: 0;">
-                    <i class="bx bx-user-voice"></i>
-                </div>
-                <div>
-                    <span style="font-size: 12px; font-weight: 700; color: #6E857E; text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 2px;">Total Responden</span>
-                    <div style="display: flex; align-items: baseline; gap: 6px;">
-                        <span style="font-size: 28px; font-weight: 800; color: #122822; line-height: 1;">{{ $totalResponden }}</span>
-                        <span style="font-size: 14px; color: #6E857E; font-weight: 600;">Orang</span>
-                    </div>
-                    <small style="color: #0284C7; font-weight: 700; font-size: 12px;">Data Terverifikasi</small>
-                </div>
-            </div>
-        </div>
+                <form action="{{ route('survei.store') }}" method="POST">
+                    @csrf
 
-        {{-- FORMULIR SURVEI KEPUASAN (Card Form Utama) --}}
-        <div style="background: #FFFFFF; border-radius: 24px; padding: 40px 36px; box-shadow: 0 10px 30px rgba(10, 92, 69, 0.08); border: 1px solid #D6E8E2; margin-bottom: 56px;">
-            <div style="border-bottom: 1.5px solid #EDF4F1; padding-bottom: 20px; margin-bottom: 28px;">
-                <h3 style="font-size: 22px; font-weight: 800; color: #0A5C45; margin: 0 0 6px 0;">
-                    Formulir Evaluasi Pelayanan Pasien
-                </h3>
-                <p style="font-size: 14px; color: #6E857E; margin: 0;">
-                    Silakan isi formulir di bawah ini dengan jujur sesuai pengalaman Anda saat berobat di Puskesmas.
-                </p>
-            </div>
-
-            @if ($errors->any())
-                <div style="background: #FEF2F2; border-left: 5px solid #EF4444; border-radius: 12px; padding: 14px 18px; margin-bottom: 24px;">
-                    <strong style="color: #B91C1C; font-size: 14px; display: block; margin-bottom: 4px;">Harap perbaiki beberapa input berikut:</strong>
-                    <ul style="margin: 0; padding-left: 20px; font-size: 13px; color: #B91C1C;">
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-
-            <form action="{{ route('survei.store') }}" method="POST">
-                @csrf
-
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-bottom: 24px;">
-                    {{-- Nama --}}
-                    <div>
-                        <label style="display: block; font-size: 14px; font-weight: 700; color: #122822; margin-bottom: 8px;">
-                            Nama Lengkap / Inisial Pasien <span style="color: #E8672C;">*</span>
-                        </label>
-                        <input type="text" 
-                               name="name" 
-                               value="{{ old('name') }}" 
-                               placeholder="Contoh: Rina Anggraini / R.A." 
-                               required 
-                               style="width: 100%; padding: 12px 16px; border-radius: 12px; border: 1.5px solid #D6E8E2; font-family: inherit; font-size: 14px; box-sizing: border-box; outline: none; transition: border-color 0.2s;"
-                               onfocus="this.style.borderColor='#0A5C45'" onblur="this.style.borderColor='#D6E8E2'">
-                    </div>
-
-                    {{-- No HP / Email --}}
-                    <div>
-                        <label style="display: block; font-size: 14px; font-weight: 700; color: #122822; margin-bottom: 8px;">
-                            No. WhatsApp / Email <span style="font-size: 12px; color: #6E857E; font-weight: 400;">(Opsional)</span>
-                        </label>
-                        <input type="text" 
-                               name="email_or_phone" 
-                               value="{{ old('email_or_phone') }}" 
-                               placeholder="Contoh: 08123456789 atau nama@email.com" 
-                               style="width: 100%; padding: 12px 16px; border-radius: 12px; border: 1.5px solid #D6E8E2; font-family: inherit; font-size: 14px; box-sizing: border-box; outline: none; transition: border-color 0.2s;"
-                               onfocus="this.style.borderColor='#0A5C45'" onblur="this.style.borderColor='#D6E8E2'">
-                    </div>
-                </div>
-
-                {{-- Layanan / Poli --}}
-                <div style="margin-bottom: 28px;">
-                    <label style="display: block; font-size: 14px; font-weight: 700; color: #122822; margin-bottom: 8px;">
-                        Layanan / Poliklinik yang Dikunjungi <span style="color: #E8672C;">*</span>
-                    </label>
-                    <select name="poli_name" required style="width: 100%; padding: 12px 16px; border-radius: 12px; border: 1.5px solid #D6E8E2; font-family: inherit; font-size: 14px; box-sizing: border-box; outline: none; background: #FFFFFF; cursor: pointer;">
-                        <option value="Poli Umum" {{ old('poli_name') == 'Poli Umum' ? 'selected' : '' }}>Poli Umum</option>
-                        <option value="Poli Gigi & Mulut" {{ old('poli_name') == 'Poli Gigi & Mulut' ? 'selected' : '' }}>Poli Gigi & Mulut</option>
-                        <option value="Poli KIA & KB" {{ old('poli_name') == 'Poli KIA & KB' ? 'selected' : '' }}>Poli KIA & KB (Kesehatan Ibu & Anak)</option>
-                        <option value="Layanan Farmasi & Obat" {{ old('poli_name') == 'Layanan Farmasi & Obat' ? 'selected' : '' }}>Layanan Farmasi & Apotek Obat</option>
-                        <option value="Laboratorium Klinis" {{ old('poli_name') == 'Laboratorium Klinis' ? 'selected' : '' }}>Laboratorium Klinis</option>
-                        <option value="Layanan UGD 24 Jam" {{ old('poli_name') == 'Layanan UGD 24 Jam' ? 'selected' : '' }}>Layanan UGD 24 Jam</option>
-                    </select>
-                </div>
-
-                {{-- Rating Kepuasan Interaktif (Menggunakan Icon Bersih Tanpa Emoticon) --}}
-                <div style="margin-bottom: 28px;">
-                    <label style="display: block; font-size: 14px; font-weight: 700; color: #122822; margin-bottom: 8px;">
-                        Bagaimana Tingkat Kepuasan Anda Terhadap Pelayanan? <span style="color: #E8672C;">*</span>
-                    </label>
-                    
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px;" id="ratingChoiceGroup">
-                        <label class="rating-choice-card" style="cursor: pointer; border: 2px solid #D6E8E2; border-radius: 16px; padding: 16px 12px; text-align: center; transition: all 0.2s; background: #F8FAF9; display: flex; flex-direction: column; align-items: center; gap: 6px;">
-                            <input type="radio" name="rating" value="5" {{ old('rating', '5') == '5' ? 'checked' : '' }} style="display: none;">
-                            <i class="bx bxs-smile" style="font-size: 28px; color: #16A34A;"></i>
-                            <span style="font-size: 13px; font-weight: 700; color: #122822;">Sangat Puas</span>
-                            <span style="font-size: 11px; color: #F59E0B; font-weight: 700;">5 Bintang</span>
-                        </label>
-
-                        <label class="rating-choice-card" style="cursor: pointer; border: 2px solid #D6E8E2; border-radius: 16px; padding: 16px 12px; text-align: center; transition: all 0.2s; background: #F8FAF9; display: flex; flex-direction: column; align-items: center; gap: 6px;">
-                            <input type="radio" name="rating" value="4" {{ old('rating') == '4' ? 'checked' : '' }} style="display: none;">
-                            <i class="bx bx-smile" style="font-size: 28px; color: #0A5C45;"></i>
-                            <span style="font-size: 13px; font-weight: 700; color: #122822;">Puas</span>
-                            <span style="font-size: 11px; color: #F59E0B; font-weight: 700;">4 Bintang</span>
-                        </label>
-
-                        <label class="rating-choice-card" style="cursor: pointer; border: 2px solid #D6E8E2; border-radius: 16px; padding: 16px 12px; text-align: center; transition: all 0.2s; background: #F8FAF9; display: flex; flex-direction: column; align-items: center; gap: 6px;">
-                            <input type="radio" name="rating" value="3" {{ old('rating') == '3' ? 'checked' : '' }} style="display: none;">
-                            <i class="bx bx-meh" style="font-size: 28px; color: #0284C7;"></i>
-                            <span style="font-size: 13px; font-weight: 700; color: #122822;">Cukup</span>
-                            <span style="font-size: 11px; color: #F59E0B; font-weight: 700;">3 Bintang</span>
-                        </label>
-
-                        <label class="rating-choice-card" style="cursor: pointer; border: 2px solid #D6E8E2; border-radius: 16px; padding: 16px 12px; text-align: center; transition: all 0.2s; background: #F8FAF9; display: flex; flex-direction: column; align-items: center; gap: 6px;">
-                            <input type="radio" name="rating" value="2" {{ old('rating') == '2' ? 'checked' : '' }} style="display: none;">
-                            <i class="bx bx-sad" style="font-size: 28px; color: #EA580C;"></i>
-                            <span style="font-size: 13px; font-weight: 700; color: #122822;">Kurang Puas</span>
-                            <span style="font-size: 11px; color: #F59E0B; font-weight: 700;">2 Bintang</span>
-                        </label>
-
-                        <label class="rating-choice-card" style="cursor: pointer; border: 2px solid #D6E8E2; border-radius: 16px; padding: 16px 12px; text-align: center; transition: all 0.2s; background: #F8FAF9; display: flex; flex-direction: column; align-items: center; gap: 6px;">
-                            <input type="radio" name="rating" value="1" {{ old('rating') == '1' ? 'checked' : '' }} style="display: none;">
-                            <i class="bx bx-angry" style="font-size: 28px; color: #DC2626;"></i>
-                            <span style="font-size: 13px; font-weight: 700; color: #122822;">Tidak Puas</span>
-                            <span style="font-size: 11px; color: #F59E0B; font-weight: 700;">1 Bintang</span>
-                        </label>
-                    </div>
-                </div>
-
-                {{-- Ulasan / Masukan --}}
-                <div style="margin-bottom: 32px;">
-                    <label style="display: block; font-size: 14px; font-weight: 700; color: #122822; margin-bottom: 8px;">
-                        Ulasan, Kritik, atau Saran Perbaikan Pelayanan <span style="color: #E8672C;">*</span>
-                    </label>
-                    <textarea name="pesan" 
-                              rows="4" 
-                              placeholder="Ceritakan pengalaman Anda selama mendapatkan pelayanan medis di Puskesmas..." 
-                              required 
-                              style="width: 100%; padding: 14px 16px; border-radius: 12px; border: 1.5px solid #D6E8E2; font-family: inherit; font-size: 14px; box-sizing: border-box; outline: none; resize: vertical; transition: border-color 0.2s;"
-                              onfocus="this.style.borderColor='#0A5C45'" onblur="this.style.borderColor='#D6E8E2'">{{ old('pesan') }}</textarea>
-                </div>
-
-                {{-- Submit Button --}}
-                <div style="display: flex; justify-content: flex-end;">
-                    <button type="submit" style="background: #0A5C45; color: #FFFFFF; font-family: inherit; font-size: 15px; font-weight: 700; padding: 14px 36px; border-radius: 9999px; border: none; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 4px 16px rgba(10, 92, 69, 0.35); display: inline-flex; align-items: center; gap: 8px;">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
-                        <span>Kirim Penilaian Survei</span>
-                    </button>
-                </div>
-            </form>
-        </div>
-
-        {{-- Ulasan Terbaru Pasien --}}
-        @if(isset($recentSurveys) && $recentSurveys->count() > 0)
-        <div>
-            <div style="text-align: center; margin-bottom: 32px;">
-                <h3 style="font-size: 22px; font-weight: 800; color: #122822; margin: 0 0 8px 0;">
-                    Ulasan Pasien Terkini
-                </h3>
-                <p style="font-size: 14px; color: #6E857E; margin: 0;">
-                    Transparansi evaluasi dan masukan nyata dari masyarakat Puskesmas.
-                </p>
-            </div>
-
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;">
-                @foreach($recentSurveys as $review)
-                <div style="background: #FFFFFF; border-radius: 16px; padding: 24px; border: 1px solid #E2E8F0; box-shadow: 0 2px 10px rgba(0,0,0,0.03); display: flex; flex-direction: column; justify-content: space-between; gap: 16px;">
-                    <div>
-                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
-                            <div style="display: flex; align-items: center; gap: 10px;">
-                                <img src="{{ $review->avatar_url }}" alt="{{ $review->name }}" style="width: 38px; height: 38px; border-radius: 50%; object-fit: cover;">
-                                <div>
-                                    <strong style="display: block; font-size: 14px; color: #122822;">{{ $review->name }}</strong>
-                                    <small style="color: #6E857E; font-size: 12px;">{{ $review->poli_name }}</small>
-                                </div>
-                            </div>
-                            <div class="d-flex text-warning" style="font-size: 14px;">
-                                @for($i = 1; $i <= $review->rating; $i++)
-                                    <i class="bx bxs-star"></i>
-                                @endfor
-                            </div>
+                    {{-- Baris 1: Nama Lengkap & No WhatsApp (2 Kolom) --}}
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 20px;">
+                        <div>
+                            <label style="display: block; font-size: 13.5px; font-weight: 700; color: #1E293B; margin-bottom: 6px;">
+                                Nama Lengkap <span style="font-weight: 500; color: #64748B; font-size: 12px;">(Opsional)</span>
+                            </label>
+                            <input type="text" 
+                                   name="name" 
+                                   value="{{ old('name') }}" 
+                                   placeholder="Nama Lengkap Anda" 
+                                   style="width: 100%; padding: 10px 14px; border-radius: 8px; border: 1.5px solid #E2E8F0; font-family: inherit; font-size: 13.5px; box-sizing: border-box; outline: none; transition: border-color 0.2s;"
+                                   onfocus="this.style.borderColor='#00A86B'" onblur="this.style.borderColor='#E2E8F0'">
                         </div>
-                        <p style="font-size: 13.5px; color: #40564F; line-height: 1.55; margin: 0;">
-                            "{{ $review->pesan }}"
-                        </p>
+
+                        <div>
+                            <label style="display: block; font-size: 13.5px; font-weight: 700; color: #1E293B; margin-bottom: 6px;">
+                                Nomor WhatsApp <span style="font-weight: 500; color: #64748B; font-size: 12px;">(Opsional)</span>
+                            </label>
+                            <input type="text" 
+                                   name="email_or_phone" 
+                                   value="{{ old('email_or_phone') }}" 
+                                   placeholder="Contoh: 081234567xxx" 
+                                   style="width: 100%; padding: 10px 14px; border-radius: 8px; border: 1.5px solid #E2E8F0; font-family: inherit; font-size: 13.5px; box-sizing: border-box; outline: none; transition: border-color 0.2s;"
+                                   onfocus="this.style.borderColor='#00A86B'" onblur="this.style.borderColor='#E2E8F0'">
+                        </div>
                     </div>
-                    <div style="border-top: 1px solid #F1F5F9; padding-top: 10px;">
-                        <small style="color: #94A3B8; font-size: 11px;">{{ $review->created_at->diffForHumans() }}</small>
+
+                    {{-- Baris 2: Layanan / Poli yang Dikunjungi --}}
+                    <div style="margin-bottom: 20px;">
+                        <label style="display: block; font-size: 13.5px; font-weight: 700; color: #1E293B; margin-bottom: 6px;">
+                            Layanan / Poliklinik yang Dikunjungi <span style="color: #EF4444;">*</span>
+                        </label>
+                        <select name="poli_name" required style="width: 100%; padding: 10px 14px; border-radius: 8px; border: 1.5px solid #E2E8F0; font-family: inherit; font-size: 13.5px; box-sizing: border-box; outline: none; background: #FFFFFF; cursor: pointer;">
+                            <option value="Poli Umum" {{ old('poli_name') == 'Poli Umum' ? 'selected' : '' }}>Poli Umum</option>
+                            <option value="Poli Gigi & Mulut" {{ old('poli_name') == 'Poli Gigi & Mulut' ? 'selected' : '' }}>Poli Gigi & Mulut</option>
+                            <option value="Poli KIA & KB" {{ old('poli_name') == 'Poli KIA & KB' ? 'selected' : '' }}>Poli KIA & KB (Kesehatan Ibu & Anak)</option>
+                            <option value="Layanan Farmasi & Obat" {{ old('poli_name') == 'Layanan Farmasi & Obat' ? 'selected' : '' }}>Layanan Farmasi & Apotek Obat</option>
+                            <option value="Laboratorium Klinis" {{ old('poli_name') == 'Laboratorium Klinis' ? 'selected' : '' }}>Laboratorium Klinis</option>
+                            <option value="Layanan UGD 24 Jam" {{ old('poli_name') == 'Layanan UGD 24 Jam' ? 'selected' : '' }}>Layanan UGD 24 Jam</option>
+                        </select>
                     </div>
-                </div>
-                @endforeach
+
+                    {{-- Baris 3: Rating Kualitas Pelayanan (4 Pill Buttons Persis Gambar 2) --}}
+                    <div style="margin-bottom: 20px;">
+                        <label style="display: block; font-size: 13.5px; font-weight: 700; color: #1E293B; margin-bottom: 8px;">
+                            Bagaimana kualitas pelayanan Puskesmas menurut Anda? <span style="color: #EF4444;">*</span>
+                        </label>
+
+                        <div class="rating-pill-group">
+                            {{-- Sangat Puas (5) --}}
+                            <label class="rating-pill-item">
+                                <input type="radio" name="rating" value="5" {{ old('rating', '5') == '5' ? 'checked' : '' }} style="display: none;">
+                                <span class="rating-pill-text" style="font-size: 13px; font-weight: 700; color: #334155;">Sangat Puas</span>
+                            </label>
+
+                            {{-- Puas (4) --}}
+                            <label class="rating-pill-item">
+                                <input type="radio" name="rating" value="4" {{ old('rating') == '4' ? 'checked' : '' }} style="display: none;">
+                                <span class="rating-pill-text" style="font-size: 13px; font-weight: 700; color: #334155;">Puas</span>
+                            </label>
+
+                            {{-- Cukup (3) --}}
+                            <label class="rating-pill-item">
+                                <input type="radio" name="rating" value="3" {{ old('rating') == '3' ? 'checked' : '' }} style="display: none;">
+                                <span class="rating-pill-text" style="font-size: 13px; font-weight: 700; color: #334155;">Cukup</span>
+                            </label>
+
+                            {{-- Kurang (2) --}}
+                            <label class="rating-pill-item">
+                                <input type="radio" name="rating" value="2" {{ old('rating') == '2' ? 'checked' : '' }} style="display: none;">
+                                <span class="rating-pill-text" style="font-size: 13px; font-weight: 700; color: #334155;">Kurang</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    {{-- Baris 4: Masukan dan Keluhan --}}
+                    <div style="margin-bottom: 24px;">
+                        <label style="display: block; font-size: 13.5px; font-weight: 700; color: #1E293B; margin-bottom: 6px;">
+                            Masukan dan keluhan <span style="color: #EF4444;">*</span>
+                        </label>
+                        <textarea name="pesan" 
+                                  rows="4" 
+                                  placeholder="Tulis masukan atau keluhan Anda di sini....." 
+                                  required 
+                                  style="width: 100%; padding: 12px 14px; border-radius: 8px; border: 1.5px solid #E2E8F0; font-family: inherit; font-size: 13.5px; box-sizing: border-box; outline: none; resize: vertical; transition: border-color 0.2s;"
+                                  onfocus="this.style.borderColor='#00A86B'" onblur="this.style.borderColor='#E2E8F0'">{{ old('pesan') }}</textarea>
+                    </div>
+
+                    {{-- Baris 4.5: Google reCAPTCHA --}}
+                    <div style="margin-bottom: 24px;">
+                        <div class="g-recaptcha" data-sitekey="{{ env('RECAPTCHA_SITE_KEY', '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI') }}"></div>
+                        @error('g-recaptcha-response')
+                            <span style="color: #EF4444; font-size: 12.5px; margin-top: 4px; display: block;">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    {{-- Baris 5: Tombol Kirim Real-Time --}}
+                    <button type="submit" class="btn-submit-survei">
+                        <span>Kirim Penilaian Real–Time</span>
+                    </button>
+                </form>
             </div>
+
         </div>
-        @endif
 
     </div>
 </div>
+
+@push('scripts')
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+@endpush
 @endsection
