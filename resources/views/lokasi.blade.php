@@ -13,12 +13,12 @@
     padding-bottom: 50px;
     padding-left: 24px;
     padding-right: 24px;
-    background-color: #D5ECE3; /* Solid fresh mint green - berkarakter, segar, tidak pucat */
+    background-color: #C3E5D8; /* Lebih hijau segar, solid, bersih, tidak terlalu putih */
     position: relative;
     overflow: hidden;
     text-align: left;
     box-sizing: border-box;
-    border-bottom: 1px solid #B8DFD1;
+    border-bottom: 1px solid #A6D9C6;
 }
 
 .lokasi-full-header__container {
@@ -41,7 +41,7 @@
 }
 
 .lokasi-header-breadcrumb a {
-    color: #386452;
+    color: #2F5947;
     text-decoration: none;
     transition: color 0.2s;
 }
@@ -63,7 +63,7 @@
 .lokasi-full-header__title {
     font-size: clamp(1.85rem, 4vw, 2.5rem);
     font-weight: 800;
-    color: #004F38; /* Solid deep forest green, clean & high contrast */
+    color: #004531; /* Solid deep forest green, super crisp & clean */
     margin: 0 0 10px 0;
     line-height: 1.25;
     letter-spacing: -0.02em;
@@ -71,21 +71,21 @@
 
 .lokasi-full-header__subtitle {
     font-size: 15.5px;
-    color: #2F5344;
+    color: #254839;
     line-height: 1.6;
     max-width: 680px;
     margin: 0;
 }
 
-/* Growing Botanical Vine Vector (Tumbuh alami dari sudut bawah kanan tanpa potongan) */
+/* Original Swirling Floral Vine Vector (Tumbuh alami dari tepi bawah tanpa potongan) */
 .lokasi-full-header__watermark {
     position: absolute;
     right: 0;
-    bottom: 0;
-    width: 440px;
-    max-width: 42%;
+    bottom: -5px;
+    width: 520px;
+    max-width: 48%;
     height: auto;
-    opacity: 0.32;
+    opacity: 0.26;
     pointer-events: none;
     z-index: 1;
     user-select: none;
@@ -97,8 +97,9 @@
         padding-bottom: 40px;
     }
     .lokasi-full-header__watermark {
-        opacity: 0.18;
-        width: 280px;
+        opacity: 0.15;
+        width: 320px;
+        right: -20px;
     }
 }
 
@@ -256,7 +257,7 @@
    CLEAN MINIMAL LIGHT HEADER (SOLID MINT, WATERMARK & AKSEN ORANYE)
    ========================================================================= --}}
 <section class="lokasi-full-header">
-    <img src="{{ asset('assets/growing-vine.svg') }}" alt="" class="lokasi-full-header__watermark" aria-hidden="true">
+    <img src="{{ asset('assets/swirl-vine.svg') }}" alt="" class="lokasi-full-header__watermark" aria-hidden="true">
 
     <div class="lokasi-full-header__container">
         {{-- Breadcrumb Nav dengan aksen oranye --}}
