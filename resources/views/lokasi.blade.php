@@ -13,12 +13,12 @@
     padding-bottom: 50px;
     padding-left: 24px;
     padding-right: 24px;
-    background-color: #EBF5F1; /* Solid clean light mint - no gradient, no neon */
+    background-color: #D5ECE3; /* Solid fresh mint green - berkarakter, segar, tidak pucat */
     position: relative;
     overflow: hidden;
     text-align: left;
     box-sizing: border-box;
-    border-bottom: 1px solid #D5E7DF;
+    border-bottom: 1px solid #B8DFD1;
 }
 
 .lokasi-full-header__container {
@@ -41,7 +41,7 @@
 }
 
 .lokasi-header-breadcrumb a {
-    color: #527867;
+    color: #386452;
     text-decoration: none;
     transition: color 0.2s;
 }
@@ -71,20 +71,21 @@
 
 .lokasi-full-header__subtitle {
     font-size: 15.5px;
-    color: #4B6358;
+    color: #2F5344;
     line-height: 1.6;
     max-width: 680px;
     margin: 0;
 }
 
-/* Botanical Vector Watermark (Image 1) */
+/* Growing Botanical Vine Vector (Tumbuh alami dari sudut bawah kanan tanpa potongan) */
 .lokasi-full-header__watermark {
     position: absolute;
-    right: -15px;
-    bottom: -15px;
-    height: 125%;
-    max-height: 250px;
-    opacity: 0.16;
+    right: 0;
+    bottom: 0;
+    width: 440px;
+    max-width: 42%;
+    height: auto;
+    opacity: 0.32;
     pointer-events: none;
     z-index: 1;
     user-select: none;
@@ -96,9 +97,8 @@
         padding-bottom: 40px;
     }
     .lokasi-full-header__watermark {
-        opacity: 0.08;
-        right: -30px;
-        height: 90%;
+        opacity: 0.18;
+        width: 280px;
     }
 }
 
@@ -256,7 +256,7 @@
    CLEAN MINIMAL LIGHT HEADER (SOLID MINT, WATERMARK & AKSEN ORANYE)
    ========================================================================= --}}
 <section class="lokasi-full-header">
-    <img src="{{ asset('assets/ornament-clean.png') }}" alt="" class="lokasi-full-header__watermark" aria-hidden="true">
+    <img src="{{ asset('assets/growing-vine.svg') }}" alt="" class="lokasi-full-header__watermark" aria-hidden="true">
 
     <div class="lokasi-full-header__container">
         {{-- Breadcrumb Nav dengan aksen oranye --}}
