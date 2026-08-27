@@ -14,7 +14,35 @@
         <!-- Desktop Menu -->
         <ul class="navbar__menu">
             <li><a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'active' : '' }}">Home</a></li>
-            <li><a href="{{ route('layanan.index') }}" class="{{ request()->routeIs('layanan.*') ? 'active' : '' }}">Layanan</a></li>
+
+            {{-- Dropdown Layanan --}}
+            <li class="navbar__item-dropdown">
+                <a href="{{ route('layanan.index') }}" class="navbar__dropdown-toggle {{ request()->routeIs('layanan.*') ? 'active' : '' }}">
+                    <span>Layanan</span>
+                    <i class="bx bx-chevron-down navbar__dropdown-chevron"></i>
+                </a>
+                <ul class="navbar__dropdown-menu">
+                    @if(isset($navLayanans) && $navLayanans->isNotEmpty())
+                        @foreach($navLayanans as $navItem)
+                            <li>
+                                <a href="{{ route('layanan.detail', $navItem->slug) }}" class="navbar__dropdown-item {{ request()->is('layanan/' . $navItem->slug) ? 'active' : '' }}">
+                                    <i class="{{ $navItem->icon ?? 'bx bx-plus-medical' }} navbar__dropdown-icon"></i>
+                                    <span class="navbar__dropdown-text">{{ $navItem->title }}</span>
+                                </a>
+                            </li>
+                        @endforeach
+                    @endif
+                    <li class="navbar__dropdown-divider"></li>
+                    <li>
+                        <a href="{{ route('layanan.index') }}" class="navbar__dropdown-item navbar__dropdown-all {{ request()->routeIs('layanan.index') ? 'active' : '' }}">
+                            <i class="bx bx-grid-alt navbar__dropdown-icon"></i>
+                            <span class="navbar__dropdown-text"><strong>Lihat Semua Layanan</strong></span>
+                            <i class="bx bx-right-arrow-alt ms-auto"></i>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
             <li><a href="{{ route('jadwal-dokter') }}" class="{{ request()->routeIs('jadwal-dokter') ? 'active' : '' }}">Jadwal Dokter</a></li>
             <li><a href="{{ route('survei.index') }}" class="{{ request()->routeIs('survei.*') ? 'active' : '' }}">Survei Kepuasan</a></li>
             <li><a href="{{ route('blog.index') }}" class="{{ request()->routeIs('blog.*') ? 'active' : '' }}">Berita</a></li>
@@ -38,7 +66,29 @@
     <!-- Mobile Dropdown Menu -->
     <div class="navbar__mobile" id="mobileMenu">
         <a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'active' : '' }}">Home</a>
-        <a href="{{ route('layanan.index') }}" class="{{ request()->routeIs('layanan.*') ? 'active' : '' }}">Layanan</a>
+
+        {{-- Mobile Layanan Accordion --}}
+        <div class="navbar__mobile-accordion">
+            <button type="button" class="navbar__mobile-accordion-toggle {{ request()->routeIs('layanan.*') ? 'active' : '' }}" id="mobileLayananToggle">
+                <span>Layanan</span>
+                <i class="bx bx-chevron-down" id="mobileLayananChevron"></i>
+            </button>
+            <div class="navbar__mobile-accordion-content" id="mobileLayananContent">
+                @if(isset($navLayanans) && $navLayanans->isNotEmpty())
+                    @foreach($navLayanans as $navItem)
+                        <a href="{{ route('layanan.detail', $navItem->slug) }}" class="navbar__mobile-subitem {{ request()->is('layanan/' . $navItem->slug) ? 'active' : '' }}">
+                            <i class="{{ $navItem->icon ?? 'bx bx-plus-medical' }}"></i>
+                            <span>{{ $navItem->title }}</span>
+                        </a>
+                    @endforeach
+                @endif
+                <a href="{{ route('layanan.index') }}" class="navbar__mobile-subitem navbar__mobile-subitem-all {{ request()->routeIs('layanan.index') ? 'active' : '' }}">
+                    <i class="bx bx-grid-alt"></i>
+                    <span><strong>Lihat Semua Layanan →</strong></span>
+                </a>
+            </div>
+        </div>
+
         <a href="{{ route('jadwal-dokter') }}" class="{{ request()->routeIs('jadwal-dokter') ? 'active' : '' }}">Jadwal Dokter</a>
         <a href="{{ route('survei.index') }}" class="{{ request()->routeIs('survei.*') ? 'active' : '' }}">Survei Kepuasan</a>
         <a href="{{ route('blog.index') }}" class="{{ request()->routeIs('blog.*') ? 'active' : '' }}">Berita</a>

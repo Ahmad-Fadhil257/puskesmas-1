@@ -200,6 +200,17 @@
                 }, { passive: true });
             }
 
+            // Mobile Layanan Accordion Toggle
+            const mobileLayananToggle = document.getElementById('mobileLayananToggle');
+            const mobileLayananContent = document.getElementById('mobileLayananContent');
+            if (mobileLayananToggle && mobileLayananContent) {
+                mobileLayananToggle.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    const isOpen = mobileLayananContent.classList.toggle('open');
+                    mobileLayananToggle.classList.toggle('open', isOpen);
+                });
+            }
+
             // Close operational badge
             document.getElementById('closeOperationalBadge')?.addEventListener('click', function() {
                 const badge = document.getElementById('operationalBadge');

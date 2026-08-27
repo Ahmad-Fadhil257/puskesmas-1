@@ -20,6 +20,7 @@
             'icon'            => $item->icon ?? 'bx bx-plus-medical',
             'custom_icon'     => $item->custom_icon ? asset($item->custom_icon) : '',
             'jam_operasional' => $item->jam_operasional ?? 'Senin - Sabtu: 08.00 - 14.00 WIB',
+            'slug'            => $item->slug,
             'tindakan_list'   => $item->tindakan_list,
             'persyaratan'     => $item->persyaratan,
             'btn_text'        => $item->btn_text ? $item->btn_text : 'Hubungi Kami',
@@ -170,8 +171,11 @@
 
         {{-- Modal Footer --}}
         <div class="layanan-modal-footer">
+            <a href="#" id="modalDetailBtn" class="btn-modal-secondary">
+                <i class="bx bx-file-blank me-1"></i> Detail Halaman
+            </a>
             <a href="{{ route('jadwal-dokter') }}" class="btn-modal-secondary">
-                <i class="bx bx-calendar me-1"></i> Cek Jadwal Dokter
+                <i class="bx bx-calendar me-1"></i> Jadwal Dokter
             </a>
             <a href="{{ $appSetting->wa_link }}" target="_blank" rel="noopener" id="modalPrimaryBtn" class="btn-modal-primary">
                 <i class="bx bxl-whatsapp me-1"></i> <span id="modalPrimaryBtnText">Hubungi / Buat Janji</span>
@@ -280,6 +284,12 @@
         const primaryBtn = document.getElementById('modalPrimaryBtn');
         primaryBtn.href = data.btn_link || '{{ $appSetting->wa_link }}';
         document.getElementById('modalPrimaryBtnText').textContent = data.btn_text || 'Hubungi / Buat Janji';
+
+        // Detail Page Link
+        const detailBtn = document.getElementById('modalDetailBtn');
+        if (detailBtn && data.slug) {
+            detailBtn.href = '/layanan/' + data.slug;
+        }
 
         const modal = document.getElementById('layananModalOverlay');
         modal.classList.add('show');

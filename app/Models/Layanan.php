@@ -14,13 +14,16 @@ class Layanan extends Model
     protected $fillable = [
         'order',
         'title',
+        'slug',
         'kategori',
         'description',
+        'image',
         'icon',
         'custom_icon',
         'variant',
         'tipe_jaminan',
         'jam_operasional',
+        'jadwal_pendaftaran',
         'dokter_ids',
         'tindakan_medis',
         'persyaratan',
@@ -28,6 +31,43 @@ class Layanan extends Model
         'btn_link',
         'is_active',
     ];
+
+    protected static function booted()
+    {
+        static::saving(function ($layanan) {
+            if (empty($layanan->slug) && !empty($layanan->title)) {
+                $baseSlug = \Illuminate\Support\Str::slug($layanan->title);
+                $slug = $baseSlug;
+                $counter = 1;
+                while (static::where('slug', $slug)->where('id', '!=', $layanan->id ?? 0)->exists()) {
+                    $slug = "{$baseSlug}-{$counter}";
+                    $counter++;
+                }
+                $layanan->slug = $slug;
+            }
+        });
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
+    public function getImageUrlAttribute(): string
+    {
+        if (!empty($this->image)) {
+            if (str_starts_with($this->image, 'http')) {
+                return $this->image;
+            }
+            if (file_exists(public_path('uploads/layanan/' . $this->image))) {
+                return asset('uploads/layanan/' . $this->image);
+            }
+            if (file_exists(public_path($this->image))) {
+                return asset($this->image);
+            }
+        }
+        return asset('admin-assets/img/illustrations/man-with-laptop-light.png');
+    }
 
     public static function getKategoriList(): array
     {

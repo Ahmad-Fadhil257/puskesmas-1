@@ -55,6 +55,25 @@ Route::get('/layanan', function () {
     return view('layanan', compact('layanans', 'dokters', 'specialties'));
 })->name('layanan.index');
 
+// Halaman Detail Layanan Informatif (Slug)
+Route::get('/layanan/{slug}', function ($slug) {
+    $layanan = \App\Models\Layanan::where('slug', $slug)->first();
+    if (!$layanan && is_numeric($slug)) {
+        $layanan = \App\Models\Layanan::find($slug);
+    }
+    if (!$layanan || !$layanan->is_active) {
+        abort(404);
+    }
+
+    $otherLayanans = \App\Models\Layanan::where('is_active', true)
+        ->where('id', '!=', $layanan->id)
+        ->orderBy('order', 'asc')
+        ->take(4)
+        ->get();
+
+    return view('layanan.detail', compact('layanan', 'otherLayanans'));
+})->name('layanan.detail');
+
 // Jadwal Dokter (dari database)
 Route::get('/jadwal-dokter', function () {
     $dokters = Dokter::where('is_active', true)->orderBy('created_at', 'asc')->get();

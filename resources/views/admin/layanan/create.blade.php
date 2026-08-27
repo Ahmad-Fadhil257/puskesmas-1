@@ -40,7 +40,7 @@
         </div>
     @endif
 
-    <form action="{{ route('admin.layanan.store') }}" method="POST">
+    <form action="{{ route('admin.layanan.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
 
         <div class="row g-4">
@@ -159,6 +159,21 @@
                                 @enderror
                             </div>
 
+                            {{-- Foto Tim / Fasilitas Poli --}}
+                            <div class="col-12">
+                                <label class="form-label fw-semibold" for="image">
+                                    Foto Tim Medis / Ruangan Poli <small class="text-muted">(Opsional)</small>
+                                </label>
+                                <input type="file"
+                                    class="form-control @error('image') is-invalid @enderror"
+                                    id="image" name="image"
+                                    accept="image/png,image/jpeg,image/jpg,image/webp" />
+                                <div class="form-text">Format: JPG, PNG, WEBP. Maks 3 MB. Ditampilkan di halaman detail informasi poli.</div>
+                                @error('image')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -188,6 +203,20 @@
                                 <button type="button" class="btn btn-xs btn-outline-secondary" onclick="setJamPreset('Senin - Jumat: 08.00 - 13.00 WIB')">Senin - Jumat (08.00 - 13.00)</button>
                                 <button type="button" class="btn btn-xs btn-outline-secondary" onclick="setJamPreset('Sesuai Jadwal Dokter Praktek')">Sesuai Jadwal Dokter</button>
                             </div>
+                        </div>
+
+                        <div class="mt-3">
+                            <label class="form-label fw-semibold" for="jadwal_pendaftaran">
+                                Jadwal Pendaftaran Loket <small class="text-muted">(Opsional)</small>
+                            </label>
+                            <textarea class="form-control @error('jadwal_pendaftaran') is-invalid @enderror"
+                                id="jadwal_pendaftaran" name="jadwal_pendaftaran"
+                                rows="3"
+                                placeholder="Contoh:&#10;Senin - Kamis: 07.30 - 12.00 WIB&#10;Jumat: 07.30 - 10.30 WIB&#10;Sabtu: 07.30 - 11.30 WIB">{{ old('jadwal_pendaftaran') }}</textarea>
+                            <div class="form-text">Rincian jam buka loket pendaftaran khusus poli ini. Jika kosong, akan memakai jadwal standar.</div>
+                            @error('jadwal_pendaftaran')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
                 </div>
