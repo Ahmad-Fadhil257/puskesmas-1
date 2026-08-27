@@ -1,0 +1,224 @@
+/**
+ * ============================================================================
+ * CRISP, ULTRA-SMOOTH & EXTENDED DURATION TYPOGRAPHY & CARD ANIMATIONS (2.2s)
+ * PUSKESMAS CARELINK
+ * ============================================================================
+ * - Tanpa efek blur (100% kristal-jernih & tajam)
+ * - Durasi 2.2 detik: Tenang, elegan & silky smooth
+ * - Kurva deselerasi presisi: cubic-bezier(0.08, 0.95, 0.15, 1)
+ * - Card (Visi-Misi, Info-Card, Bento, Process, Blog, dll) beranimasi sebagai 1 kesatuan utuh
+ * - Teks/font di dalam card TIDAK beranimasi terpisah (statis di dalam card)
+ */
+
+:root {
+    --ease-ultra-smooth:     cubic-bezier(0.08, 0.95, 0.15, 1);    /* Silky-smooth cinematic glide */
+    --ease-ultra-spring:     cubic-bezier(0.15, 1.1, 0.25, 1);     /* Gentle soft spring */
+    --anim-duration-slow:    2200ms;                               /* 2.2 detik: Tenang, elegan & sangat smooth */
+    --anim-duration-badge:   1800ms;                               /* 1.8 detik untuk badge */
+    --anim-slide-dist-x:     42px;
+    --anim-slide-dist-y:     32px;
+}
+
+/* Smooth HTML scroll */
+html {
+    scroll-behavior: smooth;
+}
+
+/* ============================================================================
+   1. GLOBAL HIGH-SPECIFICITY OVERRIDE FOR AOS (NO BLUR, CRISP GLIDE)
+   ============================================================================ */
+
+/* High specificity selector to beat AOS double-attribute classes */
+html:not(.no-js) [data-aos],
+[data-aos],
+[data-aos][data-aos],
+[data-aos][data-aos][data-aos-duration],
+body [data-aos],
+body[data-aos-duration] [data-aos] {
+    will-change: transform, opacity !important;
+    backface-visibility: hidden !important;
+    -webkit-font-smoothing: antialiased !important;
+    pointer-events: auto !important;
+    filter: none !important;
+    transition-duration: var(--anim-duration-slow) !important;
+    transition-timing-function: var(--ease-ultra-smooth) !important;
+}
+
+/* --- FADE RIGHT (Slide In from Left -> Right, Crystal Clear) --- */
+html:not(.no-js) [data-aos="fade-right"],
+[data-aos="fade-right"],
+[data-aos][data-aos="fade-right"] {
+    opacity: 0 !important;
+    transform: translate3d(calc(-1 * var(--anim-slide-dist-x)), 0, 0) scale(0.99) !important;
+    filter: none !important;
+    transition-property: opacity, transform !important;
+    transition-duration: var(--anim-duration-slow) !important;
+    transition-timing-function: var(--ease-ultra-smooth) !important;
+}
+
+html:not(.no-js) [data-aos="fade-right"].aos-animate,
+[data-aos="fade-right"].aos-animate,
+[data-aos][data-aos="fade-right"].aos-animate {
+    opacity: 1 !important;
+    transform: translate3d(0, 0, 0) scale(1) !important;
+    filter: none !important;
+}
+
+/* --- FADE LEFT (Slide In from Right -> Left, Crystal Clear) --- */
+html:not(.no-js) [data-aos="fade-left"],
+[data-aos="fade-left"],
+[data-aos][data-aos="fade-left"] {
+    opacity: 0 !important;
+    transform: translate3d(var(--anim-slide-dist-x), 0, 0) scale(0.99) !important;
+    filter: none !important;
+    transition-property: opacity, transform !important;
+    transition-duration: var(--anim-duration-slow) !important;
+    transition-timing-function: var(--ease-ultra-smooth) !important;
+}
+
+html:not(.no-js) [data-aos="fade-left"].aos-animate,
+[data-aos="fade-left"].aos-animate,
+[data-aos][data-aos="fade-left"].aos-animate {
+    opacity: 1 !important;
+    transform: translate3d(0, 0, 0) scale(1) !important;
+    filter: none !important;
+}
+
+/* --- FADE UP (Upward Float, Crystal Clear) --- */
+html:not(.no-js) [data-aos="fade-up"],
+[data-aos="fade-up"],
+[data-aos][data-aos="fade-up"] {
+    opacity: 0 !important;
+    transform: translate3d(0, var(--anim-slide-dist-y), 0) scale(0.99) !important;
+    filter: none !important;
+    transition-property: opacity, transform !important;
+    transition-duration: var(--anim-duration-slow) !important;
+    transition-timing-function: var(--ease-ultra-smooth) !important;
+}
+
+html:not(.no-js) [data-aos="fade-up"].aos-animate,
+[data-aos="fade-up"].aos-animate,
+[data-aos][data-aos="fade-up"].aos-animate {
+    opacity: 1 !important;
+    transform: translate3d(0, 0, 0) scale(1) !important;
+    filter: none !important;
+}
+
+/* --- FADE DOWN --- */
+html:not(.no-js) [data-aos="fade-down"],
+[data-aos="fade-down"],
+[data-aos][data-aos="fade-down"] {
+    opacity: 0 !important;
+    transform: translate3d(0, calc(-1 * var(--anim-slide-dist-y)), 0) scale(0.99) !important;
+    filter: none !important;
+    transition-property: opacity, transform !important;
+    transition-duration: var(--anim-duration-slow) !important;
+    transition-timing-function: var(--ease-ultra-smooth) !important;
+}
+
+html:not(.no-js) [data-aos="fade-down"].aos-animate,
+[data-aos="fade-down"].aos-animate,
+[data-aos][data-aos="fade-down"].aos-animate {
+    opacity: 1 !important;
+    transform: translate3d(0, 0, 0) scale(1) !important;
+    filter: none !important;
+}
+
+/* ============================================================================
+   2. BADGES & PILL LABELS (SPRING DURATION: 1.8s)
+   ============================================================================ */
+
+.hero__badge[data-aos],
+.about__badge[data-aos],
+.values__badge[data-aos],
+.layanan-bento-badge[data-aos],
+.dokter-label[data-aos],
+.process__badge[data-aos],
+.testimonials__badge[data-aos],
+.blog__badge[data-aos],
+.jadwal-header-badge[data-aos],
+.survei-header-badge[data-aos],
+.lokasi-header-badge[data-aos],
+.article-header-category-pill[data-aos] {
+    transition-timing-function: var(--ease-ultra-spring) !important;
+    transition-duration: var(--anim-duration-badge) !important;
+}
+
+/* ============================================================================
+   3. CARD CONTAINERS ANIMATION (Visi-Misi, Bento, Info, Process, Blog)
+   ============================================================================ */
+
+.about__card[data-aos],
+.about__cards[data-aos],
+.info-card[data-aos],
+.bento-card[data-aos],
+.process-card[data-aos],
+.blog-card[data-aos],
+.lokasi-card[data-aos],
+.jadwal-card[data-aos],
+.testimonials__slider-wrapper[data-aos],
+.dokter-slider-wrapper[data-aos] {
+    will-change: transform, opacity !important;
+    backface-visibility: hidden !important;
+    pointer-events: auto !important;
+}
+
+/* ============================================================================
+   4. STRICT EXCLUSION: FONTS/ELEMENTS INSIDE CARDS DO NOT ANIMATE SEPARATELY
+   ============================================================================ */
+
+.info-card [data-aos],
+.bento-card [data-aos],
+.dokter-card [data-aos],
+.process-card [data-aos],
+.testimonial-card [data-aos],
+.testimoni-card [data-aos],
+.blog-card [data-aos],
+.about__card [data-aos],
+.lokasi-card [data-aos],
+.jadwal-card [data-aos],
+.card [data-aos] {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    transition: none !important;
+    animation: none !important;
+}
+
+/* ============================================================================
+   5. INTERACTIVE CTA BUTTONS
+   ============================================================================ */
+
+.hero__actions .btn-primary,
+.hero__actions .btn-secondary,
+.btn-blog-see-all {
+    transition: 
+        transform 0.45s var(--ease-ultra-spring),
+        box-shadow 0.45s ease,
+        background-color 0.3s ease,
+        color 0.3s ease !important;
+}
+
+.hero__actions .btn-primary:hover,
+.hero__actions .btn-secondary:hover,
+.btn-blog-see-all:hover {
+    transform: translateY(-3px) scale(1.025);
+}
+
+.hero__actions .btn-primary:active,
+.hero__actions .btn-secondary:active {
+    transform: translateY(0) scale(0.98);
+}
+
+/* ============================================================================
+   6. ACCESSIBILITY: REDUCED MOTION PREFERENCE
+   ============================================================================ */
+@media (prefers-reduced-motion: reduce) {
+    [data-aos] {
+        opacity: 1 !important;
+        transform: none !important;
+        filter: none !important;
+        transition: none !important;
+        animation: none !important;
+    }
+}

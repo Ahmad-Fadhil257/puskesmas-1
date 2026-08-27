@@ -3,12 +3,12 @@
 
         {{-- ===== HEADER SECTION ===== --}}
         <div class="layanan-bento-header">
-            <div class="layanan-bento-badge">
+            <div class="layanan-bento-badge" data-aos="fade-right">
                 <i class="bx bx-plus-medical"></i>
                 <span>LAYANAN PUBLIK</span>
             </div>
-            <h2 class="layanan-bento-title">Pusat Layanan Kesehatan Terpadu</h2>
-            <p class="layanan-bento-subtitle">
+            <h2 class="layanan-bento-title" data-aos="fade-right">Pusat Layanan Kesehatan Terpadu</h2>
+            <p class="layanan-bento-subtitle" data-aos="fade-up">
                 Pilih kategori layanan yang Anda butuhkan. Kami menyediakan berbagai jalur pendaftaran, konsultasi dokter, dan informasi fasilitas kesehatan secara mudah dan terpadu.
             </p>
         </div>
@@ -17,7 +17,7 @@
         <div class="layanan-bento-grid">
 
             {{-- 1. KARTU BESAR KIRI (FEATURED HERO CARD: POLI KIA & IMUNISASI) --}}
-            <div class="bento-card bento-card--hero">
+            <div class="bento-card bento-card--hero" data-aos="fade-up">
                 {{-- Decorative Medical Background Pattern --}}
                 <div class="bento-hero-bg-decor" aria-hidden="true">
                     <svg viewBox="0 0 400 500" fill="none" xmlns="http://www.w3.org/2000/svg" class="bento-hero-svg">
@@ -49,7 +49,7 @@
             </div>
 
             {{-- 2. KARTU KANAN ATAS 1: POLI UMUM & SURAT SEHAT (MINT TINT) --}}
-            <div class="bento-card bento-card--mint">
+            <div class="bento-card bento-card--mint" data-aos="fade-up">
                 <div class="bento-card-icon-wrap icon-mint">
                     <i class="bx bx-clinic"></i>
                 </div>
@@ -60,7 +60,7 @@
             </div>
 
             {{-- 3. KARTU KANAN ATAS 2: FARMASI & APOTEK (PEACH TINT) --}}
-            <div class="bento-card bento-card--peach">
+            <div class="bento-card bento-card--peach" data-aos="fade-up">
                 <div class="bento-card-icon-wrap icon-peach">
                     <i class="bx bx-capsule"></i>
                 </div>
@@ -71,7 +71,7 @@
             </div>
 
             {{-- 4. KARTU KANAN BAWAH: KATALOG LENGKAP PUSKESMAS (WIDE SLATE CARD - SATU-SATUNYA YANG MENGARAHKAN KE /LAYANAN) --}}
-            <div class="bento-card bento-card--slate">
+            <div class="bento-card bento-card--slate" data-aos="fade-up">
                 <div class="bento-slate-left">
                     <div class="bento-card-icon-wrap icon-slate-dark">
                         <i class="bx bx-map-pin"></i>

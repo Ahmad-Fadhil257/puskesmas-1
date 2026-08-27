@@ -25,13 +25,13 @@
         </nav>
 
         {{-- Category Badge --}}
-        <span class="article-header-category-pill">{{ strtoupper($article->category) }}</span>
+        <span class="article-header-category-pill" data-aos="fade-right">{{ strtoupper($article->category) }}</span>
 
         {{-- Large Article Title --}}
-        <h1 class="article-header-main-title">{{ $article->title }}</h1>
+        <h1 class="article-header-main-title" data-aos="fade-right">{{ $article->title }}</h1>
 
         {{-- Metadata Row --}}
-        <div class="article-header-meta-row">
+        <div class="article-header-meta-row" data-aos="fade-up">
             <span class="meta-item">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>

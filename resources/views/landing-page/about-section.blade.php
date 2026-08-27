@@ -3,7 +3,7 @@
     <div class="about__inner">
 
         {{-- Left Column: Staggered Photos --}}
-        <div class="about__images">
+        <div class="about__images" data-aos="fade-right">
             <div class="about__img-wrap about__img-wrap--main">
                 <img src="{{ isset($about) ? $about->image_main_url : asset('assets/about/about-1.jpg') }}"
                      alt="{{ $about->title ?? 'Tim medis profesional Puskesmas CareLink' }}"
@@ -22,7 +22,7 @@
         <div class="about__content">
 
             {{-- Badge --}}
-            <div class="about__badge">
+            <div class="about__badge" data-aos="fade-left">
                 <svg viewBox="0 0 24 24" aria-hidden="true">
                     <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
                 </svg>
@@ -30,12 +30,12 @@
             </div>
 
             {{-- Heading H2 --}}
-            <h2 class="about__title">
+            <h2 class="about__title" data-aos="fade-left">
                 {!! nl2br(e($about->title ?? 'Puskesmas CareLink  Menciptakan Pelayanan Aman, Kesehatan Adalah Prioritas Kami')) !!}
             </h2>
 
             {{-- Description --}}
-            <p class="about__desc">
+            <p class="about__desc" data-aos="fade-up">
                 {!! nl2br(e($about->description ?? 'Puskesmas CareLink menyediakan layanan kesehatan berkualitas tinggi dengan dokter berpengalaman, layanan gawat darurat, dan dukungan sepanjang waktu. Mitra tepercaya Anda untuk hidup yang lebih sehat.')) !!}
             </p>
 
@@ -43,7 +43,7 @@
             <div class="about__cards">
 
                 {{-- Visi --}}
-                <div class="about__card">
+                <div class="about__card" data-aos="fade-up">
                     <div class="about__card-icon">
                         <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2">
                             <circle cx="12" cy="12" r="3"/>
@@ -57,7 +57,7 @@
                 </div>
 
                 {{-- Misi --}}
-                <div class="about__card">
+                <div class="about__card" data-aos="fade-up">
                     <div class="about__card-icon">
                         <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/>

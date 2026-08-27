@@ -6,6 +6,11 @@
     <title>@yield('title', config('app.name') . ' - Melayani Kesehatan Masyarakat')</title>
     <meta name="description" content="@yield('meta_description', 'Pelayanan medis komprehensif dengan dokter ahli, fasilitas modern, dan pelayanan penuh kasih sayang. Kesehatan Anda, prioritas kami.')">
 
+    <!-- Google Fonts - Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
+
     <!-- Boxicons Font Icons -->
     <link rel="stylesheet" href="{{ asset('admin-assets/vendor/fonts/boxicons.css') }}">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -22,6 +27,9 @@
     <link rel="stylesheet" href="{{ asset('css/landing-page/testimoni.css') }}">
     <link rel="stylesheet" href="{{ asset('css/landing-page/blog.css') }}">
     <link rel="stylesheet" href="{{ asset('css/landing-page/footer.css') }}">
+    <!-- AOS (Animate On Scroll) CSS - Sesuai Medisy.id -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/typography-animations.css') }}">
 
     <!-- Floating Operational Badge Styles -->
     <style>
@@ -245,6 +253,12 @@
             });
         });
     </script>
+
+    <!-- AOS (Animate On Scroll) JS - Sesuai Medisy.id -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <!-- Typography Entrance & Exit Animations Engine -->
+    <script src="{{ asset('js/typography-animations.js') }}" defer></script>
 
     @stack('scripts')
 </body>

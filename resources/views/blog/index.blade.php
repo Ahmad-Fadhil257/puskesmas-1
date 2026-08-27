@@ -15,8 +15,8 @@
     <div class="blog-full-header__glow" aria-hidden="true"></div>
 
     <div class="blog-full-header__container">
-        <h1 class="blog-full-header__title">Rilis Berita & Informasi Terkini</h1>
-        <p class="blog-full-header__subtitle">
+        <h1 class="blog-full-header__title" data-aos="fade-right">Rilis Berita & Informasi Terkini</h1>
+        <p class="blog-full-header__subtitle" data-aos="fade-up">
             Informasi seputar kesehatan terkini dan kegiatan pelayanan yang dilaksanakan oleh Puskesmas CareLink
         </p>
     </div>

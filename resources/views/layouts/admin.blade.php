@@ -227,12 +227,12 @@
                     @endif
 
                     <!-- PENGATURAN & AKUN -->
-                    @if($user->canAccessPage('users') || $user->canAccessPage('settings'))
+                    @if($user->canAccessPage('users') || $user->canAccessPage('settings') || $user->canAccessPage('lokasi'))
                     <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">Pengaturan Sistem</span>
                     </li>
                     @endif
-                    @if($user->canAccessPage('settings'))
+                    @if($user->canAccessPage('settings') || $user->canAccessPage('lokasi'))
                     <li class="menu-item {{ request()->routeIs('admin.lokasi.*') ? 'active' : '' }}">
                         <a href="{{ route('admin.lokasi.index') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-map-pin"></i>
