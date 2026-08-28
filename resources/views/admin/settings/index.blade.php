@@ -165,6 +165,10 @@
                             <div class="col-12">
                                 <label class="form-label fw-semibold" for="address">Alamat Lengkap</label>
                                 <textarea class="form-control" id="address" name="address" rows="2" placeholder="Jl. Kesehatan No. 123...">{{ old('address', $setting->address) }}</textarea>
+                                <div class="form-text mt-1 d-flex align-items-center gap-1 text-muted small">
+                                    <i class="bx bx-info-circle text-primary"></i>
+                                    <span>Untuk mengatur <strong>peta Google Maps interaktif</strong>, <strong>patokan landmark</strong>, dan <strong>info UGD 24 Jam</strong>, silakan buka menu <a href="{{ route('admin.lokasi.index') }}" class="fw-bold text-decoration-underline">Lokasi & Peta</a>.</span>
+                                </div>
                             </div>
 
                             {{-- Divider Jam Operasional --}}

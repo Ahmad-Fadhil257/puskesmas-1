@@ -24,10 +24,19 @@
 
             <!-- Dual Action Buttons -->
             <div class="hero__actions" data-aos="fade-up">
-                <a href="{{ $hero->btn_primary_link ?? '#janji-temu' }}" class="btn-primary">
+                @php
+                    $primaryLink = (!empty($hero->btn_primary_link) && $hero->btn_primary_link !== '#janji-temu')
+                        ? $hero->btn_primary_link
+                        : ($appSetting->wa_link ?? '#');
+                    $secondaryLink = (!empty($hero->btn_secondary_link) && $hero->btn_secondary_link !== '#layanan')
+                        ? $hero->btn_secondary_link
+                        : route('layanan.index');
+                    $isPrimaryWa = str_contains($primaryLink, 'wa.me') || str_contains($primaryLink, 'whatsapp');
+                @endphp
+                <a href="{{ $primaryLink }}" class="btn-primary" @if($isPrimaryWa) target="_blank" rel="noopener" @endif>
                     {{ $hero->btn_primary_text ?? 'Janji Temu Online' }}
                 </a>
-                <a href="{{ $hero->btn_secondary_link ?? '#layanan' }}" class="btn-secondary">
+                <a href="{{ $secondaryLink }}" class="btn-secondary">
                     {{ $hero->btn_secondary_text ?? 'Layanan Kami' }}
                 </a>
             </div>
