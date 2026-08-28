@@ -24,7 +24,7 @@
 }
 
 body {
-    background: #F8FAFC !important;
+    background: #EDF2F7 !important;
     font-family: var(--font-family);
     color: var(--color-body);
     min-height: 100vh;
@@ -126,8 +126,8 @@ body {
     background: #FFFFFF;
     border-radius: var(--radius-16);
     padding: 24px 28px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
-    border: 1px solid #E2E8F0;
+    box-shadow: 0 4px 16px rgba(15, 23, 42, 0.05), 0 1px 3px rgba(15, 23, 42, 0.02);
+    border: 1px solid #CBD5E1;
     margin-bottom: 36px;
 }
 
@@ -278,11 +278,11 @@ body {
 .article-card {
     background: #FFFFFF;
     border-radius: var(--radius-16);
-    border: 1px solid #E2E8F0;
+    border: 1px solid #CBD5E1;
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
+    box-shadow: 0 4px 16px rgba(15, 23, 42, 0.05), 0 1px 3px rgba(15, 23, 42, 0.02);
     transition: var(--transition);
 }
 

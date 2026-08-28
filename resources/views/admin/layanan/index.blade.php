@@ -147,6 +147,11 @@
                         {{-- Aksi --}}
                         <td>
                             <div class="d-flex justify-content-center align-items-center gap-1">
+                                {{-- View Public Page --}}
+                                <a href="{{ route('layanan.detail', $item->slug) }}" target="_blank" class="btn btn-sm btn-icon btn-outline-info" title="Buka Halaman Publik">
+                                    <i class="bx bx-link-external"></i>
+                                </a>
+
                                 {{-- Edit Button --}}
                                 <a href="{{ route('admin.layanan.edit', $item->id) }}" class="btn btn-sm btn-icon btn-outline-warning" title="Edit Layanan">
                                     <i class="bx bx-edit-alt"></i>

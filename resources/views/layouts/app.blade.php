@@ -16,7 +16,7 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
     <!-- Main CSS -->
-    <link rel="stylesheet" href="{{ asset('css/layouts/nav.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/layouts/nav.css') }}?v={{ file_exists(public_path('css/layouts/nav.css')) ? filemtime(public_path('css/layouts/nav.css')) : time() }}">
     <link rel="stylesheet" href="{{ asset('css/landing-page/hero.css') }}">
     <link rel="stylesheet" href="{{ asset('css/landing-page/info-cards.css') }}">
     <link rel="stylesheet" href="{{ asset('css/landing-page/about.css') }}">
@@ -27,9 +27,7 @@
     <link rel="stylesheet" href="{{ asset('css/landing-page/testimoni.css') }}">
     <link rel="stylesheet" href="{{ asset('css/landing-page/blog.css') }}">
     <link rel="stylesheet" href="{{ asset('css/landing-page/footer.css') }}">
-    <!-- AOS (Animate On Scroll) CSS - Sesuai Medisy.id -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/typography-animations.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/landing-page/subpage-header.css') }}?v={{ file_exists(public_path('css/landing-page/subpage-header.css')) ? filemtime(public_path('css/landing-page/subpage-header.css')) : time() }}">
 
     <!-- Floating Operational Badge Styles -->
     <style>
@@ -219,27 +217,23 @@
                 }, { passive: true });
             }
 
-            // ── Close dropdown when clicking outside ─────────────────────────
-            document.addEventListener('click', function (e) {
-                if (!e.target.closest('.has-dropdown')) {
-                    document.querySelectorAll('.has-dropdown.is-open').forEach(function (el) {
-                        el.classList.remove('is-open');
+            // Mobile Accordion Dropdowns Helper
+            function setupMobileAccordion(toggleId, contentId) {
+                const toggle = document.getElementById(toggleId);
+                const content = document.getElementById(contentId);
+                if (toggle && content) {
+                    toggle.addEventListener('click', function (e) {
+                        e.stopPropagation();
+                        const isOpen = content.classList.toggle('open');
+                        toggle.classList.toggle('open', isOpen);
                     });
                 }
-            });
+            }
+            setupMobileAccordion('mobileProfilToggle', 'mobileProfilContent');
+            setupMobileAccordion('mobileLayananToggle', 'mobileLayananContent');
+            setupMobileAccordion('mobileInfoToggle', 'mobileInfoContent');
 
-            // ── Dropdown: toggle on click for touch devices ───────────────────
-            document.querySelectorAll('.has-dropdown .nav-link-dropdown').forEach(function (link) {
-                link.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const item = link.closest('.has-dropdown');
-                    const wasOpen = item.classList.contains('is-open');
-                    document.querySelectorAll('.has-dropdown.is-open').forEach(function (el) { el.classList.remove('is-open'); });
-                    if (!wasOpen) item.classList.add('is-open');
-                });
-            });
-
-            // ── Close operational badge ───────────────────────────────────────
+            // Close operational badge
             document.getElementById('closeOperationalBadge')?.addEventListener('click', function() {
                 const badge = document.getElementById('operationalBadge');
                 if (badge) {

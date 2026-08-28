@@ -1,5 +1,5 @@
-{{-- Testimoni Pasien Section (Full Width & Swiper Carousel) --}}
-<section class="testimonials" id="testimoni">
+{{-- Survei Kepuasan Pasien Section (Full Width & Swiper Carousel) --}}
+<section class="testimonials" id="survei-pasien">
 
     {{-- Swiper CSS CDN --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
@@ -17,13 +17,13 @@
                 <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                     <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.17L4 17.17V4h16v12z"/>
                 </svg>
-                <span>TESTIMONI PASIEN</span>
+                <span>SURVEI KEPUASAN PASIEN</span>
             </div>
-            <h2 class="testimonials__title" data-aos="fade-right">
-                Simak Kesaksian Mereka yang Mempercayai CareLink
+            <h2 class="testimonials__title">
+                Suara & Hasil Evaluasi Masyarakat
             </h2>
-            <p class="testimonials__subtitle" data-aos="fade-up">
-                Pengalaman pasien kami berbicara banyak hal. Simak bagaimana Puskesmas telah memberikan perawatan ahli yang penuh kepedulian serta membawa perubahan positif dalam hidup mereka.
+            <p class="testimonials__subtitle">
+                Rangkuman penilaian dan ulasan nyata dari masyarakat mengenai kualitas, ketepatan, dan keramahan pelayanan kesehatan di Puskesmas.
             </p>
         </div>
 
@@ -109,6 +109,17 @@
             {{-- Slider Pagination Dots --}}
             <div class="testimonials__pagination"></div>
 
+        </div>
+
+        {{-- CTA Isi Survei --}}
+        <div style="text-align: center; margin-top: 36px;">
+            <a href="{{ route('survei.index') }}" style="display: inline-flex; align-items: center; gap: 8px; background: #0A5C45; color: #FFFFFF; font-weight: 700; font-size: 14.5px; padding: 13px 26px; border-radius: 9999px; text-decoration: none; box-shadow: 0 4px 14px rgba(10, 92, 69, 0.25); transition: all 0.2s ease;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                </svg>
+                <span>Beri Penilaian Anda (Isi Survei)</span>
+            </a>
         </div>
 
     </div>

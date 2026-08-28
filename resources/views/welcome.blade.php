@@ -16,9 +16,6 @@
     <!-- Nilai-Nilai Kami Section -->
     @include('landing-page.nilai-nilai-section')
 
-    <!-- Layanan Kami -->
-    @include('landing-page.layanan-section')
-
     <!-- Dokter Kami -->
     @include('landing-page.dokter-section')
 
