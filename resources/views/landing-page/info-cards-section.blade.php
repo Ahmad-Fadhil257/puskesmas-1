@@ -4,7 +4,7 @@
 
         @if(isset($infoCards) && $infoCards->count() > 0)
             @foreach($infoCards as $card)
-                <div class="info-card {{ $card->is_featured ? 'info-card--featured' : '' }}">
+                <div class="info-card {{ $card->is_featured ? 'info-card--featured' : '' }}" data-aos="fade-up">
                     <div class="info-card__icon">
                         @if($card->icon == 'doctor')
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
@@ -46,7 +46,7 @@
             @endforeach
         @else
             {{-- Fallback Default Jika Database Kosong --}}
-            <div class="info-card">
+            <div class="info-card" data-aos="fade-up">
                 <div class="info-card__icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
                         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
@@ -60,7 +60,7 @@
                 </div>
             </div>
 
-            <div class="info-card info-card--featured">
+            <div class="info-card info-card--featured" data-aos="fade-up">
                 <div class="info-card__icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
                         <path d="M12 2l2.09 6.26L20 10l-5.91 1.74L12 18l-2.09-6.26L4 10l5.91-1.74L12 2z"/>
@@ -73,7 +73,7 @@
                 </div>
             </div>
 
-            <div class="info-card">
+            <div class="info-card" data-aos="fade-up">
                 <div class="info-card__icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
                         <circle cx="12" cy="12" r="10"/>

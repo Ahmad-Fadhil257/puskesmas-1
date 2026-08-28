@@ -16,13 +16,13 @@
     <img src="{{ asset('assets/botanical-clean.png') }}" alt="" class="subpage-header__watermark" aria-hidden="true">
 
     <div class="subpage-header__container">
-        <div class="subpage-header__breadcrumb">
+        <div class="subpage-header__breadcrumb" data-aos="fade-right">
             <a href="{{ route('home') }}">Beranda</a>
             <span class="subpage-header__breadcrumb-sep">•</span>
             <span class="subpage-header__breadcrumb-current">Jadwal Dokter</span>
         </div>
-        <h1 class="subpage-header__title">Jadwal Praktik Dokter Spesialis & Umum</h1>
-        <p class="subpage-header__subtitle">
+        <h1 class="subpage-header__title" data-aos="fade-right">Jadwal Praktik Dokter Spesialis & Umum</h1>
+        <p class="subpage-header__subtitle" data-aos="fade-up">
             Temukan jadwal lengkap praktik dokter spesialis dan umum kami untuk perencanaan kunjungan kesehatan Anda dan keluarga.
         </p>
     </div>
@@ -33,7 +33,7 @@
     <div class="jadwal-container">
         <div class="jadwal-grid">
             @forelse($dokters as $dokter)
-            <div class="jadwal-card">
+            <div class="jadwal-card" data-aos="fade-up">
                 <div class="jadwal-card-photo">
                     @if($dokter->photo)
                         <img src="{{ asset($dokter->photo) }}" alt="{{ $dokter->name }}" loading="lazy">

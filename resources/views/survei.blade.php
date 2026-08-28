@@ -17,13 +17,13 @@
     <img src="{{ asset('assets/botanical-clean.png') }}" alt="" class="subpage-header__watermark" aria-hidden="true">
 
     <div class="subpage-header__container">
-        <div class="subpage-header__breadcrumb">
+        <div class="subpage-header__breadcrumb" data-aos="fade-right">
             <a href="{{ route('home') }}">Beranda</a>
             <span class="subpage-header__breadcrumb-sep">•</span>
             <span class="subpage-header__breadcrumb-current">Survei Kepuasan Pasien</span>
         </div>
-        <h1 class="subpage-header__title">Survei Kepuasan Pasien</h1>
-        <p class="subpage-header__subtitle">
+        <h1 class="subpage-header__title" data-aos="fade-right">Survei Kepuasan Pasien</h1>
+        <p class="subpage-header__subtitle" data-aos="fade-up">
             Partisipasi Anda sangat berarti bagi peningkatan mutu, transparansi, dan pelayanan kesehatan Puskesmas. Mohon luangkan waktu 1 menit untuk mengisi evaluasi singkat ini.
         </p>
     </div>
@@ -50,10 +50,7 @@
 
         <div class="survei-main-grid">
 
-            {{-- =============================================================
-               KOLOM KIRI: VISUAL GAMBAR + BADGE RATING (PERSIS SCREENSHOT)
-               ============================================================= --}}
-            <div class="survei-visual-card">
+            <div class="survei-visual-card" data-aos="fade-right">
                 <div class="survei-visual-blob"></div>
                 <img src="{{ asset('assets/img/survey-illustration.jpg') }}" 
                      alt="Survei Kepuasan Pasien" 
@@ -79,13 +76,12 @@
             {{-- =============================================================
                KOLOM KANAN: FORMULIR EVALUASI RINGKAS & BERSIH
                ============================================================= --}}
-            <div class="survei-form-card">
+            <div class="survei-form-card" data-aos="fade-left">
 
                 <div class="form-header-box">
                     <h3 class="form-header-title">Beri Penilaian Pelayanan</h3>
                     <p class="form-header-sub">Pilih tingkat kepuasan Anda dan berikan ulasan jujur tentang pengalaman berobat Anda.</p>
                 </div>
-
                 @if ($errors->any())
                     <div style="background: #FEF2F2; border: 1px solid #FCA5A5; border-left: 4px solid #EF4444; border-radius: 10px; padding: 12px 16px; margin-bottom: 24px;">
                         <strong style="color: #B91C1C; font-size: 13.5px; display: block; margin-bottom: 2px;">Mohon periksa isian formulir:</strong>

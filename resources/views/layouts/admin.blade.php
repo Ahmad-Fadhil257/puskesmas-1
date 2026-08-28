@@ -232,7 +232,7 @@
                         <span class="menu-header-text">Pengaturan Sistem</span>
                     </li>
                     @endif
-                    @if($user->canAccessPage('lokasi') || $user->canAccessPage('settings'))
+                    @if($user->canAccessPage('lokasi'))
                     <li class="menu-item {{ request()->routeIs('admin.lokasi.*') ? 'active' : '' }}">
                         <a href="{{ route('admin.lokasi.index') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-map-pin"></i>

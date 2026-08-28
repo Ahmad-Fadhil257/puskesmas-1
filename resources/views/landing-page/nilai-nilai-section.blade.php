@@ -1,10 +1,10 @@
 {{-- Nilai-Nilai Kami Section --}}
 <section class="values" id="nilai-nilai">
     <div class="values__container">
-        <div class="values__card">
+        <div class="values__card" data-aos="fade-up">
             
             {{-- Badge / Subtitle --}}
-            <div class="values__badge">
+            <div class="values__badge" data-aos="fade-right">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                     <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
                 </svg>
@@ -12,12 +12,12 @@
             </div>
 
             {{-- Title --}}
-            <h2 class="values__title">
+            <h2 class="values__title" data-aos="fade-right">
                 {{ $nilaiSection->title ?? 'Berdedikasi pada Keunggulan dalam Layanan Kesehatan melalui Kemitraan Terpercaya' }}
             </h2>
 
             {{-- Partners / Logos Capsule --}}
-            <div class="values__partners-clip">
+            <div class="values__partners-clip" data-aos="fade-up">
                 <div class="values__partners" id="valuesCarousel">
                     @if(isset($mitras) && $mitras->count() > 0)
                         @foreach($mitras as $m)

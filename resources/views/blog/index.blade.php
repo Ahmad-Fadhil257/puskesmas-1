@@ -16,13 +16,13 @@
     <img src="{{ asset('assets/botanical-clean.png') }}" alt="" class="subpage-header__watermark" aria-hidden="true">
 
     <div class="subpage-header__container">
-        <div class="subpage-header__breadcrumb">
+        <div class="subpage-header__breadcrumb" data-aos="fade-right">
             <a href="{{ route('home') }}">Beranda</a>
             <span class="subpage-header__breadcrumb-sep">•</span>
             <span class="subpage-header__breadcrumb-current">Rilis Berita & Artikel</span>
         </div>
-        <h1 class="subpage-header__title">Rilis Berita & Informasi Terkini</h1>
-        <p class="subpage-header__subtitle">
+        <h1 class="subpage-header__title" data-aos="fade-right">Rilis Berita & Informasi Terkini</h1>
+        <p class="subpage-header__subtitle" data-aos="fade-up">
             Informasi seputar kesehatan terkini dan kegiatan pelayanan yang dilaksanakan oleh Puskesmas CareLink
         </p>
     </div>
@@ -33,7 +33,7 @@
     <div class="blog-content-container">
 
         {{-- Search & Filter Controls (2 Kolom Seperti Gambar 2 Dinkes) --}}
-        <div class="blog-filter-card">
+        <div class="blog-filter-card" data-aos="fade-up">
             <form action="{{ route('blog.index') }}" method="GET" class="blog-filter-form">
                 <div class="blog-filter-form__grid">
                     {{-- Kolom Kiri: Cari Album / Kegiatan / Artikel --}}
@@ -85,7 +85,7 @@
 
             <div class="blog-highlights-grid">
                 {{-- Highlight Kiri (Banner Besar) --}}
-                <article class="blog-card blog-card--featured">
+                <article class="blog-card blog-card--featured" data-aos="fade-up">
                     <a href="{{ route('blog.show', $heroFeatured->slug) }}" class="blog-card__image-wrap">
                         <img src="{{ $heroFeatured->thumbnail_url }}" alt="{{ $heroFeatured->title }}" class="blog-card__img">
                         <div class="blog-card__overlay"></div>
@@ -108,7 +108,7 @@
                 </article>
 
                 {{-- Highlight Kanan (2 Kartu Stack) --}}
-                <div class="blog__sidebar">
+                <div class="blog__sidebar" data-aos="fade-up">
                     @foreach($heroSides as $side)
                         <article class="blog-card blog-card--side">
                             <a href="{{ route('blog.show', $side->slug) }}" class="blog-card__side-img-wrap">
@@ -145,7 +145,7 @@
             <div class="articles-catalog-section">
                 <div class="articles-grid">
                     @foreach($gridArticles as $item)
-                        <article class="article-card">
+                        <article class="article-card" data-aos="fade-up">
                             <a href="{{ route('blog.show', $item->slug) }}" class="article-card__thumb-wrap">
                                 <img src="{{ $item->thumbnail_url }}" alt="{{ $item->title }}" class="article-card__img" loading="lazy">
                                 <span class="article-card__category">{{ $item->category }}</span>

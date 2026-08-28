@@ -26,13 +26,13 @@
         </div>
 
         {{-- Category Badge --}}
-        <span class="article-header-category-pill">{{ strtoupper($article->category) }}</span>
+        <span class="article-header-category-pill" data-aos="fade-right">{{ strtoupper($article->category) }}</span>
 
         {{-- Large Article Title --}}
-        <h1 class="article-header-main-title">{{ $article->title }}</h1>
+        <h1 class="article-header-main-title" data-aos="fade-right">{{ $article->title }}</h1>
 
         {{-- Metadata Row --}}
-        <div class="article-header-meta-row">
+        <div class="article-header-meta-row" data-aos="fade-up">
             <span class="meta-item">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
@@ -75,7 +75,7 @@
     <div class="blog-content-container">
 
         {{-- Kartu 1: Konten Utama Artikel (Card Terpisah Latar Putih) --}}
-        <article class="article-main-card">
+        <article class="article-main-card" data-aos="fade-up">
             {{-- Featured Image Banner --}}
             <div class="article-featured-image">
                 <img src="{{ $article->thumbnail_url }}" alt="{{ $article->title }}">
@@ -119,7 +119,7 @@
 
         {{-- Kartu 2: Direkomendasikan untuk Anda (Card Terpisah Maksimal 6 Artikel) --}}
         @if(isset($relatedArticles) && $relatedArticles->count() > 0)
-            <section class="article-related-card">
+            <section class="article-related-card" data-aos="fade-up">
                 <div class="article-related-card__header">
                     <h3 class="article-related-card__title">Direkomendasikan untuk Anda</h3>
                     <p class="article-related-card__subtitle">Rekomendasi bacaan edukasi kesehatan seputar topik <strong>{{ $article->category }}</strong> untuk Anda dan keluarga.</p>
@@ -127,7 +127,7 @@
 
                 <div class="articles-grid">
                     @foreach($relatedArticles as $rel)
-                        <article class="article-card">
+                        <article class="article-card" data-aos="fade-up">
                             <a href="{{ route('blog.show', $rel->slug) }}" class="article-card__thumb-wrap">
                                 <img src="{{ $rel->thumbnail_url }}" alt="{{ $rel->title }}" class="article-card__img" loading="lazy">
                                 <span class="article-card__category">{{ $rel->category }}</span>

@@ -163,14 +163,14 @@
 
     <div class="lokasi-full-header__container">
         {{-- Breadcrumb Nav dengan aksen oranye --}}
-        <div class="lokasi-header-breadcrumb">
+        <div class="lokasi-header-breadcrumb" data-aos="fade-right">
             <a href="{{ route('home') }}">Beranda</a>
             <span class="lokasi-header-breadcrumb-sep">•</span>
             <span class="lokasi-header-breadcrumb-current">Kontak & Lokasi</span>
         </div>
 
-        <h1 class="lokasi-full-header__title">Lokasi & Kontak Puskesmas</h1>
-        <p class="lokasi-full-header__subtitle">
+        <h1 class="lokasi-full-header__title" data-aos="fade-right">Lokasi & Kontak Puskesmas</h1>
+        <p class="lokasi-full-header__subtitle" data-aos="fade-up">
             Kunjungi Puskesmas kami dengan mudah. Temukan rute navigasi terdekat, alamat lengkap, jadwal operasional pelayanan, serta kontak informasi bantuan kami.
         </p>
     </div>
@@ -188,7 +188,7 @@
             <div style="display: flex; flex-direction: column; gap: 24px;">
 
                 {{-- Card 1: Alamat Utama --}}
-                <div class="lokasi-card">
+                <div class="lokasi-card" data-aos="fade-up">
                     <div style="display: flex; align-items: flex-start; gap: 18px;">
                         <div class="lokasi-icon-wrapper">
                             <i class="bx bx-map"></i>
@@ -211,7 +211,7 @@
                 </div>
 
                 {{-- Card 2: Jam Pelayanan --}}
-                <div class="lokasi-card">
+                <div class="lokasi-card" data-aos="fade-up">
                     <div style="display: flex; align-items: flex-start; gap: 18px;">
                         <div class="lokasi-icon-wrapper" style="background: #FFFBEB; color: #D97706;">
                             <i class="bx bx-time-five"></i>
@@ -243,7 +243,7 @@
                 </div>
 
                 {{-- Card 3: Kontak & Bantuan --}}
-                <div class="lokasi-card">
+                <div class="lokasi-card" data-aos="fade-up">
                     <div style="display: flex; align-items: flex-start; gap: 18px;">
                         <div class="lokasi-icon-wrapper" style="background: #F0FDF4; color: #16A34A;">
                             <i class="bx bx-phone-call"></i>
@@ -272,7 +272,7 @@
                 </div>
 
                 {{-- Card 4: Action Buttons --}}
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;" data-aos="fade-up">
                     <a href="{{ $appSetting->direct_maps_link }}" target="_blank" rel="noopener" class="btn-rute-maps">
                         <i class="bx bx-navigation"></i>
                         <span>Petunjuk Rute</span>
@@ -288,7 +288,7 @@
             </div>
 
             {{-- Kolom Kanan: Interactive Google Maps Frame (Edge to Edge, Clean) --}}
-            <div class="lokasi-maps-container">
+            <div class="lokasi-maps-container" data-aos="fade-left">
                 <iframe class="lokasi-maps-iframe"
                         src="{{ $appSetting->embed_map_url }}" 
                         loading="lazy" 

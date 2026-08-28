@@ -13,7 +13,7 @@
         {{-- Section Header with "Lihat Semua" --}}
         <div class="blog__header-row">
             <div class="blog__header">
-                <div class="blog__badge">
+                <div class="blog__badge" data-aos="fade-right">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                         <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
                         <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
@@ -22,13 +22,13 @@
                     </svg>
                     <span>BLOG & BERITA</span>
                 </div>
-                <h2 class="blog__title">Tetap Terinformasi dengan Berita Terbaru</h2>
-                <p class="blog__subtitle">
+                <h2 class="blog__title" data-aos="fade-right">Tetap Terinformasi dengan Berita Terbaru</h2>
+                <p class="blog__subtitle" data-aos="fade-up">
                     Bagian Blog & Berita kami menyajikan informasi terkini mengenai tips kesehatan, terobosan medis, kabar klinik, dan saran seputar kebugaran.
                 </p>
             </div>
 
-            <div class="blog__header-action">
+            <div class="blog__header-action" data-aos="fade-left">
                 <a href="{{ route('blog.index') }}" class="btn-blog-see-all">
                     <span>Lihat Semua</span>
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -44,7 +44,7 @@
 
             {{-- Featured Card (Kiri - Banner Besar dengan Overlay) --}}
             @if($featured)
-                <article class="blog-card blog-card--featured">
+                <article class="blog-card blog-card--featured" data-aos="fade-up">
                     <a href="{{ route('blog.show', $featured->slug) }}" class="blog-card__image-wrap">
                         <img src="{{ $featured->thumbnail_url }}" 
                              alt="{{ $featured->title }}" 
@@ -72,7 +72,7 @@
             @endif
 
             {{-- Right Column (2 Cards Stack Vertikal Sesuai Gambar 3 Figma) --}}
-            <div class="blog__sidebar">
+            <div class="blog__sidebar" data-aos="fade-up">
                 @foreach($sideArticles as $side)
                     <article class="blog-card blog-card--side">
                         <a href="{{ route('blog.show', $side->slug) }}" class="blog-card__side-img-wrap">

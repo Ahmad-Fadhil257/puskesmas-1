@@ -22,6 +22,7 @@ class User extends Authenticatable
         'about'      => 'Kelola Tentang Kami',
         'nilai'      => 'Kelola Nilai & Mitra',
         'surveys'    => 'Survei & Testimoni',
+        'lokasi'     => 'Kelola Lokasi & Peta',
         'users'      => 'Kelola Pengguna',
         'settings'   => 'Identitas & Logo',
         'lokasi'     => 'Lokasi & Peta',
