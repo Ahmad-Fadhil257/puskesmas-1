@@ -466,10 +466,10 @@ a { text-decoration: none; color: inherit; }
 
 .operational-circle-badge {
     position: fixed;
-    top: 98px;
-    left: 20px;
-    width: 164px;
-    height: 164px;
+    top: 100px;
+    left: 22px;
+    width: 150px;
+    height: 150px;
     z-index: 90;
     user-select: none;
     animation: floatCircle 5s ease-in-out infinite;
@@ -564,8 +564,8 @@ a { text-decoration: none; color: inherit; }
 /* Close Button: Discreet mini circular button on top-right rim */
 .operational-circle-badge__close {
     position: absolute;
-    top: 6px;
-    right: 6px;
+    top: 2px;
+    right: 2px;
     width: 22px;
     height: 22px;
     border-radius: 50%;
