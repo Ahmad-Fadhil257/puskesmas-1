@@ -22,10 +22,10 @@ class User extends Authenticatable
         'about'      => 'Kelola Tentang Kami',
         'nilai'      => 'Kelola Nilai & Mitra',
         'surveys'    => 'Survei & Testimoni',
-        'lokasi'     => 'Kelola Lokasi & Peta',
+        'faq'        => 'Tanya Jawab (FAQ)',
+        'lokasi'     => 'Lokasi & Peta',
         'users'      => 'Kelola Pengguna',
         'settings'   => 'Identitas & Logo',
-        'lokasi'     => 'Lokasi & Peta',
     ];
 
     protected $fillable = [

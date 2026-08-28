@@ -72,6 +72,7 @@
                         <li><a href="{{ route('layanan.index') }}">Layanan & Poliklinik</a></li>
                         <li><a href="{{ route('jadwal-dokter') }}">Jadwal Dokter</a></li>
                         <li><a href="{{ route('blog.index') }}">Berita & Informasi</a></li>
+                        <li><a href="{{ route('faq.index') }}">Tanya Jawab (FAQ)</a></li>
                         <li><a href="{{ route('survei.index') }}">Survei Kepuasan Pasien</a></li>
                         <li><a href="{{ route('lokasi') }}">Lokasi & Peta Puskesmas</a></li>
                     </ul>

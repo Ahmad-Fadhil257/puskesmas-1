@@ -156,7 +156,7 @@
 
                     <!-- KONTEN & INFORMASI WEBSITE -->
                     @php $user = Auth::user(); @endphp
-                    @if($user->canAccessPage('hero') || $user->canAccessPage('layanan') || $user->canAccessPage('articles') || $user->canAccessPage('cara-kerja') || $user->canAccessPage('dokter') || $user->canAccessPage('about') || $user->canAccessPage('nilai') || $user->canAccessPage('surveys'))
+                    @if($user->canAccessPage('hero') || $user->canAccessPage('layanan') || $user->canAccessPage('articles') || $user->canAccessPage('cara-kerja') || $user->canAccessPage('dokter') || $user->canAccessPage('about') || $user->canAccessPage('nilai') || $user->canAccessPage('surveys') || $user->canAccessPage('faq'))
                     <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">Manajemen Konten</span>
                     </li>
@@ -222,6 +222,14 @@
                         <a href="{{ route('admin.surveys.index') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-message-rounded-detail"></i>
                             <div>Survei Kepuasan Pasien</div>
+                        </a>
+                    </li>
+                    @endif
+                    @if($user->canAccessPage('faq'))
+                    <li class="menu-item {{ request()->routeIs('admin.faq.*') ? 'active' : '' }}">
+                        <a href="{{ route('admin.faq.index') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-help-circle"></i>
+                            <div>Tanya Jawab (FAQ)</div>
                         </a>
                     </li>
                     @endif

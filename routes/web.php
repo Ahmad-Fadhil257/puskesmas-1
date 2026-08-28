@@ -13,7 +13,9 @@ use App\Http\Controllers\Admin\AdminNilaiController;
 use App\Http\Controllers\Admin\AdminLayananController;
 use App\Http\Controllers\Admin\AdminSurveyController;
 use App\Http\Controllers\Admin\AdminLokasiController;
+use App\Http\Controllers\Admin\AdminFaqController;
 use App\Http\Controllers\CaraKerjaController;
+use App\Http\Controllers\FaqController;
 use App\Models\About;
 use App\Models\Article;
 use App\Models\CaraKerja;
@@ -90,6 +92,9 @@ Route::get('/lokasi', function () {
     return view('lokasi');
 })->name('lokasi');
 
+// Halaman Tanya Jawab Pasien (FAQ)
+Route::get('/faq', [FaqController::class, 'index'])->name('faq.index');
+
 // Auth Routes (URL Khusus Login: /puskem-min)
 Route::get('/puskem-min', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/puskem-login', [AuthController::class, 'login'])->name('login.post');
@@ -144,6 +149,10 @@ Route::middleware(['auth'])->group(function () {
         Route::patch('surveys/{id}/toggle', [AdminSurveyController::class, 'toggleApproval'])->name('surveys.toggle');
         Route::patch('surveys/{id}/toggle-featured', [AdminSurveyController::class, 'toggleFeatured'])->name('surveys.toggle-featured');
         Route::resource('surveys', AdminSurveyController::class)->except(['create', 'edit']);
+
+        // Kelola Tanya Jawab (FAQ)
+        Route::patch('faq/{id}/toggle-status', [AdminFaqController::class, 'toggleStatus'])->name('faq.toggle-status');
+        Route::resource('faq', AdminFaqController::class)->except(['show']);
 
         // Kelola Identitas & Logo Aplikasi
         Route::get('settings', [AdminSettingController::class, 'index'])->name('settings.index');
