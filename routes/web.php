@@ -47,12 +47,13 @@ Route::get('/', function () {
 Route::get('/survei', [SurveyController::class, 'index'])->name('survei.index');
 Route::post('/survei', [SurveyController::class, 'store'])->name('survei.store');
 
-// Layanan & Poli Puskesmas (dari database)
+// Layanan & Poli Puskesmas (Redirect langsung ke layanan pertama)
 Route::get('/layanan', function () {
-    $layanans = Layanan::where('is_active', true)->orderBy('order', 'asc')->orderBy('id', 'asc')->get();
-    $dokters = Dokter::where('is_active', true)->orderBy('created_at', 'asc')->get();
-    $specialties = Dokter::where('is_active', true)->pluck('specialty')->filter()->unique()->values();
-    return view('layanan', compact('layanans', 'dokters', 'specialties'));
+    $firstLayanan = Layanan::where('is_active', true)->orderBy('order', 'asc')->orderBy('id', 'asc')->first();
+    if ($firstLayanan) {
+        return redirect()->route('layanan.detail', $firstLayanan->slug);
+    }
+    return redirect()->route('home');
 })->name('layanan.index');
 
 // Halaman Detail Layanan Informatif (Slug)

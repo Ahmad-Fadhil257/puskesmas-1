@@ -352,7 +352,7 @@
         <div class="subpage-header__breadcrumb">
             <a href="{{ route('home') }}">Beranda</a>
             <span class="subpage-header__breadcrumb-sep">•</span>
-            <a href="{{ route('layanan.index') }}">Layanan</a>
+            <span>Layanan</span>
             <span class="subpage-header__breadcrumb-sep">•</span>
             <span class="subpage-header__breadcrumb-current">{{ $layanan->title }}</span>
         </div>

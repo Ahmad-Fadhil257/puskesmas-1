@@ -22,9 +22,9 @@
                 </a>
             </li>
 
-            {{-- 2. LAYANAN (DROPDOWN DINAMIS) --}}
+            {{-- 2. LAYANAN (DROPDOWN DINAMIS MURNI) --}}
             <li class="navbar__item-dropdown">
-                <a href="{{ route('layanan.index') }}" class="navbar__dropdown-toggle {{ request()->routeIs('layanan.*') ? 'active' : '' }}">
+                <a href="javascript:void(0)" class="navbar__dropdown-toggle {{ request()->routeIs('layanan.*') ? 'active' : '' }}" role="button" aria-haspopup="true" aria-expanded="false" style="cursor: pointer;">
                     <span>LAYANAN</span>
                     <svg class="navbar__dropdown-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                         <polyline points="6 9 12 15 18 9"></polyline>
