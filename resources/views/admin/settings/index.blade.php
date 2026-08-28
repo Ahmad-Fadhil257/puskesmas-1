@@ -188,6 +188,13 @@
                                 <small class="text-muted">Jam pelayanan puskesmas.</small>
                             </div>
 
+                            {{-- Teks Melingkar Badge --}}
+                            <div class="col-12">
+                                <label class="form-label fw-semibold" for="operational_badge_text">Teks Melingkar Badge (Slogan / Keterangan)</label>
+                                <input type="text" class="form-control" id="operational_badge_text" name="operational_badge_text" value="{{ old('operational_badge_text', $setting->operational_badge_text ?? '• JAM OPERASIONAL • PUSKESMAS BUKA •') }}" placeholder="Contoh: • JAM OPERASIONAL • PUSKESMAS BUKA •">
+                                <small class="text-muted">Teks yang berputar perlahan mengelilingi lingkaran jam operasional. Gunakan simbol titik (•) sebagai pemisah kata.</small>
+                            </div>
+
                             {{-- Switch Tampilkan Jam Operasional --}}
                             <div class="col-12">
                                 <div class="form-check form-switch p-3 border rounded-3 bg-label-primary">

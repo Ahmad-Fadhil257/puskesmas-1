@@ -32,121 +32,6 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/typography-animations.css') }}">
 
-    <!-- Floating Operational Badge Styles -->
-    <style>
-        @keyframes slideInBadge {
-            0%   { opacity: 0; transform: translateX(-60px) scale(0.85); }
-            60%  { opacity: 1; transform: translateX(6px) scale(1.03); }
-            80%  { transform: translateX(-2px) scale(0.99); }
-            100% { opacity: 1; transform: translateX(0) scale(1); }
-        }
-
-        @keyframes floatBadge {
-            0%, 100% { transform: translateY(0px); }
-            50%       { transform: translateY(-6px); }
-        }
-
-        @keyframes emeraldPulse {
-            0%, 100% {
-                box-shadow: 0 4px 18px rgba(10, 92, 69, 0.18), 0 2px 8px rgba(0,0,0,0.07);
-                border-color: rgba(10, 92, 69, 0.12);
-            }
-            50% {
-                box-shadow: 0 8px 32px rgba(10, 92, 69, 0.32), 0 2px 12px rgba(0,0,0,0.10);
-                border-color: rgba(10, 92, 69, 0.28);
-            }
-        }
-
-        @keyframes dotPing {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50%       { opacity: 0.5; transform: scale(1.6); }
-        }
-
-        .operational-badge {
-            position: fixed;
-            top: 104px;
-            left: 20px;
-            background: #FFFFFF;
-            border-radius: 14px;
-            padding: 14px 18px 14px 16px;
-            border: 1.5px solid rgba(10, 92, 69, 0.12);
-            z-index: 90;
-            display: flex;
-            flex-direction: column;
-            gap: 3px;
-            animation:
-                slideInBadge 0.65s cubic-bezier(0.34, 1.56, 0.64, 1) forwards,
-                floatBadge   4s ease-in-out 0.8s infinite,
-                emeraldPulse 4s ease-in-out 0.8s infinite;
-            transition: opacity 0.3s ease, transform 0.3s ease;
-        }
-
-        .operational-badge__close {
-            position: absolute;
-            top: 7px;
-            right: 9px;
-            background: none;
-            border: none;
-            font-size: 17px;
-            color: #9CA3AF;
-            cursor: pointer;
-            width: 22px;
-            height: 22px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            transition: all 0.2s ease;
-            line-height: 1;
-        }
-
-        .operational-badge__close:hover {
-            color: #EF4444;
-            background: rgba(239, 68, 68, 0.1);
-            transform: rotate(90deg);
-        }
-
-        .operational-badge__label {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            font-size: 9.5px;
-            font-weight: 800;
-            color: #0A5C45;
-            letter-spacing: 0.11em;
-            text-transform: uppercase;
-        }
-
-        .operational-badge__dot {
-            width: 7px;
-            height: 7px;
-            background: #22C55E;
-            border-radius: 50%;
-            animation: dotPing 2s ease-in-out infinite;
-            flex-shrink: 0;
-        }
-
-        .operational-badge__days {
-            font-size: 12.5px;
-            font-weight: 600;
-            color: #374151;
-            line-height: 1.3;
-        }
-
-        .operational-badge__hours {
-            font-size: 15px;
-            font-weight: 800;
-            color: #0A5C45;
-            line-height: 1.3;
-            letter-spacing: -0.02em;
-        }
-
-        /* Responsive: hide on mobile */
-        @media (max-width: 768px) {
-            .operational-badge { display: none; }
-        }
-    </style>
-
     @stack('styles')
 </head>
 <body>
@@ -159,16 +44,37 @@
         @yield('content')
     </main>
 
-    <!-- Floating Badge: Jam Operasional — hanya di landing page utama -->
+    <!-- Floating Badge: Jam Operasional (Circular Medical Seal) — hanya di landing page utama -->
     @if(($appSetting->show_operational_hours ?? true) && request()->routeIs('home'))
-    <div class="operational-badge" id="operationalBadge">
-        <button class="operational-badge__close" id="closeOperationalBadge" aria-label="Tutup">×</button>
-        <span class="operational-badge__label">
-            <span class="operational-badge__dot"></span>
-            OPERASIONAL
-        </span>
-        <span class="operational-badge__days">{{ $appSetting->operational_days ?? 'Senin - Sabtu' }}</span>
-        <span class="operational-badge__hours">{{ $appSetting->operational_hours ?? '08.00 - 16.00 WIB' }}</span>
+    <div class="operational-circle-badge" id="operationalBadge" role="complementary" aria-label="Jam Operasional Puskesmas">
+        <button type="button" class="operational-circle-badge__close" id="closeOperationalBadge" aria-label="Tutup pemberitahuan" title="Tutup">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
+
+        <!-- Outer Rotating Circular Text Ring (Lapang & Tidak Menempel) -->
+        <div class="operational-circle-badge__spinner">
+            <svg viewBox="0 0 164 164" class="operational-circle-badge__svg-ring" aria-hidden="true">
+                <defs>
+                    <path id="circleTextPath" d="M 82, 82 m -64, 0 a 64,64 0 1,1 128,0 a 64,64 0 1,1 -128,0" />
+                </defs>
+                <circle cx="82" cy="82" r="77" fill="none" stroke="rgba(10, 92, 69, 0.14)" stroke-width="1.2" stroke-dasharray="4 3" />
+                <text font-size="8.8" font-weight="800" fill="#0A5C45" letter-spacing="2.8px">
+                    <textPath href="#circleTextPath" startOffset="0%">
+                        {{ $appSetting->operational_badge_text ?? '• JAM OPERASIONAL • PUSKESMAS BUKA •' }}
+                    </textPath>
+                </text>
+            </svg>
+        </div>
+
+        <!-- Inner Core Disc (Bersih: Hanya Ikon Jam + Hari + Waktu) -->
+        <div class="operational-circle-badge__core">
+            <i class="bx bx-time-five operational-circle-badge__icon"></i>
+            <span class="operational-circle-badge__days">{{ $appSetting->operational_days ?? 'Senin - Sabtu' }}</span>
+            <span class="operational-circle-badge__hours">{{ $appSetting->operational_hours ?? '08.00 - 16.00 WIB' }}</span>
+        </div>
     </div>
     @endif
 
@@ -215,7 +121,12 @@
 
             // ── Sticky navbar on scroll ───────────────────────────────────────
             if (header) {
-                    // Mobile Accordion Dropdowns Helper
+                window.addEventListener('scroll', function () {
+                    header.classList.toggle('scrolled', window.scrollY > 50);
+                }, { passive: true });
+            }
+
+            // ── Mobile Accordion Dropdowns Helper ─────────────────────────────
             function setupMobileAccordion(toggleId, contentId) {
                 const toggle = document.getElementById(toggleId);
                 const content = document.getElementById(contentId);
@@ -239,15 +150,17 @@
                     });
                 }
             });
+
+            // ── Close Operational Badge ──────────────────────────────────────
             document.getElementById('closeOperationalBadge')?.addEventListener('click', function() {
                 const badge = document.getElementById('operationalBadge');
                 if (badge) {
                     badge.style.animation = 'none';
                     badge.style.opacity = '0';
-                    badge.style.transform = 'translateX(-50px) scale(0.8)';
+                    badge.style.transform = 'scale(0.3) rotate(-40deg)';
                     setTimeout(() => {
                         badge.style.display = 'none';
-                    }, 300);
+                    }, 250);
                 }
             });
         });

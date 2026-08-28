@@ -21,6 +21,7 @@ class AppSetting extends Model
         'maps_link',
         'operational_days',
         'operational_hours',
+        'operational_badge_text',
         'emergency_info',
         'show_operational_hours',
         'facebook_link',
