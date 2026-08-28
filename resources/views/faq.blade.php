@@ -32,46 +32,75 @@
 </section>
 
 {{-- =========================================================================
-   MAIN CONTENT: SEARCH BAR, CATEGORY PILLS, & INTERACTIVE ACCORDIONS
+   MAIN CONTENT: 2-COLUMN SEARCH & FILTER CARD (KONSISTEN PERSIS DENGAN BERITA)
    ========================================================================= --}}
 <div class="faq-content-wrapper">
     <div class="faq-container">
 
-        {{-- 1. Search Box Bar --}}
-        <div class="faq-search-wrapper" data-aos="fade-up">
-            <div class="faq-search-bar">
-                <i class="bx bx-search faq-search-icon"></i>
-                <input type="text" 
-                       id="faqSearchInput" 
-                       class="faq-search-input" 
-                       placeholder="Cari pertanyaan... (contoh: BPJS, rujukan, UGD, jadwal loket)" 
-                       aria-label="Cari pertanyaan FAQ">
-                <button type="button" id="faqSearchClear" class="faq-search-clear" title="Hapus pencarian">
-                    <i class="bx bx-x"></i>
+        {{-- Search & Filter Card (2 Kolom Seperti di Halaman Berita) --}}
+        <div class="faq-filter-card" data-aos="fade-up">
+            <div class="faq-filter-form__grid">
+                
+                {{-- Kolom Kiri: Cari Pertanyaan / Kata Kunci --}}
+                <div class="faq-filter-col">
+                    <label class="faq-filter-label" for="faqSearchInput">Cari Pertanyaan / Kata Kunci</label>
+                    <div class="faq-search-input-group">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6E857E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="search-icon">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                        <input type="text" 
+                               id="faqSearchInput" 
+                               placeholder="Ketik topik pertanyaan, misal: BPJS, rujukan, UGD, jadwal loket..." 
+                               autocomplete="off">
+                        <button type="button" id="faqSearchClear" class="faq-search-clear-btn" title="Hapus pencarian">&times;</button>
+                        <button type="button" id="btnFaqSearch" class="btn-faq-search">
+                            <span>Cari</span>
+                        </button>
+                    </div>
+                </div>
+
+                {{-- Kolom Kanan: Filter Kategori --}}
+                <div class="faq-filter-col">
+                    <label class="faq-filter-label" for="faqCategorySelect">Filter Kategori Topik</label>
+                    <div class="faq-select-group">
+                        <select id="faqCategorySelect" class="faq-category-select">
+                            <option value="all">Semua Kategori ({{ $faqs->count() }})</option>
+                            @foreach($categories as $cat)
+                                @php $catCount = $faqs->where('kategori', $cat)->count(); @endphp
+                                @if($catCount > 0)
+                                    <option value="{{ $cat }}">{{ $cat }} ({{ $catCount }})</option>
+                                @endif
+                            @endforeach
+                        </select>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0A5C45" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="faq-select-chevron">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </div>
+                </div>
+
+            </div>
+
+            {{-- Quick Filter Pills --}}
+            <div class="faq-quick-pills">
+                <span class="faq-quick-pills-label">Topik Populer:</span>
+                <button type="button" class="faq-pill-btn active" data-category="all">
+                    <span>Semua Topik</span>
+                    <span class="faq-pill-count">{{ $faqs->count() }}</span>
                 </button>
+                @foreach($categories as $cat)
+                    @php $catCount = $faqs->where('kategori', $cat)->count(); @endphp
+                    @if($catCount > 0)
+                        <button type="button" class="faq-pill-btn" data-category="{{ $cat }}">
+                            <span>{{ $cat }}</span>
+                            <span class="faq-pill-count">{{ $catCount }}</span>
+                        </button>
+                    @endif
+                @endforeach
             </div>
         </div>
 
-        {{-- 2. Category Filter Pills --}}
-        <div class="faq-category-pills" data-aos="fade-up" id="faqCategoryPills">
-            <button type="button" class="faq-pill-btn active" data-category="all">
-                <span>Semua Topik</span>
-                <span class="faq-pill-count">{{ $faqs->count() }}</span>
-            </button>
-            @foreach($categories as $cat)
-                @php
-                    $catCount = $faqs->where('kategori', $cat)->count();
-                @endphp
-                @if($catCount > 0)
-                    <button type="button" class="faq-pill-btn" data-category="{{ $cat }}">
-                        <span>{{ $cat }}</span>
-                        <span class="faq-pill-count">{{ $catCount }}</span>
-                    </button>
-                @endif
-            @endforeach
-        </div>
-
-        {{-- 3. Accordion List --}}
+        {{-- Accordion List --}}
         <div class="faq-accordion-list" id="faqAccordionList" data-aos="fade-up">
             @forelse($faqs as $index => $faq)
                 <div class="faq-item" 
@@ -111,22 +140,22 @@
             @endforelse
         </div>
 
-        {{-- 4. Empty Search State (Client-side) --}}
+        {{-- Empty Search State (Client-side) --}}
         <div class="faq-empty-state" id="faqEmptyState">
             <i class="bx bx-search-alt"></i>
             <h4>Pertanyaan Tidak Ditemukan</h4>
-            <p>Maaf, kami tidak menemukan pertanyaan yang cocok dengan kata kunci yang Anda masukkan.</p>
-            <button type="button" class="btn btn-sm btn-outline-primary" id="btnResetSearch">
-                <i class="bx bx-refresh me-1"></i> Tampilkan Semua Pertanyaan
+            <p>Maaf, kami tidak menemukan pertanyaan yang cocok dengan kata kunci atau topik yang Anda pilih.</p>
+            <button type="button" class="btn-faq-search" id="btnResetSearch">
+                <span>Tampilkan Semua Pertanyaan</span>
             </button>
         </div>
 
-        {{-- 5. WhatsApp Help CTA Card --}}
+        {{-- WhatsApp Help CTA Card --}}
         <div class="faq-help-card" data-aos="fade-up">
             <div class="faq-help-info">
                 <h3>Belum Menemukan Jawaban yang Anda Cari?</h3>
                 <p>
-                    Tim petugas informasi dan loket layanan kami siap membantu menjawab pertanyaan Anda seputar pelayanan Puskesmas secara ramah dan langsung.
+                    Tim petugas informasi dan loket layanan kami siap membantu menjawab pertanyaan Anda seputar pelayanan Puskesmas secara ramah dan langsung melalui WhatsApp.
                 </p>
             </div>
             <div>
@@ -147,10 +176,12 @@
 document.addEventListener('DOMContentLoaded', function() {
     const searchInput = document.getElementById('faqSearchInput');
     const searchClear = document.getElementById('faqSearchClear');
+    const categorySelect = document.getElementById('faqCategorySelect');
     const categoryPills = document.querySelectorAll('.faq-pill-btn');
     const faqItems = document.querySelectorAll('.faq-item');
     const emptyState = document.getElementById('faqEmptyState');
     const btnResetSearch = document.getElementById('btnResetSearch');
+    const btnFaqSearch = document.getElementById('btnFaqSearch');
 
     let currentCategory = 'all';
     let currentSearchTerm = '';
@@ -161,7 +192,7 @@ document.addEventListener('DOMContentLoaded', function() {
         btn.addEventListener('click', function() {
             const isOpen = item.classList.contains('is-open');
 
-            // Optional: Close other accordions for sleek accordion feel
+            // Tutup accordion lain agar bersih dan rapi
             faqItems.forEach(otherItem => {
                 if (otherItem !== item && otherItem.classList.contains('is-open')) {
                     otherItem.classList.remove('is-open');
@@ -206,47 +237,71 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // 3. Category Click
+    // 3. Sinkronisasi Kategori (Select Dropdown & Pills)
+    function setCategory(cat) {
+        currentCategory = cat;
+        if (categorySelect) {
+            categorySelect.value = cat;
+        }
+        categoryPills.forEach(pill => {
+            if (pill.getAttribute('data-category') === cat) {
+                pill.classList.add('active');
+            } else {
+                pill.classList.remove('active');
+            }
+        });
+        applyFilter();
+    }
+
+    if (categorySelect) {
+        categorySelect.addEventListener('change', function() {
+            setCategory(this.value);
+        });
+    }
+
     categoryPills.forEach(pill => {
         pill.addEventListener('click', function() {
-            categoryPills.forEach(p => p.classList.remove('active'));
-            this.classList.add('active');
-            currentCategory = this.getAttribute('data-category');
-            applyFilter();
+            setCategory(this.getAttribute('data-category'));
         });
     });
 
     // 4. Live Search Input
-    searchInput.addEventListener('input', function() {
-        currentSearchTerm = this.value.trim().toLowerCase();
-        if (currentSearchTerm.length > 0) {
-            searchClear.style.display = 'flex';
-        } else {
-            searchClear.style.display = 'none';
-        }
-        applyFilter();
-    });
+    if (searchInput) {
+        searchInput.addEventListener('input', function() {
+            currentSearchTerm = this.value.trim().toLowerCase();
+            if (currentSearchTerm.length > 0) {
+                searchClear.style.display = 'inline-flex';
+            } else {
+                searchClear.style.display = 'none';
+            }
+            applyFilter();
+        });
+    }
+
+    if (btnFaqSearch) {
+        btnFaqSearch.addEventListener('click', function() {
+            applyFilter();
+        });
+    }
 
     // 5. Clear Search Button
-    searchClear.addEventListener('click', function() {
-        searchInput.value = '';
-        currentSearchTerm = '';
-        searchClear.style.display = 'none';
-        searchInput.focus();
-        applyFilter();
-    });
+    if (searchClear) {
+        searchClear.addEventListener('click', function() {
+            searchInput.value = '';
+            currentSearchTerm = '';
+            searchClear.style.display = 'none';
+            searchInput.focus();
+            applyFilter();
+        });
+    }
 
     // 6. Reset Button on Empty State
     if (btnResetSearch) {
         btnResetSearch.addEventListener('click', function() {
-            searchInput.value = '';
+            if (searchInput) searchInput.value = '';
             currentSearchTerm = '';
-            searchClear.style.display = 'none';
-            categoryPills.forEach(p => p.classList.remove('active'));
-            const allPill = document.querySelector('.faq-pill-btn[data-category="all"]');
-            if (allPill) allPill.classList.add('active');
-            currentCategory = 'all';
-            applyFilter();
+            if (searchClear) searchClear.style.display = 'none';
+            setCategory('all');
         });
     }
 });
