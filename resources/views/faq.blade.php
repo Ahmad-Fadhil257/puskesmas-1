@@ -126,8 +126,10 @@
                          class="faq-body-collapse" 
                          role="region" 
                          aria-labelledby="faq-header-{{ $faq->id }}">
-                        <div class="faq-body-content">
-                            {!! nl2br(e($faq->jawaban)) !!}
+                        <div class="faq-body-collapse-inner">
+                            <div class="faq-body-content">
+                                {!! nl2br(e($faq->jawaban)) !!}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -223,6 +225,11 @@ document.addEventListener('DOMContentLoaded', function() {
             const matchesSearch = (!currentSearchTerm || itemQ.includes(currentSearchTerm) || itemA.includes(currentSearchTerm));
 
             if (matchesCategory && matchesSearch) {
+                if (item.style.display === 'none' || item.style.display === '') {
+                    item.classList.remove('animate-fade-in');
+                    void item.offsetWidth;
+                    item.classList.add('animate-fade-in');
+                }
                 item.style.display = 'block';
                 visibleCount++;
             } else {

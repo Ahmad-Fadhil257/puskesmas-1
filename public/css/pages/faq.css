@@ -326,7 +326,7 @@
     justify-content: center;
     flex-shrink: 0;
     color: #0A5C45;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.4s cubic-bezier(0.34, 1.4, 0.64, 1), border-color 0.3s ease;
     font-size: 20px;
     border: 1px solid #E2E8F0;
 }
@@ -338,24 +338,54 @@
     transform: rotate(180deg);
 }
 
+/* 60fps Butter Smooth Grid Transition */
 .faq-body-collapse {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.38s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .faq-item.is-open .faq-body-collapse {
-    max-height: 900px;
+    grid-template-rows: 1fr;
+}
+
+.faq-body-collapse-inner {
+    overflow: hidden;
 }
 
 .faq-body-content {
-    padding: 0 28px 24px 28px;
+    padding: 0 28px 26px 28px;
     color: #334155;
     font-size: 15px;
-    line-height: 1.75;
+    line-height: 1.8;
     border-top: 1px solid #F1F5F9;
-    padding-top: 18px;
+    padding-top: 20px;
     margin-top: 4px;
+    opacity: 0;
+    transform: translateY(-8px);
+    transition: opacity 0.28s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.faq-item.is-open .faq-body-content {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.05s;
+}
+
+/* Smooth Cascading Filter Animation */
+@keyframes faqFadeSlideIn {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.faq-item.animate-fade-in {
+    animation: faqFadeSlideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .faq-body-content p:last-child {
