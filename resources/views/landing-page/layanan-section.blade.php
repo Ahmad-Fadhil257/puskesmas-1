@@ -81,8 +81,8 @@
                         Temukan rincian seluruh 6+ poliklinik rawat jalan, dokter spesialis, jadwal operasional, laboratorium, serta fasilitas siaga UGD 24 jam.
                     </p>
                     <a href="{{ route('layanan.index') }}" class="btn-bento-white">
-                        <i class="bx bx-grid-alt me-1"></i>
-                        <span>Buka Katalog Semua Layanan</span>
+                        <i class="bx bx-clinic me-1"></i>
+                        <span>Lihat Rincian Layanan & Poli</span>
                         <i class="bx bx-right-arrow-alt ms-1"></i>
                     </a>
                 </div>

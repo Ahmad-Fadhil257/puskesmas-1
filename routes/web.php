@@ -47,13 +47,33 @@ Route::get('/', function () {
 Route::get('/survei', [SurveyController::class, 'index'])->name('survei.index');
 Route::post('/survei', [SurveyController::class, 'store'])->name('survei.store');
 
-// Layanan & Poli Puskesmas (dari database)
+// Layanan & Poli Puskesmas (Redirect langsung ke layanan pertama)
 Route::get('/layanan', function () {
-    $layanans = Layanan::where('is_active', true)->orderBy('order', 'asc')->orderBy('id', 'asc')->get();
-    $dokters = Dokter::where('is_active', true)->orderBy('created_at', 'asc')->get();
-    $specialties = Dokter::where('is_active', true)->pluck('specialty')->filter()->unique()->values();
-    return view('layanan', compact('layanans', 'dokters', 'specialties'));
+    $firstLayanan = Layanan::where('is_active', true)->orderBy('order', 'asc')->orderBy('id', 'asc')->first();
+    if ($firstLayanan) {
+        return redirect()->route('layanan.detail', $firstLayanan->slug);
+    }
+    return redirect()->route('home');
 })->name('layanan.index');
+
+// Halaman Detail Layanan Informatif (Slug)
+Route::get('/layanan/{slug}', function ($slug) {
+    $layanan = \App\Models\Layanan::where('slug', $slug)->first();
+    if (!$layanan && is_numeric($slug)) {
+        $layanan = \App\Models\Layanan::find($slug);
+    }
+    if (!$layanan || !$layanan->is_active) {
+        abort(404);
+    }
+
+    $otherLayanans = \App\Models\Layanan::where('is_active', true)
+        ->where('id', '!=', $layanan->id)
+        ->orderBy('order', 'asc')
+        ->take(4)
+        ->get();
+
+    return view('layanan.detail', compact('layanan', 'otherLayanans'));
+})->name('layanan.detail');
 
 // Jadwal Dokter (dari database)
 Route::get('/jadwal-dokter', function () {
@@ -120,9 +140,10 @@ Route::middleware(['auth'])->group(function () {
         Route::patch('nilai/mitra/{id}/toggle-status', [AdminNilaiController::class, 'toggleMitraStatus'])->name('nilai.mitra.toggle-status');
         Route::delete('nilai/mitra/{id}', [AdminNilaiController::class, 'destroyMitra'])->name('nilai.mitra.destroy');
 
-        // Kelola Survei Kepuasan & Testimoni
+        // Kelola Survei Kepuasan Pasien
         Route::patch('surveys/{id}/toggle', [AdminSurveyController::class, 'toggleApproval'])->name('surveys.toggle');
-        Route::resource('surveys', AdminSurveyController::class)->except(['show', 'create', 'edit']);
+        Route::patch('surveys/{id}/toggle-featured', [AdminSurveyController::class, 'toggleFeatured'])->name('surveys.toggle-featured');
+        Route::resource('surveys', AdminSurveyController::class)->except(['create', 'edit']);
 
         // Kelola Identitas & Logo Aplikasi
         Route::get('settings', [AdminSettingController::class, 'index'])->name('settings.index');

@@ -221,7 +221,7 @@
                     <li class="menu-item {{ request()->routeIs('admin.surveys.*') ? 'active' : '' }}">
                         <a href="{{ route('admin.surveys.index') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-message-rounded-detail"></i>
-                            <div>Survei & Testimoni</div>
+                            <div>Survei Kepuasan Pasien</div>
                         </a>
                     </li>
                     @endif
@@ -232,7 +232,7 @@
                         <span class="menu-header-text">Pengaturan Sistem</span>
                     </li>
                     @endif
-                    @if($user->canAccessPage('settings') || $user->canAccessPage('lokasi'))
+                    @if($user->canAccessPage('lokasi') || $user->canAccessPage('settings'))
                     <li class="menu-item {{ request()->routeIs('admin.lokasi.*') ? 'active' : '' }}">
                         <a href="{{ route('admin.lokasi.index') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-map-pin"></i>

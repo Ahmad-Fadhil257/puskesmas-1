@@ -25,6 +25,7 @@ class User extends Authenticatable
         'lokasi'     => 'Kelola Lokasi & Peta',
         'users'      => 'Kelola Pengguna',
         'settings'   => 'Identitas & Logo',
+        'lokasi'     => 'Lokasi & Peta',
     ];
 
     protected $fillable = [
