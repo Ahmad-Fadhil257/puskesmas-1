@@ -218,73 +218,7 @@
     margin: 0;
 }
 
-/* 6. Dokter Penanggung Jawab */
-.dokter-cards-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 16px;
-    margin-bottom: 32px;
-}
 
-.dokter-item-card {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    background: #F8FAFC;
-    border: 1px solid #CBD5E1;
-    border-radius: 12px;
-    padding: 14px;
-}
-
-.dokter-avatar-wrap {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    overflow: hidden;
-    flex-shrink: 0;
-    background: #E2E8F0;
-    border: 1px solid #CBD5E1;
-}
-
-.dokter-avatar-wrap img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.dokter-avatar-placeholder {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #E6F5F1;
-    color: #0A5C45;
-    font-size: 22px;
-}
-
-.dokter-info h5 {
-    font-size: 14px;
-    font-weight: 700;
-    color: #0F172A;
-    margin: 0 0 2px 0;
-}
-
-.dokter-info p {
-    font-size: 12px;
-    color: #64748B;
-    margin: 0 0 4px 0;
-}
-
-.dokter-info .badge-jadwal {
-    font-size: 11px;
-    font-weight: 600;
-    color: #0A5C45;
-    background: #E6F5F1;
-    padding: 2px 8px;
-    border-radius: 4px;
-    display: inline-block;
-}
 
 /* 7. Call to Action Card */
 .cta-help-card {
@@ -481,56 +415,7 @@
                 </p>
             </div>
 
-            {{-- 6. DOKTER & TENAGA MEDIS PENANGGUNG JAWAB --}}
-            @if($layanan->dokters->isNotEmpty())
-                <h3 class="section-headline">
-                    <i class="bx bx-user-pin"></i>
-                    <span>Dokter & Tenaga Medis Penanggung Jawab</span>
-                </h3>
-                <div class="dokter-cards-grid">
-                    @foreach($layanan->dokters as $dokter)
-                        <div class="dokter-item-card">
-                            <div class="dokter-avatar-wrap">
-                                @if($dokter->photo)
-                                    <img src="{{ asset($dokter->photo) }}" alt="{{ $dokter->name }}">
-                                @else
-                                    <div class="dokter-avatar-placeholder">
-                                        <i class="bx bx-user"></i>
-                                    </div>
-                                @endif
-                            </div>
-                            <div class="dokter-info">
-                                <h5>{{ $dokter->name }}</h5>
-                                <p>{{ $dokter->specialty ?? 'Dokter Pelaksana' }}</p>
-                                @if(!empty($dokter->jadwal_praktek))
-                                    @php
-                                        $jadwalStr = '';
-                                        if (is_array($dokter->jadwal_praktek)) {
-                                            $formattedDays = [];
-                                            foreach (array_slice($dokter->jadwal_praktek, 0, 2) as $jItem) {
-                                                if (is_array($jItem)) {
-                                                    $formattedDays[] = ($jItem['hari'] ?? '') . (!empty($jItem['jam']) ? ' (' . $jItem['jam'] . ')' : '');
-                                                } elseif (is_string($jItem)) {
-                                                    $formattedDays[] = $jItem;
-                                                }
-                                            }
-                                            $jadwalStr = implode(', ', array_filter($formattedDays));
-                                        } else {
-                                            $jadwalStr = (string) $dokter->jadwal_praktek;
-                                        }
-                                    @endphp
-                                    @if(!empty($jadwalStr))
-                                        <span class="badge-jadwal">
-                                            <i class="bx bx-calendar-event me-1"></i>
-                                            {{ $jadwalStr }}
-                                        </span>
-                                    @endif
-                                @endif
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-            @endif
+
 
             {{-- 7. CTA / PENDAFTARAN & KONSULTASI --}}
             <div class="cta-help-card">

@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Layanan;
-use App\Models\Dokter;
 use Illuminate\Http\Request;
 
 class AdminLayananController extends Controller
@@ -37,10 +36,9 @@ class AdminLayananController extends Controller
      */
     public function create()
     {
-        $dokters = Dokter::where('is_active', true)->orderBy('name', 'asc')->get();
         $categories = array_keys(Layanan::getKategoriList());
         $nextOrder = (Layanan::max('order') ?? 0) + 1;
-        return view('admin.layanan.create', compact('dokters', 'categories', 'nextOrder'));
+        return view('admin.layanan.create', compact('categories', 'nextOrder'));
     }
 
     /**
@@ -114,9 +112,8 @@ class AdminLayananController extends Controller
     public function edit($id)
     {
         $layanan = Layanan::findOrFail($id);
-        $dokters = Dokter::where('is_active', true)->orderBy('name', 'asc')->get();
         $categories = array_keys(Layanan::getKategoriList());
-        return view('admin.layanan.edit', compact('layanan', 'dokters', 'categories'));
+        return view('admin.layanan.edit', compact('layanan', 'categories'));
     }
 
     /**
