@@ -10,6 +10,9 @@
     <link rel="stylesheet" href="{{ asset('admin-assets/vendor/fonts/boxicons.css') }}">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
+    <!-- AOS (Animate On Scroll) CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
     <!-- Main CSS -->
     <link rel="stylesheet" href="{{ asset('css/layouts/nav.css') }}?v={{ file_exists(public_path('css/layouts/nav.css')) ? filemtime(public_path('css/layouts/nav.css')) : time() }}">
     <link rel="stylesheet" href="{{ asset('css/landing-page/hero.css') }}">
@@ -232,6 +235,17 @@
         });
     </script>
 
+    <!-- AOS (Animate On Scroll) JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 700,
+            once: true,
+            offset: 60,
+            easing: 'ease-out-cubic'
+        });
+    </script>
+    <script src="{{ asset('js/typography-animations.js') }}" defer></script>
     @stack('scripts')
 </body>
 </html>
