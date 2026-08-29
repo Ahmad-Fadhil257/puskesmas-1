@@ -261,6 +261,8 @@
         </div>
     </form>
 
+@endsection
+
 @push('scripts')
 <script>
     function setIconPreset(val) {
@@ -269,4 +271,3 @@
     }
 </script>
 @endpush
-@endsection

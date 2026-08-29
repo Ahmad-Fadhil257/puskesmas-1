@@ -169,21 +169,9 @@
         </div>
     </div>
 
-<script>
-function previewPhoto(input) {
-    const wrap = document.getElementById('previewWrap');
-    const preview = document.getElementById('photoPreview');
-    if (input.files && input.files[0]) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            preview.src = e.target.result;
-            wrap.classList.remove('d-none');
-        };
-        reader.readAsDataURL(input.files[0]);
-    }
-}
-</script>
+@endsection
 
+@push('styles')
 <style>
 .custom-dropdown { position: relative; }
 .custom-dropdown .dropdown-toggle {
@@ -224,9 +212,24 @@ function previewPhoto(input) {
 .custom-dropdown .dropdown-menu-custom::-webkit-scrollbar-thumb { background: #C5E5DD; border-radius: 10px; }
 .dark-style .custom-dropdown .dropdown-menu-custom::-webkit-scrollbar-thumb { background: #064e3b; }
 </style>
+@endpush
 
+@push('scripts')
 <script>
-const hariOptions = @php echo json_encode(['Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu']); @endphp;
+function previewPhoto(input) {
+    const wrap = document.getElementById('previewWrap');
+    const preview = document.getElementById('photoPreview');
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            preview.src = e.target.result;
+            wrap.classList.remove('d-none');
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+const hariOptions = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'];
 
 function toggleDropdown(btn) {
     const wrap = btn.closest('.custom-dropdown');
@@ -285,5 +288,4 @@ document.querySelectorAll('.btn-remove-jadwal').forEach(function(btn) {
     btn.addEventListener('click', function() { this.closest('.jadwal-row').remove(); });
 });
 </script>
-
-@endsection
+@endpush

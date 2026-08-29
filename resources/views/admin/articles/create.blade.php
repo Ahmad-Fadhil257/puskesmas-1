@@ -127,6 +127,8 @@
         </div>
     </div>
 
+@endsection
+
 @push('scripts')
 <script>
     function previewThumbnail(event) {
@@ -147,5 +149,3 @@
     }
 </script>
 @endpush
-
-@endsection

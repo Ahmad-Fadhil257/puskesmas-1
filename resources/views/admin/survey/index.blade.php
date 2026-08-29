@@ -282,7 +282,7 @@
 
                                 {{-- Tombol Edit Modal --}}
                                 <button type="button" class="btn btn-sm btn-icon btn-outline-warning" 
-                                        onclick="editSurvey({{ json_encode($s) }})" 
+                                        onclick="editSurvey({{ $s->id }})" 
                                         title="Edit Ulasan">
                                     <i class="bx bx-edit-alt"></i>
                                 </button>
@@ -475,6 +475,8 @@
     </div>
 </div>
 
+@endsection
+
 @push('scripts')
 <script>
     // Tampilkan Modal Detail Ulasan via AJAX
@@ -518,8 +520,13 @@
             });
     }
 
+    const surveysData = @json($surveys->keyBy('id'));
+
     // Isi Form Edit dan Buka Modal Edit
-    function editSurvey(survey) {
+    function editSurvey(id) {
+        const survey = surveysData[id];
+        if (!survey) return;
+
         const form = document.getElementById('formEditSurvey');
         form.action = `{{ url('admin/surveys') }}/${survey.id}`;
 
@@ -565,4 +572,3 @@
     });
 </script>
 @endpush
-@endsection
