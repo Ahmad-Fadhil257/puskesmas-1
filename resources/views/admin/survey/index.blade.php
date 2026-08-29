@@ -274,15 +274,15 @@
                         <td class="text-center">
                             <div class="d-flex justify-content-center align-items-center gap-1">
                                 {{-- Tombol Detail Modal --}}
-                                <button type="button" class="btn btn-sm btn-icon btn-outline-info" 
-                                        onclick="showSurveyDetail({{ $s->id }})" 
+                                <button type="button" class="btn btn-sm btn-icon btn-outline-info btn-show-survey" 
+                                        data-id="{{ $s->id }}" 
                                         title="Lihat Detail Ulasan">
                                     <i class="bx bx-show"></i>
                                 </button>
 
                                 {{-- Tombol Edit Modal --}}
-                                <button type="button" class="btn btn-sm btn-icon btn-outline-warning" 
-                                        onclick="editSurvey({{ $s->id }})" 
+                                <button type="button" class="btn btn-sm btn-icon btn-outline-warning btn-edit-survey" 
+                                        data-id="{{ $s->id }}" 
                                         title="Edit Ulasan">
                                     <i class="bx bx-edit-alt"></i>
                                 </button>
@@ -541,6 +541,22 @@
         const modal = new bootstrap.Modal(document.getElementById('modalEditSurvey'));
         modal.show();
     }
+
+    // Event Listener untuk Tombol Detail Modal
+    document.querySelectorAll('.btn-show-survey').forEach(function (button) {
+        button.addEventListener('click', function () {
+            const id = this.getAttribute('data-id');
+            showSurveyDetail(id);
+        });
+    });
+
+    // Event Listener untuk Tombol Edit Modal
+    document.querySelectorAll('.btn-edit-survey').forEach(function (button) {
+        button.addEventListener('click', function () {
+            const id = this.getAttribute('data-id');
+            editSurvey(id);
+        });
+    });
 
     // Konfirmasi Hapus SweetAlert2 / Fallback
     document.querySelectorAll('.btn-delete-survey').forEach(function (button) {
