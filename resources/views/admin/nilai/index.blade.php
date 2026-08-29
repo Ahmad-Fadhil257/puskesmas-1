@@ -3,7 +3,6 @@
 @section('title', 'Kelola Nilai-Nilai & Mitra - Puskesmas CareLink')
 
 @section('content')
-<div class="container-xxl flex-grow-1 container-p-y">
 
     {{-- Breadcrumb & Header --}}
     <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-3">
@@ -305,10 +304,7 @@
 
             </div>
         </div>
-
     </div>
-
-</div>
 
 {{-- =========================================================================
    MODAL TAMBAH MITRA BARU
