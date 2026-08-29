@@ -33,7 +33,7 @@
     <div class="jadwal-container">
         <div class="jadwal-grid">
             @forelse($dokters as $dokter)
-            <div class="jadwal-card" data-aos="fade-up">
+            <div class="jadwal-card">
                 <div class="jadwal-card-photo">
                     @if($dokter->photo)
                         <img src="{{ asset($dokter->photo) }}" alt="{{ $dokter->name }}" loading="lazy">

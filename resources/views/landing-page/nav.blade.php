@@ -46,7 +46,7 @@
 
             {{-- 3. INFORMASI PUBLIK (DROPDOWN) --}}
             <li class="navbar__item-dropdown">
-                <a href="{{ route('blog.index') }}" class="navbar__dropdown-toggle {{ request()->routeIs('blog.*') || request()->routeIs('jadwal-dokter') || request()->routeIs('faq.*') ? 'active' : '' }}">
+                <a href="{{ route('blog.index') }}" class="navbar__dropdown-toggle {{ request()->routeIs('blog.*') || request()->routeIs('jadwal-dokter') || request()->routeIs('faq.*') || request()->routeIs('infografis') ? 'active' : '' }}">
                     <span>INFORMASI PUBLIK</span>
                     <svg class="navbar__dropdown-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                         <polyline points="6 9 12 15 18 9"></polyline>
@@ -63,6 +63,12 @@
                         <a href="{{ route('jadwal-dokter') }}" class="navbar__dropdown-item {{ request()->routeIs('jadwal-dokter') ? 'active' : '' }}">
                             <i class="bx bx-calendar navbar__dropdown-icon"></i>
                             <span class="navbar__dropdown-text">Jadwal Praktik Dokter</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('infografis') }}" class="navbar__dropdown-item {{ request()->routeIs('infografis') ? 'active' : '' }}">
+                            <i class="bx bx-bar-chart-alt-2 navbar__dropdown-icon"></i>
+                            <span class="navbar__dropdown-text">Infografis</span>
                         </a>
                     </li>
                     <li>
@@ -127,7 +133,7 @@
 
         {{-- Mobile Informasi Publik Accordion --}}
         <div class="navbar__mobile-accordion">
-            <button type="button" class="navbar__mobile-accordion-toggle {{ request()->routeIs('blog.*') || request()->routeIs('jadwal-dokter') || request()->routeIs('faq.*') ? 'active' : '' }}" id="mobileInfoToggle">
+            <button type="button" class="navbar__mobile-accordion-toggle {{ request()->routeIs('blog.*') || request()->routeIs('jadwal-dokter') || request()->routeIs('faq.*') || request()->routeIs('infografis') ? 'active' : '' }}" id="mobileInfoToggle">
                 <span>INFORMASI PUBLIK</span>
                 <i class="bx bx-chevron-down" id="mobileInfoChevron"></i>
             </button>
@@ -137,6 +143,9 @@
                 </a>
                 <a href="{{ route('jadwal-dokter') }}" class="navbar__mobile-subitem {{ request()->routeIs('jadwal-dokter') ? 'active' : '' }}">
                     <i class="bx bx-calendar"></i> <span>Jadwal Praktik Dokter</span>
+                </a>
+                <a href="{{ route('infografis') }}" class="navbar__mobile-subitem {{ request()->routeIs('infografis') ? 'active' : '' }}">
+                    <i class="bx bx-bar-chart-alt-2"></i> <span>Infografis</span>
                 </a>
                 <a href="{{ route('faq.index') }}" class="navbar__mobile-subitem {{ request()->routeIs('faq.*') ? 'active' : '' }}">
                     <i class="bx bx-help-circle"></i> <span>Tanya Jawab (FAQ)</span>

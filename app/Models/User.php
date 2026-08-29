@@ -17,6 +17,7 @@ class User extends Authenticatable
         'hero'       => 'Kelola Hero & Fitur',
         'layanan'    => 'Kelola Layanan',
         'articles'   => 'Kelola Berita & Info',
+        'infografis' => 'Kelola Infografis',
         'cara-kerja' => 'Kelola Cara Kerja',
         'dokter'     => 'Kelola Dokter',
         'about'      => 'Kelola Tentang Kami',

@@ -188,7 +188,7 @@
             <div style="display: flex; flex-direction: column; gap: 24px;">
 
                 {{-- Card 1: Alamat Utama --}}
-                <div class="lokasi-card" data-aos="fade-up">
+                <div class="lokasi-card">
                     <div style="display: flex; align-items: flex-start; gap: 18px;">
                         <div class="lokasi-icon-wrapper">
                             <i class="bx bx-map"></i>
@@ -211,7 +211,7 @@
                 </div>
 
                 {{-- Card 2: Jam Pelayanan --}}
-                <div class="lokasi-card" data-aos="fade-up">
+                <div class="lokasi-card">
                     <div style="display: flex; align-items: flex-start; gap: 18px;">
                         <div class="lokasi-icon-wrapper" style="background: #FFFBEB; color: #D97706;">
                             <i class="bx bx-time-five"></i>
@@ -243,7 +243,7 @@
                 </div>
 
                 {{-- Card 3: Kontak & Bantuan --}}
-                <div class="lokasi-card" data-aos="fade-up">
+                <div class="lokasi-card">
                     <div style="display: flex; align-items: flex-start; gap: 18px;">
                         <div class="lokasi-icon-wrapper" style="background: #F0FDF4; color: #16A34A;">
                             <i class="bx bx-phone-call"></i>

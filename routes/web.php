@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\AdminDokterController;
 use App\Http\Controllers\Admin\AdminNilaiController;
 use App\Http\Controllers\Admin\AdminLayananController;
+use App\Http\Controllers\Admin\AdminInfografisController;
 use App\Http\Controllers\Admin\AdminSurveyController;
 use App\Http\Controllers\Admin\AdminLokasiController;
 use App\Http\Controllers\Admin\AdminFaqController;
@@ -87,6 +88,13 @@ Route::get('/jadwal-dokter', function () {
 Route::get('/berita', [BlogController::class, 'index'])->name('blog.index');
 Route::get('/berita/{slug}', [BlogController::class, 'show'])->name('blog.show');
 
+// Halaman Infografis Publik
+Route::get('/infografis', function () {
+    $infografis = \App\Models\Infografis::active()->orderBy('order', 'asc')->orderBy('id', 'desc')->get();
+    $kategoris = $infografis->pluck('kategori')->unique()->values();
+    return view('infografis', compact('infografis', 'kategoris'));
+})->name('infografis');
+
 // Halaman Lokasi & Peta Puskesmas
 Route::get('/lokasi', function () {
     return view('lokasi');
@@ -135,6 +143,10 @@ Route::middleware(['auth'])->group(function () {
         // Kelola Layanan Kami
         Route::post('layanan/{id}/reorder', [AdminLayananController::class, 'reorder'])->name('layanan.reorder');
         Route::resource('layanan', AdminLayananController::class)->except(['show']);
+
+        // Kelola Infografis
+        Route::patch('infografis/{infografis}/toggle-status', [AdminInfografisController::class, 'toggleStatus'])->name('infografis.toggle-status');
+        Route::resource('infografis', AdminInfografisController::class)->except(['show'])->parameters(['infografis' => 'infografis']);
 
         // Kelola Nilai-Nilai & Mitra (Banner & Mitra CRUD)
         Route::get('nilai', [AdminNilaiController::class, 'index'])->name('nilai.index');

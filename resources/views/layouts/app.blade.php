@@ -6,14 +6,12 @@
     <title>@yield('title', config('app.name') . ' - Melayani Kesehatan Masyarakat')</title>
     <meta name="description" content="@yield('meta_description', 'Pelayanan medis komprehensif dengan dokter ahli, fasilitas modern, dan pelayanan penuh kasih sayang. Kesehatan Anda, prioritas kami.')">
 
-    <!-- Google Fonts - Plus Jakarta Sans -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
-
     <!-- Boxicons Font Icons -->
     <link rel="stylesheet" href="{{ asset('admin-assets/vendor/fonts/boxicons.css') }}">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <!-- AOS (Animate On Scroll) CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <!-- Main CSS -->
     <link rel="stylesheet" href="{{ asset('css/layouts/nav.css') }}?v={{ file_exists(public_path('css/layouts/nav.css')) ? filemtime(public_path('css/layouts/nav.css')) : time() }}">
@@ -90,7 +88,6 @@
             const iconClose = document.getElementById('iconClose');
             const header = document.querySelector('.site-header');
 
-            // ── Mobile toggle open/close ──────────────────────────────────────
             if (toggle && menu) {
                 toggle.addEventListener('click', function () {
                     const isOpen = menu.classList.toggle('open');
@@ -99,8 +96,7 @@
                     iconClose.style.display = isOpen ? 'block' : 'none';
                 });
 
-                // Close mobile menu when a plain link is clicked
-                menu.querySelectorAll('a:not(.mobile-accordion__body a)').forEach(function (link) {
+                menu.querySelectorAll('a').forEach(function (link) {
                     link.addEventListener('click', function () {
                         menu.classList.remove('open');
                         toggle.setAttribute('aria-expanded', 'false');
@@ -110,16 +106,7 @@
                 });
             }
 
-            // ── Mobile accordion (Profil, Layanan, Informasi Publik) ──────────
-            document.querySelectorAll('.mobile-accordion__btn').forEach(function (btn) {
-                btn.addEventListener('click', function () {
-                    const accordion = btn.closest('.mobile-accordion');
-                    const isOpen = accordion.classList.toggle('open');
-                    btn.setAttribute('aria-expanded', isOpen);
-                });
-            });
-
-            // ── Sticky navbar on scroll ───────────────────────────────────────
+            // Sticky navbar effect
             if (header) {
                 window.addEventListener('scroll', function () {
                     header.classList.toggle('scrolled', window.scrollY > 50);
@@ -166,12 +153,17 @@
         });
     </script>
 
-    <!-- AOS (Animate On Scroll) JS - Sesuai Medisy.id -->
+    <!-- AOS (Animate On Scroll) JS -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-
-    <!-- Typography Entrance & Exit Animations Engine -->
+    <script>
+        AOS.init({
+            duration: 700,
+            once: true,
+            offset: 60,
+            easing: 'ease-out-cubic'
+        });
+    </script>
     <script src="{{ asset('js/typography-animations.js') }}" defer></script>
-
     @stack('scripts')
 </body>
 </html>

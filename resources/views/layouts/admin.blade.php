@@ -177,6 +177,14 @@
                         </a>
                     </li>
                     @endif
+                    @if($user->canAccessPage('infografis'))
+                    <li class="menu-item {{ request()->routeIs('admin.infografis.*') ? 'active' : '' }}">
+                        <a href="{{ route('admin.infografis.index') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-bar-chart-alt-2"></i>
+                            <div>Kelola Infografis</div>
+                        </a>
+                    </li>
+                    @endif
                     @if($user->canAccessPage('articles'))
                     <li class="menu-item {{ request()->routeIs('admin.articles.*') ? 'active' : '' }}">
                         <a href="{{ route('admin.articles.index') }}" class="menu-link">
