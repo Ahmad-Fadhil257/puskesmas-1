@@ -520,26 +520,28 @@
             });
     }
 
-    const surveysData = @json($surveys->keyBy('id'));
-
-    // Isi Form Edit dan Buka Modal Edit
+    // Isi Form Edit dan Buka Modal Edit via AJAX
     function editSurvey(id) {
-        const survey = surveysData[id];
-        if (!survey) return;
+        fetch(`{{ url('admin/surveys') }}/${id}`)
+            .then(res => res.json())
+            .then(survey => {
+                const form = document.getElementById('formEditSurvey');
+                form.action = `{{ url('admin/surveys') }}/${survey.id}`;
 
-        const form = document.getElementById('formEditSurvey');
-        form.action = `{{ url('admin/surveys') }}/${survey.id}`;
+                document.getElementById('edit_name').value = survey.name;
+                document.getElementById('edit_phone').value = (survey.email_or_phone && survey.email_or_phone !== '-') ? survey.email_or_phone : '';
+                document.getElementById('edit_poli').value = survey.poli_name;
+                document.getElementById('edit_rating').value = survey.rating;
+                document.getElementById('edit_pesan').value = survey.pesan;
+                document.getElementById('edit_is_approved').checked = Boolean(survey.is_approved);
+                document.getElementById('edit_is_featured').checked = Boolean(survey.is_featured);
 
-        document.getElementById('edit_name').value = survey.name;
-        document.getElementById('edit_phone').value = survey.email_or_phone || '';
-        document.getElementById('edit_poli').value = survey.poli_name;
-        document.getElementById('edit_rating').value = survey.rating;
-        document.getElementById('edit_pesan').value = survey.pesan;
-        document.getElementById('edit_is_approved').checked = Boolean(survey.is_approved);
-        document.getElementById('edit_is_featured').checked = Boolean(survey.is_featured);
-
-        const modal = new bootstrap.Modal(document.getElementById('modalEditSurvey'));
-        modal.show();
+                const modal = new bootstrap.Modal(document.getElementById('modalEditSurvey'));
+                modal.show();
+            })
+            .catch(err => {
+                console.error('Error fetching survey for edit:', err);
+            });
     }
 
     // Event Listener untuk Tombol Detail Modal
