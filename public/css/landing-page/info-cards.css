@@ -173,6 +173,7 @@
 @media (max-width: 768px) {
     .info-cards {
         margin-top: 16px;
+        margin-bottom: -30px;
         padding: 0 16px;
     }
 

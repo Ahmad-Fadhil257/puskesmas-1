@@ -243,7 +243,7 @@ a {
 
 @media (max-width: 768px) {
     .about {
-        padding: 56px 16px;
+        padding: 56px 20px;
     }
 
     .about__cards {
@@ -252,6 +252,7 @@ a {
 
     .about__images {
         min-height: 320px;
+        gap: 16px;
     }
 
     .about__img-wrap--main {
@@ -264,11 +265,16 @@ a {
 }
 
 @media (max-width: 480px) {
+    .about {
+        padding: 48px 16px;
+    }
+
     .about__title {
         font-size: 1.5rem;
     }
 
     .about__images {
         min-height: 260px;
+        gap: 12px;
     }
 }

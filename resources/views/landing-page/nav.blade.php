@@ -32,7 +32,7 @@
                 </a>
                 <ul class="navbar__dropdown-menu">
                     @if(isset($navLayanans) && $navLayanans->isNotEmpty())
-                        @foreach($navLayanans as $navItem)
+                        @foreach($navLayanans->filter(fn($item) => !empty($item->slug)) as $navItem)
                             <li>
                                 <a href="{{ route('layanan.detail', $navItem->slug) }}" class="navbar__dropdown-item {{ request()->is('layanan/' . $navItem->slug) ? 'active' : '' }}">
                                     <i class="{{ $navItem->icon ?? 'bx bx-plus-medical' }} navbar__dropdown-icon"></i>
@@ -121,7 +121,7 @@
             </button>
             <div class="navbar__mobile-accordion-content" id="mobileLayananContent">
                 @if(isset($navLayanans) && $navLayanans->isNotEmpty())
-                    @foreach($navLayanans as $navItem)
+                    @foreach($navLayanans->filter(fn($item) => !empty($item->slug)) as $navItem)
                         <a href="{{ route('layanan.detail', $navItem->slug) }}" class="navbar__mobile-subitem {{ request()->is('layanan/' . $navItem->slug) ? 'active' : '' }}">
                             <i class="{{ $navItem->icon ?? 'bx bx-plus-medical' }}"></i>
                             <span>{{ $navItem->title }}</span>
