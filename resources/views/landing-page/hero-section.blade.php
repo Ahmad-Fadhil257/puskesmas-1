@@ -25,9 +25,10 @@
             <!-- Dual Action Buttons -->
             <div class="hero__actions" data-aos="fade-up">
                 @php
+                    $defaultPesanJanji = "Halo Admin Puskesmas, saya ingin membuat janji temu pendaftaran online. Mohon informasi jadwal dan persyaratannya. Terima kasih.";
                     $primaryLink = (!empty($hero->btn_primary_link) && $hero->btn_primary_link !== '#janji-temu')
                         ? $hero->btn_primary_link
-                        : ($appSetting->wa_link ?? '#');
+                        : (isset($appSetting) ? $appSetting->getWaUrl($defaultPesanJanji) : '#');
                     $secondaryLink = (!empty($hero->btn_secondary_link) && $hero->btn_secondary_link !== '#layanan')
                         ? $hero->btn_secondary_link
                         : route('layanan.index');

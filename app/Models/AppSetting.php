@@ -106,12 +106,26 @@ class AppSetting extends Model
      */
     public function getWaLinkAttribute(): string
     {
-        $phone = preg_replace('/[^0-9]/', '', $this->phone);
+        return $this->getWaUrl();
+    }
+
+    /**
+     * Generate WhatsApp link dengan pesan template otomatis
+     */
+    public function getWaUrl(?string $text = null): string
+    {
+        $phone = preg_replace('/[^0-9]/', '', $this->phone ?? '');
 
         if (str_starts_with($phone, '0')) {
             $phone = '62' . substr($phone, 1);
         }
 
-        return 'https://api.whatsapp.com/send?phone=' . $phone;
+        $url = 'https://api.whatsapp.com/send?phone=' . $phone;
+
+        if (!empty($text)) {
+            $url .= '&text=' . rawurlencode($text);
+        }
+
+        return $url;
     }
 }

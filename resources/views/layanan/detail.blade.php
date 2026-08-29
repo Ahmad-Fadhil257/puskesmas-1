@@ -424,7 +424,11 @@
                     <p>Petugas kami siap membantu memberikan informasi seputar alur rujukan, antrean, dan pendaftaran poli.</p>
                 </div>
                 <div class="cta-help-actions">
-                    <a href="{{ $appSetting->wa_link ?? '#' }}" target="_blank" rel="noopener" class="btn-cta-wa">
+                    @php
+                        $pesanWaLayanan = "Halo Admin Puskesmas, saya ingin bertanya dan berkonsultasi mengenai layanan " . $layanan->nama . ". Apakah kuota antrean untuk hari ini/besok masih tersedia? Terima kasih.";
+                        $waLayananLink = isset($appSetting) ? $appSetting->getWaUrl($pesanWaLayanan) : '#';
+                    @endphp
+                    <a href="{{ $waLayananLink }}" target="_blank" rel="noopener" class="btn-cta-wa">
                         <i class="bx bxl-whatsapp fs-5"></i>
                         <span>Pendaftaran / Chat WA</span>
                     </a>

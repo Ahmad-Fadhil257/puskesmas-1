@@ -161,7 +161,11 @@
                 </p>
             </div>
             <div>
-                <a href="{{ $appSetting->wa_link }}" target="_blank" rel="noopener" class="btn-faq-wa">
+                @php
+                    $pesanWaFaq = "Halo Admin Puskesmas, pertanyaan saya tidak tercantum di daftar Tanya Jawab (FAQ) website. Saya ingin menanyakan perihal pelayanan Puskesmas lebih lanjut. Terima kasih.";
+                    $waFaqLink = isset($appSetting) ? $appSetting->getWaUrl($pesanWaFaq) : '#';
+                @endphp
+                <a href="{{ $waFaqLink }}" target="_blank" rel="noopener" class="btn-faq-wa">
                     <i class="bx bxl-whatsapp fs-5"></i>
                     <span>Tanya Petugas via WhatsApp</span>
                 </a>
