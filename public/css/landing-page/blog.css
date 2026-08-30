@@ -419,3 +419,25 @@
         height: 160px;
     }
 }
+
+@media (max-width: 480px) {
+    .blog__title {
+        font-size: 1.375rem;
+    }
+
+    .blog-card--featured {
+        min-height: 380px;
+    }
+
+    .blog-card__title a {
+        font-size: 1.25rem;
+    }
+
+    .blog-card__content {
+        padding: 20px 16px;
+    }
+
+    .blog-card__side-body {
+        padding: 16px 16px 18px;
+    }
+}

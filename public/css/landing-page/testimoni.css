@@ -137,6 +137,8 @@
 .testimonials__slider-wrapper {
     position: relative;
     width: 100%;
+    padding: 0 16px;
+    box-sizing: border-box;
 }
 
 .testimonials__nav-btn {
@@ -169,11 +171,11 @@
 }
 
 .testimonials__nav-btn--prev {
-    left: -24px;
+    left: -16px;
 }
 
 .testimonials__nav-btn--next {
-    right: -24px;
+    right: -16px;
 }
 
 /* Swiper Container & Equal Heights */
@@ -416,42 +418,73 @@
         font-size: 2rem;
     }
 
-    .testimonials__nav-btn--prev {
-        left: -14px;
-    }
-
-    .testimonials__nav-btn--next {
-        right: -14px;
+    /* Sembunyikan tombol panah floating di tablet & mobile agar tidak menimpa kartu ulasan */
+    .testimonials__nav-btn {
+        display: none !important;
     }
 }
 
 @media (max-width: 768px) {
     .testimonials {
-        padding: 60px 0 75px;
+        padding: 50px 0 65px;
     }
 
     .testimonials__container {
-        padding: 0 20px;
+        padding: 0 16px;
     }
 
     .testimonial-card {
-        padding: 26px 20px;
+        padding: 24px 18px;
+        min-height: auto;
     }
 
     .testimonials__title {
-        font-size: 1.625rem;
+        font-size: 1.5rem;
+    }
+
+    .testimonials__subtitle {
+        font-size: 0.875rem;
     }
 
     .testimonials__nav-btn {
-        width: 38px;
-        height: 38px;
+        display: none !important;
     }
+}
 
-    .testimonials__nav-btn--prev {
-        left: -8px;
-    }
+/* CTA Isi Survei */
+.testimonials__cta-wrap {
+    text-align: center;
+    margin-top: 36px;
+}
 
-    .testimonials__nav-btn--next {
-        right: -8px;
+.testimonials__cta-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: #0A5C45;
+    color: #FFFFFF;
+    font-weight: 700;
+    font-size: 14.5px;
+    padding: 13px 26px;
+    border-radius: 9999px;
+    text-decoration: none;
+    box-shadow: 0 4px 14px rgba(10, 92, 69, 0.25);
+    transition: all 0.2s ease;
+    max-width: 100%;
+}
+
+.testimonials__cta-btn:hover {
+    background: #084a37;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(10, 92, 69, 0.35);
+}
+
+@media (max-width: 480px) {
+    .testimonials__cta-btn {
+        padding: 12px 20px;
+        font-size: 13.5px;
+        width: 100%;
+        box-sizing: border-box;
     }
 }

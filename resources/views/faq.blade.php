@@ -37,66 +37,24 @@
 <div class="faq-content-wrapper">
     <div class="faq-container">
 
-        {{-- Search & Filter Card (2 Kolom Seperti di Halaman Berita) --}}
+        {{-- Search Card (Tanpa Kategori, Bersih & Responsif) --}}
         <div class="faq-filter-card" data-aos="fade-up">
-            <div class="faq-filter-form__grid">
-                
-                {{-- Kolom Kiri: Cari Pertanyaan / Kata Kunci --}}
-                <div class="faq-filter-col">
-                    <label class="faq-filter-label" for="faqSearchInput">Cari Pertanyaan / Kata Kunci</label>
-                    <div class="faq-search-input-group">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6E857E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="search-icon">
-                            <circle cx="11" cy="11" r="8"></circle>
-                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                        </svg>
-                        <input type="text" 
-                               id="faqSearchInput" 
-                               placeholder="Ketik topik pertanyaan, misal: BPJS, rujukan, UGD, jadwal loket..." 
-                               autocomplete="off">
-                        <button type="button" id="faqSearchClear" class="faq-search-clear-btn" title="Hapus pencarian">&times;</button>
-                        <button type="button" id="btnFaqSearch" class="btn-faq-search">
-                            <span>Cari</span>
-                        </button>
-                    </div>
+            <div class="faq-search-wrapper">
+                <label class="faq-filter-label" for="faqSearchInput">Cari Pertanyaan / Kata Kunci</label>
+                <div class="faq-search-input-group">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6E857E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="search-icon">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    <input type="text" 
+                           id="faqSearchInput" 
+                           placeholder="Ketik topik atau kata kunci pertanyaan, misal: BPJS, rujukan, jadwal loket, IGD..." 
+                           autocomplete="off">
+                    <button type="button" id="faqSearchClear" class="faq-search-clear-btn" title="Hapus pencarian">&times;</button>
+                    <button type="button" id="btnFaqSearch" class="btn-faq-search">
+                        <span>Cari</span>
+                    </button>
                 </div>
-
-                {{-- Kolom Kanan: Filter Kategori --}}
-                <div class="faq-filter-col">
-                    <label class="faq-filter-label" for="faqCategorySelect">Filter Kategori Topik</label>
-                    <div class="faq-select-group">
-                        <select id="faqCategorySelect" class="faq-category-select">
-                            <option value="all">Semua Kategori ({{ $faqs->count() }})</option>
-                            @foreach($categories as $cat)
-                                @php $catCount = $faqs->where('kategori', $cat)->count(); @endphp
-                                @if($catCount > 0)
-                                    <option value="{{ $cat }}">{{ $cat }} ({{ $catCount }})</option>
-                                @endif
-                            @endforeach
-                        </select>
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0A5C45" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="faq-select-chevron">
-                            <polyline points="6 9 12 15 18 9"></polyline>
-                        </svg>
-                    </div>
-                </div>
-
-            </div>
-
-            {{-- Quick Filter Pills --}}
-            <div class="faq-quick-pills">
-                <span class="faq-quick-pills-label">Topik Populer:</span>
-                <button type="button" class="faq-pill-btn active" data-category="all">
-                    <span>Semua Topik</span>
-                    <span class="faq-pill-count">{{ $faqs->count() }}</span>
-                </button>
-                @foreach($categories as $cat)
-                    @php $catCount = $faqs->where('kategori', $cat)->count(); @endphp
-                    @if($catCount > 0)
-                        <button type="button" class="faq-pill-btn" data-category="{{ $cat }}">
-                            <span>{{ $cat }}</span>
-                            <span class="faq-pill-count">{{ $catCount }}</span>
-                        </button>
-                    @endif
-                @endforeach
             </div>
         </div>
 
@@ -104,7 +62,6 @@
         <div class="faq-accordion-list" id="faqAccordionList" data-aos="fade-up">
             @forelse($faqs as $index => $faq)
                 <div class="faq-item" 
-                     data-category="{{ $faq->kategori }}" 
                      data-question="{{ strtolower($faq->pertanyaan) }}" 
                      data-answer="{{ strtolower(strip_tags($faq->jawaban)) }}">
                     
@@ -114,7 +71,6 @@
                             id="faq-header-{{ $faq->id }}" 
                             aria-controls="faq-body-{{ $faq->id }}">
                         <div class="faq-header-content">
-                            <span class="faq-badge-category">{{ $faq->kategori }}</span>
                             <h3 class="faq-question-text">{{ $faq->pertanyaan }}</h3>
                         </div>
                         <div class="faq-toggle-icon-wrap" aria-hidden="true">
@@ -182,14 +138,11 @@
 document.addEventListener('DOMContentLoaded', function() {
     const searchInput = document.getElementById('faqSearchInput');
     const searchClear = document.getElementById('faqSearchClear');
-    const categorySelect = document.getElementById('faqCategorySelect');
-    const categoryPills = document.querySelectorAll('.faq-pill-btn');
     const faqItems = document.querySelectorAll('.faq-item');
     const emptyState = document.getElementById('faqEmptyState');
     const btnResetSearch = document.getElementById('btnResetSearch');
     const btnFaqSearch = document.getElementById('btnFaqSearch');
 
-    let currentCategory = 'all';
     let currentSearchTerm = '';
 
     // 1. Accordion Toggle
@@ -216,19 +169,17 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // 2. Filter Logic (Category + Live Search)
+    // 2. Filter Logic (Live Search)
     function applyFilter() {
         let visibleCount = 0;
 
         faqItems.forEach(item => {
-            const itemCat = item.getAttribute('data-category');
             const itemQ = item.getAttribute('data-question') || '';
             const itemA = item.getAttribute('data-answer') || '';
 
-            const matchesCategory = (currentCategory === 'all' || itemCat === currentCategory);
             const matchesSearch = (!currentSearchTerm || itemQ.includes(currentSearchTerm) || itemA.includes(currentSearchTerm));
 
-            if (matchesCategory && matchesSearch) {
+            if (matchesSearch) {
                 if (item.style.display === 'none' || item.style.display === '') {
                     item.classList.remove('animate-fade-in');
                     void item.offsetWidth;
@@ -248,35 +199,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // 3. Sinkronisasi Kategori (Select Dropdown & Pills)
-    function setCategory(cat) {
-        currentCategory = cat;
-        if (categorySelect) {
-            categorySelect.value = cat;
-        }
-        categoryPills.forEach(pill => {
-            if (pill.getAttribute('data-category') === cat) {
-                pill.classList.add('active');
-            } else {
-                pill.classList.remove('active');
-            }
-        });
-        applyFilter();
-    }
-
-    if (categorySelect) {
-        categorySelect.addEventListener('change', function() {
-            setCategory(this.value);
-        });
-    }
-
-    categoryPills.forEach(pill => {
-        pill.addEventListener('click', function() {
-            setCategory(this.getAttribute('data-category'));
-        });
-    });
-
-    // 4. Live Search Input
+    // 3. Live Search Input
     if (searchInput) {
         searchInput.addEventListener('input', function() {
             currentSearchTerm = this.value.trim().toLowerCase();
@@ -295,7 +218,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // 5. Clear Search Button
+    // 4. Clear Search Button
     if (searchClear) {
         searchClear.addEventListener('click', function() {
             searchInput.value = '';
@@ -306,13 +229,13 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // 6. Reset Button on Empty State
+    // 5. Reset Button on Empty State
     if (btnResetSearch) {
         btnResetSearch.addEventListener('click', function() {
             if (searchInput) searchInput.value = '';
             currentSearchTerm = '';
             if (searchClear) searchClear.style.display = 'none';
-            setCategory('all');
+            applyFilter();
         });
     }
 });

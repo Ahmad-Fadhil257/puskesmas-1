@@ -196,6 +196,20 @@
         padding: 32px 0 24px;
     }
 
+    .footer__grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        text-align: center;
+    }
+
+    .footer__brand-header {
+        justify-content: center;
+    }
+
+    .footer__socials {
+        justify-content: center;
+    }
+
     .footer__brand-title {
         font-size: 1.25rem;
     }

@@ -277,6 +277,17 @@ a { text-decoration: none; color: inherit; }
 }
 
 @media (max-width: 480px) {
-    .hero__title { font-size: 1.75rem; }
+    .hero__title { font-size: clamp(1.4rem, 6vw, 1.75rem); }
     .hero__desc { font-size: 0.9375rem; }
+    .hero__actions {
+        flex-direction: column;
+        width: 100%;
+        gap: 12px;
+    }
+    .hero__actions .btn-primary,
+    .hero__actions .btn-secondary {
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+    }
 }
