@@ -50,48 +50,26 @@
 
         <div class="survei-main-grid">
 
-            {{-- =============================================================
-               KOLOM KIRI: KARTU VISUAL (SELARAS DENGAN FORMULIR)
-               ============================================================= --}}
             <div class="survei-visual-card" data-aos="fade-right">
-                <div class="survei-visual-header">
-                    <span class="survei-visual-tag">
-                        <i class="bx bx-check-shield"></i>
-                        <span>Evaluasi Mutu Pelayanan</span>
-                    </span>
-                    <h3 class="survei-visual-title">Suara Anda Adalah Kunci Perubahan Kami</h3>
+                <div class="survei-visual-blob"></div>
+                <img src="{{ asset('assets/img/survey-illustration.jpg') }}?v={{ file_exists(public_path('assets/img/survey-illustration.jpg')) ? filemtime(public_path('assets/img/survey-illustration.jpg')) : time() }}" 
+                     alt="Survei Kepuasan Pasien" 
+                     class="survei-visual-img">
+                
+                <div class="survei-visual-floating-badge">
+                    <div style="display: flex; align-items: center; gap: 4px; color: #F59E0B; font-weight: 800; font-size: 15px;">
+                        <i class="bx bxs-star"></i>
+                        <span>{{ $avgRating ?? '4.9' }}</span>
+                    </div>
+                    <span style="display: inline-block; width: 4px; height: 4px; background: #CBD5E1; border-radius: 50%;"></span>
+                    <span style="font-size: 13px; font-weight: 700; color: #0A5C45;">{{ $satisfactionPct ?? '98' }}% Sangat Puas</span>
                 </div>
 
-                <div class="survei-visual-image-wrapper">
-                    <img src="{{ asset('assets/img/survey-illustration.jpg') }}?v={{ file_exists(public_path('assets/img/survey-illustration.jpg')) ? filemtime(public_path('assets/img/survey-illustration.jpg')) : time() }}" 
-                         alt="Survei Kepuasan Pasien" 
-                         class="survei-visual-img">
-                    
-                    <div class="survei-visual-floating-badge">
-                        <div style="display: flex; align-items: center; gap: 4px; color: #F59E0B; font-weight: 800; font-size: 15px;">
-                            <i class="bx bxs-star"></i>
-                            <span>{{ $avgRating ?? '4.9' }}</span>
-                        </div>
-                        <span style="display: inline-block; width: 4px; height: 4px; background: #CBD5E1; border-radius: 50%;"></span>
-                        <span style="font-size: 13px; font-weight: 700; color: #0A5C45;">{{ $satisfactionPct ?? '98' }}% Pasien Puas</span>
-                    </div>
-                </div>
-
-                <div class="survei-visual-features">
-                    <div class="survei-feature-item">
-                        <div class="survei-feature-icon"><i class="bx bx-lock-alt"></i></div>
-                        <div class="survei-feature-text">
-                            <strong>100% Rahasia & Aman</strong>
-                            <span>Tersedia opsi pengiriman anonim tanpa membagikan nama dan nomor kontak.</span>
-                        </div>
-                    </div>
-                    <div class="survei-feature-item">
-                        <div class="survei-feature-icon"><i class="bx bx-line-chart"></i></div>
-                        <div class="survei-feature-text">
-                            <strong>Evaluasi Berkelanjutan</strong>
-                            <span>Setiap masukan dianalisis secara berkala untuk meningkatkan fasilitas dan keramahan petugas.</span>
-                        </div>
-                    </div>
+                <div style="margin-top: 20px; z-index: 2; position: relative;">
+                    <h4 style="font-size: 17px; font-weight: 800; color: #122822; margin: 0 0 6px 0;">Penilaian Anda Sangat Berarti</h4>
+                    <p style="font-size: 13.5px; color: #64748B; margin: 0; max-width: 320px; line-height: 1.5;">
+                        Setiap masukan dan evaluasi membantu kami terus meningkatkan kualitas pelayanan kesehatan masyarakat.
+                    </p>
                 </div>
             </div>
 
