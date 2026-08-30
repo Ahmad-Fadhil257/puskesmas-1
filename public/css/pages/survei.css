@@ -331,17 +331,17 @@
 /* Submit Button */
 .btn-submit-survei {
     width: 100%;
-    background: #0A5C45;
+    background: #00A86B;
     color: #FFFFFF;
     border: none;
-    border-radius: 10px;
+    border-radius: 8px;
     padding: 14px 24px;
     font-family: inherit;
     font-size: 15px;
-    font-weight: 700;
+    font-weight: 750;
     cursor: pointer;
-    transition: all 0.2s ease;
-    box-shadow: 0 4px 14px rgba(10, 92, 69, 0.25);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 4px 14px rgba(0, 168, 107, 0.28);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -349,7 +349,7 @@
 }
 
 .btn-submit-survei:hover {
-    background: #084A37;
-    box-shadow: 0 8px 20px rgba(10, 92, 69, 0.35);
-    transform: translateY(-1px);
+    background: #008F5B;
+    box-shadow: 0 8px 20px rgba(0, 168, 107, 0.4);
+    transform: translateY(-2px);
 }

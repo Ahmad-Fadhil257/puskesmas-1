@@ -41,6 +41,16 @@ class Infografis extends Model
         if (empty($this->image_path)) {
             return asset('assets/images/infografis-placeholder.svg');
         }
+
+        if (file_exists(public_path($this->image_path))) {
+            return asset($this->image_path);
+        }
+
+        $cleaned = preg_replace('#^storage/#', '', $this->image_path);
+        if (file_exists(public_path($cleaned))) {
+            return asset($cleaned);
+        }
+
         return asset($this->image_path);
     }
 
@@ -53,6 +63,16 @@ class Infografis extends Model
         if (empty($path)) {
             return asset('assets/images/infografis-placeholder.svg');
         }
+
+        if (file_exists(public_path($path))) {
+            return asset($path);
+        }
+
+        $cleaned = preg_replace('#^storage/#', '', $path);
+        if (file_exists(public_path($cleaned))) {
+            return asset($cleaned);
+        }
+
         return asset($path);
     }
 }

@@ -81,21 +81,21 @@
     align-items: center;
     justify-content: center;
     gap: 8px;
-    background: #0A5C45;
+    background: #00A86B;
     color: #FFFFFF;
     font-size: 14.5px;
-    font-weight: 700;
+    font-weight: 750;
     padding: 13px 24px;
-    border-radius: 12px;
+    border-radius: 8px;
     text-decoration: none;
     transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-    box-shadow: 0 4px 12px rgba(10, 92, 69, 0.2);
+    box-shadow: 0 4px 14px rgba(0, 168, 107, 0.28);
 }
 
 .btn-rute-maps:hover {
-    background: #064E3B;
+    background: #008F5B;
     color: #FFFFFF;
-    box-shadow: 0 6px 18px rgba(10, 92, 69, 0.3);
+    box-shadow: 0 8px 20px rgba(0, 168, 107, 0.4);
     transform: translateY(-2px);
 }
 
@@ -107,9 +107,9 @@
     background: #25D366;
     color: #FFFFFF;
     font-size: 14.5px;
-    font-weight: 700;
+    font-weight: 750;
     padding: 13px 24px;
-    border-radius: 12px;
+    border-radius: 8px;
     text-decoration: none;
     transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     box-shadow: 0 4px 12px rgba(37, 211, 102, 0.2);

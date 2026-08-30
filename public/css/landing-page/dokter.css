@@ -9,11 +9,24 @@
     overflow: hidden;
 }
 
+/* Polkadot Geometric Dot Grid Pattern (Senada dengan Testimoni) */
+.dokter-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1.2px, transparent 1.2px);
+    background-size: 24px 24px;
+    opacity: 0.55;
+    pointer-events: none;
+    z-index: 0;
+}
+
 .dokter-container {
     max-width: var(--container-max);
     margin: 0 auto;
     padding: 0 24px;
     position: relative;
+    z-index: 1;
 }
 
 /* ===== HEADER ===== */
@@ -21,27 +34,31 @@
     text-align: center;
     max-width: 680px;
     margin: 0 auto 48px;
+    position: relative;
+    z-index: 1;
 }
 
 .dokter-label {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
+    gap: 10px;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     color: #92e4c8;
-    background: rgba(255, 255, 255, 0.12);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    padding: 6px 16px;
-    border-radius: 9999px;
+    background: transparent;
+    border: none;
+    border-left: 4px solid #92e4c8;
+    padding: 3px 0 3px 12px;
+    border-radius: 0;
     margin-bottom: 16px;
+    cursor: default;
 }
 
 .dokter-label svg {
-    width: 14px;
-    height: 14px;
+    width: 16px;
+    height: 16px;
     flex-shrink: 0;
 }
 

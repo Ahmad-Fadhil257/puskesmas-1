@@ -9,16 +9,41 @@ use Illuminate\Support\Facades\Storage;
 
 class AdminInfografisController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $infografis = Infografis::orderBy('order', 'asc')->orderBy('id', 'desc')->paginate(12);
-        $kategoris = Infografis::distinct()->pluck('kategori');
-        return view('admin.infografis.index', compact('infografis', 'kategoris'));
+        $query = Infografis::query();
+
+        if ($request->filled('search')) {
+            $search = $request->input('search');
+            $query->where(function ($q) use ($search) {
+                $q->where('title', 'like', "%{$search}%")
+                  ->orWhere('deskripsi', 'like', "%{$search}%");
+            });
+        }
+
+        if ($request->filled('kategori')) {
+            $query->where('kategori', $request->kategori);
+        }
+
+        if ($request->filled('status')) {
+            if ($request->status === 'active') {
+                $query->where('is_active', true);
+            } elseif ($request->status === 'inactive') {
+                $query->where('is_active', false);
+            }
+        }
+
+        $infografis = $query->orderBy('order', 'asc')->orderBy('id', 'desc')->paginate(12)->withQueryString();
+        $kategoris = Infografis::distinct()->whereNotNull('kategori')->pluck('kategori');
+        $totalInfografis = Infografis::count();
+        $totalActive = Infografis::where('is_active', true)->count();
+
+        return view('admin.infografis.index', compact('infografis', 'kategoris', 'totalInfografis', 'totalActive'));
     }
 
     public function create()
     {
-        return view('admin.infografis.create');
+        return redirect()->route('admin.infografis.index');
     }
 
     public function store(Request $request)
@@ -35,13 +60,18 @@ class AdminInfografisController extends Controller
             'image.max'      => 'Ukuran gambar maksimal 5 MB.',
         ]);
 
-        $path = $request->file('image')->store('uploads/infografis', 'public');
+        $uploadDir = public_path('uploads/infografis');
+        if (!\Illuminate\Support\Facades\File::isDirectory($uploadDir)) {
+            \Illuminate\Support\Facades\File::makeDirectory($uploadDir, 0755, true, true);
+        }
+        $filename = time() . '_' . \Illuminate\Support\Str::random(10) . '.' . $request->file('image')->getClientOriginalExtension();
+        $request->file('image')->move($uploadDir, $filename);
 
         Infografis::create([
             'title'      => $request->title,
             'kategori'   => $request->kategori,
             'deskripsi'  => $request->deskripsi,
-            'image_path' => 'storage/' . $path,
+            'image_path' => 'uploads/infografis/' . $filename,
             'is_active'  => $request->boolean('is_active', true),
             'order'      => $request->order ?? 0,
         ]);
@@ -52,7 +82,7 @@ class AdminInfografisController extends Controller
 
     public function edit(Infografis $infografis)
     {
-        return view('admin.infografis.edit', compact('infografis'));
+        return redirect()->route('admin.infografis.index');
     }
 
     public function update(Request $request, Infografis $infografis)
@@ -76,12 +106,16 @@ class AdminInfografisController extends Controller
 
         if ($request->hasFile('image')) {
             // Hapus gambar lama jika ada
-            $oldPath = str_replace('storage/', '', $infografis->image_path);
-            if (Storage::disk('public')->exists($oldPath)) {
-                Storage::disk('public')->delete($oldPath);
+            if ($infografis->image_path && \Illuminate\Support\Facades\File::exists(public_path($infografis->image_path))) {
+                \Illuminate\Support\Facades\File::delete(public_path($infografis->image_path));
             }
-            $path = $request->file('image')->store('uploads/infografis', 'public');
-            $data['image_path'] = 'storage/' . $path;
+            $uploadDir = public_path('uploads/infografis');
+            if (!\Illuminate\Support\Facades\File::isDirectory($uploadDir)) {
+                \Illuminate\Support\Facades\File::makeDirectory($uploadDir, 0755, true, true);
+            }
+            $filename = time() . '_' . \Illuminate\Support\Str::random(10) . '.' . $request->file('image')->getClientOriginalExtension();
+            $request->file('image')->move($uploadDir, $filename);
+            $data['image_path'] = 'uploads/infografis/' . $filename;
         }
 
         $infografis->update($data);
@@ -92,9 +126,8 @@ class AdminInfografisController extends Controller
 
     public function destroy(Infografis $infografis)
     {
-        $oldPath = str_replace('storage/', '', $infografis->image_path);
-        if (Storage::disk('public')->exists($oldPath)) {
-            Storage::disk('public')->delete($oldPath);
+        if ($infografis->image_path && \Illuminate\Support\Facades\File::exists(public_path($infografis->image_path))) {
+            \Illuminate\Support\Facades\File::delete(public_path($infografis->image_path));
         }
         $infografis->delete();
 
