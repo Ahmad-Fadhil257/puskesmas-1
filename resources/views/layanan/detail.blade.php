@@ -279,7 +279,7 @@
    HEADER SECTION: CLEAN MINT SUBPAGE HEADER WITH BOTANICAL ORNAMENT
    ========================================================================= --}}
 <section class="subpage-header">
-    <img src="{{ asset('assets/botanical-clean.png') }}" alt="" class="subpage-header__watermark" aria-hidden="true">
+    <img src="{{ asset('assets/botanical-clean.png') }}?v={{ file_exists(public_path('assets/botanical-clean.png')) ? filemtime(public_path('assets/botanical-clean.png')) : time() }}" alt="" class="subpage-header__watermark" aria-hidden="true">
 
     <div class="subpage-header__container">
         {{-- Breadcrumb Nav dengan aksen oranye --}}

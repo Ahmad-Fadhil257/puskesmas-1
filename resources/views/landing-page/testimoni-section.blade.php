@@ -106,10 +106,10 @@
                 </div>
             </div>
 
-            {{-- Slider Pagination Dots --}}
-            <div class="testimonials__pagination"></div>
-
         </div>
+
+        {{-- Slider Pagination Dots (Lingkaran Sempurna & Presisi di Tengah) --}}
+        <div class="testimonials__pagination"></div>
 
         {{-- CTA Isi Survei --}}
         <div class="testimonials__cta-wrap">

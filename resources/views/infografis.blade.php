@@ -13,7 +13,7 @@
    SUBPAGE HEADER
    ========================================================================= --}}
 <section class="subpage-header">
-    <img src="{{ asset('assets/botanical-clean.png') }}" alt="" class="subpage-header__watermark" aria-hidden="true">
+    <img src="{{ asset('assets/botanical-clean.png') }}?v={{ file_exists(public_path('assets/botanical-clean.png')) ? filemtime(public_path('assets/botanical-clean.png')) : time() }}" alt="" class="subpage-header__watermark" aria-hidden="true">
     <div class="subpage-header__container">
         <div class="subpage-header__breadcrumb">
             <a href="{{ route('home') }}">Beranda</a>

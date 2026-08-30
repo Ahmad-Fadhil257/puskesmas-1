@@ -14,7 +14,7 @@
    HEADER SECTION: CLEAN MINT SUBPAGE HEADER WITH BOTANICAL ORNAMENT
    ========================================================================= --}}
 <section class="subpage-header">
-    <img src="{{ asset('assets/botanical-clean.png') }}" alt="" class="subpage-header__watermark" aria-hidden="true">
+    <img src="{{ asset('assets/botanical-clean.png') }}?v={{ file_exists(public_path('assets/botanical-clean.png')) ? filemtime(public_path('assets/botanical-clean.png')) : time() }}" alt="" class="subpage-header__watermark" aria-hidden="true">
 
     <div class="subpage-header__container">
         <div class="subpage-header__breadcrumb" data-aos="fade-right">
@@ -52,7 +52,7 @@
 
             <div class="survei-visual-card" data-aos="fade-right">
                 <div class="survei-visual-blob"></div>
-                <img src="{{ asset('assets/img/survey-illustration.jpg') }}" 
+                <img src="{{ asset('assets/img/survey-illustration.jpg') }}?v={{ file_exists(public_path('assets/img/survey-illustration.jpg')) ? filemtime(public_path('assets/img/survey-illustration.jpg')) : time() }}" 
                      alt="Survei Kepuasan Pasien" 
                      class="survei-visual-img">
                 

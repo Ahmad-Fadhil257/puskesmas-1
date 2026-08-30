@@ -82,13 +82,13 @@
 .subpage-header__watermark,
 .lokasi-full-header__watermark {
     position: absolute;
-    right: -20px;
+    right: 15px;
     top: 50%;
-    transform: translateY(-50%) scaleX(-1); /* Tangkai kecil menghadap ke kanan */
-    width: 480px;
-    max-width: 45%;
+    transform: translateY(-50%);
+    width: 450px;
+    max-width: 42%;
     height: auto;
-    opacity: 0.28;
+    opacity: 0.32;
     pointer-events: none;
     z-index: 1;
     user-select: none;

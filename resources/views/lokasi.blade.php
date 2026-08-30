@@ -159,7 +159,7 @@
    CLEAN MINIMAL LIGHT HEADER (SOLID MINT, WATERMARK & AKSEN ORANYE)
    ========================================================================= --}}
 <section class="lokasi-full-header">
-    <img src="{{ asset('assets/botanical-clean.png') }}" alt="" class="lokasi-full-header__watermark" aria-hidden="true">
+    <img src="{{ asset('assets/botanical-clean.png') }}?v={{ file_exists(public_path('assets/botanical-clean.png')) ? filemtime(public_path('assets/botanical-clean.png')) : time() }}" alt="" class="lokasi-full-header__watermark" aria-hidden="true">
 
     <div class="lokasi-full-header__container">
         {{-- Breadcrumb Nav dengan aksen oranye --}}
