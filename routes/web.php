@@ -3,6 +3,8 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\SurveyController;
+use App\Http\Controllers\StatistikController;
+use App\Http\Controllers\FaqController;
 use App\Http\Controllers\Admin\ArticleController as AdminArticleController;
 use App\Http\Controllers\Admin\AboutController as AdminAboutController;
 use App\Http\Controllers\Admin\HeroController as AdminHeroController;
@@ -13,6 +15,9 @@ use App\Http\Controllers\Admin\AdminNilaiController;
 use App\Http\Controllers\Admin\AdminLayananController;
 use App\Http\Controllers\Admin\AdminSurveyController;
 use App\Http\Controllers\Admin\AdminLokasiController;
+use App\Http\Controllers\Admin\AdminFaqController;
+use App\Http\Controllers\Admin\AdminInfografisController;
+use App\Http\Controllers\Admin\AdminStatistikController;
 use App\Http\Controllers\CaraKerjaController;
 use App\Models\About;
 use App\Models\Article;
@@ -47,23 +52,56 @@ Route::get('/', function () {
 Route::get('/survei', [SurveyController::class, 'index'])->name('survei.index');
 Route::post('/survei', [SurveyController::class, 'store'])->name('survei.store');
 
-// Layanan & Poli Puskesmas (dari database)
+// Layanan & Poli Puskesmas (Redirect langsung ke layanan pertama)
 Route::get('/layanan', function () {
-    $layanans = Layanan::where('is_active', true)->orderBy('order', 'asc')->orderBy('id', 'asc')->get();
-    $dokters = Dokter::where('is_active', true)->orderBy('created_at', 'asc')->get();
-    $specialties = Dokter::where('is_active', true)->pluck('specialty')->filter()->unique()->values();
-    return view('layanan', compact('layanans', 'dokters', 'specialties'));
+    $firstLayanan = Layanan::where('is_active', true)->orderBy('order', 'asc')->orderBy('id', 'asc')->first();
+    if ($firstLayanan && !empty($firstLayanan->slug)) {
+        return redirect()->route('layanan.detail', $firstLayanan->slug);
+    }
+    return redirect()->route('home');
 })->name('layanan.index');
 
+// Halaman Detail Layanan Informatif (Slug)
+Route::get('/layanan/{slug}', function ($slug) {
+    $layanan = \App\Models\Layanan::where('slug', $slug)->first();
+    if (!$layanan && is_numeric($slug)) {
+        $layanan = \App\Models\Layanan::find($slug);
+    }
+    if (!$layanan || !$layanan->is_active) {
+        abort(404);
+    }
+
+    $otherLayanans = \App\Models\Layanan::where('is_active', true)
+        ->where('id', '!=', $layanan->id)
+        ->orderBy('order', 'asc')
+        ->take(4)
+        ->get();
+
+    return view('layanan.detail', compact('layanan', 'otherLayanans'));
+})->name('layanan.detail');
 
 // Portal Publik Berita & Blog
 Route::get('/berita', [BlogController::class, 'index'])->name('blog.index');
 Route::get('/berita/{slug}', [BlogController::class, 'show'])->name('blog.show');
 
+// Halaman Infografis Publik
+Route::get('/infografis', function () {
+    $infografis = \App\Models\Infografis::active()->orderBy('order', 'asc')->orderBy('id', 'desc')->get();
+    $kategoris = $infografis->pluck('kategori')->unique()->values();
+    return view('infografis', compact('infografis', 'kategoris'));
+})->name('infografis');
+
 // Halaman Lokasi & Peta Puskesmas
 Route::get('/lokasi', function () {
     return view('lokasi');
 })->name('lokasi');
+
+// Halaman Statistik Kesehatan Publik
+Route::get('/statistik', [StatistikController::class, 'index'])->name('statistik');
+
+// Halaman FAQ (Tanya Jawab) Publik
+Route::get('/faq', [FaqController::class, 'index'])->name('faq.index');
+
 
 // Auth Routes (URL Khusus Login: /puskem-min)
 Route::get('/puskem-min', [AuthController::class, 'showLoginForm'])->name('login');
@@ -126,6 +164,25 @@ Route::middleware(['auth'])->group(function () {
         // Kelola Lokasi, Peta & Kontak Puskesmas
         Route::get('lokasi', [AdminLokasiController::class, 'index'])->name('lokasi.index');
         Route::put('lokasi', [AdminLokasiController::class, 'update'])->name('lokasi.update');
+
+        // Kelola FAQ (Tanya Jawab)
+        Route::resource('faq', AdminFaqController::class)->except(['show']);
+
+        // Kelola Infografis
+        Route::resource('infografis', AdminInfografisController::class)->except(['show']);
+
+        // Kelola Statistik Kesehatan
+        Route::get('statistik', [AdminStatistikController::class, 'index'])->name('statistik.index');
+        Route::get('statistik/penyakit/create', [AdminStatistikController::class, 'createPenyakit'])->name('statistik.penyakit.create');
+        Route::post('statistik/penyakit', [AdminStatistikController::class, 'storePenyakit'])->name('statistik.penyakit.store');
+        Route::get('statistik/penyakit/{id}/edit', [AdminStatistikController::class, 'editPenyakit'])->name('statistik.penyakit.edit');
+        Route::put('statistik/penyakit/{id}', [AdminStatistikController::class, 'updatePenyakit'])->name('statistik.penyakit.update');
+        Route::delete('statistik/penyakit/{id}', [AdminStatistikController::class, 'destroyPenyakit'])->name('statistik.penyakit.destroy');
+        Route::get('statistik/kunjungan/create', [AdminStatistikController::class, 'createKunjungan'])->name('statistik.kunjungan.create');
+        Route::post('statistik/kunjungan', [AdminStatistikController::class, 'storeKunjungan'])->name('statistik.kunjungan.store');
+        Route::get('statistik/kunjungan/{id}/edit', [AdminStatistikController::class, 'editKunjungan'])->name('statistik.kunjungan.edit');
+        Route::put('statistik/kunjungan/{id}', [AdminStatistikController::class, 'updateKunjungan'])->name('statistik.kunjungan.update');
+        Route::delete('statistik/kunjungan/{id}', [AdminStatistikController::class, 'destroyKunjungan'])->name('statistik.kunjungan.destroy');
     });
 
     // Pengaturan & Manajemen Tentang Kami (About)
