@@ -70,6 +70,19 @@
                                 <polyline points="6 9 12 15 18 9"></polyline>
                             </svg>
                         </div>
+                        {{-- Custom Dropdown Mobile --}}
+                        <div class="blog-custom-dropdown" id="customCategoryDropdown">
+                            <div class="blog-custom-dropdown__selected" id="customDropdownSelected">
+                                <span>{{ request('category') ?: 'Semua Kategori' }}</span>
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                            </div>
+                            <div class="blog-custom-dropdown__options" id="customDropdownOptions">
+                                <a href="{{ route('blog.index', array_filter(['search' => request('search')])) }}" class="blog-custom-dropdown__option {{ !request('category') ? 'active' : '' }}">Semua Kategori</a>
+                                @foreach($categories as $cat)
+                                    <a href="{{ route('blog.index', array_filter(['search' => request('search'), 'category' => $cat])) }}" class="blog-custom-dropdown__option {{ request('category') == $cat ? 'active' : '' }}">{{ $cat }}</a>
+                                @endforeach
+                            </div>
+                        </div>
                     </div>
                 </div>
             </form>
@@ -206,5 +219,30 @@
 
     </div>
 </div>
+
+@push('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const selected = document.getElementById('customDropdownSelected');
+        const options = document.getElementById('customDropdownOptions');
+        if (!selected || !options) return;
+
+        selected.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const isOpen = options.classList.contains('show');
+            document.querySelectorAll('.blog-custom-dropdown__options').forEach(function(el) {
+                el.classList.remove('show');
+            });
+            if (!isOpen) {
+                options.classList.add('show');
+            }
+        });
+
+        document.addEventListener('click', function() {
+            options.classList.remove('show');
+        });
+    });
+</script>
+@endpush
 
 @endsection

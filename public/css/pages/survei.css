@@ -135,12 +135,121 @@
     padding: 38px 34px;
     border: 1px solid #CBD5E1;
     box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05), 0 1px 3px rgba(15, 23, 42, 0.02);
+    position: relative;
+    z-index: 10;
+    overflow: visible;
 }
 
 @media (max-width: 576px) {
     .survei-form-card {
         padding: 24px 18px;
     }
+}
+
+/* =============================================================================
+   CUSTOM DROPDOWN — SURVEI POLIKLINIK
+   ============================================================================= */
+.survei-custom-dropdown {
+    position: relative;
+    width: 100%;
+}
+
+.survei-custom-dropdown__selected {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #FFFFFF;
+    border: 1.5px solid #CBD5E1;
+    border-radius: 10px;
+    padding: 11px 14px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #0A5C45;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    gap: 8px;
+    user-select: none;
+}
+
+.survei-custom-dropdown__selected:hover,
+.survei-custom-dropdown.open .survei-custom-dropdown__selected {
+    border-color: #0A5C45;
+    background: #FFFFFF;
+    box-shadow: 0 0 0 3px rgba(10, 92, 69, 0.08);
+}
+
+.survei-custom-dropdown__selected span {
+    flex: 1;
+    color: #0F172A;
+    font-weight: 500;
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.survei-custom-dropdown__selected span.placeholder {
+    color: #8CA39B;
+}
+
+.survei-dropdown-chevron {
+    flex-shrink: 0;
+    transition: transform 0.25s ease;
+}
+
+.survei-custom-dropdown.open .survei-dropdown-chevron {
+    transform: rotate(180deg);
+}
+
+.survei-custom-dropdown__options {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    right: 0;
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 10px;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.12);
+    z-index: 999;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    transition: max-height 0.28s ease, opacity 0.22s ease, visibility 0.22s ease;
+    overflow-y: auto;
+}
+
+.survei-custom-dropdown__options.show {
+    max-height: 260px;
+    opacity: 1;
+    visibility: visible;
+}
+
+.survei-custom-dropdown__option {
+    display: block;
+    padding: 11px 16px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #1E293B;
+    text-decoration: none;
+    border-bottom: 1px solid #F1F5F9;
+    transition: background 0.15s, color 0.15s;
+    cursor: pointer;
+}
+
+.survei-custom-dropdown__option:last-child {
+    border-bottom: none;
+}
+
+.survei-custom-dropdown__option:hover {
+    background: #F0FDF9;
+    color: #0A5C45;
+}
+
+.survei-custom-dropdown__option.active {
+    background: #E6F5F1;
+    color: #0A5C45;
+    font-weight: 700;
 }
 
 .form-header-box {

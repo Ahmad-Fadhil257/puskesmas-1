@@ -133,27 +133,51 @@
                     </div>
 
                     {{-- 2. POLI / LAYANAN YANG DIKUNJUNGI --}}
-                    <div style="margin-bottom: 24px;">
-                        <label class="form-section-label" for="poli_name">
+                    <div style="margin-bottom: 24px; position: relative; z-index: 30;">
+                        <label class="form-section-label" for="poli_name_hidden">
                             Layanan / Poliklinik yang Dikunjungi <span class="required-star">*</span>
                         </label>
-                        <select name="poli_name" id="poli_name" required class="form-input-control" style="cursor: pointer;">
-                            <option value="">-- Pilih Poliklinik / Ruang Pelayanan --</option>
-                            @if(isset($layanans) && $layanans->isNotEmpty())
-                                @foreach($layanans as $lay)
-                                    <option value="{{ $lay->title }}" {{ old('poli_name') == $lay->title ? 'selected' : '' }}>
-                                        {{ $lay->title }}
-                                    </option>
-                                @endforeach
-                            @endif
-                            <option value="Loket Pendaftaran & Rekam Medis" {{ old('poli_name') == 'Loket Pendaftaran & Rekam Medis' ? 'selected' : '' }}>Loket Pendaftaran & Rekam Medis</option>
-                            <option value="Poli Umum" {{ old('poli_name') == 'Poli Umum' ? 'selected' : '' }}>Poli Umum</option>
-                            <option value="Poli Gigi & Mulut" {{ old('poli_name') == 'Poli Gigi & Mulut' ? 'selected' : '' }}>Poli Gigi & Mulut</option>
-                            <option value="Poli KIA & KB" {{ old('poli_name') == 'Poli KIA & KB' ? 'selected' : '' }}>Poli KIA & KB (Ibu, Anak, Imunisasi)</option>
-                            <option value="Laboratorium Klinis" {{ old('poli_name') == 'Laboratorium Klinis' ? 'selected' : '' }}>Laboratorium Klinis</option>
-                            <option value="Farmasi & Apotek Obat" {{ old('poli_name') == 'Farmasi & Apotek Obat' ? 'selected' : '' }}>Farmasi & Apotek Obat</option>
-                            <option value="Layanan UGD 24 Jam" {{ old('poli_name') == 'Layanan UGD 24 Jam' ? 'selected' : '' }}>Layanan Gawat Darurat (UGD 24 Jam)</option>
-                        </select>
+
+                        {{-- Hidden input untuk submit form --}}
+                        <input type="hidden" name="poli_name" id="poli_name_hidden"
+                               value="{{ old('poli_name', '') }}" required>
+
+                        {{-- Custom Dropdown --}}
+                        @php
+                            $oldPoli = old('poli_name', '');
+                            $poliLabels = [
+                                'Loket Pendaftaran & Rekam Medis' => 'Loket Pendaftaran & Rekam Medis',
+                                'Poli Umum' => 'Poli Umum',
+                                'Poli Gigi & Mulut' => 'Poli Gigi & Mulut',
+                                'Poli KIA & KB' => 'Poli KIA & KB (Ibu, Anak, Imunisasi)',
+                                'Laboratorium Klinis' => 'Laboratorium Klinis',
+                                'Farmasi & Apotek Obat' => 'Farmasi & Apotek Obat',
+                                'Layanan UGD 24 Jam' => 'Layanan Gawat Darurat (UGD 24 Jam)',
+                            ];
+                        @endphp
+                        <div class="survei-custom-dropdown" id="surveiPoliDropdown">
+                            <div class="survei-custom-dropdown__selected" id="surveiPoliSelected">
+                                <span id="surveiPoliLabel" class="{{ (!$oldPoli || !isset($poliLabels[$oldPoli])) ? 'placeholder' : '' }}">
+                                    {{ $oldPoli && isset($poliLabels[$oldPoli]) ? $poliLabels[$oldPoli] : '-- Pilih Poliklinik / Ruang Pelayanan --' }}
+                                </span>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0A5C45" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="survei-dropdown-chevron"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                            </div>
+                            <div class="survei-custom-dropdown__options" id="surveiPoliOptions">
+                                @if(isset($layanans) && $layanans->isNotEmpty())
+                                    @foreach($layanans as $lay)
+                                        <a href="#" class="survei-custom-dropdown__option {{ old('poli_name') == $lay->title ? 'active' : '' }}"
+                                           data-value="{{ $lay->title }}">{{ $lay->title }}</a>
+                                    @endforeach
+                                @endif
+                                <a href="#" class="survei-custom-dropdown__option {{ old('poli_name') == 'Loket Pendaftaran & Rekam Medis' ? 'active' : '' }}" data-value="Loket Pendaftaran & Rekam Medis">Loket Pendaftaran & Rekam Medis</a>
+                                <a href="#" class="survei-custom-dropdown__option {{ old('poli_name') == 'Poli Umum' ? 'active' : '' }}" data-value="Poli Umum">Poli Umum</a>
+                                <a href="#" class="survei-custom-dropdown__option {{ old('poli_name') == 'Poli Gigi & Mulut' ? 'active' : '' }}" data-value="Poli Gigi & Mulut">Poli Gigi & Mulut</a>
+                                <a href="#" class="survei-custom-dropdown__option {{ old('poli_name') == 'Poli KIA & KB' ? 'active' : '' }}" data-value="Poli KIA & KB">Poli KIA & KB (Ibu, Anak, Imunisasi)</a>
+                                <a href="#" class="survei-custom-dropdown__option {{ old('poli_name') == 'Laboratorium Klinis' ? 'active' : '' }}" data-value="Laboratorium Klinis">Laboratorium Klinis</a>
+                                <a href="#" class="survei-custom-dropdown__option {{ old('poli_name') == 'Farmasi & Apotek Obat' ? 'active' : '' }}" data-value="Farmasi & Apotek Obat">Farmasi & Apotek Obat</a>
+                                <a href="#" class="survei-custom-dropdown__option {{ old('poli_name') == 'Layanan UGD 24 Jam' ? 'active' : '' }}" data-value="Layanan UGD 24 Jam">Layanan Gawat Darurat (UGD 24 Jam)</a>
+                            </div>
+                        </div>
                     </div>
 
                     {{-- 3. MASUKAN, KRITIK & SARAN --}}
@@ -259,6 +283,60 @@
         if (anonCheckbox) {
             handleAnonymousToggle(anonCheckbox);
         }
+
+        // ── Custom Poli Dropdown ─────────────────────────────────────────────
+        const dropdown   = document.getElementById('surveiPoliDropdown');
+        const selected   = document.getElementById('surveiPoliSelected');
+        const optionsBox = document.getElementById('surveiPoliOptions');
+        const labelEl    = document.getElementById('surveiPoliLabel');
+        const hiddenInput = document.getElementById('poli_name_hidden');
+
+        if (!dropdown || !selected || !optionsBox) return;
+
+        // Mark placeholder styling on init
+        if (!hiddenInput.value) {
+            labelEl.classList.add('placeholder');
+        }
+
+        // Toggle open/close
+        selected.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const isOpen = optionsBox.classList.contains('show');
+            optionsBox.classList.toggle('show', !isOpen);
+            dropdown.classList.toggle('open', !isOpen);
+        });
+
+        // Handle option click
+        optionsBox.querySelectorAll('.survei-custom-dropdown__option').forEach(function(opt) {
+            opt.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                const value = this.dataset.value;
+                const text  = this.textContent.trim();
+
+                // Update hidden input
+                hiddenInput.value = value;
+
+                // Update label
+                labelEl.textContent = text;
+                labelEl.classList.remove('placeholder');
+
+                // Update active class
+                optionsBox.querySelectorAll('.survei-custom-dropdown__option').forEach(o => o.classList.remove('active'));
+                this.classList.add('active');
+
+                // Close
+                optionsBox.classList.remove('show');
+                dropdown.classList.remove('open');
+            });
+        });
+
+        // Close on outside click
+        document.addEventListener('click', function() {
+            optionsBox.classList.remove('show');
+            dropdown.classList.remove('open');
+        });
     });
 </script>
 @endpush

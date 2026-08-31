@@ -64,7 +64,7 @@
                                     </div>
                                 </div>
                                 <p class="testimonial-card__quote">
-                                    "{{ $s->pesan }}"
+                                    "{{ \Illuminate\Support\Str::limit($s->pesan, 400) }}"
                                 </p>
                             </div>
                             <div class="testimonial-card__stars" aria-label="{{ $s->rating }} dari 5 bintang">

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->tinyInteger('rating')->default(5); // 1 - 5 Bintang
             $table->text('pesan');
             $table->string('avatar')->nullable();
-            $table->boolean('is_approved')->default(true);
+            $table->boolean('is_approved')->default(false);
             $table->boolean('is_featured')->default(false);
             $table->timestamps();
         });

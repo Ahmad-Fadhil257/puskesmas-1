@@ -158,12 +158,22 @@
                         </select>
                     </div>
 
+                    {{-- Filter Status --}}
+                    <div class="col-md-2 col-12">
+                        <select name="status" class="form-select" onchange="this.form.submit()">
+                            <option value="">Semua Status</option>
+                            <option value="draft" {{ request('status') == 'draft' ? 'selected' : '' }}>Draft</option>
+                            <option value="approved" {{ request('status') == 'approved' ? 'selected' : '' }}>Publik</option>
+                            <option value="featured" {{ request('status') == 'featured' ? 'selected' : '' }}>Unggulan</option>
+                        </select>
+                    </div>
+
                     {{-- Tombol Filter & Reset --}}
                     <div class="col-md-2 col-12 d-flex gap-2">
                         <button type="submit" class="btn btn-primary w-100">
                             <i class="bx bx-search me-1"></i> Cari
                         </button>
-                        @if(request('search') || request('poli') || request('rating'))
+                        @if(request('search') || request('poli') || request('rating') || request('status'))
                             <a href="{{ route('admin.surveys.index') }}" class="btn btn-outline-secondary" title="Reset">
                                 <i class="bx bx-reset"></i>
                             </a>
