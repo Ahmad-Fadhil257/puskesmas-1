@@ -13,7 +13,7 @@
 {{-- =========================================================================
    HEADER SECTION: CLEAN MINT SUBPAGE HEADER WITH BOTANICAL ORNAMENT
    ========================================================================= --}}
-<section class="subpage-header">
+<section class="subpage-header" data-aos="fade-down">
     <img src="{{ asset('assets/botanical-clean.png') }}?v={{ file_exists(public_path('assets/botanical-clean.png')) ? filemtime(public_path('assets/botanical-clean.png')) : time() }}" alt="" class="subpage-header__watermark" aria-hidden="true">
 
     <div class="subpage-header__container">
@@ -37,7 +37,7 @@
 
         {{-- Alert Notifikasi Sukses --}}
         @if(session('survey_success'))
-            <div class="survei-alert-success">
+            <div class="survei-alert-success" data-aos="fade-down">
                 <div class="survei-alert-icon">
                     <i class="bx bx-check"></i>
                 </div>
@@ -83,7 +83,7 @@
                     <p class="form-header-sub">Pilih tingkat kepuasan Anda dan berikan ulasan jujur tentang pengalaman berobat Anda.</p>
                 </div>
                 @if ($errors->any())
-                    <div style="background: #FEF2F2; border: 1px solid #FCA5A5; border-left: 4px solid #EF4444; border-radius: 10px; padding: 12px 16px; margin-bottom: 24px;">
+                    <div style="background: #FEF2F2; border: 1px solid #FCA5A5; border-left: 4px solid #EF4444; border-radius: 12px; padding: 12px 16px; margin-bottom: 24px;">
                         <strong style="color: #B91C1C; font-size: 13.5px; display: block; margin-bottom: 2px;">Mohon periksa isian formulir:</strong>
                         <ul style="margin: 0; padding-left: 18px; font-size: 13px; color: #B91C1C;">
                             @foreach ($errors->all() as $error)

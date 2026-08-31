@@ -12,7 +12,7 @@
 <div class="statistik-page">
 
     {{-- ── Subpage Header (konsisten dengan halaman lain) ─────────────────── --}}
-    <section class="subpage-header">
+    <section class="subpage-header" data-aos="fade-down">
         <img src="{{ asset('assets/botanical-clean.png') }}" alt="" class="subpage-header__watermark" aria-hidden="true">
         <div class="subpage-header__container">
             <div class="subpage-header__breadcrumb">
@@ -31,7 +31,7 @@
 
     {{-- Year Filter --}}
     @if($tahunList->isNotEmpty())
-    <div class="statistik-year-filter">
+    <div class="statistik-year-filter" data-aos="fade-up">
         @foreach($tahunList as $t)
             <a href="{{ route('statistik') }}?tahun={{ $t }}"
                class="year-btn {{ $tahunFilter == $t ? 'active' : '' }}">{{ $t }}</a>
@@ -43,29 +43,29 @@
     <div class="statistik-content">
 
         {{-- KPI Summary Cards --}}
-        <div class="statistik-kpi-grid" data-aos="fade-up">
-            <div class="kpi-card" style="--kpi-color:#0A5C45; --kpi-bg:#E6F4ED;">
+        <div class="statistik-kpi-grid">
+            <div class="kpi-card" style="--kpi-color:#0A5C45; --kpi-bg:#E6F4ED;" data-aos="fade-up" data-aos-delay="0">
                 <div class="kpi-card__icon">
                     <i class='bx bx-user-check'></i>
                 </div>
                 <div class="kpi-card__number">{{ number_format($totalKunjungan) }}</div>
                 <div class="kpi-card__label">Total Kunjungan {{ $tahunFilter }}</div>
             </div>
-            <div class="kpi-card" style="--kpi-color:#0A5C45; --kpi-bg:#E6F4ED;">
+            <div class="kpi-card" style="--kpi-color:#0A5C45; --kpi-bg:#E6F4ED;" data-aos="fade-up" data-aos-delay="100">
                 <div class="kpi-card__icon">
                     <i class='bx bx-user-plus'></i>
                 </div>
                 <div class="kpi-card__number">{{ number_format($totalBaru) }}</div>
                 <div class="kpi-card__label">Pasien Baru</div>
             </div>
-            <div class="kpi-card" style="--kpi-color:#0A5C45; --kpi-bg:#E6F4ED;">
+            <div class="kpi-card" style="--kpi-color:#0A5C45; --kpi-bg:#E6F4ED;" data-aos="fade-up" data-aos-delay="200">
                 <div class="kpi-card__icon">
                     <i class='bx bx-user'></i>
                 </div>
                 <div class="kpi-card__number">{{ number_format($totalLama) }}</div>
                 <div class="kpi-card__label">Pasien Lama</div>
             </div>
-            <div class="kpi-card" style="--kpi-color:#0A5C45; --kpi-bg:#E6F4ED;">
+            <div class="kpi-card" style="--kpi-color:#0A5C45; --kpi-bg:#E6F4ED;" data-aos="fade-up" data-aos-delay="300">
                 <div class="kpi-card__icon">
                     <i class='bx bx-heart-circle'></i>
                 </div>

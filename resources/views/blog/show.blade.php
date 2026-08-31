@@ -12,7 +12,7 @@
 {{-- =========================================================================
    HEADER SECTION: CLEAN MINT SUBPAGE HEADER WITH BOTANICAL ORNAMENT
    ========================================================================= --}}
-<section class="subpage-header">
+<section class="subpage-header" data-aos="fade-down">
     <img src="{{ asset('assets/botanical-clean.png') }}?v={{ file_exists(public_path('assets/botanical-clean.png')) ? filemtime(public_path('assets/botanical-clean.png')) : time() }}" alt="" class="subpage-header__watermark" aria-hidden="true">
 
     <div class="subpage-header__container">
@@ -126,8 +126,8 @@
                 </div>
 
                 <div class="articles-grid">
-                    @foreach($relatedArticles as $rel)
-                        <article class="article-card" data-aos="fade-up">
+                    @foreach($relatedArticles as $index => $rel)
+                        <article class="article-card" data-aos="fade-up" data-aos-delay="{{ min($index * 80, 450) }}">
                             <a href="{{ route('blog.show', $rel->slug) }}" class="article-card__thumb-wrap">
                                 <img src="{{ $rel->thumbnail_url }}" alt="{{ $rel->title }}" class="article-card__img" loading="lazy">
                                 <span class="article-card__category">{{ $rel->category }}</span>

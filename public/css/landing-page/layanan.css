@@ -15,13 +15,13 @@
     --font-sans:            'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
     --container-max:        1200px;
     --radius-sm:            8px;
-    --radius-md:            16px;
-    --radius-lg:            24px;
+    --radius-md:            12px;
+    --radius-lg:            12px;
     --radius-full:          9999px;
 
-    --shadow-card:          0 4px 20px rgba(0, 0, 0, 0.04);
-    --shadow-hover:         0 16px 36px rgba(10, 92, 69, 0.10);
-    --transition:           all 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+    --shadow-card:          0 4px 18px rgba(10, 92, 69, 0.06);
+    --shadow-hover:         0 14px 34px rgba(10, 92, 69, 0.12);
+    --transition:           all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* ==========================================================================

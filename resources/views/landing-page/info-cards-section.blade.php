@@ -4,7 +4,7 @@
 
         @if(isset($infoCards) && $infoCards->count() > 0)
             @foreach($infoCards as $card)
-                <div class="info-card {{ $card->is_featured ? 'info-card--featured' : '' }}" data-aos="fade-up">
+                <div class="info-card {{ $card->is_featured ? 'info-card--featured' : '' }}" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
                     <div class="info-card__icon">
                         @if($card->icon == 'doctor')
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">

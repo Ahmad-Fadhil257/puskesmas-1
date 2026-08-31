@@ -29,6 +29,8 @@ use App\Models\Layanan;
 use App\Models\Mitra;
 use App\Models\NilaiSection;
 use App\Models\Survey;
+use App\Models\Faq;
+use App\Models\Infografis;
 use Illuminate\Support\Facades\Route;
 
 // Landing Page Utama (dengan passing artikel terbaru, cara kerja dinamis, hero & info cards)
@@ -112,9 +114,28 @@ Route::post('/puskem-logout', [AuthController::class, 'logout'])->name('logout')
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () {
         $totalArticles = Article::count();
-        $totalViews = Article::sum('views_count');
+        $totalViews = Article::sum('views_count') ?? 0;
         $latestArticles = Article::orderBy('created_at', 'desc')->take(5)->get();
-        return view('admin.dashboard', compact('totalArticles', 'totalViews', 'latestArticles'));
+        $totalDokter = Dokter::count();
+        $totalLayanan = Layanan::count();
+        $totalFaq = Faq::count();
+        $totalInfografis = Infografis::count();
+        $totalSurveys = Survey::count();
+        $avgRating = Survey::getAverageRating() ?? 5.0;
+        $latestSurveys = Survey::orderBy('created_at', 'desc')->take(3)->get();
+
+        return view('admin.dashboard', compact(
+            'totalArticles',
+            'totalViews',
+            'latestArticles',
+            'totalDokter',
+            'totalLayanan',
+            'totalFaq',
+            'totalInfografis',
+            'totalSurveys',
+            'avgRating',
+            'latestSurveys'
+        ));
     })->name('dashboard');
 
     // CRUD Manajemen Berita

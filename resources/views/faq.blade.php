@@ -59,9 +59,11 @@
         </div>
 
         {{-- Accordion List --}}
-        <div class="faq-accordion-list" id="faqAccordionList" data-aos="fade-up">
+        <div class="faq-accordion-list" id="faqAccordionList">
             @forelse($faqs as $index => $faq)
                 <div class="faq-item" 
+                     data-aos="fade-up"
+                     data-aos-delay="{{ min($index * 60, 400) }}"
                      data-question="{{ strtolower($faq->pertanyaan) }}" 
                      data-answer="{{ strtolower(strip_tags($faq->jawaban)) }}">
                     
@@ -90,7 +92,7 @@
                     </div>
                 </div>
             @empty
-                <div class="text-center py-5 bg-white rounded-4 border">
+                <div class="text-center py-5 bg-white rounded-3 border" style="border-radius: 12px !important;">
                     <i class="bx bx-help-circle display-4 text-muted mb-2"></i>
                     <h5 class="fw-bold text-dark">Belum Ada Informasi FAQ</h5>
                     <p class="text-muted small">Informasi tanya jawab sedang dipersiapkan oleh pihak pengelola.</p>

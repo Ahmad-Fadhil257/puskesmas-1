@@ -64,10 +64,10 @@
                         <div class="avatar avatar-md bg-label-primary rounded p-2 d-flex align-items-center justify-content-center">
                             <i class="bx bx-news fs-3 text-primary"></i>
                         </div>
-                        <span class="badge bg-label-primary rounded-pill fw-semibold">{{ number_format($totalViews) }} Views</span>
+                        <span class="badge bg-label-primary rounded-pill fw-semibold">{{ number_format($totalViews ?? 0) }} Views</span>
                     </div>
                     <span class="text-muted d-block small fw-semibold">Berita & Informasi Publik</span>
-                    <h3 class="card-title mb-1 fw-bold">{{ $totalArticles }}</h3>
+                    <h3 class="card-title mb-1 fw-bold">{{ $totalArticles ?? 0 }}</h3>
                     <small class="text-muted">Total artikel terpublikasi</small>
                 </div>
             </div>
@@ -81,10 +81,10 @@
                         <div class="avatar avatar-md bg-label-success rounded p-2 d-flex align-items-center justify-content-center">
                             <i class="bx bx-plus-medical fs-3 text-success"></i>
                         </div>
-                        <span class="badge bg-label-success rounded-pill fw-semibold">{{ $totalDokter }} Dokter</span>
+                        <span class="badge bg-label-success rounded-pill fw-semibold">{{ $totalDokter ?? 0 }} Dokter</span>
                     </div>
                     <span class="text-muted d-block small fw-semibold">Layanan Medis & Poliklinik</span>
-                    <h3 class="card-title mb-1 fw-bold">{{ $totalLayanan }}</h3>
+                    <h3 class="card-title mb-1 fw-bold">{{ $totalLayanan ?? 0 }}</h3>
                     <small class="text-muted">Fasilitas & poli aktif</small>
                 </div>
             </div>
@@ -98,10 +98,10 @@
                         <div class="avatar avatar-md bg-label-info rounded p-2 d-flex align-items-center justify-content-center">
                             <i class="bx bx-images fs-3 text-info"></i>
                         </div>
-                        <span class="badge bg-label-info rounded-pill fw-semibold">{{ $totalFaq }} FAQ</span>
+                        <span class="badge bg-label-info rounded-pill fw-semibold">{{ $totalFaq ?? 0 }} FAQ</span>
                     </div>
                     <span class="text-muted d-block small fw-semibold">Infografis & Edukasi</span>
-                    <h3 class="card-title mb-1 fw-bold">{{ $totalInfografis }}</h3>
+                    <h3 class="card-title mb-1 fw-bold">{{ $totalInfografis ?? 0 }}</h3>
                     <small class="text-muted">Poster & materi publikasi</small>
                 </div>
             </div>
@@ -115,10 +115,10 @@
                         <div class="avatar avatar-md bg-label-warning rounded p-2 d-flex align-items-center justify-content-center">
                             <i class="bx bx-star fs-3 text-warning"></i>
                         </div>
-                        <span class="badge bg-label-warning rounded-pill fw-semibold">{{ $avgRating }} / 5.0 ⭐</span>
+                        <span class="badge bg-label-warning rounded-pill fw-semibold">{{ $avgRating ?? '5.0' }} / 5.0 ⭐</span>
                     </div>
                     <span class="text-muted d-block small fw-semibold">Survei Kepuasan Pasien</span>
-                    <h3 class="card-title mb-1 fw-bold">{{ $totalSurveys }}</h3>
+                    <h3 class="card-title mb-1 fw-bold">{{ $totalSurveys ?? 0 }}</h3>
                     <small class="text-muted">Total ulasan masyarakat</small>
                 </div>
             </div>
@@ -151,7 +151,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse($latestArticles as $art)
+                            @forelse($latestArticles ?? [] as $art)
                                 <tr>
                                     <td>
                                         <div style="max-width: 280px; white-space: normal;">
@@ -206,7 +206,7 @@
                 </div>
                 <div class="card-body py-3">
                     <div class="d-flex flex-column gap-3">
-                        @forelse($latestSurveys as $srv)
+                        @forelse($latestSurveys ?? [] as $srv)
                             <div class="p-3 rounded border" style="background: rgba(0, 0, 0, 0.02);">
                                 <div class="d-flex align-items-center justify-content-between mb-1">
                                     <div class="d-flex align-items-center gap-2">

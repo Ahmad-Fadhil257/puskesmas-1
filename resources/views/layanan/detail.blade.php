@@ -23,10 +23,10 @@
 /* 1. Image / Banner Card */
 .layanan-image-card {
     background: #FFFFFF;
-    border-radius: 16px;
+    border-radius: 12px;
     overflow: hidden;
     border: 1px solid #CBD5E1;
-    box-shadow: 0 4px 16px rgba(15, 23, 42, 0.05), 0 1px 3px rgba(15, 23, 42, 0.02);
+    box-shadow: 0 4px 18px rgba(10, 92, 69, 0.06), 0 1px 3px rgba(15, 23, 42, 0.02);
     text-align: center;
 }
 
@@ -56,10 +56,10 @@
 /* 2. Main Content Card */
 .layanan-content-card {
     background: #FFFFFF;
-    border-radius: 16px;
+    border-radius: 12px;
     padding: 36px 40px;
     border: 1px solid #CBD5E1;
-    box-shadow: 0 4px 16px rgba(15, 23, 42, 0.05), 0 1px 3px rgba(15, 23, 42, 0.02);
+    box-shadow: 0 4px 18px rgba(10, 92, 69, 0.06), 0 1px 3px rgba(15, 23, 42, 0.02);
     overflow-wrap: anywhere;
     word-break: break-word;
     word-wrap: break-word;
@@ -313,7 +313,7 @@
 {{-- =========================================================================
    HEADER SECTION: CLEAN MINT SUBPAGE HEADER WITH BOTANICAL ORNAMENT
    ========================================================================= --}}
-<section class="subpage-header">
+<section class="subpage-header" data-aos="fade-down">
     <img src="{{ asset('assets/botanical-clean.png') }}?v={{ file_exists(public_path('assets/botanical-clean.png')) ? filemtime(public_path('assets/botanical-clean.png')) : time() }}" alt="" class="subpage-header__watermark" aria-hidden="true">
 
     <div class="subpage-header__container">
@@ -340,7 +340,7 @@
     <div class="layanan-detail-main">
 
         {{-- 1. FOTO TIM / RUANGAN POLI / ICON HEADER --}}
-        <div class="layanan-image-card">
+        <div class="layanan-image-card" data-aos="fade-up">
             @if(!empty($layanan->image))
                 <img src="{{ $layanan->image_url }}" alt="{{ $layanan->title }}" class="layanan-image-img">
             @else
@@ -355,7 +355,7 @@
         </div>
 
         {{-- 2. DESKRIPSI & RUANG LINGKUP LAYANAN --}}
-        <div class="layanan-content-card">
+        <div class="layanan-content-card" data-aos="fade-up" data-aos-delay="100">
             <h3 class="section-headline">
                 <i class="bx bx-detail"></i>
                 <span>Deskripsi & Ruang Lingkup Layanan</span>
