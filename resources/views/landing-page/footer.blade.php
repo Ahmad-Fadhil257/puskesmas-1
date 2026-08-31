@@ -6,12 +6,10 @@
 
                 <!-- Brand -->
                 <div class="footer__brand">
-                    <h3 class="footer__brand-title"><span class="brand-text">{{ $appSetting->app_name ?? 'Puskesmas' }}</span></h3>
+                    <h4 class="footer__heading">{{ $appSetting->app_name ?? 'Puskesmas' }}</h4>
                     <p class="footer__brand-desc">
-                        Melayani dengan Sepenuh Hati.<br>
-                        Menyediakan layanan kesehatan<br>
-                        dasar yang berkualitas untuk<br>
-                        masyarakat.
+                        Melayani dengan Sepenuh Hati.
+                        Menyediakan layanan kesehatan dasar dan poliklinik yang berkualitas untuk masyarakat.
                     </p>
                     @php
                         $hasSocials = !empty($appSetting->facebook_link) || !empty($appSetting->instagram_link) || !empty($appSetting->twitter_link) || !empty($appSetting->youtube_link) || !empty($appSetting->tiktok_link);
