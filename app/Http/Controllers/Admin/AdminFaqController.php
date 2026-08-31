@@ -14,7 +14,6 @@ class AdminFaqController extends Controller
     public function index(Request $request)
     {
         $search = $request->query('search');
-        $categoryFilter = $request->query('kategori');
         $statusFilter = $request->query('status');
 
         $query = Faq::orderBy('urutan', 'asc')->orderBy('id', 'asc');
@@ -24,10 +23,6 @@ class AdminFaqController extends Controller
                 $q->where('pertanyaan', 'like', "%{$search}%")
                   ->orWhere('jawaban', 'like', "%{$search}%");
             });
-        }
-
-        if (!empty($categoryFilter)) {
-            $query->where('kategori', $categoryFilter);
         }
 
         if ($statusFilter === 'active') {
@@ -40,9 +35,8 @@ class AdminFaqController extends Controller
 
         $totalFaq = Faq::count();
         $totalActive = Faq::where('is_active', true)->count();
-        $categories = Faq::getKategoriList();
 
-        return view('admin.faq.index', compact('faqs', 'totalFaq', 'totalActive', 'categories', 'search', 'categoryFilter', 'statusFilter'));
+        return view('admin.faq.index', compact('faqs', 'totalFaq', 'totalActive', 'search', 'statusFilter'));
     }
 
     /**
@@ -50,9 +44,8 @@ class AdminFaqController extends Controller
      */
     public function create()
     {
-        $categories = Faq::getKategoriList();
         $nextOrder = (Faq::max('urutan') ?? 0) + 1;
-        return view('admin.faq.create', compact('categories', 'nextOrder'));
+        return view('admin.faq.create', compact('nextOrder'));
     }
 
     /**
@@ -63,13 +56,11 @@ class AdminFaqController extends Controller
         $validated = $request->validate([
             'pertanyaan' => ['required', 'string', 'max:255'],
             'jawaban'    => ['required', 'string'],
-            'kategori'   => ['required', 'string', 'max:100'],
             'urutan'     => ['nullable', 'integer', 'min:1'],
             'is_active'  => ['nullable', 'boolean'],
         ], [
             'pertanyaan.required' => 'Teks pertanyaan wajib diisi.',
             'jawaban.required'    => 'Teks jawaban lengkap wajib diisi.',
-            'kategori.required'   => 'Kategori pertanyaan wajib dipilih.',
         ]);
 
         $urutan = $validated['urutan'] ?? ((Faq::max('urutan') ?? 0) + 1);
@@ -77,7 +68,6 @@ class AdminFaqController extends Controller
         Faq::create([
             'pertanyaan' => $validated['pertanyaan'],
             'jawaban'    => $validated['jawaban'],
-            'kategori'   => $validated['kategori'],
             'urutan'     => $urutan,
             'is_active'  => $request->boolean('is_active', true),
         ]);
@@ -92,8 +82,7 @@ class AdminFaqController extends Controller
     public function edit($id)
     {
         $faq = Faq::findOrFail($id);
-        $categories = Faq::getKategoriList();
-        return view('admin.faq.edit', compact('faq', 'categories'));
+        return view('admin.faq.edit', compact('faq'));
     }
 
     /**
@@ -106,20 +95,17 @@ class AdminFaqController extends Controller
         $validated = $request->validate([
             'pertanyaan' => ['required', 'string', 'max:255'],
             'jawaban'    => ['required', 'string'],
-            'kategori'   => ['required', 'string', 'max:100'],
             'urutan'     => ['required', 'integer', 'min:1'],
             'is_active'  => ['nullable', 'boolean'],
         ], [
             'pertanyaan.required' => 'Teks pertanyaan wajib diisi.',
             'jawaban.required'    => 'Teks jawaban lengkap wajib diisi.',
-            'kategori.required'   => 'Kategori pertanyaan wajib dipilih.',
             'urutan.required'     => 'Nomor urut prioritas wajib diisi.',
         ]);
 
         $faq->update([
             'pertanyaan' => $validated['pertanyaan'],
             'jawaban'    => $validated['jawaban'],
-            'kategori'   => $validated['kategori'],
             'urutan'     => $validated['urutan'],
             'is_active'  => $request->boolean('is_active', false),
         ]);

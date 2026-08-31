@@ -27,6 +27,9 @@ use App\Models\Layanan;
 use App\Models\Mitra;
 use App\Models\NilaiSection;
 use App\Models\Survey;
+use App\Models\Infografis;
+use App\Models\Faq;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 // Landing Page Utama (dengan passing artikel terbaru, cara kerja dinamis, hero & info cards)
@@ -111,10 +114,34 @@ Route::post('/puskem-logout', [AuthController::class, 'logout'])->name('logout')
 // Dashboard & Admin Routes (Diproteksi auth middleware)
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () {
-        $totalArticles = Article::count();
-        $totalViews = Article::sum('views_count');
-        $latestArticles = Article::orderBy('created_at', 'desc')->take(5)->get();
-        return view('admin.dashboard', compact('totalArticles', 'totalViews', 'latestArticles'));
+        $totalArticles   = Article::count();
+        $totalViews      = Article::sum('views_count') ?? 0;
+        $latestArticles  = Article::orderBy('created_at', 'desc')->take(5)->get();
+
+        $totalLayanan    = Layanan::count();
+        $totalDokter     = Dokter::count();
+        $totalInfografis = Infografis::count();
+        $totalFaq        = Faq::count();
+
+        $totalSurveys    = Survey::count();
+        $avgRating       = Survey::count() > 0 ? round(Survey::avg('rating'), 1) : 5.0;
+        $latestSurveys   = Survey::orderBy('created_at', 'desc')->take(4)->get();
+
+        $totalUsers      = User::count();
+
+        return view('admin.dashboard', compact(
+            'totalArticles',
+            'totalViews',
+            'latestArticles',
+            'totalLayanan',
+            'totalDokter',
+            'totalInfografis',
+            'totalFaq',
+            'totalSurveys',
+            'avgRating',
+            'latestSurveys',
+            'totalUsers'
+        ));
     })->name('dashboard');
 
     // CRUD Manajemen Berita

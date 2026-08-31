@@ -90,6 +90,29 @@
                                 @enderror
                             </div>
 
+                            {{-- Kategori Layanan --}}
+                            <div class="col-12">
+                                <label class="form-label fw-semibold" for="kategori">
+                                    Kategori Layanan <span class="text-danger">*</span>
+                                </label>
+                                <input type="text"
+                                    class="form-control @error('kategori') is-invalid @enderror"
+                                    id="kategori" name="kategori"
+                                    list="kategoriLayananDatalist"
+                                    value="{{ old('kategori', 'Rawat Jalan (BPJS & Umum)') }}"
+                                    placeholder="Pilih atau ketik kategori baru..."
+                                    required />
+                                <datalist id="kategoriLayananDatalist">
+                                    @foreach($categories as $cat)
+                                        <option value="{{ $cat }}">
+                                    @endforeach
+                                </datalist>
+                                <div class="form-text">Pilih dari pilihan atau ketik nama kategori baru.</div>
+                                @error('kategori')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
                             {{-- Sub-judul / Tagline Singkat --}}
                             <div class="col-12">
                                 <label class="form-label fw-semibold" for="subtitle">

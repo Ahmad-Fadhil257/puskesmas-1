@@ -36,7 +36,7 @@ class AdminLayananController extends Controller
      */
     public function create()
     {
-        $categories = array_keys(Layanan::getKategoriList());
+        $categories = array_values(array_unique(array_merge(array_keys(Layanan::getKategoriList()), Layanan::distinct()->pluck('kategori')->filter()->toArray())));
         $nextOrder = (Layanan::max('order') ?? 0) + 1;
         return view('admin.layanan.create', compact('categories', 'nextOrder'));
     }
@@ -112,7 +112,7 @@ class AdminLayananController extends Controller
     public function edit($id)
     {
         $layanan = Layanan::findOrFail($id);
-        $categories = array_keys(Layanan::getKategoriList());
+        $categories = array_values(array_unique(array_merge(array_keys(Layanan::getKategoriList()), Layanan::distinct()->pluck('kategori')->filter()->toArray())));
         return view('admin.layanan.edit', compact('layanan', 'categories'));
     }
 

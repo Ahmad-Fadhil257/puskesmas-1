@@ -58,8 +58,8 @@
                 <defs>
                     <path id="circleTextPath" d="M 75, 75 m -57, 0 a 57,57 0 1,1 114,0 a 57,57 0 1,1 -114,0" />
                 </defs>
-                <circle cx="75" cy="75" r="68" fill="none" stroke="rgba(10, 92, 69, 0.14)" stroke-width="1.2" stroke-dasharray="3.5 3" />
-                <text font-size="8.6" font-weight="800" fill="#0A5C45" letter-spacing="2.2px">
+                <circle cx="75" cy="75" r="68" fill="none" stroke="rgba(249, 115, 22, 0.3)" stroke-width="1.2" stroke-dasharray="3.5 3" />
+                <text font-size="8.6" font-weight="800" fill="#F97316" letter-spacing="2.2px">
                     <textPath href="#circleTextPath" startOffset="0%">
                         {{ $appSetting->operational_badge_text ?? '• JAM OPERASIONAL • PUSKESMAS BUKA •' }}
                     </textPath>

@@ -45,12 +45,13 @@
                     {{-- Kategori --}}
                     <div class="col-md-4">
                         <label class="form-label fw-semibold" for="category">Kategori <span class="text-danger">*</span></label>
-                        <select class="form-select @error('category') is-invalid @enderror" id="category" name="category" required>
-                            <option value="">-- Pilih Kategori --</option>
+                        <input type="text" name="category" id="category" list="categoryDatalist" class="form-control @error('category') is-invalid @enderror" placeholder="Pilih atau ketik kategori..." value="{{ old('category', 'Tips Kesehatan') }}" required>
+                        <datalist id="categoryDatalist">
                             @foreach($categories as $cat)
-                                <option value="{{ $cat }}" {{ old('category') == $cat ? 'selected' : '' }}>{{ $cat }}</option>
+                                <option value="{{ $cat }}">
                             @endforeach
-                        </select>
+                        </datalist>
+                        <div class="form-text">Pilih dari rekomendasi atau ketik kategori baru.</div>
                         @error('category')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror

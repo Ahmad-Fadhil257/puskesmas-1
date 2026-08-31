@@ -47,6 +47,7 @@
             </ul>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
+    @endif
     {{-- Info Card: Keterhubungan Menu --}}
     <div class="alert alert-info border-0 shadow-sm d-flex align-items-center mb-4 py-3" style="background-color: #E8F4FD; color: #0C5460; border-left: 4px solid #0284C7 !important; border-radius: 10px;">
         <i class="bx bx-info-circle fs-4 me-3 text-info"></i>

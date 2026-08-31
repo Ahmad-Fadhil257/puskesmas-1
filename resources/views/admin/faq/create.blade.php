@@ -69,24 +69,7 @@
                         @enderror
                     </div>
 
-                    {{-- Kategori --}}
-                    <div class="col-md-6 col-12">
-                        <label class="form-label fw-semibold" for="kategori">
-                            Kategori Pertanyaan <span class="text-danger">*</span>
-                        </label>
-                        <div class="input-group">
-                            <select class="form-select @error('kategori') is-invalid @enderror" id="kategori" name="kategori" required>
-                                <option value="">-- Pilih Kategori --</option>
-                                @foreach($categories as $cat)
-                                    <option value="{{ $cat }}" {{ old('kategori') === $cat ? 'selected' : '' }}>{{ $cat }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="form-text small">Pilih salah satu topik kategori untuk memudahkan pencarian oleh masyarakat.</div>
-                        @error('kategori')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
+
 
                     {{-- Urutan Prioritas --}}
                     <div class="col-md-3 col-6">
