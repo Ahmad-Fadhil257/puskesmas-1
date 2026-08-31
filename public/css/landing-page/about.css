@@ -137,22 +137,24 @@ a {
 .about__badge {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    font-size: 12px;
-    font-weight: 700;
+    gap: 10px;
+    font-size: 14px;
+    font-weight: 800;
     color: var(--color-primary);
-    background: rgba(10, 92, 69, 0.1);
-    border: 1px solid rgba(10, 92, 69, 0.18);
-    padding: 6px 16px;
-    border-radius: var(--radius-full);
+    background: transparent;
+    border: none;
+    border-left: 4px solid var(--color-primary);
+    padding: 3px 0 3px 12px;
+    border-radius: 0;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.1em;
     width: fit-content;
+    cursor: default;
 }
 
 .about__badge svg {
-    width: 14px;
-    height: 14px;
+    width: 16px;
+    height: 16px;
     stroke: var(--color-primary);
     fill: none;
     flex-shrink: 0;
@@ -243,7 +245,7 @@ a {
 
 @media (max-width: 768px) {
     .about {
-        padding: 56px 16px;
+        padding: 56px 20px;
     }
 
     .about__cards {
@@ -252,6 +254,7 @@ a {
 
     .about__images {
         min-height: 320px;
+        gap: 16px;
     }
 
     .about__img-wrap--main {
@@ -264,11 +267,16 @@ a {
 }
 
 @media (max-width: 480px) {
+    .about {
+        padding: 48px 16px;
+    }
+
     .about__title {
         font-size: 1.5rem;
     }
 
     .about__images {
         min-height: 260px;
+        gap: 12px;
     }
 }

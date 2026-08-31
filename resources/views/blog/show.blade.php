@@ -9,20 +9,21 @@
 
 @section('content')
 
-{{-- Full Width Dark Emerald Header (Fill Semua Rata Kiri Sejajar Grid) --}}
-<section class="blog-full-header article-detail-header">
-    <div class="blog-full-header__decor-pattern" aria-hidden="true"></div>
-    <div class="blog-full-header__glow" aria-hidden="true"></div>
+{{-- =========================================================================
+   HEADER SECTION: CLEAN MINT SUBPAGE HEADER WITH BOTANICAL ORNAMENT
+   ========================================================================= --}}
+<section class="subpage-header">
+    <img src="{{ asset('assets/botanical-clean.png') }}?v={{ file_exists(public_path('assets/botanical-clean.png')) ? filemtime(public_path('assets/botanical-clean.png')) : time() }}" alt="" class="subpage-header__watermark" aria-hidden="true">
 
-    <div class="blog-full-header__container">
+    <div class="subpage-header__container">
         {{-- Breadcrumbs Navigasi --}}
-        <nav class="article-breadcrumb-nav" aria-label="Breadcrumb">
+        <div class="subpage-header__breadcrumb">
             <a href="{{ route('home') }}">Beranda</a>
-            <span class="sep">&rsaquo;</span>
+            <span class="subpage-header__breadcrumb-sep">•</span>
             <a href="{{ route('blog.index') }}">Berita & Artikel</a>
-            <span class="sep">&rsaquo;</span>
-            <span class="current">{{ Str::limit($article->title, 40) }}</span>
-        </nav>
+            <span class="subpage-header__breadcrumb-sep">•</span>
+            <span class="subpage-header__breadcrumb-current">{{ Str::limit($article->title, 35) }}</span>
+        </div>
 
         {{-- Category Badge --}}
         <span class="article-header-category-pill" data-aos="fade-right">{{ strtoupper($article->category) }}</span>

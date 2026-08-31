@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Survey;
+use App\Models\Layanan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
@@ -11,20 +12,52 @@ use Illuminate\Support\Str;
 class AdminSurveyController extends Controller
 {
     /**
-     * Tampilkan rekap data survei & testimoni pasien
+     * Tampilkan rekap data survei & evaluasi kepuasan pasien
      */
     public function index(Request $request)
     {
+        $search = $request->query('search');
         $ratingFilter = $request->query('rating');
+        $statusFilter = $request->query('status');
+        $poliFilter = $request->query('poli');
 
-        $query = Survey::orderBy('created_at', 'desc');
+        $query = Survey::orderBy('is_featured', 'desc')->orderBy('created_at', 'desc');
 
+        // Filter Pencarian (Nama, No Kontak, Poli, atau Isi Pesan)
+        if (!empty($search)) {
+            $query->where(function ($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
+                  ->orWhere('email_or_phone', 'like', "%{$search}%")
+                  ->orWhere('poli_name', 'like', "%{$search}%")
+                  ->orWhere('pesan', 'like', "%{$search}%");
+            });
+        }
+
+        // Filter Rating Bintang (1 - 5)
         if ($ratingFilter && in_array($ratingFilter, ['1','2','3','4','5'])) {
             $query->where('rating', (int) $ratingFilter);
         }
 
+        // Filter Status Publikasi / Unggulan
+        if ($statusFilter === 'approved') {
+            $query->where('is_approved', true);
+        } elseif ($statusFilter === 'draft') {
+            $query->where('is_approved', false);
+        } elseif ($statusFilter === 'featured') {
+            $query->where('is_featured', true);
+        }
+
+        // Filter Berdasarkan Unit / Poliklinik
+        if (!empty($poliFilter)) {
+            $query->where('poli_name', $poliFilter);
+        }
+
         $surveys = $query->paginate(15)->withQueryString();
+
+        // Statistik Keseluruhan
         $totalResponden = Survey::count();
+        $totalApproved = Survey::where('is_approved', true)->count();
+        $totalFeatured = Survey::where('is_featured', true)->count();
         $avgRating = Survey::getAverageRating();
         $satisfactionPct = Survey::getSatisfactionPercentage();
 
@@ -36,18 +69,51 @@ class AdminSurveyController extends Controller
             1 => Survey::where('rating', 1)->count(),
         ];
 
+        // Daftar Poli yang tersedia untuk dropdown filter & form modal
+        $availablePolis = Survey::select('poli_name')->whereNotNull('poli_name')->distinct()->pluck('poli_name');
+        $layanans = Layanan::orderBy('order', 'asc')->get();
+
         return view('admin.survey.index', compact(
             'surveys',
             'totalResponden',
+            'totalApproved',
+            'totalFeatured',
             'avgRating',
             'satisfactionPct',
             'ratingCounts',
-            'ratingFilter'
+            'ratingFilter',
+            'statusFilter',
+            'poliFilter',
+            'search',
+            'availablePolis',
+            'layanans'
         ));
     }
 
     /**
-     * Tambah testimoni / survei manual oleh admin
+     * Ambil data JSON untuk Pratinjau / Modal Detail
+     */
+    public function show($id)
+    {
+        $survey = Survey::findOrFail($id);
+
+        return response()->json([
+            'id'             => $survey->id,
+            'name'           => $survey->name,
+            'email_or_phone' => $survey->email_or_phone ?? '-',
+            'poli_name'      => $survey->poli_name ?? 'Poli Umum',
+            'rating'         => $survey->rating,
+            'pesan'          => $survey->pesan,
+            'avatar_url'     => $survey->avatar_url,
+            'is_approved'    => (bool) $survey->is_approved,
+            'is_featured'    => (bool) $survey->is_featured,
+            'created_at'     => $survey->created_at->format('d F Y, H:i') . ' WIB',
+            'time_ago'       => $survey->created_at->diffForHumans(),
+        ]);
+    }
+
+    /**
+     * Tambah data evaluasi / survei manual oleh admin
      */
     public function store(Request $request)
     {
@@ -56,7 +122,7 @@ class AdminSurveyController extends Controller
             'email_or_phone' => 'nullable|string|max:100',
             'poli_name'      => 'required|string|max:100',
             'rating'         => 'required|integer|min:1|max:5',
-            'pesan'          => 'required|string|max:1000',
+            'pesan'          => 'required|string|max:1500',
             'avatar'         => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
             'is_approved'    => 'nullable',
             'is_featured'    => 'nullable',
@@ -86,11 +152,11 @@ class AdminSurveyController extends Controller
         ]);
 
         return redirect()->route('admin.surveys.index')
-                         ->with('success', 'Testimoni baru berhasil ditambahkan!');
+                         ->with('success', 'Data evaluasi survei berhasil ditambahkan!');
     }
 
     /**
-     * Update data survei / testimoni
+     * Update data survei / ulasan
      */
     public function update(Request $request, $id)
     {
@@ -101,7 +167,7 @@ class AdminSurveyController extends Controller
             'email_or_phone' => 'nullable|string|max:100',
             'poli_name'      => 'required|string|max:100',
             'rating'         => 'required|integer|min:1|max:5',
-            'pesan'          => 'required|string|max:1000',
+            'pesan'          => 'required|string|max:1500',
             'avatar'         => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
             'is_approved'    => 'nullable',
             'is_featured'    => 'nullable',
@@ -131,7 +197,7 @@ class AdminSurveyController extends Controller
         $survey->save();
 
         return redirect()->route('admin.surveys.index')
-                         ->with('success', 'Data survei/testimoni berhasil diperbarui!');
+                         ->with('success', 'Data evaluasi survei berhasil diperbarui!');
     }
 
     /**
@@ -145,7 +211,25 @@ class AdminSurveyController extends Controller
 
         $status = $survey->is_approved ? 'dipublikasikan ke website' : 'disembunyikan dari website';
         return redirect()->route('admin.surveys.index')
-                         ->with('success', "Testimoni dari \"{$survey->name}\" berhasil {$status}!");
+                         ->with('success', "Ulasan dari \"{$survey->name}\" berhasil {$status}!");
+    }
+
+    /**
+     * Toggle status unggulan (Featured) tampil prioritas pertama
+     */
+    public function toggleFeatured($id)
+    {
+        $survey = Survey::findOrFail($id);
+        $survey->is_featured = !$survey->is_featured;
+        // Jika dijadikan featured, pastikan otomatis disetujui (is_approved = true)
+        if ($survey->is_featured) {
+            $survey->is_approved = true;
+        }
+        $survey->save();
+
+        $status = $survey->is_featured ? 'dijadikan ulasan Unggulan (tampil prioritas di beranda)' : 'dihapus dari ulasan unggulan';
+        return redirect()->route('admin.surveys.index')
+                         ->with('success', "Ulasan dari \"{$survey->name}\" berhasil {$status}!");
     }
 
     /**

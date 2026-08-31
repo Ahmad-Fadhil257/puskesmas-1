@@ -1,0 +1,301 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   STATISTIK LANDING SECTION CSS
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Section Wrapper ──────────────────────────────────────────────────────── */
+.statistik-landing {
+    background: linear-gradient(180deg, #F0FDF4 0%, #fff 100%);
+    padding: 5rem 1.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.statistik-landing::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(10,92,69,0.07) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.statistik-landing__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* ── Header ───────────────────────────────────────────────────────────────── */
+.statistik-landing__header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.statistik-landing__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    font-weight: 800;
+    color: #0A5C45;
+    background: transparent;
+    border: none;
+    border-left: 4px solid #0A5C45;
+    padding: 3px 0 3px 12px;
+    border-radius: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    width: fit-content;
+    margin-bottom: 1rem;
+}
+
+.statistik-landing__title {
+    font-size: clamp(1.6rem, 3.5vw, 2.5rem);
+    font-weight: 800;
+    color: #0D1B2A;
+    line-height: 1.2;
+    margin-bottom: 0.85rem;
+}
+
+.statistik-landing__title span {
+    color: #0A5C45;
+}
+
+.statistik-landing__desc {
+    font-size: 1rem;
+    color: #64748B;
+    max-width: 500px;
+    margin: 0 auto;
+    line-height: 1.65;
+}
+
+/* ── KPI Row ──────────────────────────────────────────────────────────────── */
+.statistik-landing__kpi {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+    margin-bottom: 3rem;
+}
+
+.sl-kpi {
+    background: #fff;
+    border-radius: 16px;
+    padding: 1.5rem 1rem;
+    text-align: center;
+    border: 1px solid rgba(10,92,69,0.1);
+    box-shadow: 0 2px 12px rgba(10,92,69,0.07);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.sl-kpi::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: #0A5C45;
+}
+
+.sl-kpi:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(10,92,69,0.13);
+}
+
+.sl-kpi__num {
+    font-size: 2.1rem;
+    font-weight: 900;
+    color: #111;
+    line-height: 1;
+    margin-bottom: 0.4rem;
+    font-variant-numeric: tabular-nums;
+}
+
+.sl-kpi__label {
+    font-size: 0.77rem;
+    font-weight: 600;
+    color: #64748B;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* ── Two-column Grid ──────────────────────────────────────────────────────── */
+.statistik-landing__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+}
+
+.sl-section-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 800;
+    color: #0A5C45;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid #E6F4ED;
+}
+
+/* ── Disease Card ─────────────────────────────────────────────────────────── */
+.sl-disease-wrap {
+    background: #fff;
+    border-radius: 20px;
+    padding: 1.75rem;
+    border: 1px solid rgba(10,92,69,0.08);
+    box-shadow: 0 2px 16px rgba(10,92,69,0.07);
+}
+
+.sl-disease-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.sl-disease-item {
+    display: grid;
+    grid-template-columns: 26px 1fr auto;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.sl-disease-rank {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: rgba(10, 92, 69, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    font-weight: 800;
+    color: #0A5C45;
+    flex-shrink: 0;
+}
+
+.sl-disease-body {
+    min-width: 0;
+}
+
+.sl-disease-name {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #1E293B;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 0.3rem;
+}
+
+.sl-disease-icd {
+    font-size: 0.68rem;
+    color: #94A3B8;
+    font-weight: 500;
+    margin-left: 0.3rem;
+}
+
+.sl-disease-track {
+    height: 8px;
+    background: #F1F5F9;
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.sl-disease-fill {
+    height: 100%;
+    border-radius: 999px;
+    width: 0;
+    transition: width 1.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.sl-disease-count {
+    text-align: right;
+    min-width: 56px;
+}
+.sl-disease-count strong {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 800;
+    color: #0A5C45;
+    line-height: 1.1;
+}
+.sl-disease-count span {
+    font-size: 0.68rem;
+    color: #94A3B8;
+    font-weight: 500;
+}
+
+/* ── Kunjungan Chart Card ─────────────────────────────────────────────────── */
+.sl-kunjungan-wrap {
+    background: #fff;
+    border-radius: 20px;
+    padding: 1.75rem;
+    border: 1px solid rgba(10,92,69,0.08);
+    box-shadow: 0 2px 16px rgba(10,92,69,0.07);
+    display: flex;
+    flex-direction: column;
+}
+
+.sl-chart-container {
+    flex: 1;
+    position: relative;
+    min-height: 220px;
+}
+
+.sl-kunjungan-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+    padding-top: 0.85rem;
+    border-top: 1px solid #F1F5F9;
+    font-size: 0.85rem;
+}
+
+.sl-kunjungan-total span { color: #64748B; font-weight: 500; }
+.sl-kunjungan-total strong { color: #0A5C45; font-weight: 800; }
+
+/* ── CTA Button ───────────────────────────────────────────────────────────── */
+.statistik-landing__cta {
+    text-align: center;
+}
+
+.sl-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: linear-gradient(135deg, #0A5C45, #1A7A5E);
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 700;
+    padding: 0.85rem 2rem;
+    border-radius: 999px;
+    text-decoration: none;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 16px rgba(10,92,69,0.3);
+}
+
+.sl-cta-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(10,92,69,0.4);
+    color: #fff;
+}
+
+/* ── Responsive ───────────────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+    .statistik-landing__grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 640px) {
+    .statistik-landing__kpi {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .statistik-landing {
+        padding: 3.5rem 1rem;
+    }
+}

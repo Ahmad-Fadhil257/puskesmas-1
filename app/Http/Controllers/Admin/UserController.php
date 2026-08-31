@@ -58,21 +58,22 @@ class UserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
             'password' => ['required', 'string', 'min:6'],
-            'role' => ['required', 'in:admin,staf'],
+            'role' => ['nullable', 'in:admin,staf'],
             'phone' => ['nullable', 'string', 'max:20'],
             'is_active' => ['nullable', 'boolean'],
             'accessible_pages' => ['nullable', 'array'],
-            'accessible_pages.*' => ['string', 'in:' . implode(',', array_keys(User::PAGES))],
         ]);
+
+        $role = $request->role ?? 'admin';
 
         $data = [
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'role' => $request->role,
+            'role' => $role,
             'phone' => $request->phone,
             'is_active' => $request->boolean('is_active', true),
-            'accessible_pages' => $request->role === 'staf' ? ($request->accessible_pages ?? []) : null,
+            'accessible_pages' => null,
         ];
 
         User::create($data);
@@ -96,19 +97,17 @@ class UserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
             'password' => ['nullable', 'string', 'min:6'],
-            'role' => ['required', 'in:admin,staf'],
+            'role' => ['nullable', 'in:admin,staf'],
             'phone' => ['nullable', 'string', 'max:20'],
             'is_active' => ['nullable', 'boolean'],
-            'accessible_pages' => ['nullable', 'array'],
-            'accessible_pages.*' => ['string', 'in:' . implode(',', array_keys(User::PAGES))],
         ]);
 
         $data = [
             'name' => $request->name,
             'email' => $request->email,
-            'role' => $request->role,
+            'role' => $request->role ?? $user->role ?? 'admin',
             'phone' => $request->phone,
-            'is_active' => $request->boolean('is_active', true),
+            'is_active' => $user->id === Auth::id() ? true : $request->boolean('is_active', true),
             'accessible_pages' => $request->role === 'staf' ? ($request->accessible_pages ?? []) : null,
         ];
 

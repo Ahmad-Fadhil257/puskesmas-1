@@ -30,12 +30,19 @@ class ArticleController extends Controller
         return view('admin.articles.index', compact('articles', 'search'));
     }
 
+    private function getCategoryList()
+    {
+        $defaults = ['Tips Kesehatan', 'Info Medis', 'Kesehatan Mental', 'Gizi & Nutrisi', 'Berita Klinik', 'Imunisasi & Anak'];
+        $dbCats = Article::distinct()->pluck('category')->filter()->toArray();
+        return array_values(array_unique(array_merge($defaults, $dbCats)));
+    }
+
     /**
      * Form tambah artikel baru
      */
     public function create()
     {
-        $categories = ['Tips Kesehatan', 'Info Medis', 'Kesehatan Mental', 'Gizi & Nutrisi', 'Berita Klinik', 'Imunisasi & Anak'];
+        $categories = $this->getCategoryList();
         return view('admin.articles.create', compact('categories'));
     }
 
@@ -100,7 +107,7 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
-        $categories = ['Tips Kesehatan', 'Info Medis', 'Kesehatan Mental', 'Gizi & Nutrisi', 'Berita Klinik', 'Imunisasi & Anak'];
+        $categories = $this->getCategoryList();
         return view('admin.articles.edit', compact('article', 'categories'));
     }
 

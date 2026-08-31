@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 350" fill="none" class="growing-vine-svg">
+    <!-- Main Arching Trunk growing from bottom-right corner -->
+    <path d="M 500 350 C 420 340 350 290 320 220 C 290 150 250 110 180 85 C 120 65 60 80 10 110" 
+          stroke="#0A5C45" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    
+    <!-- Secondary Lower Branch -->
+    <path d="M 450 350 C 400 300 380 250 370 190 C 360 140 380 90 420 50 C 450 20 490 20 500 35" 
+          stroke="#0A5C45" stroke-width="3.5" stroke-linecap="round"/>
+    
+    <!-- Delicate Curly Tendril 1 -->
+    <path d="M 320 220 C 310 180 330 140 360 130 C 390 120 405 140 395 160 C 385 175 365 170 360 155 C 355 140 370 130 380 135" 
+          stroke="#0A5C45" stroke-width="2" stroke-linecap="round"/>
+
+    <!-- Delicate Curly Tendril 2 (Left tip) -->
+    <path d="M 180 85 C 170 50 190 25 220 20 C 245 15 260 35 250 55 C 240 70 220 65 215 50 C 210 38 225 30 235 35" 
+          stroke="#0A5C45" stroke-width="2" stroke-linecap="round"/>
+
+    <!-- Small Curly Tendril 3 -->
+    <path d="M 80 90 C 60 70 65 40 90 35 C 110 30 120 45 110 60 C 100 70 85 65 85 55" 
+          stroke="#0A5C45" stroke-width="1.8" stroke-linecap="round"/>
+
+    <!-- Bottom Sprout Growing from base -->
+    <path d="M 480 350 C 460 310 470 270 500 240" 
+          stroke="#0A5C45" stroke-width="2.5" stroke-linecap="round"/>
+
+    <!-- Leaves (Solid elegant botanical shapes) -->
+    <!-- Leaf 1 (Near Base) -->
+    <path d="M 410 310 Q 365 315 360 285 Q 385 270 410 310 Z" fill="#0A5C45"/>
+    
+    <!-- Leaf 2 (Mid lower) -->
+    <path d="M 345 255 Q 310 270 290 245 Q 315 230 345 255 Z" fill="#0A5C45"/>
+    
+    <!-- Leaf 3 (Branching outward) -->
+    <path d="M 300 180 Q 260 170 265 140 Q 295 145 300 180 Z" fill="#0A5C45"/>
+
+    <!-- Leaf 4 (Upper stem) -->
+    <path d="M 230 115 Q 195 100 205 75 Q 235 85 230 115 Z" fill="#0A5C45"/>
+
+    <!-- Leaf 5 (Near apex left) -->
+    <path d="M 130 75 Q 95 60 110 40 Q 135 50 130 75 Z" fill="#0A5C45"/>
+
+    <!-- Leaf 6 (Tip sprout) -->
+    <path d="M 30 102 Q 0 115 5 95 Q 25 85 30 102 Z" fill="#0A5C45"/>
+
+    <!-- Secondary Branch Leaves -->
+    <path d="M 430 330 Q 400 340 395 320 Q 415 310 430 330 Z" fill="#0A5C45"/>
+    <path d="M 375 220 Q 345 205 360 185 Q 380 195 375 220 Z" fill="#0A5C45"/>
+    <path d="M 390 100 Q 375 65 400 60 Q 410 80 390 100 Z" fill="#0A5C45"/>
+    <path d="M 460 30 Q 480 5 495 20 Q 485 40 460 30 Z" fill="#0A5C45"/>
+
+    <!-- Subtle Warm Orange Accent Berries / Buds (Harmonizing with Testimoni) -->
+    <circle cx="215" cy="50" r="4.5" fill="#E8672C"/>
+    <circle cx="360" cy="155" r="4" fill="#E8672C"/>
+    <circle cx="110" cy="60" r="3.5" fill="#E8672C"/>
+    <circle cx="270" cy="142" r="3.5" fill="#E8672C"/>
+    <circle cx="410" cy="58" r="4" fill="#E8672C"/>
+</svg>

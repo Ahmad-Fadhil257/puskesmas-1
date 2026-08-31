@@ -165,6 +165,10 @@
                             <div class="col-12">
                                 <label class="form-label fw-semibold" for="address">Alamat Lengkap</label>
                                 <textarea class="form-control" id="address" name="address" rows="2" placeholder="Jl. Kesehatan No. 123...">{{ old('address', $setting->address) }}</textarea>
+                                <div class="form-text mt-1 d-flex align-items-center gap-1 text-muted small">
+                                    <i class="bx bx-info-circle text-primary"></i>
+                                    <span>Untuk mengatur <strong>peta Google Maps interaktif</strong>, <strong>patokan landmark</strong>, dan <strong>info UGD 24 Jam</strong>, silakan buka menu <a href="{{ route('admin.lokasi.index') }}" class="fw-bold text-decoration-underline">Lokasi & Peta</a>.</span>
+                                </div>
                             </div>
 
                             {{-- Divider Jam Operasional --}}
@@ -188,6 +192,13 @@
                                 <small class="text-muted">Jam pelayanan puskesmas.</small>
                             </div>
 
+                            {{-- Teks Melingkar Badge --}}
+                            <div class="col-12">
+                                <label class="form-label fw-semibold" for="operational_badge_text">Teks Melingkar Badge (Slogan / Keterangan)</label>
+                                <input type="text" class="form-control" id="operational_badge_text" name="operational_badge_text" value="{{ old('operational_badge_text', $setting->operational_badge_text ?? '• JAM OPERASIONAL • PUSKESMAS BUKA •') }}" placeholder="Contoh: • JAM OPERASIONAL • PUSKESMAS BUKA •">
+                                <small class="text-muted">Teks yang berputar perlahan mengelilingi lingkaran jam operasional. Gunakan simbol titik (•) sebagai pemisah kata.</small>
+                            </div>
+
                             {{-- Switch Tampilkan Jam Operasional --}}
                             <div class="col-12">
                                 <div class="form-check form-switch p-3 border rounded-3 bg-label-primary">
@@ -203,6 +214,71 @@
                                     <small class="d-block text-muted mt-1">
                                         Jika dinonaktifkan, badge jam operasional tidak akan tampil di landing page.
                                     </small>
+                                </div>
+                            </div>
+
+                            {{-- Divider Media Sosial --}}
+                            <div class="col-12 pt-2">
+                                <div class="divider text-start my-1">
+                                    <div class="divider-text fw-bold text-dark">AKUN MEDIA SOSIAL (IKON FOOTER WEBSITE)</div>
+                                </div>
+                                <small class="text-muted d-block mb-3">
+                                    Masukkan tautan profil media sosial Puskesmas. Ikon media sosial di footer otomatis terhubung ke URL ini. Kosongkan jika akun belum tersedia.
+                                </small>
+                            </div>
+
+                            {{-- Facebook --}}
+                            <div class="col-md-6 col-12">
+                                <label class="form-label fw-semibold" for="facebook_link">Facebook URL</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light"><i class="bx bxl-facebook text-primary fs-5"></i></span>
+                                    <input type="url" class="form-control" id="facebook_link" name="facebook_link" 
+                                           value="{{ old('facebook_link', $setting->facebook_link) }}" 
+                                           placeholder="https://facebook.com/puskesmas.resmi">
+                                </div>
+                            </div>
+
+                            {{-- Instagram --}}
+                            <div class="col-md-6 col-12">
+                                <label class="form-label fw-semibold" for="instagram_link">Instagram URL</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light"><i class="bx bxl-instagram text-danger fs-5"></i></span>
+                                    <input type="url" class="form-control" id="instagram_link" name="instagram_link" 
+                                           value="{{ old('instagram_link', $setting->instagram_link) }}" 
+                                           placeholder="https://instagram.com/puskesmas.resmi">
+                                </div>
+                            </div>
+
+                            {{-- Twitter / X --}}
+                            <div class="col-md-6 col-12">
+                                <label class="form-label fw-semibold" for="twitter_link">Twitter / X URL</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light"><i class="bx bxl-twitter text-info fs-5"></i></span>
+                                    <input type="url" class="form-control" id="twitter_link" name="twitter_link" 
+                                           value="{{ old('twitter_link', $setting->twitter_link) }}" 
+                                           placeholder="https://x.com/puskesmas">
+                                </div>
+                            </div>
+
+                            {{-- YouTube --}}
+                            <div class="col-md-6 col-12">
+                                <label class="form-label fw-semibold" for="youtube_link">YouTube Channel URL</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light"><i class="bx bxl-youtube text-danger fs-5"></i></span>
+                                    <input type="url" class="form-control" id="youtube_link" name="youtube_link" 
+                                           value="{{ old('youtube_link', $setting->youtube_link) }}" 
+                                           placeholder="https://youtube.com/@puskesmas">
+                                </div>
+                            </div>
+
+                            {{-- TikTok --}}
+                            <div class="col-12">
+                                <label class="form-label fw-semibold" for="tiktok_link">TikTok URL</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light"><i class="bx bxl-tiktok text-dark fs-5"></i></span>
+                                    <input type="url" class="form-control" id="tiktok_link" name="tiktok_link" 
+                                           value="{{ old('tiktok_link', $setting->tiktok_link) }}" 
+                                           placeholder="https://tiktok.com/@puskesmas">
                                 </div>
                             </div>
                         </div>

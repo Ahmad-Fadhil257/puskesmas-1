@@ -9,14 +9,20 @@
 
 @section('content')
 
-{{-- Full Width Dark Emerald Header (Fill Semua Sesuai Referensi Dinkes) --}}
-<section class="blog-full-header">
-    <div class="blog-full-header__decor-pattern" aria-hidden="true"></div>
-    <div class="blog-full-header__glow" aria-hidden="true"></div>
+{{-- =========================================================================
+   HEADER SECTION: CLEAN MINT SUBPAGE HEADER WITH BOTANICAL ORNAMENT
+   ========================================================================= --}}
+<section class="subpage-header">
+    <img src="{{ asset('assets/botanical-clean.png') }}?v={{ file_exists(public_path('assets/botanical-clean.png')) ? filemtime(public_path('assets/botanical-clean.png')) : time() }}" alt="" class="subpage-header__watermark" aria-hidden="true">
 
-    <div class="blog-full-header__container">
-        <h1 class="blog-full-header__title" data-aos="fade-right">Rilis Berita & Informasi Terkini</h1>
-        <p class="blog-full-header__subtitle" data-aos="fade-up">
+    <div class="subpage-header__container">
+        <div class="subpage-header__breadcrumb" data-aos="fade-right">
+            <a href="{{ route('home') }}">Beranda</a>
+            <span class="subpage-header__breadcrumb-sep">•</span>
+            <span class="subpage-header__breadcrumb-current">Rilis Berita & Artikel</span>
+        </div>
+        <h1 class="subpage-header__title" data-aos="fade-right">Rilis Berita & Informasi Terkini</h1>
+        <p class="subpage-header__subtitle" data-aos="fade-up">
             Informasi seputar kesehatan terkini dan kegiatan pelayanan yang dilaksanakan oleh Puskesmas CareLink
         </p>
     </div>
@@ -63,6 +69,19 @@
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0A5C45" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="select-chevron">
                                 <polyline points="6 9 12 15 18 9"></polyline>
                             </svg>
+                        </div>
+                        {{-- Custom Dropdown Mobile --}}
+                        <div class="blog-custom-dropdown" id="customCategoryDropdown">
+                            <div class="blog-custom-dropdown__selected" id="customDropdownSelected">
+                                <span>{{ request('category') ?: 'Semua Kategori' }}</span>
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                            </div>
+                            <div class="blog-custom-dropdown__options" id="customDropdownOptions">
+                                <a href="{{ route('blog.index', array_filter(['search' => request('search')])) }}" class="blog-custom-dropdown__option {{ !request('category') ? 'active' : '' }}">Semua Kategori</a>
+                                @foreach($categories as $cat)
+                                    <a href="{{ route('blog.index', array_filter(['search' => request('search'), 'category' => $cat])) }}" class="blog-custom-dropdown__option {{ request('category') == $cat ? 'active' : '' }}">{{ $cat }}</a>
+                                @endforeach
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -200,5 +219,30 @@
 
     </div>
 </div>
+
+@push('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const selected = document.getElementById('customDropdownSelected');
+        const options = document.getElementById('customDropdownOptions');
+        if (!selected || !options) return;
+
+        selected.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const isOpen = options.classList.contains('show');
+            document.querySelectorAll('.blog-custom-dropdown__options').forEach(function(el) {
+                el.classList.remove('show');
+            });
+            if (!isOpen) {
+                options.classList.add('show');
+            }
+        });
+
+        document.addEventListener('click', function() {
+            options.classList.remove('show');
+        });
+    });
+</script>
+@endpush
 
 @endsection

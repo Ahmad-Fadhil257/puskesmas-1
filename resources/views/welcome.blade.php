@@ -13,11 +13,11 @@
     <!-- About / Tentang Kami Section -->
     @include('landing-page.about-section')
 
+    <!-- Statistik Kesehatan Section -->
+    @include('landing-page.statistik-section')
+
     <!-- Nilai-Nilai Kami Section -->
     @include('landing-page.nilai-nilai-section')
-
-    <!-- Layanan Kami -->
-    @include('landing-page.layanan-section')
 
     <!-- Dokter Kami -->
     @include('landing-page.dokter-section')

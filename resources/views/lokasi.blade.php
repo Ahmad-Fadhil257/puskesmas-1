@@ -5,90 +5,8 @@
 
 @push('styles')
 <style>
-/* Full Width Dark Emerald Header (Ijo Tua Seragam) */
-.lokasi-full-header {
-    width: 100%;
-    margin-top: -95px;
-    padding-top: 150px;
-    padding-bottom: 60px;
-    padding-left: 24px;
-    padding-right: 24px;
-    background: linear-gradient(135deg, #0A5C45 0%, #064E3B 60%, #043628 100%);
-    position: relative;
-    overflow: hidden;
-    isolation: isolate;
-    box-shadow: 0 12px 36px rgba(0, 50, 35, 0.15);
-    text-align: left;
-    box-sizing: border-box;
-}
-
-.lokasi-full-header__glow {
-    position: absolute;
-    top: -80px;
-    right: -80px;
-    width: 400px;
-    height: 400px;
-    background: radial-gradient(circle, rgba(52, 211, 153, 0.18) 0%, transparent 70%);
-    border-radius: 50%;
-    filter: blur(50px);
-    pointer-events: none;
-    z-index: -1;
-}
-
-.lokasi-full-header__decor-pattern {
-    position: absolute;
-    inset: 0;
-    background-image: 
-        radial-gradient(rgba(255, 255, 255, 0.08) 1.2px, transparent 1.2px),
-        linear-gradient(to right, rgba(255, 255, 255, 0.01) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255, 255, 255, 0.01) 1px, transparent 1px);
-    background-size: 24px 24px;
-    opacity: 0.6;
-    pointer-events: none;
-    z-index: -1;
-}
-
-.lokasi-full-header__container {
-    max-width: 1200px;
-    margin: 0 auto;
-    width: 100%;
-}
-
-.lokasi-header-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: #A7F3D0;
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    padding: 6px 16px;
-    border-radius: 9999px;
-    margin-bottom: 20px;
-}
-
-.lokasi-full-header__title {
-    font-size: clamp(1.85rem, 4vw, 2.5rem);
-    font-weight: 800;
-    color: #FFFFFF;
-    margin: 0 0 12px 0;
-    line-height: 1.25;
-    letter-spacing: -0.02em;
-}
-
-.lokasi-full-header__subtitle {
-    font-size: 15.5px;
-    color: rgba(240, 253, 250, 0.85);
-    line-height: 1.6;
-    max-width: 700px;
-    margin: 0;
-}
-
 .lokasi-content-wrapper {
-    background: #F8FAFC;
+    background: #EDF2F7;
     padding: 60px 24px 90px;
     font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
 }
@@ -114,15 +32,15 @@
     background: #FFFFFF;
     border-radius: 16px;
     padding: 26px 30px;
-    border: 1px solid #E2E8F0;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+    border: 1px solid #CBD5E1;
+    box-shadow: 0 4px 16px rgba(15, 23, 42, 0.05), 0 1px 3px rgba(15, 23, 42, 0.02);
     transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
 }
 
 .lokasi-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 12px 30px rgba(10, 92, 69, 0.06), 0 4px 12px rgba(0, 0, 0, 0.02);
-    border-color: rgba(10, 92, 69, 0.15);
+    box-shadow: 0 12px 30px rgba(10, 92, 69, 0.08), 0 4px 12px rgba(0, 0, 0, 0.03);
+    border-color: rgba(10, 92, 69, 0.25);
 }
 
 .lokasi-icon-wrapper {
@@ -141,8 +59,8 @@
 .lokasi-maps-container {
     background: #FFFFFF;
     border-radius: 16px;
-    border: 1px solid #E2E8F0;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+    border: 1px solid #CBD5E1;
+    box-shadow: 0 4px 16px rgba(15, 23, 42, 0.05), 0 1px 3px rgba(15, 23, 42, 0.02);
     height: 100%;
     position: relative;
     min-height: 500px;
@@ -163,21 +81,21 @@
     align-items: center;
     justify-content: center;
     gap: 8px;
-    background: #0A5C45;
+    background: #00A86B;
     color: #FFFFFF;
     font-size: 14.5px;
-    font-weight: 700;
+    font-weight: 750;
     padding: 13px 24px;
-    border-radius: 12px;
+    border-radius: 8px;
     text-decoration: none;
     transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-    box-shadow: 0 4px 12px rgba(10, 92, 69, 0.2);
+    box-shadow: 0 4px 14px rgba(0, 168, 107, 0.28);
 }
 
 .btn-rute-maps:hover {
-    background: #064E3B;
+    background: #008F5B;
     color: #FFFFFF;
-    box-shadow: 0 6px 18px rgba(10, 92, 69, 0.3);
+    box-shadow: 0 8px 20px rgba(0, 168, 107, 0.4);
     transform: translateY(-2px);
 }
 
@@ -189,9 +107,9 @@
     background: #25D366;
     color: #FFFFFF;
     font-size: 14.5px;
-    font-weight: 700;
+    font-weight: 750;
     padding: 13px 24px;
-    border-radius: 12px;
+    border-radius: 8px;
     text-decoration: none;
     transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     box-shadow: 0 4px 12px rgba(37, 211, 102, 0.2);
@@ -238,20 +156,19 @@
 @section('content')
 
 {{-- =========================================================================
-   FULL WIDTH DARK EMERALD HEADER (IJO TUA PERSIS BERITA & LAYANAN)
+   CLEAN MINIMAL LIGHT HEADER (SOLID MINT, WATERMARK & AKSEN ORANYE)
    ========================================================================= --}}
 <section class="lokasi-full-header">
-    <div class="lokasi-full-header__decor-pattern" aria-hidden="true"></div>
-    <div class="lokasi-full-header__glow" aria-hidden="true"></div>
+    <img src="{{ asset('assets/botanical-clean.png') }}?v={{ file_exists(public_path('assets/botanical-clean.png')) ? filemtime(public_path('assets/botanical-clean.png')) : time() }}" alt="" class="lokasi-full-header__watermark" aria-hidden="true">
 
     <div class="lokasi-full-header__container">
-        <div class="lokasi-header-badge" data-aos="fade-right">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                <circle cx="12" cy="10" r="3"></circle>
-            </svg>
-            <span>Informasi & Peta Lokasi</span>
+        {{-- Breadcrumb Nav dengan aksen oranye --}}
+        <div class="lokasi-header-breadcrumb" data-aos="fade-right">
+            <a href="{{ route('home') }}">Beranda</a>
+            <span class="lokasi-header-breadcrumb-sep">•</span>
+            <span class="lokasi-header-breadcrumb-current">Kontak & Lokasi</span>
         </div>
+
         <h1 class="lokasi-full-header__title" data-aos="fade-right">Lokasi & Kontak Puskesmas</h1>
         <p class="lokasi-full-header__subtitle" data-aos="fade-up">
             Kunjungi Puskesmas kami dengan mudah. Temukan rute navigasi terdekat, alamat lengkap, jadwal operasional pelayanan, serta kontak informasi bantuan kami.
@@ -271,7 +188,7 @@
             <div style="display: flex; flex-direction: column; gap: 24px;">
 
                 {{-- Card 1: Alamat Utama --}}
-                <div class="lokasi-card" data-aos="fade-up">
+                <div class="lokasi-card">
                     <div style="display: flex; align-items: flex-start; gap: 18px;">
                         <div class="lokasi-icon-wrapper">
                             <i class="bx bx-map"></i>
@@ -294,7 +211,7 @@
                 </div>
 
                 {{-- Card 2: Jam Pelayanan --}}
-                <div class="lokasi-card" data-aos="fade-up">
+                <div class="lokasi-card">
                     <div style="display: flex; align-items: flex-start; gap: 18px;">
                         <div class="lokasi-icon-wrapper" style="background: #FFFBEB; color: #D97706;">
                             <i class="bx bx-time-five"></i>
@@ -326,7 +243,7 @@
                 </div>
 
                 {{-- Card 3: Kontak & Bantuan --}}
-                <div class="lokasi-card" data-aos="fade-up">
+                <div class="lokasi-card">
                     <div style="display: flex; align-items: flex-start; gap: 18px;">
                         <div class="lokasi-icon-wrapper" style="background: #F0FDF4; color: #16A34A;">
                             <i class="bx bx-phone-call"></i>

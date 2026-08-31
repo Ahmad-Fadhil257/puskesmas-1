@@ -46,6 +46,14 @@
         </div>
     @endif
 
+    {{-- Info Card: Keterhubungan Menu --}}
+    <div class="alert alert-info border-0 shadow-sm d-flex align-items-center mb-4 py-3" style="background-color: #E8F4FD; color: #0C5460; border-left: 4px solid #0284C7 !important; border-radius: 10px;">
+        <i class="bx bx-info-circle fs-4 me-3 text-info"></i>
+        <div class="small">
+            <strong>Petunjuk:</strong> Halaman ini mengelola <strong>titik koordinat &amp; peta Google Maps interaktif</strong>, <strong>patokan landmark</strong>, dan <strong>layanan darurat UGD</strong>. Untuk mengubah <strong>Alamat Teks</strong>, <strong>Nomor WhatsApp / Telepon</strong>, atau <strong>Jam Operasional</strong>, silakan buka menu <a href="{{ route('admin.settings.index') }}" class="fw-bold text-decoration-underline text-primary">Identitas &amp; Logo</a>.
+        </div>
+    </div>
+
     <form action="{{ route('admin.lokasi.update') }}" method="POST">
         @csrf
         @method('PUT')

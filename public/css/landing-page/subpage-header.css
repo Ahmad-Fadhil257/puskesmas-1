@@ -1,0 +1,249 @@
+/* =============================================================================
+   SUBPAGE HEADER — Shared across all landing subpages
+   Background: #C3E5D8 (mint hijau segar), ornamen botanical kanan
+   ============================================================================= */
+
+/* ----- Container Section ----- */
+.subpage-header {
+    width: 100%;
+    margin-top: -95px;
+    padding-top: 145px;
+    padding-bottom: 50px;
+    padding-left: 24px;
+    padding-right: 24px;
+    background-color: #C3E5D8;
+    position: relative;
+    overflow: hidden;
+    overflow-x: clip;
+    text-align: left;
+    box-sizing: border-box;
+    border-bottom: 1px solid #A6D9C6;
+}
+
+.subpage-header__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+}
+
+/* ----- Breadcrumb ----- */
+.subpage-header__breadcrumb {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    letter-spacing: 0.02em;
+}
+
+.subpage-header__breadcrumb a {
+    color: #2F5947;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.subpage-header__breadcrumb a:hover {
+    color: #004F38;
+}
+
+.subpage-header__breadcrumb-sep {
+    color: #E8672C;
+    font-size: 11px;
+}
+
+.subpage-header__breadcrumb-current {
+    color: #E8672C;
+    font-weight: 700;
+}
+
+/* ----- Title & Subtitle ----- */
+.subpage-header__title {
+    font-size: clamp(1.85rem, 4vw, 2.5rem);
+    font-weight: 800;
+    color: #004531;
+    margin: 0 0 10px 0;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    max-width: 620px;
+}
+
+.subpage-header__subtitle {
+    font-size: 15.5px;
+    color: #254839;
+    line-height: 1.6;
+    max-width: 580px;
+    margin: 0;
+}
+
+/* ----- Botanical Ornament Watermark (kanan, tangkai kecil menghadap ke kanan) ----- */
+.subpage-header__watermark,
+.lokasi-full-header__watermark {
+    position: absolute;
+    right: -20px;
+    top: 50%;
+    transform: translateY(-50%) scaleX(-1); /* Tangkai kecil menghadap ke kanan */
+    width: 480px;
+    max-width: 45%;
+    height: auto;
+    opacity: 0.28;
+    pointer-events: none;
+    z-index: 1;
+    user-select: none;
+}
+
+/* Support legacy class selectors */
+.lokasi-full-header {
+    width: 100%;
+    margin-top: -95px;
+    padding-top: 145px;
+    padding-bottom: 50px;
+    padding-left: 24px;
+    padding-right: 24px;
+    background-color: #C3E5D8;
+    position: relative;
+    overflow: hidden;
+    overflow-x: clip;
+    text-align: left;
+    box-sizing: border-box;
+    border-bottom: 1px solid #A6D9C6;
+}
+
+.lokasi-full-header__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+}
+
+.lokasi-header-breadcrumb {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    letter-spacing: 0.02em;
+}
+
+.lokasi-header-breadcrumb a {
+    color: #2F5947;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.lokasi-header-breadcrumb a:hover {
+    color: #004F38;
+}
+
+.lokasi-header-breadcrumb-sep {
+    color: #E8672C;
+    font-size: 11px;
+}
+
+.lokasi-header-breadcrumb-current {
+    color: #E8672C;
+    font-weight: 700;
+}
+
+.lokasi-full-header__title {
+    font-size: clamp(1.85rem, 4vw, 2.5rem);
+    font-weight: 800;
+    color: #004531;
+    margin: 0 0 10px 0;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    max-width: 620px;
+}
+
+.lokasi-full-header__subtitle {
+    font-size: 15.5px;
+    color: #254839;
+    line-height: 1.6;
+    max-width: 580px;
+    margin: 0;
+}
+
+/* ----- Responsive ----- */
+@media (max-width: 991px) {
+    .subpage-header__watermark,
+    .lokasi-full-header__watermark {
+        opacity: 0.16;
+        width: 300px;
+        max-width: 48%;
+        right: -15px;
+    }
+}
+
+@media (max-width: 768px) {
+    .subpage-header,
+    .lokasi-full-header {
+        padding-top: 125px;
+        padding-bottom: 40px;
+    }
+    .subpage-header__watermark,
+    .lokasi-full-header__watermark {
+        opacity: 0.12;
+        width: 220px;
+        right: -10px;
+    }
+}
+
+/* Article Detail overrides in subpage-header */
+.subpage-header .article-header-category-pill {
+    background: #0A5C45;
+    color: #FFFFFF;
+    border: none;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 6px;
+    letter-spacing: 0.06em;
+    display: inline-block;
+    margin-bottom: 12px;
+}
+
+.subpage-header .article-header-main-title {
+    color: #004531;
+    font-size: clamp(1.75rem, 3.5vw, 2.35rem);
+    font-weight: 800;
+    line-height: 1.25;
+    margin: 0 0 14px 0;
+    max-width: 780px;
+}
+
+.subpage-header .article-header-meta-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #2F5947;
+    font-size: 13.5px;
+    font-weight: 500;
+    flex-wrap: wrap;
+}
+
+.subpage-header .article-header-meta-row svg {
+    stroke: #0A5C45;
+}
+
+.subpage-header .article-header-meta-row .dot {
+    color: #E8672C;
+    font-weight: bold;
+    opacity: 1;
+}
+
+/* =============================================================================
+   SUBPAGE CANVAS & CARD CONTRAST STANDARD (Prevents card blending with canvas)
+   ============================================================================= */
+.subpage-content-wrapper,
+.layanan-detail-wrapper,
+.layanan-grid-section,
+.jadwal-content-wrapper,
+.survei-content-wrapper,
+.lokasi-content-wrapper,
+.blog-content-wrapper {
+    background-color: #EDF2F7 !important;
+}
