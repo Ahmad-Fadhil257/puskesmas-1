@@ -25,20 +25,6 @@
         </div>
     </div>
 
-    {{-- Alert Session --}}
-    @if (session('success'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <i class="bx bx-check-circle me-1"></i> {{ session('success') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    @endif
-
-    @if (session('error'))
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <i class="bx bx-error-circle me-1"></i> {{ session('error') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    @endif
 
     {{-- Filter & Search Card Sneat --}}
     <div class="card mb-4">
@@ -146,11 +132,6 @@
                         {{-- Aksi --}}
                         <td>
                             <div class="d-flex justify-content-center align-items-center gap-1">
-                                {{-- View Public Page --}}
-                                <a href="{{ route('layanan.detail', $item->slug) }}" target="_blank" class="btn btn-sm btn-icon btn-outline-info" title="Buka Halaman Publik">
-                                    <i class="bx bx-link-external"></i>
-                                </a>
-
                                 {{-- Edit Button --}}
                                 <a href="{{ route('admin.layanan.edit', $item->id) }}" class="btn btn-sm btn-icon btn-outline-warning" title="Edit Layanan">
                                     <i class="bx bx-edit-alt"></i>
@@ -201,11 +182,8 @@
         @endif
     </div>
 
-@endsection
 
 @push('scripts')
-{{-- SweetAlert2 JS --}}
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const deleteButtons = document.querySelectorAll('.btn-delete-layanan');
@@ -240,3 +218,5 @@
     });
 </script>
 @endpush
+
+@endsection

@@ -147,6 +147,9 @@
                     <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">Menu Utama</span>
                     </li>
+                    @php $user = Auth::user(); @endphp
+
+                    <!-- 1. UTAMA -->
                     <li class="menu-item {{ request()->routeIs('dashboard') ? 'active' : '' }}">
                         <a href="{{ route('dashboard') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
@@ -154,37 +157,13 @@
                         </a>
                     </li>
 
-                    <!-- KONTEN & INFORMASI WEBSITE -->
-                    @php $user = Auth::user(); @endphp
-                    @if($user->canAccessPage('hero') || $user->canAccessPage('layanan') || $user->canAccessPage('articles') || $user->canAccessPage('cara-kerja') || $user->canAccessPage('dokter') || $user->canAccessPage('about') || $user->canAccessPage('nilai') || $user->canAccessPage('surveys') || $user->canAccessPage('faq'))
+                    <!-- 2. INFORMASI & BERITA PUBLIK -->
+                    @if($user->canAccessPage('articles') || $user->canAccessPage('infografis') || $user->canAccessPage('faq') || $user->canAccessPage('cara-kerja'))
                     <li class="menu-header small text-uppercase">
-                        <span class="menu-header-text">Manajemen Konten</span>
+                        <span class="menu-header-text">Informasi & Berita</span>
                     </li>
                     @endif
-                    @if($user->canAccessPage('hero'))
-                    <li class="menu-item {{ request()->routeIs('admin.hero.*') ? 'active' : '' }}">
-                        <a href="{{ route('admin.hero.index') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-layout"></i>
-                            <div>Kelola Hero & Fitur</div>
-                        </a>
-                    </li>
-                    @endif
-                    @if($user->canAccessPage('layanan'))
-                    <li class="menu-item {{ request()->routeIs('admin.layanan.*') ? 'active' : '' }}">
-                        <a href="{{ route('admin.layanan.index') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-briefcase-alt-2"></i>
-                            <div>Kelola Layanan</div>
-                        </a>
-                    </li>
-                    @endif
-                    @if($user->canAccessPage('infografis'))
-                    <li class="menu-item {{ request()->routeIs('admin.infografis.*') ? 'active' : '' }}">
-                        <a href="{{ route('admin.infografis.index') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-bar-chart-alt-2"></i>
-                            <div>Kelola Infografis</div>
-                        </a>
-                    </li>
-                    @endif
+
                     @if($user->canAccessPage('articles'))
                     <li class="menu-item {{ request()->routeIs('admin.articles.*') ? 'active' : '' }}">
                         <a href="{{ route('admin.articles.index') }}" class="menu-link">
@@ -193,46 +172,16 @@
                         </a>
                     </li>
                     @endif
-                    @if($user->canAccessPage('cara-kerja'))
-                    <li class="menu-item {{ request()->routeIs('admin.cara-kerja.*') ? 'active' : '' }}">
-                        <a href="{{ route('admin.cara-kerja.index') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-list-check"></i>
-                            <div>Kelola Cara Kerja</div>
+
+                    @if($user->canAccessPage('infografis'))
+                    <li class="menu-item {{ request()->routeIs('admin.infografis.*') ? 'active' : '' }}">
+                        <a href="{{ route('admin.infografis.index') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-images"></i>
+                            <div>Infografis Kesehatan</div>
                         </a>
                     </li>
                     @endif
-                    @if($user->canAccessPage('dokter'))
-                    <li class="menu-item {{ request()->routeIs('admin.dokter.*') ? 'active' : '' }}">
-                        <a href="{{ route('admin.dokter.index') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-user-plus"></i>
-                            <div>Kelola Dokter</div>
-                        </a>
-                    </li>
-                    @endif
-                    @if($user->canAccessPage('about'))
-                    <li class="menu-item {{ request()->routeIs('admin.about.*') ? 'active' : '' }}">
-                        <a href="{{ route('admin.about.index') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-info-circle"></i>
-                            <div>Kelola Tentang Kami</div>
-                        </a>
-                    </li>
-                    @endif
-                    @if($user->canAccessPage('nilai'))
-                    <li class="menu-item {{ request()->routeIs('admin.nilai.*') ? 'active' : '' }}">
-                        <a href="{{ route('admin.nilai.index') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-star"></i>
-                            <div>Kelola Nilai & Mitra</div>
-                        </a>
-                    </li>
-                    @endif
-                    @if($user->canAccessPage('surveys'))
-                    <li class="menu-item {{ request()->routeIs('admin.surveys.*') ? 'active' : '' }}">
-                        <a href="{{ route('admin.surveys.index') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-message-rounded-detail"></i>
-                            <div>Survei Kepuasan Pasien</div>
-                        </a>
-                    </li>
-                    @endif
+
                     @if($user->canAccessPage('faq'))
                     <li class="menu-item {{ request()->routeIs('admin.faq.*') ? 'active' : '' }}">
                         <a href="{{ route('admin.faq.index') }}" class="menu-link">
@@ -242,40 +191,128 @@
                     </li>
                     @endif
 
-                    <!-- PENGATURAN & AKUN -->
+                    <li class="menu-item {{ request()->routeIs('admin.statistik.*') ? 'active' : '' }}">
+                        <a href="{{ route('admin.statistik.index') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-bar-chart-alt-2"></i>
+                            <div>Statistik Kesehatan</div>
+                        </a>
+                    </li>
+
+                    @if($user->canAccessPage('cara-kerja'))
+                    <li class="menu-item {{ request()->routeIs('admin.cara-kerja.*') ? 'active' : '' }}">
+                        <a href="{{ route('admin.cara-kerja.index') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-list-check"></i>
+                            <div>Cara Kerja & Alur</div>
+                        </a>
+                    </li>
+                    @endif
+
+                    <!-- 3. MEDIS & PELAYANAN -->
+                    @if($user->canAccessPage('layanan') || $user->canAccessPage('dokter') || $user->canAccessPage('surveys'))
+                    <li class="menu-header small text-uppercase">
+                        <span class="menu-header-text">Medis & Pelayanan</span>
+                    </li>
+                    @endif
+
+                    @if($user->canAccessPage('layanan'))
+                    <li class="menu-item {{ request()->routeIs('admin.layanan.*') ? 'active' : '' }}">
+                        <a href="{{ route('admin.layanan.index') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-plus-medical"></i>
+                            <div>Kelola Layanan & Poli</div>
+                        </a>
+                    </li>
+                    @endif
+
+                    @if($user->canAccessPage('dokter'))
+                    <li class="menu-item {{ request()->routeIs('admin.dokter.*') ? 'active' : '' }}">
+                        <a href="{{ route('admin.dokter.index') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-user-plus"></i>
+                            <div>Kelola Dokter & Jadwal</div>
+                        </a>
+                    </li>
+                    @endif
+
+                    @if($user->canAccessPage('surveys'))
+                    <li class="menu-item {{ request()->routeIs('admin.surveys.*') ? 'active' : '' }}">
+                        <a href="{{ route('admin.surveys.index') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-star"></i>
+                            <div>Survei Kepuasan Pasien</div>
+                        </a>
+                    </li>
+                    @endif
+
+                    <!-- 4. PROFIL & HOMEPAGE -->
+                    @if($user->canAccessPage('hero') || $user->canAccessPage('about') || $user->canAccessPage('nilai'))
+                    <li class="menu-header small text-uppercase">
+                        <span class="menu-header-text">Profil & Homepage</span>
+                    </li>
+                    @endif
+
+                    @if($user->canAccessPage('hero'))
+                    <li class="menu-item {{ request()->routeIs('admin.hero.*') ? 'active' : '' }}">
+                        <a href="{{ route('admin.hero.index') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-layout"></i>
+                            <div>Kelola Hero & Fitur</div>
+                        </a>
+                    </li>
+                    @endif
+
+                    @if($user->canAccessPage('about'))
+                    <li class="menu-item {{ request()->routeIs('admin.about.*') ? 'active' : '' }}">
+                        <a href="{{ route('admin.about.index') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-info-circle"></i>
+                            <div>Tentang Kami (Profil)</div>
+                        </a>
+                    </li>
+                    @endif
+
+                    @if($user->canAccessPage('nilai'))
+                    <li class="menu-item {{ request()->routeIs('admin.nilai.*') ? 'active' : '' }}">
+                        <a href="{{ route('admin.nilai.index') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-award"></i>
+                            <div>Tata Nilai & Mitra</div>
+                        </a>
+                    </li>
+                    @endif
+
+                    <!-- 5. PENGATURAN SISTEM -->
                     @if($user->canAccessPage('users') || $user->canAccessPage('settings') || $user->canAccessPage('lokasi'))
                     <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">Pengaturan Sistem</span>
                     </li>
                     @endif
+
                     @if($user->canAccessPage('lokasi'))
                     <li class="menu-item {{ request()->routeIs('admin.lokasi.*') ? 'active' : '' }}">
                         <a href="{{ route('admin.lokasi.index') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-map-pin"></i>
-                            <div>Lokasi & Peta</div>
+                            <div>Lokasi, Peta & Kontak</div>
                         </a>
                     </li>
                     @endif
+
+                    @if($user->canAccessPage('settings'))
+                    <li class="menu-item {{ request()->routeIs('admin.settings.*') ? 'active' : '' }}">
+                        <a href="{{ route('admin.settings.index') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-slider-alt"></i>
+                            <div>Identitas & Logo Web</div>
+                        </a>
+                    </li>
+                    @endif
+
                     @if($user->canAccessPage('users'))
                     <li class="menu-item {{ request()->routeIs('admin.users.*') ? 'active' : '' }}">
                         <a href="{{ route('admin.users.index') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-user-pin"></i>
-                            <div>Kelola Pengguna</div>
+                            <div>Kelola Pengguna Sistem</div>
                         </a>
                     </li>
                     @endif
-                    @if($user->canAccessPage('settings'))
-                    <li class="menu-item {{ request()->routeIs('admin.settings.*') ? 'active' : '' }}">
-                        <a href="{{ route('admin.settings.index') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-palette"></i>
-                            <div>Identitas & Logo</div>
-                        </a>
-                    </li>
-                    @endif
+
                     <li class="menu-item">
                         <a href="{{ url('/') }}" target="_blank" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-globe"></i>
-                            <div>Lihat Landing Page</div>
+                            <div>Lihat Halaman Website</div>
                         </a>
                     </li>
                 </ul>

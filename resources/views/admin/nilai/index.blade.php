@@ -356,9 +356,9 @@
     </div>
 </div>
 
+@endsection
+
 @push('scripts')
-{{-- SweetAlert2 JS --}}
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const deleteButtons = document.querySelectorAll('.btn-delete-mitra');

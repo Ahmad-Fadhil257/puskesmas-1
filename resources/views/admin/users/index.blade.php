@@ -87,31 +87,24 @@
         <div class="card-body py-3">
             <form action="{{ route('admin.users.index') }}" method="GET">
                 <div class="row g-2 align-items-center">
-                    <div class="col-md-5 col-12">
+                    <div class="col-md-7 col-12">
                         <div class="input-group input-group-merge">
                             <span class="input-group-text"><i class="bx bx-search"></i></span>
                             <input type="text" name="search" class="form-control" placeholder="Cari nama, email, atau telepon..." value="{{ request('search') }}">
                         </div>
                     </div>
                     <div class="col-md-3 col-6">
-                        <select name="role" class="form-select">
-                            <option value="">-- Semua Peran --</option>
-                            <option value="admin" {{ request('role') == 'admin' ? 'selected' : '' }}>Administrator</option>
-                            <option value="staf" {{ request('role') == 'staf' ? 'selected' : '' }}>Staf</option>
-                        </select>
-                    </div>
-                    <div class="col-md-2 col-6">
                         <select name="status" class="form-select">
                             <option value="">-- Semua Status --</option>
                             <option value="active" {{ request('status') == 'active' ? 'selected' : '' }}>Aktif</option>
                             <option value="inactive" {{ request('status') == 'inactive' ? 'selected' : '' }}>Nonaktif</option>
                         </select>
                     </div>
-                    <div class="col-md-2 col-12 d-flex gap-2">
+                    <div class="col-md-2 col-6 d-flex gap-2">
                         <button type="submit" class="btn btn-primary w-100">
                             <i class="bx bx-filter-alt me-1"></i> Filter
                         </button>
-                        @if(request()->hasAny(['search', 'role', 'status']))
+                        @if(request()->hasAny(['search', 'status']))
                             <a href="{{ route('admin.users.index') }}" class="btn btn-outline-secondary" title="Reset Filter">
                                 <i class="bx bx-reset"></i>
                             </a>
@@ -134,9 +127,7 @@
                     <tr>
                         <th style="width: 60px;" class="text-center">No</th>
                         <th>Pengguna</th>
-                            <th>Peran (Role)</th>
-                            <th>Akses Halaman</th>
-                            <th>Kontak</th>
+                        <th>Kontak</th>
                         <th class="text-center">Status</th>
                         <th class="text-center" style="width: 150px;">Aksi</th>
                     </tr>
@@ -154,7 +145,7 @@
                             <td>
                                 <div class="d-flex align-items-center gap-3">
                                     <div class="avatar avatar-sm flex-shrink-0">
-                                        <span class="avatar-initial rounded-circle {{ $item->role === 'admin' ? 'bg-label-primary' : 'bg-label-info' }} fw-bold">
+                                        <span class="avatar-initial rounded-circle bg-label-primary fw-bold">
                                             {{ strtoupper(substr($item->name, 0, 1)) }}
                                         </span>
                                     </div>
@@ -168,30 +159,6 @@
                                         <small class="text-muted">{{ $item->email }}</small>
                                     </div>
                                 </div>
-                            </td>
-                            <td>
-                                @if($item->role === 'admin')
-                                    <span class="badge bg-primary text-white rounded-pill px-3 py-1">
-                                        <i class="bx bx-shield me-1"></i> Admin
-                                    </span>
-                                @else
-                                    <span class="badge bg-label-info rounded-pill px-3 py-1">
-                                        <i class="bx bx-user me-1"></i> Staf
-                                    </span>
-                                @endif
-                            </td>
-                            <td>
-                                @if($item->role === 'admin')
-                                    <span class="text-muted small">Semua halaman</span>
-                                @elseif(!empty($item->accessible_pages))
-                                    <div class="d-flex flex-wrap gap-1">
-                                        @foreach($item->accessible_pages as $page)
-                                            <span class="badge bg-label-success rounded-pill" style="font-size: 0.7rem;">{{ $allPages[$page] ?? $page }}</span>
-                                        @endforeach
-                                    </div>
-                                @else
-                                    <span class="text-muted small fst-italic">Belum diatur</span>
-                                @endif
                             </td>
                             <td>
                                 <span class="text-muted small">
@@ -294,27 +261,6 @@
                             <input type="password" name="password" class="form-control" placeholder="Minimal 6 karakter" required>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label fw-semibold">Peran / Hak Akses <span class="text-danger">*</span></label>
-                            <select name="role" class="form-select" id="createRole" required>
-                                <option value="admin">Administrator (Akses Penuh)</option>
-                                <option value="staf" selected>Staf Puskesmas</option>
-                            </select>
-                        </div>
-                        <div class="mb-3 accessible-pages-section" id="createAccessiblePages" style="display:{{ old('role', 'staf') === 'staf' ? 'block' : 'none' }}">
-                            <label class="form-label fw-semibold">Halaman yang Bisa Diakses</label>
-                            <div class="row g-2">
-                                @foreach($allPages as $key => $label)
-                                    <div class="col-6">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="accessible_pages[]" value="{{ $key }}" id="createPage-{{ $key }}" {{ in_array($key, old('accessible_pages', [])) ? 'checked' : '' }}>
-                                            <label class="form-check-label" for="createPage-{{ $key }}">{{ $label }}</label>
-                                        </div>
-                                    </div>
-                                @endforeach
-                            </div>
-                            <div class="form-text">Pilih halaman mana saja yang bisa diakses staf ini.</div>
-                        </div>
-                        <div class="mb-3">
                             <label class="form-label fw-semibold">Nomor Telepon / WhatsApp</label>
                             <input type="text" name="phone" class="form-control" placeholder="Contoh: 08123456789">
                         </div>
@@ -364,27 +310,6 @@
                                 <label class="form-label fw-semibold">Kata Sandi Baru</label>
                                 <input type="password" name="password" class="form-control" placeholder="Kosongkan jika tidak diubah">
                                 <div class="form-text">Biarkan kosong jika kata sandi tidak ingin diubah.</div>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label fw-semibold">Peran / Hak Akses <span class="text-danger">*</span></label>
-                                <select name="role" class="form-select" id="editRole-{{ $item->id }}" required>
-                                    <option value="admin" {{ $item->role === 'admin' ? 'selected' : '' }}>Administrator (Akses Penuh)</option>
-                                    <option value="staf" {{ $item->role === 'staf' ? 'selected' : '' }}>Staf Puskesmas</option>
-                                </select>
-                            </div>
-                            <div class="mb-3 accessible-pages-section" id="editAccessiblePages-{{ $item->id }}" style="display:{{ $item->role === 'staf' ? 'block' : 'none' }}">
-                                <label class="form-label fw-semibold">Halaman yang Bisa Diakses</label>
-                                <div class="row g-2">
-                                    @foreach($allPages as $key => $label)
-                                        <div class="col-6">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" name="accessible_pages[]" value="{{ $key }}" id="editPage-{{ $item->id }}-{{ $key }}" {{ in_array($key, old('accessible_pages', $item->accessible_pages ?? [])) ? 'checked' : '' }}>
-                                                <label class="form-check-label" for="editPage-{{ $item->id }}-{{ $key }}">{{ $label }}</label>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                </div>
-                                <div class="form-text">Pilih halaman mana saja yang bisa diakses staf ini.</div>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label fw-semibold">Nomor Telepon / WhatsApp</label>

@@ -15,8 +15,10 @@ use App\Http\Controllers\Admin\AdminInfografisController;
 use App\Http\Controllers\Admin\AdminSurveyController;
 use App\Http\Controllers\Admin\AdminLokasiController;
 use App\Http\Controllers\Admin\AdminFaqController;
+use App\Http\Controllers\Admin\AdminStatistikController;
 use App\Http\Controllers\CaraKerjaController;
 use App\Http\Controllers\FaqController;
+use App\Http\Controllers\StatistikController;
 use App\Models\About;
 use App\Models\Article;
 use App\Models\CaraKerja;
@@ -78,11 +80,13 @@ Route::get('/layanan/{slug}', function ($slug) {
     return view('layanan.detail', compact('layanan', 'otherLayanans'));
 })->name('layanan.detail');
 
-// Jadwal Dokter (dari database)
+// Jadwal Dokter (dari database) - redirect ke layanan
 Route::get('/jadwal-dokter', function () {
-    $dokters = Dokter::where('is_active', true)->orderBy('created_at', 'asc')->get();
-    return view('jadwal-dokter', compact('dokters'));
+    return redirect()->route('layanan.index');
 })->name('jadwal-dokter');
+
+// Statistik Publik
+Route::get('/statistik', [StatistikController::class, 'index'])->name('statistik');
 
 // Portal Publik Berita & Blog
 Route::get('/berita', [BlogController::class, 'index'])->name('blog.index');
@@ -173,6 +177,19 @@ Route::middleware(['auth'])->group(function () {
         // Kelola Lokasi, Peta & Kontak Puskesmas
         Route::get('lokasi', [AdminLokasiController::class, 'index'])->name('lokasi.index');
         Route::put('lokasi', [AdminLokasiController::class, 'update'])->name('lokasi.update');
+
+        // Kelola Statistik
+        Route::get('statistik', [AdminStatistikController::class, 'index'])->name('statistik.index');
+        Route::get('statistik/penyakit/create', [AdminStatistikController::class, 'penyakitCreate'])->name('statistik.penyakit.create');
+        Route::post('statistik/penyakit', [AdminStatistikController::class, 'penyakitStore'])->name('statistik.penyakit.store');
+        Route::get('statistik/penyakit/{id}/edit', [AdminStatistikController::class, 'penyakitEdit'])->name('statistik.penyakit.edit');
+        Route::put('statistik/penyakit/{id}', [AdminStatistikController::class, 'penyakitUpdate'])->name('statistik.penyakit.update');
+        Route::delete('statistik/penyakit/{id}', [AdminStatistikController::class, 'penyakitDestroy'])->name('statistik.penyakit.destroy');
+        Route::get('statistik/kunjungan/create', [AdminStatistikController::class, 'kunjunganCreate'])->name('statistik.kunjungan.create');
+        Route::post('statistik/kunjungan', [AdminStatistikController::class, 'kunjunganStore'])->name('statistik.kunjungan.store');
+        Route::get('statistik/kunjungan/{id}/edit', [AdminStatistikController::class, 'kunjunganEdit'])->name('statistik.kunjungan.edit');
+        Route::put('statistik/kunjungan/{id}', [AdminStatistikController::class, 'kunjunganUpdate'])->name('statistik.kunjungan.update');
+        Route::delete('statistik/kunjungan/{id}', [AdminStatistikController::class, 'kunjunganDestroy'])->name('statistik.kunjungan.destroy');
     });
 
     // Pengaturan & Manajemen Tentang Kami (About)

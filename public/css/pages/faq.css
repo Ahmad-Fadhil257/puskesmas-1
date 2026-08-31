@@ -317,6 +317,8 @@
     line-height: 1.45;
     margin: 0;
     transition: color 0.2s ease;
+    overflow-wrap: anywhere;
+    word-break: break-word;
 }
 
 .faq-item.is-open .faq-question-text {
@@ -371,6 +373,9 @@
     opacity: 0;
     transform: translateY(-8px);
     transition: opacity 0.28s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    white-space: pre-wrap;
 }
 
 .faq-item.is-open .faq-body-content {

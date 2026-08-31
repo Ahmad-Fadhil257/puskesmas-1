@@ -112,6 +112,8 @@
     font-weight: 700;
     color: var(--color-dark);
     line-height: 1.3;
+    overflow-wrap: anywhere;
+    word-break: break-word;
 }
 
 .info-card__desc {
@@ -119,6 +121,8 @@
     font-weight: 400;
     color: var(--color-body);
     line-height: 1.5;
+    overflow-wrap: anywhere;
+    word-break: break-word;
 }
 
 /* --------------------------------------------------------------------------

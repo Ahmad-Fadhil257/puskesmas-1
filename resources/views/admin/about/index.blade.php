@@ -302,6 +302,9 @@
         </div>
     </div>
 
+@endsection
+
+@push('scripts')
 <script>
 function previewImage(event, previewId, containerId) {
     const input = event.target;
@@ -321,4 +324,4 @@ function previewImage(event, previewId, containerId) {
     }
 }
 </script>
-@endsection
+@endpush

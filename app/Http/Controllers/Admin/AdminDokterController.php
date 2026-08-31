@@ -43,15 +43,9 @@ class AdminDokterController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'name'             => 'required|string|max:255',
-            'specialty'        => 'required|string|max:255',
-            'photo'            => 'nullable|image|mimes:jpeg,png,jpg,webp|max:3072',
-            'jadwal_hari'      => 'nullable|array',
-            'jadwal_hari.*'    => 'nullable|string|max:20',
-            'jadwal_mulai'     => 'nullable|array',
-            'jadwal_mulai.*'   => 'nullable|string|max:10',
-            'jadwal_selesai'   => 'nullable|array',
-            'jadwal_selesai.*' => 'nullable|string|max:10',
+            'name'      => 'required|string|max:255',
+            'specialty' => 'required|string|max:255',
+            'photo'     => 'nullable|image|mimes:jpeg,png,jpg,webp|max:3072',
         ]);
 
         $photoPath = null;
@@ -69,11 +63,10 @@ class AdminDokterController extends Controller
         }
 
         Dokter::create([
-            'name'           => $validated['name'],
-            'specialty'      => $validated['specialty'],
-            'photo'          => $photoPath,
-            'jadwal_praktek' => $this->buildJadwal($request),
-            'is_active'      => true,
+            'name'      => $validated['name'],
+            'specialty' => $validated['specialty'],
+            'photo'     => $photoPath,
+            'is_active' => true,
         ]);
 
         return redirect()->route('admin.dokter.index')
@@ -97,15 +90,9 @@ class AdminDokterController extends Controller
         $dokter = Dokter::findOrFail($id);
 
         $validated = $request->validate([
-            'name'             => 'required|string|max:255',
-            'specialty'        => 'required|string|max:255',
-            'photo'            => 'nullable|image|mimes:jpeg,png,jpg,webp|max:3072',
-            'jadwal_hari'      => 'nullable|array',
-            'jadwal_hari.*'    => 'nullable|string|max:20',
-            'jadwal_mulai'     => 'nullable|array',
-            'jadwal_mulai.*'   => 'nullable|string|max:10',
-            'jadwal_selesai'   => 'nullable|array',
-            'jadwal_selesai.*' => 'nullable|string|max:10',
+            'name'      => 'required|string|max:255',
+            'specialty' => 'required|string|max:255',
+            'photo'     => 'nullable|image|mimes:jpeg,png,jpg,webp|max:3072',
         ]);
 
         if ($request->hasFile('photo')) {
@@ -125,9 +112,8 @@ class AdminDokterController extends Controller
             $dokter->photo = 'assets/dokter/' . $filename;
         }
 
-        $dokter->name           = $validated['name'];
-        $dokter->specialty      = $validated['specialty'];
-        $dokter->jadwal_praktek = $this->buildJadwal($request);
+        $dokter->name      = $validated['name'];
+        $dokter->specialty = $validated['specialty'];
         $dokter->save();
 
         return redirect()->route('admin.dokter.index')
@@ -149,34 +135,5 @@ class AdminDokterController extends Controller
 
         return redirect()->route('admin.dokter.index')
                          ->with('success', 'Data dokter berhasil dihapus!');
-    }
-
-    /**
-     * Bangun array jadwal dari input form time picker
-     */
-    private function buildJadwal(Request $request): ?array
-    {
-        $hari    = $request->input('jadwal_hari', []);
-        $mulai   = $request->input('jadwal_mulai', []);
-        $selesai = $request->input('jadwal_selesai', []);
-
-        $jadwal = [];
-        foreach ($hari as $i => $h) {
-            $h = trim($h ?? '');
-            $m = trim($mulai[$i] ?? '');
-            $s = trim($selesai[$i] ?? '');
-
-            if ($h !== '' && ($m !== '' || $s !== '')) {
-                $jamStr = ($m !== '' && $s !== '') ? "{$m} - {$s} WIB" : ($m !== '' ? $m : $s);
-                $jadwal[] = [
-                    'hari'    => $h,
-                    'jam'     => $jamStr,
-                    'mulai'   => $m,
-                    'selesai' => $s,
-                ];
-            }
-        }
-
-        return $jadwal !== [] ? $jadwal : null;
     }
 }

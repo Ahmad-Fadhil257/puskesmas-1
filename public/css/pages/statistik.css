@@ -1,0 +1,476 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   STATISTIK PAGE — Public Statistics Page CSS
+   Puskesmas CareLink
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Google Font (inherit dari app) ───────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+/* ── Page Wrapper ─────────────────────────────────────────────────────────── */
+.statistik-page {
+    font-family: 'Inter', sans-serif;
+    background: #F0FDF4;
+    min-height: 100vh;
+}
+
+/* ── Hero Banner ──────────────────────────────────────────────────────────── */
+.statistik-hero {
+    background: linear-gradient(135deg, #0A5C45 0%, #1A7A5E 40%, #0F6B52 100%);
+    padding: 5rem 1.5rem 4rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.statistik-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        radial-gradient(circle at 20% 30%, rgba(255,255,255,0.06) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(255,255,255,0.04) 0%, transparent 50%);
+}
+
+.statistik-hero::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0; right: 0;
+    height: 60px;
+    background: #F0FDF4;
+    clip-path: ellipse(55% 100% at 50% 100%);
+}
+
+.statistik-hero__inner {
+    position: relative;
+    z-index: 1;
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.statistik-hero__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 999px;
+    padding: 0.35rem 1rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #A7F3D0;
+    text-transform: uppercase;
+    margin-bottom: 1.25rem;
+    backdrop-filter: blur(6px);
+}
+
+.statistik-hero__title {
+    font-size: clamp(1.75rem, 4vw, 2.75rem);
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+}
+
+.statistik-hero__subtitle {
+    font-size: 1rem;
+    color: rgba(255,255,255,0.75);
+    max-width: 520px;
+    margin: 0 auto 2rem;
+    line-height: 1.65;
+}
+
+/* ── Year Filter ──────────────────────────────────────────────────────────── */
+.statistik-year-filter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    padding: 1.25rem 1.5rem;
+    background: #F8FFFE;
+    border-bottom: 1px solid rgba(10,92,69,0.08);
+}
+
+.statistik-year-filter .year-btn {
+    background: #fff;
+    border: 1.5px solid rgba(10,92,69,0.25);
+    color: #0A5C45;
+    border-radius: 999px;
+    padding: 0.4rem 1.1rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+}
+
+.statistik-year-filter .year-btn:hover {
+    background: #E6F4ED;
+    border-color: #0A5C45;
+}
+
+.statistik-year-filter .year-btn.active {
+    background: #0A5C45;
+    color: #fff;
+    border-color: #0A5C45;
+}
+
+/* ── Main Content Container ───────────────────────────────────────────────── */
+.statistik-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 5rem;
+}
+
+/* ── Summary KPI Cards ────────────────────────────────────────────────────── */
+.statistik-kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.25rem;
+    margin-bottom: 3.5rem;
+}
+
+.kpi-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 1.5rem 1.25rem;
+    box-shadow: 0 2px 12px rgba(10,92,69,0.08);
+    border: 1px solid rgba(10,92,69,0.06);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.kpi-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(10,92,69,0.12);
+}
+
+.kpi-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--kpi-color, #0A5C45);
+}
+
+.kpi-card__icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: var(--kpi-bg, #E6F4ED);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 0.85rem;
+    font-size: 1.5rem;
+    color: var(--kpi-color, #0A5C45);
+}
+
+.kpi-card__number {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #111;
+    line-height: 1;
+    margin-bottom: 0.35rem;
+}
+
+.kpi-card__label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #64748B;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* ── Section Heading ──────────────────────────────────────────────────────── */
+.statistik-section {
+    margin-bottom: 3.5rem;
+}
+
+.statistik-section__header {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1.75rem;
+}
+
+.statistik-section__icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #0A5C45, #1A7A5E);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 1.25rem;
+    color: #fff;
+}
+
+.statistik-section__title {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #0A5C45;
+    margin-bottom: 0.2rem;
+}
+
+.statistik-section__subtitle {
+    font-size: 0.875rem;
+    color: #64748B;
+    margin: 0;
+}
+
+/* ── Disease Bar Chart ────────────────────────────────────────────────────── */
+.disease-chart-wrap {
+    background: #fff;
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 2px 16px rgba(10,92,69,0.08);
+    border: 1px solid rgba(10,92,69,0.06);
+}
+
+.disease-bar-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.disease-bar-item {
+    display: grid;
+    grid-template-columns: 28px 1fr auto;
+    align-items: center;
+    gap: 1rem;
+}
+
+.disease-bar-item__rank {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(10,92,69,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.72rem;
+    font-weight: 800;
+    color: #0A5C45;
+    flex-shrink: 0;
+}
+
+.disease-bar-item__info {
+    flex: 1;
+    min-width: 0;
+}
+
+.disease-bar-item__name {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #1E293B;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 0.35rem;
+}
+
+.disease-bar-item__icd {
+    font-size: 0.7rem;
+    color: #94A3B8;
+    margin-left: 0.4rem;
+    font-weight: 500;
+}
+
+.disease-bar-track {
+    height: 10px;
+    background: #F1F5F9;
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.disease-bar-fill {
+    height: 100%;
+    border-radius: 999px;
+    background: var(--bar-color, #0A5C45);
+    width: 0;
+    transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.disease-bar-item__count {
+    font-size: 0.9rem;
+    font-weight: 800;
+    color: #1E293B;
+    text-align: right;
+    min-width: 64px;
+}
+
+.disease-bar-item__sub {
+    font-size: 0.7rem;
+    color: #94A3B8;
+    font-weight: 500;
+}
+
+/* ── Kunjungan Chart (Chart.js canvas) ────────────────────────────────────── */
+.kunjungan-chart-wrap {
+    background: #fff;
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 2px 16px rgba(10,92,69,0.08);
+    border: 1px solid rgba(10,92,69,0.06);
+}
+
+.kunjungan-canvas-container {
+    position: relative;
+    height: 320px;
+}
+
+.kunjungan-legend {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-top: 1.25rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid #F1F5F9;
+}
+
+.kunjungan-legend__item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #475569;
+}
+
+.kunjungan-legend__dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+    flex-shrink: 0;
+}
+
+/* ── Kunjungan Monthly Table ──────────────────────────────────────────────── */
+.kunjungan-table-wrap {
+    background: #fff;
+    border-radius: 20px;
+    padding: 0;
+    box-shadow: 0 2px 16px rgba(10,92,69,0.08);
+    border: 1px solid rgba(10,92,69,0.06);
+    overflow: hidden;
+    margin-top: 1.5rem;
+}
+
+.kunjungan-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+}
+
+.kunjungan-table thead th {
+    background: #F8FFFE;
+    color: #0A5C45;
+    font-weight: 700;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.9rem 1.25rem;
+    border-bottom: 2px solid #E6F4ED;
+    white-space: nowrap;
+}
+
+.kunjungan-table tbody td {
+    padding: 0.8rem 1.25rem;
+    border-bottom: 1px solid #F1F5F9;
+    color: #334155;
+    vertical-align: middle;
+}
+
+.kunjungan-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.kunjungan-table tbody tr:hover td {
+    background: #F0FDF4;
+}
+
+.kunjungan-table .month-badge {
+    font-weight: 700;
+    color: #0A5C45;
+}
+
+.kunjungan-table .total-cell {
+    font-weight: 800;
+    color: #0A5C45;
+    font-size: 0.95rem;
+}
+
+.kunjungan-table tfoot td {
+    background: #E6F4ED;
+    font-weight: 800;
+    color: #0A5C45;
+    padding: 0.9rem 1.25rem;
+}
+
+/* ── Empty State ──────────────────────────────────────────────────────────── */
+.statistik-empty {
+    text-align: center;
+    padding: 4rem 1.5rem;
+    color: #94A3B8;
+}
+
+.statistik-empty__icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.statistik-empty__title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #64748B;
+    margin-bottom: 0.5rem;
+}
+
+/* ── Responsive ───────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+    .statistik-hero {
+        padding: 4rem 1rem 3rem;
+    }
+
+    .statistik-content {
+        padding: 2rem 1rem 4rem;
+    }
+
+    .disease-chart-wrap,
+    .kunjungan-chart-wrap {
+        padding: 1.25rem;
+    }
+
+    .disease-bar-item {
+        grid-template-columns: 24px 1fr auto;
+        gap: 0.6rem;
+    }
+
+    .disease-bar-item__name {
+        font-size: 0.8rem;
+    }
+
+    .kunjungan-canvas-container {
+        height: 240px;
+    }
+
+    .kunjungan-table-wrap {
+        overflow-x: auto;
+    }
+
+    .kunjungan-table {
+        min-width: 480px;
+    }
+}
+
+@media (max-width: 480px) {
+    .statistik-kpi-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

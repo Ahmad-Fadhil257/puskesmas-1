@@ -13,8 +13,7 @@ class FaqController extends Controller
     public function index(Request $request)
     {
         $faqs = Faq::active()->ordered()->get();
-        $categories = Faq::getKategoriList();
 
-        return view('faq', compact('faqs', 'categories'));
+        return view('faq', compact('faqs'));
     }
 }

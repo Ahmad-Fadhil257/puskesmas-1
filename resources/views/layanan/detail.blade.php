@@ -60,6 +60,11 @@
     padding: 36px 40px;
     border: 1px solid #CBD5E1;
     box-shadow: 0 4px 16px rgba(15, 23, 42, 0.05), 0 1px 3px rgba(15, 23, 42, 0.02);
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    word-wrap: break-word;
+    overflow: hidden;
+    max-width: 100%;
 }
 
 @media (max-width: 768px) {
@@ -79,11 +84,14 @@
     gap: 8px;
     padding-bottom: 12px;
     border-bottom: 1px solid #E2E8F0;
+    overflow-wrap: anywhere;
+    word-break: break-word;
 }
 
 .section-headline i {
     color: #0A5C45;
     font-size: 20px;
+    flex-shrink: 0;
 }
 
 .layanan-description-text {
@@ -91,6 +99,11 @@
     line-height: 1.75;
     color: #334155;
     margin-bottom: 32px;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    max-width: 100%;
 }
 
 /* 3. Tables for Jadwal */
@@ -113,6 +126,8 @@
     border-radius: 12px;
     border: 1px solid #CBD5E1;
     padding: 18px 20px;
+    overflow-wrap: anywhere;
+    word-break: break-word;
 }
 
 .jadwal-card-header {
@@ -127,6 +142,7 @@
 
 .jadwal-card-header i {
     font-size: 18px;
+    flex-shrink: 0;
 }
 
 .jadwal-table {
@@ -146,6 +162,8 @@
 .jadwal-table td {
     padding: 8px 4px;
     color: #334155;
+    overflow-wrap: anywhere;
+    word-break: break-word;
 }
 
 .jadwal-table td.hari {
@@ -179,6 +197,8 @@
     font-size: 13.5px;
     font-weight: 600;
     color: #166534;
+    overflow-wrap: anywhere;
+    word-break: break-word;
 }
 
 .tindakan-item i {
@@ -194,9 +214,14 @@
     border-radius: 12px;
     padding: 18px 20px;
     margin-bottom: 32px;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    word-wrap: break-word;
+    max-width: 100%;
 }
 
-.persyaratan-box h4 {
+.persyaratan-box h4,
+.persyaratan-box-header {
     font-size: 14.5px;
     font-weight: 700;
     color: #92400E;
@@ -204,18 +229,28 @@
     display: flex;
     align-items: center;
     gap: 8px;
+    overflow-wrap: anywhere;
+    word-break: break-word;
 }
 
-.persyaratan-box h4 i {
+.persyaratan-box h4 i,
+.persyaratan-box-header i {
     color: #D97706;
     font-size: 18px;
+    flex-shrink: 0;
 }
 
-.persyaratan-box p {
+.persyaratan-box p,
+.persyaratan-box-text {
     font-size: 13.5px;
     color: #78350F;
     line-height: 1.6;
     margin: 0;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    max-width: 100%;
 }
 
 

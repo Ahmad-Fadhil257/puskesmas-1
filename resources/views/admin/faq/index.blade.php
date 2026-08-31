@@ -40,7 +40,7 @@
 
     {{-- Stats Cards --}}
     <div class="row g-3 mb-4">
-        <div class="col-sm-6 col-lg-4">
+        <div class="col-sm-6">
             <div class="card border-0 shadow-sm">
                 <div class="card-body d-flex align-items-center gap-3 py-3">
                     <div class="avatar avatar-md bg-label-primary rounded p-2 d-flex align-items-center justify-content-center">
@@ -53,7 +53,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-6 col-lg-4">
+        <div class="col-sm-6">
             <div class="card border-0 shadow-sm">
                 <div class="card-body d-flex align-items-center gap-3 py-3">
                     <div class="avatar avatar-md bg-label-success rounded p-2 d-flex align-items-center justify-content-center">
@@ -66,19 +66,6 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-6 col-lg-4">
-            <div class="card border-0 shadow-sm">
-                <div class="card-body d-flex align-items-center gap-3 py-3">
-                    <div class="avatar avatar-md bg-label-info rounded p-2 d-flex align-items-center justify-content-center">
-                        <i class="bx bx-category fs-3 text-info"></i>
-                    </div>
-                    <div>
-                        <span class="text-muted d-block small">Kategori Layanan</span>
-                        <h4 class="mb-0 fw-bold text-info">{{ count($categories) }}</h4>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 
     {{-- Filter Toolbar & Data Table --}}
@@ -86,30 +73,20 @@
         <div class="card-header border-bottom py-3">
             <form action="{{ route('admin.faq.index') }}" method="GET" class="row g-2 align-items-center">
                 {{-- Search Bar --}}
-                <div class="col-md-5 col-12">
+                <div class="col-md-7 col-12">
                     <div class="input-group input-group-merge">
                         <span class="input-group-text"><i class="bx bx-search"></i></span>
                         <input type="text" name="search" class="form-control" placeholder="Cari pertanyaan atau jawaban..." value="{{ $search }}">
                         @if($search)
-                            <a href="{{ route('admin.faq.index', array_filter(['kategori' => $categoryFilter, 'status' => $statusFilter])) }}" class="input-group-text text-muted" title="Hapus pencarian">
+                            <a href="{{ route('admin.faq.index', array_filter(['status' => $statusFilter])) }}" class="input-group-text text-muted" title="Hapus pencarian">
                                 <i class="bx bx-x"></i>
                             </a>
                         @endif
                     </div>
                 </div>
 
-                {{-- Filter Kategori --}}
-                <div class="col-md-3 col-6">
-                    <select name="kategori" class="form-select" onchange="this.form.submit()">
-                        <option value="">-- Semua Kategori --</option>
-                        @foreach($categories as $cat)
-                            <option value="{{ $cat }}" {{ $categoryFilter === $cat ? 'selected' : '' }}>{{ $cat }}</option>
-                        @endforeach
-                    </select>
-                </div>
-
                 {{-- Filter Status --}}
-                <div class="col-md-2 col-6">
+                <div class="col-md-3 col-6">
                     <select name="status" class="form-select" onchange="this.form.submit()">
                         <option value="">-- Status --</option>
                         <option value="active" {{ $statusFilter === 'active' ? 'selected' : '' }}>Aktif</option>
@@ -118,11 +95,11 @@
                 </div>
 
                 {{-- Submit & Reset --}}
-                <div class="col-md-2 col-12 d-flex gap-1">
+                <div class="col-md-2 col-6 d-flex gap-1">
                     <button type="submit" class="btn btn-primary w-100">
                         <i class="bx bx-filter-alt"></i> Filter
                     </button>
-                    @if($search || $categoryFilter || $statusFilter)
+                    @if($search || $statusFilter)
                         <a href="{{ route('admin.faq.index') }}" class="btn btn-outline-secondary" title="Reset filter">
                             <i class="bx bx-reset"></i>
                         </a>
@@ -136,7 +113,7 @@
                 <thead class="table-light">
                     <tr>
                         <th style="width: 70px;" class="text-center">No</th>
-                        <th style="min-width: 280px;">Pertanyaan & Kategori</th>
+                        <th style="min-width: 280px;">Pertanyaan</th>
                         <th style="min-width: 320px;">Ringkasan Jawaban</th>
                         <th style="width: 110px;" class="text-center">Status</th>
                         <th style="width: 120px;" class="text-center">Aksi</th>
@@ -154,9 +131,6 @@
                                 <div class="fw-bold text-dark fs-6 mb-1 text-wrap" style="max-width: 380px;">
                                     {{ $item->pertanyaan }}
                                 </div>
-                                <span class="badge bg-label-primary small">
-                                    <i class="bx bx-tag me-1"></i>{{ $item->kategori }}
-                                </span>
                             </td>
                             <td>
                                 <p class="text-muted mb-0 text-wrap small" style="max-width: 460px; line-height: 1.5;">

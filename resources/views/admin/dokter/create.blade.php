@@ -42,7 +42,7 @@
     {{-- Form Card --}}
     <div class="card mb-4">
         <div class="card-header border-bottom py-3">
-            <h5 class="mb-0 fw-bold">Informasi Dokter & Jadwal Praktek</h5>
+            <h5 class="mb-0 fw-bold">Informasi Data Dokter</h5>
         </div>
         <div class="card-body pt-4">
             <form action="{{ route('admin.dokter.store') }}" method="POST" enctype="multipart/form-data">
@@ -106,7 +106,7 @@
                     </div>
 
                     {{-- Upload Foto --}}
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <label class="form-label fw-semibold" for="photo">Foto Dokter</label>
                         <input type="file"
                             class="form-control @error('photo') is-invalid @enderror"
@@ -122,36 +122,6 @@
                             <span class="d-block text-muted small mb-1">Preview:</span>
                             <img id="photoPreview" src="" alt="Preview Foto" class="rounded border" style="height: 140px; object-fit: cover; object-position: top;">
                         </div>
-                    </div>
-
-                    {{-- Jadwal Praktek (Time Input) --}}
-                    <div class="col-md-6">
-                        <label class="form-label fw-semibold">Jadwal Praktek</label>
-                        <div id="jadwalRows">
-                            <div class="jadwal-row d-flex gap-2 mb-2 align-items-center flex-wrap flex-sm-nowrap">
-                                <div class="custom-dropdown" style="width: 140px; flex-shrink: 0;">
-                                    <input type="hidden" name="jadwal_hari[]" class="hari-value" value="Senin">
-                                    <button type="button" class="dropdown-toggle text-start d-flex align-items-center" onclick="toggleDropdown(this)">
-                                        <span class="dropdown-selected">Senin</span>
-                                    </button>
-                                    <div class="dropdown-menu-custom">
-                                        @foreach(['Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu'] as $day)
-                                            <div class="dropdown-item-custom {{ $day === 'Senin' ? 'active' : '' }}" data-value="{{ $day }}" onclick="selectOption(this)">{{ $day }}</div>
-                                        @endforeach
-                                    </div>
-                                </div>
-                                <div class="d-flex align-items-center gap-1" style="flex: 1;">
-                                    <input type="time" name="jadwal_mulai[]" class="form-control form-control-sm" value="08:00" title="Jam Mulai">
-                                    <span class="text-muted small px-1">s/d</span>
-                                    <input type="time" name="jadwal_selesai[]" class="form-control form-control-sm" value="12:00" title="Jam Selesai">
-                                </div>
-                                <button type="button" class="btn btn-sm btn-outline-danger btn-remove-jadwal" title="Hapus"><i class="bx bx-x"></i></button>
-                            </div>
-                        </div>
-                        <button type="button" class="btn btn-sm btn-outline-success mt-1" onclick="addJadwalRow()">
-                            <i class="bx bx-plus"></i> Tambah Jam
-                        </button>
-                        <div class="form-text">Pilih hari dan tentukan jam mulai & jam selesai praktik.</div>
                     </div>
 
                     {{-- Tombol Aksi --}}
@@ -171,7 +141,22 @@
 
 @endsection
 
-@push('styles')
+@push('scripts')
+<script>
+function previewPhoto(input) {
+    const wrap = document.getElementById('previewWrap');
+    const preview = document.getElementById('photoPreview');
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            preview.src = e.target.result;
+            wrap.classList.remove('d-none');
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+</script>
+
 <style>
 .custom-dropdown { position: relative; }
 .custom-dropdown .dropdown-toggle {
@@ -212,25 +197,8 @@
 .custom-dropdown .dropdown-menu-custom::-webkit-scrollbar-thumb { background: #C5E5DD; border-radius: 10px; }
 .dark-style .custom-dropdown .dropdown-menu-custom::-webkit-scrollbar-thumb { background: #064e3b; }
 </style>
-@endpush
 
-@push('scripts')
 <script>
-function previewPhoto(input) {
-    const wrap = document.getElementById('previewWrap');
-    const preview = document.getElementById('photoPreview');
-    if (input.files && input.files[0]) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            preview.src = e.target.result;
-            wrap.classList.remove('d-none');
-        };
-        reader.readAsDataURL(input.files[0]);
-    }
-}
-
-const hariOptions = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'];
-
 function toggleDropdown(btn) {
     const wrap = btn.closest('.custom-dropdown');
     const isOpen = wrap.classList.contains('open');
@@ -259,33 +227,6 @@ document.addEventListener('click', function(e) {
         document.querySelectorAll('.custom-dropdown.open').forEach(d => d.classList.remove('open'));
     }
 });
-
-function addJadwalRow() {
-    const container = document.getElementById('jadwalRows');
-    const row = document.createElement('div');
-    row.className = 'jadwal-row d-flex gap-2 mb-2 align-items-center flex-wrap flex-sm-nowrap';
-
-    var options = '';
-    for (var i = 0; i < hariOptions.length; i++) {
-        options += '<div class="dropdown-item-custom' + (i === 0 ? ' active' : '') + '" data-value="' + hariOptions[i] + '" onclick="selectOption(this)">' + hariOptions[i] + '</div>';
-    }
-
-    row.innerHTML = '<div class="custom-dropdown" style="width: 140px; flex-shrink: 0;">' +
-        '<input type="hidden" name="jadwal_hari[]" class="hari-value" value="Senin">' +
-        '<button type="button" class="dropdown-toggle text-start d-flex align-items-center" onclick="toggleDropdown(this)">' +
-        '<span class="dropdown-selected">Senin</span></button>' +
-        '<div class="dropdown-menu-custom">' + options + '</div></div>' +
-        '<div class="d-flex align-items-center gap-1" style="flex: 1;">' +
-        '<input type="time" name="jadwal_mulai[]" class="form-control form-control-sm" value="08:00" title="Jam Mulai">' +
-        '<span class="text-muted small px-1">s/d</span>' +
-        '<input type="time" name="jadwal_selesai[]" class="form-control form-control-sm" value="12:00" title="Jam Selesai"></div>' +
-        '<button type="button" class="btn btn-sm btn-outline-danger btn-remove-jadwal" title="Hapus"><i class="bx bx-x"></i></button>';
-    container.appendChild(row);
-    row.querySelector('.btn-remove-jadwal').addEventListener('click', function() { row.remove(); });
-}
-
-document.querySelectorAll('.btn-remove-jadwal').forEach(function(btn) {
-    btn.addEventListener('click', function() { this.closest('.jadwal-row').remove(); });
-});
 </script>
+
 @endpush
