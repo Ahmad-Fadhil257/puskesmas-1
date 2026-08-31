@@ -58,6 +58,12 @@ class DatabaseSeeder extends Seeder
         // Seed Data Nilai & Mitra
         $this->call(NilaiSectionSeeder::class);
 
+        // Seed Data FAQ
+        $this->call(FaqSeeder::class);
+
+        // Seed Data Survei
+        $this->call(SurveySeeder::class);
+
         // Seed Data Cara Kerja
         $caraKerja = [
             [
