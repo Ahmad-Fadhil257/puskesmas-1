@@ -17,6 +17,10 @@ use App\Http\Controllers\Admin\AdminLokasiController;
 use App\Http\Controllers\Admin\AdminFaqController;
 use App\Http\Controllers\CaraKerjaController;
 use App\Http\Controllers\FaqController;
+use App\Http\Controllers\StatistikController;
+use App\Http\Controllers\Admin\AdminStatistikController;
+use App\Models\StatistikPenyakit;
+use App\Models\StatistikKunjungan;
 use App\Models\About;
 use App\Models\Article;
 use App\Models\CaraKerja;
@@ -106,6 +110,9 @@ Route::get('/lokasi', function () {
 // Halaman Tanya Jawab Pasien (FAQ)
 Route::get('/faq', [FaqController::class, 'index'])->name('faq.index');
 
+// Halaman Statistik Kesehatan Publik
+Route::get('/statistik', [StatistikController::class, 'index'])->name('statistik');
+
 // Auth Routes (URL Khusus Login: /puskem-min)
 Route::get('/puskem-min', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/puskem-login', [AuthController::class, 'login'])->name('login.post');
@@ -192,6 +199,19 @@ Route::middleware(['auth'])->group(function () {
         // Kelola Tanya Jawab (FAQ)
         Route::patch('faq/{id}/toggle-status', [AdminFaqController::class, 'toggleStatus'])->name('faq.toggle-status');
         Route::resource('faq', AdminFaqController::class)->except(['show']);
+
+        // Kelola Statistik Kesehatan
+        Route::get('statistik', [AdminStatistikController::class, 'index'])->name('statistik.index');
+        Route::get('statistik/penyakit/create', [AdminStatistikController::class, 'createPenyakit'])->name('statistik.penyakit.create');
+        Route::post('statistik/penyakit', [AdminStatistikController::class, 'storePenyakit'])->name('statistik.penyakit.store');
+        Route::get('statistik/penyakit/{id}/edit', [AdminStatistikController::class, 'editPenyakit'])->name('statistik.penyakit.edit');
+        Route::put('statistik/penyakit/{id}', [AdminStatistikController::class, 'updatePenyakit'])->name('statistik.penyakit.update');
+        Route::delete('statistik/penyakit/{id}', [AdminStatistikController::class, 'destroyPenyakit'])->name('statistik.penyakit.destroy');
+        Route::get('statistik/kunjungan/create', [AdminStatistikController::class, 'createKunjungan'])->name('statistik.kunjungan.create');
+        Route::post('statistik/kunjungan', [AdminStatistikController::class, 'storeKunjungan'])->name('statistik.kunjungan.store');
+        Route::get('statistik/kunjungan/{id}/edit', [AdminStatistikController::class, 'editKunjungan'])->name('statistik.kunjungan.edit');
+        Route::put('statistik/kunjungan/{id}', [AdminStatistikController::class, 'updateKunjungan'])->name('statistik.kunjungan.update');
+        Route::delete('statistik/kunjungan/{id}', [AdminStatistikController::class, 'destroyKunjungan'])->name('statistik.kunjungan.destroy');
 
         // Kelola Identitas & Logo Aplikasi
         Route::get('settings', [AdminSettingController::class, 'index'])->name('settings.index');

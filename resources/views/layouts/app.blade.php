@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="{{ asset('css/landing-page/testimoni.css') }}">
     <link rel="stylesheet" href="{{ asset('css/landing-page/blog.css') }}">
     <link rel="stylesheet" href="{{ asset('css/landing-page/footer.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/landing-page/statistik.css') }}">
     <link rel="stylesheet" href="{{ asset('css/landing-page/subpage-header.css') }}?v={{ file_exists(public_path('css/landing-page/subpage-header.css')) ? filemtime(public_path('css/landing-page/subpage-header.css')) : time() }}">
     <!-- AOS (Animate On Scroll) CSS -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">

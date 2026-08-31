@@ -13,6 +13,9 @@
     <!-- About / Tentang Kami Section -->
     @include('landing-page.about-section')
 
+    <!-- Statistik Kesehatan Section -->
+    @include('landing-page.statistik-section')
+
     <!-- Nilai-Nilai Kami Section -->
     @include('landing-page.nilai-nilai-section')
 

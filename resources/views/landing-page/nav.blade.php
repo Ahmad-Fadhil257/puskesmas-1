@@ -77,6 +77,12 @@
                             <span class="navbar__dropdown-text">Tanya Jawab (FAQ)</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="{{ route('statistik') }}" class="navbar__dropdown-item {{ request()->routeIs('statistik') ? 'active' : '' }}">
+                            <i class="bx bx-bar-chart-alt-2 navbar__dropdown-icon"></i>
+                            <span class="navbar__dropdown-text">Statistik Kesehatan</span>
+                        </a>
+                    </li>
                 </ul>
             </li>
 
@@ -149,6 +155,9 @@
                 </a>
                 <a href="{{ route('faq.index') }}" class="navbar__mobile-subitem {{ request()->routeIs('faq.*') ? 'active' : '' }}">
                     <i class="bx bx-help-circle"></i> <span>Tanya Jawab (FAQ)</span>
+                </a>
+                <a href="{{ route('statistik') }}" class="navbar__mobile-subitem {{ request()->routeIs('statistik') ? 'active' : '' }}">
+                    <i class="bx bx-bar-chart-alt-2"></i> <span>Statistik Kesehatan</span>
                 </a>
             </div>
         </div>
