@@ -191,6 +191,13 @@
                     </li>
                     @endif
 
+                    <li class="menu-item {{ request()->routeIs('admin.statistik.*') ? 'active' : '' }}">
+                        <a href="{{ route('admin.statistik.index') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-bar-chart-alt-2"></i>
+                            <div>Statistik Kesehatan</div>
+                        </a>
+                    </li>
+
                     @if($user->canAccessPage('cara-kerja'))
                     <li class="menu-item {{ request()->routeIs('admin.cara-kerja.*') ? 'active' : '' }}">
                         <a href="{{ route('admin.cara-kerja.index') }}" class="menu-link">
