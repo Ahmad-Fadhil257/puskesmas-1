@@ -3,7 +3,6 @@
 @section('title', 'Tambah Dokter Baru - Puskesmas CareLink')
 
 @section('content')
-<div class="container-xxl flex-grow-1 container-p-y">
 
     {{-- Breadcrumb & Header --}}
     <div class="d-flex justify-content-between align-items-center mb-4">
@@ -43,7 +42,7 @@
     {{-- Form Card --}}
     <div class="card mb-4">
         <div class="card-header border-bottom py-3">
-            <h5 class="mb-0 fw-bold">Informasi Dokter & Jadwal Praktek</h5>
+            <h5 class="mb-0 fw-bold">Informasi Data Dokter</h5>
         </div>
         <div class="card-body pt-4">
             <form action="{{ route('admin.dokter.store') }}" method="POST" enctype="multipart/form-data">
@@ -107,7 +106,7 @@
                     </div>
 
                     {{-- Upload Foto --}}
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <label class="form-label fw-semibold" for="photo">Foto Dokter</label>
                         <input type="file"
                             class="form-control @error('photo') is-invalid @enderror"
@@ -125,36 +124,6 @@
                         </div>
                     </div>
 
-                    {{-- Jadwal Praktek (Time Input) --}}
-                    <div class="col-md-6">
-                        <label class="form-label fw-semibold">Jadwal Praktek</label>
-                        <div id="jadwalRows">
-                            <div class="jadwal-row d-flex gap-2 mb-2 align-items-center flex-wrap flex-sm-nowrap">
-                                <div class="custom-dropdown" style="width: 140px; flex-shrink: 0;">
-                                    <input type="hidden" name="jadwal_hari[]" class="hari-value" value="Senin">
-                                    <button type="button" class="dropdown-toggle text-start d-flex align-items-center" onclick="toggleDropdown(this)">
-                                        <span class="dropdown-selected">Senin</span>
-                                    </button>
-                                    <div class="dropdown-menu-custom">
-                                        @foreach(['Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu'] as $day)
-                                            <div class="dropdown-item-custom {{ $day === 'Senin' ? 'active' : '' }}" data-value="{{ $day }}" onclick="selectOption(this)">{{ $day }}</div>
-                                        @endforeach
-                                    </div>
-                                </div>
-                                <div class="d-flex align-items-center gap-1" style="flex: 1;">
-                                    <input type="time" name="jadwal_mulai[]" class="form-control form-control-sm" value="08:00" title="Jam Mulai">
-                                    <span class="text-muted small px-1">s/d</span>
-                                    <input type="time" name="jadwal_selesai[]" class="form-control form-control-sm" value="12:00" title="Jam Selesai">
-                                </div>
-                                <button type="button" class="btn btn-sm btn-outline-danger btn-remove-jadwal" title="Hapus"><i class="bx bx-x"></i></button>
-                            </div>
-                        </div>
-                        <button type="button" class="btn btn-sm btn-outline-success mt-1" onclick="addJadwalRow()">
-                            <i class="bx bx-plus"></i> Tambah Jam
-                        </button>
-                        <div class="form-text">Pilih hari dan tentukan jam mulai & jam selesai praktik.</div>
-                    </div>
-
                     {{-- Tombol Aksi --}}
                     <div class="col-12">
                         <div class="d-flex justify-content-end gap-2 mt-2 pt-3 border-top">
@@ -170,8 +139,9 @@
         </div>
     </div>
 
-</div>
+@endsection
 
+@push('scripts')
 <script>
 function previewPhoto(input) {
     const wrap = document.getElementById('previewWrap');
@@ -229,8 +199,6 @@ function previewPhoto(input) {
 </style>
 
 <script>
-const hariOptions = @php echo json_encode(['Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu']); @endphp;
-
 function toggleDropdown(btn) {
     const wrap = btn.closest('.custom-dropdown');
     const isOpen = wrap.classList.contains('open');
@@ -259,34 +227,6 @@ document.addEventListener('click', function(e) {
         document.querySelectorAll('.custom-dropdown.open').forEach(d => d.classList.remove('open'));
     }
 });
-
-function addJadwalRow() {
-    const container = document.getElementById('jadwalRows');
-    const row = document.createElement('div');
-    row.className = 'jadwal-row d-flex gap-2 mb-2 align-items-center flex-wrap flex-sm-nowrap';
-
-    var options = '';
-    for (var i = 0; i < hariOptions.length; i++) {
-        options += '<div class="dropdown-item-custom' + (i === 0 ? ' active' : '') + '" data-value="' + hariOptions[i] + '" onclick="selectOption(this)">' + hariOptions[i] + '</div>';
-    }
-
-    row.innerHTML = '<div class="custom-dropdown" style="width: 140px; flex-shrink: 0;">' +
-        '<input type="hidden" name="jadwal_hari[]" class="hari-value" value="Senin">' +
-        '<button type="button" class="dropdown-toggle text-start d-flex align-items-center" onclick="toggleDropdown(this)">' +
-        '<span class="dropdown-selected">Senin</span></button>' +
-        '<div class="dropdown-menu-custom">' + options + '</div></div>' +
-        '<div class="d-flex align-items-center gap-1" style="flex: 1;">' +
-        '<input type="time" name="jadwal_mulai[]" class="form-control form-control-sm" value="08:00" title="Jam Mulai">' +
-        '<span class="text-muted small px-1">s/d</span>' +
-        '<input type="time" name="jadwal_selesai[]" class="form-control form-control-sm" value="12:00" title="Jam Selesai"></div>' +
-        '<button type="button" class="btn btn-sm btn-outline-danger btn-remove-jadwal" title="Hapus"><i class="bx bx-x"></i></button>';
-    container.appendChild(row);
-    row.querySelector('.btn-remove-jadwal').addEventListener('click', function() { row.remove(); });
-}
-
-document.querySelectorAll('.btn-remove-jadwal').forEach(function(btn) {
-    btn.addEventListener('click', function() { this.closest('.jadwal-row').remove(); });
-});
 </script>
 
-@endsection
+@endpush

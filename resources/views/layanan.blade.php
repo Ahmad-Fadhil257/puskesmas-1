@@ -29,7 +29,6 @@
                     'name'           => $d->name,
                     'specialty'      => $d->specialty,
                     'photo'          => $d->photo ? asset($d->photo) : null,
-                    'jadwal_praktek' => $d->jadwal_praktek ?? [],
                 ];
             })->values()->toArray(),
         ];
@@ -170,8 +169,8 @@
 
         {{-- Modal Footer --}}
         <div class="layanan-modal-footer">
-            <a href="{{ route('jadwal-dokter') }}" class="btn-modal-secondary">
-                <i class="bx bx-calendar me-1"></i> Cek Jadwal Dokter
+            <a href="{{ route('layanan.index') }}" class="btn-modal-secondary">
+                <i class="bx bx-grid-alt me-1"></i> Lihat Semua Layanan
             </a>
             <a href="{{ $appSetting->wa_link }}" target="_blank" rel="noopener" id="modalPrimaryBtn" class="btn-modal-primary">
                 <i class="bx bxl-whatsapp me-1"></i> <span id="modalPrimaryBtnText">Hubungi / Buat Janji</span>

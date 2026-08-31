@@ -3,7 +3,6 @@
 @section('title', 'Kelola Nilai-Nilai & Mitra - Puskesmas CareLink')
 
 @section('content')
-<div class="container-xxl flex-grow-1 container-p-y">
 
     {{-- Breadcrumb & Header --}}
     <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-3">
@@ -360,9 +359,9 @@
     </div>
 </div>
 
+@endsection
+
 @push('scripts')
-{{-- SweetAlert2 JS --}}
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const deleteButtons = document.querySelectorAll('.btn-delete-mitra');

@@ -3,7 +3,6 @@
 @section('title', 'Kelola Dokter - Puskesmas CareLink')
 
 @section('content')
-<div class="container-xxl flex-grow-1 container-p-y">
 
     {{-- Breadcrumb & Header --}}
     <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-3">
@@ -25,21 +24,6 @@
             </a>
         </div>
     </div>
-
-    {{-- Alert Session --}}
-    @if (session('success'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <i class="bx bx-check-circle me-1"></i> {{ session('success') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    @endif
-
-    @if (session('error'))
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <i class="bx bx-error-circle me-1"></i> {{ session('error') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    @endif
 
     {{-- Filter & Search Card Sneat --}}
     <div class="card mb-4">
@@ -147,7 +131,6 @@
         @endif
     </div>
 
-</div>
 
 @push('scripts')
 <script>

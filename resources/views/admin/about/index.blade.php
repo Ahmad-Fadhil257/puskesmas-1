@@ -3,7 +3,6 @@
 @section('title', 'Kelola Tentang Kami - Puskesmas CareLink')
 
 @section('content')
-<div class="container-xxl flex-grow-1 container-p-y">
 
     {{-- Breadcrumb & Header --}}
     <div class="d-flex justify-content-between align-items-center mb-4">
@@ -303,8 +302,9 @@
         </div>
     </div>
 
-</div>
+@endsection
 
+@push('scripts')
 <script>
 function previewImage(event, previewId, containerId) {
     const input = event.target;
@@ -324,4 +324,4 @@ function previewImage(event, previewId, containerId) {
     }
 }
 </script>
-@endsection
+@endpush

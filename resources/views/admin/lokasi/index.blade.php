@@ -3,12 +3,11 @@
 @section('title', 'Kelola Lokasi & Peta - Puskesmas CareLink')
 
 @section('content')
-<div class="container-xxl flex-grow-1 container-p-y">
 
     {{-- Breadcrumb & Header --}}
     <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-3">
         <div>
-            <h4 class="fw-bold py-1 mb-1 text-primary" style="color: #0A5C45 !important;">
+            <h4 class="fw-bold py-1 mb-1" style="color: #0A5C45;">
                 <i class="bx bx-map-pin me-2"></i>Kelola Lokasi & Peta Puskesmas
             </h4>
             <nav aria-label="breadcrumb">
@@ -24,20 +23,17 @@
         </a>
     </div>
 
-    {{-- Alert Success / Errors --}}
+    {{-- Alert Success / Errors (handled by Toastr via layout) --}}
     @if (session('success'))
-        <div class="alert alert-success alert-dismissible fade show shadow-sm border-0 d-flex align-items-center" role="alert" style="background-color: #E6F4EA; color: #137333; border-left: 4px solid #137333 !important; border-radius: 8px;">
-            <i class="bx bx-check-circle fs-4 me-2"></i>
-            <div>
-                {{ session('success') }}
-            </div>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="bx bx-check-circle me-1"></i> {{ session('success') }}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif
 
     @if ($errors->any())
-        <div class="alert alert-danger alert-dismissible fade show shadow-sm border-0" role="alert" style="background-color: #FCE8E6; color: #C5221F; border-left: 4px solid #C5221F !important; border-radius: 8px;">
-            <div class="d-flex align-items-center mb-2">
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <div class="d-flex align-items-center mb-1">
                 <i class="bx bx-error-circle fs-4 me-2"></i>
                 <span class="fw-bold">Terdapat beberapa kesalahan pengisian:</span>
             </div>
@@ -224,5 +220,4 @@
 
     </form>
 
-</div>
 @endsection

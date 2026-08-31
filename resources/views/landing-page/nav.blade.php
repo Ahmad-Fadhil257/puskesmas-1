@@ -28,7 +28,6 @@
                 </a>
                 <ul class="dropdown-menu">
                     <li><a href="{{ route('home') }}#tentang">Tentang Puskesmas</a></li>
-                    <li><a href="{{ route('jadwal-dokter') }}">Tenaga Kesehatan</a></li>
                     <li><a href="{{ route('lokasi') }}">Lokasi & Peta</a></li>
                 </ul>
             </li>
@@ -43,7 +42,6 @@
                 </a>
                 <ul class="dropdown-menu">
                     <li><a href="{{ route('layanan.index') }}">Semua Layanan</a></li>
-                    <li><a href="{{ route('jadwal-dokter') }}">Jadwal Dokter</a></li>
                     <li><a href="{{ $appSetting->wa_link }}" target="_blank" rel="noopener">Janji Temu</a></li>
                 </ul>
             </li>
@@ -114,7 +112,6 @@
             </button>
             <div class="mobile-accordion__body">
                 <a href="{{ route('layanan.index') }}">Semua Layanan</a>
-                <a href="{{ route('jadwal-dokter') }}">Jadwal Dokter</a>
             </div>
         </div>
 

@@ -10,7 +10,12 @@
             <h4 class="fw-bold py-1 mb-1" style="color: #0A5C45;">
                 <i class="bx bx-list-check me-2"></i>Kelola Alur Cara Kerja
             </h4>
-            <p class="text-muted mb-0">Manajemen langkah-langkah alur pelayanan pasien di Puskesmas CareLink yang ditampilkan pada Landing Page.</p>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb breadcrumb-style1 mb-0">
+                    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
+                    <li class="breadcrumb-item active">Kelola Cara Kerja</li>
+                </ol>
+            </nav>
         </div>
         <div>
             <a href="{{ route('admin.cara-kerja.create') }}" class="btn btn-primary d-inline-flex align-items-center gap-2">
@@ -88,6 +93,8 @@
         </div>
     </div>
 
+@endsection
+
 @push('scripts')
 <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -118,5 +125,3 @@
     });
 </script>
 @endpush
-
-@endsection

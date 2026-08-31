@@ -3,12 +3,11 @@
 @section('title', 'Survei Kepuasan Masyarakat & Testimoni - Puskesmas CareLink')
 
 @section('content')
-<div class="container-xxl flex-grow-1 container-p-y">
 
     {{-- Breadcrumb & Header --}}
     <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-3">
         <div>
-            <h4 class="fw-bold py-1 mb-1 text-primary">
+            <h4 class="fw-bold py-1 mb-1" style="color: #0A5C45;">
                 <i class="bx bx-smile me-2"></i>Survei Kepuasan Masyarakat
             </h4>
             <nav aria-label="breadcrumb">
@@ -30,13 +29,6 @@
         </div>
     </div>
 
-    {{-- Alert Session --}}
-    @if (session('success'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <i class="bx bx-check-circle me-1"></i> {{ session('success') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    @endif
 
     {{-- STATISTIK IKM (Indeks Kepuasan Masyarakat) - DISEMBUNYIKAN --}}
     {{--
@@ -249,11 +241,8 @@
         @endif
     </div>
 
-</div>
 
 @push('scripts')
-{{-- SweetAlert2 JS --}}
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const deleteButtons = document.querySelectorAll('.btn-delete-survey');

@@ -3,7 +3,6 @@
 @section('title', 'Kelola Berita & Artikel - Puskesmas CareLink')
 
 @section('content')
-<div class="container-xxl flex-grow-1 container-p-y">
 
     {{-- Page Header --}}
     <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-3">
@@ -11,7 +10,12 @@
             <h4 class="fw-bold py-1 mb-1" style="color: #0A5C45;">
                 <i class="bx bx-news me-2"></i>Kelola Berita & Artikel Edukasi
             </h4>
-            <p class="text-muted mb-0">Manajemen konten berita, tips kesehatan, dan artikel publikasi Puskesmas CareLink.</p>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb breadcrumb-style1 mb-0">
+                    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
+                    <li class="breadcrumb-item active">Kelola Berita & Artikel</li>
+                </ol>
+            </nav>
         </div>
         <div>
             <a href="{{ route('admin.articles.create') }}" class="btn btn-primary d-inline-flex align-items-center gap-2">
@@ -139,7 +143,6 @@
         @endif
     </div>
 
-</div>
 
 @push('scripts')
 <script>

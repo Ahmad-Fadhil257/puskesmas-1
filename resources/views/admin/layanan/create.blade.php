@@ -3,7 +3,6 @@
 @section('title', 'Tambah Layanan & Poli - Puskesmas CareLink')
 
 @section('content')
-<div class="container-xxl flex-grow-1 container-p-y">
 
     {{-- Breadcrumb & Header --}}
     <div class="d-flex justify-content-between align-items-center mb-4">
@@ -186,7 +185,7 @@
                                 <button type="button" class="btn btn-xs btn-outline-secondary" onclick="setJamPreset('24 Jam Nonstop (Setiap Hari)')">24 Jam (UGD)</button>
                                 <button type="button" class="btn btn-xs btn-outline-secondary" onclick="setJamPreset('Senin - Sabtu: 08.00 - 14.00 WIB')">Senin - Sabtu (08.00 - 14.00)</button>
                                 <button type="button" class="btn btn-xs btn-outline-secondary" onclick="setJamPreset('Senin - Jumat: 08.00 - 13.00 WIB')">Senin - Jumat (08.00 - 13.00)</button>
-                                <button type="button" class="btn btn-xs btn-outline-secondary" onclick="setJamPreset('Sesuai Jadwal Dokter Praktek')">Sesuai Jadwal Dokter</button>
+                                <button type="button" class="btn btn-xs btn-outline-secondary" onclick="setJamPreset('Senin - Kamis: 08.00 - 12.00 WIB')">Senin - Kamis (08.00 - 12.00)</button>
                             </div>
                         </div>
                     </div>
@@ -310,7 +309,6 @@
         </div>
 
     </form>
-</div>
 
 @push('scripts')
 <script>

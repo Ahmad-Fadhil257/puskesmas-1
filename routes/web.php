@@ -55,11 +55,6 @@ Route::get('/layanan', function () {
     return view('layanan', compact('layanans', 'dokters', 'specialties'));
 })->name('layanan.index');
 
-// Jadwal Dokter (dari database)
-Route::get('/jadwal-dokter', function () {
-    $dokters = Dokter::where('is_active', true)->orderBy('created_at', 'asc')->get();
-    return view('jadwal-dokter', compact('dokters'));
-})->name('jadwal-dokter');
 
 // Portal Publik Berita & Blog
 Route::get('/berita', [BlogController::class, 'index'])->name('blog.index');
