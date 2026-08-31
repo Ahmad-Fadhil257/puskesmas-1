@@ -636,6 +636,9 @@ body {
     line-height: 1.85;
     color: #2F413B;
     margin-bottom: 40px;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    word-wrap: break-word;
 }
 
 .article-body-content p {
