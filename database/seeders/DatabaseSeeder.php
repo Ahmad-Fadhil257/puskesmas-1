@@ -64,6 +64,9 @@ class DatabaseSeeder extends Seeder
         // Seed Data Survei
         $this->call(SurveySeeder::class);
 
+        // Seed Data Statistik
+        $this->call(StatistikSeeder::class);
+
         // Seed Data Cara Kerja
         $caraKerja = [
             [

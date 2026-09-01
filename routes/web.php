@@ -13,10 +13,10 @@ use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\AdminDokterController;
 use App\Http\Controllers\Admin\AdminNilaiController;
 use App\Http\Controllers\Admin\AdminLayananController;
+use App\Http\Controllers\Admin\AdminInfografisController;
 use App\Http\Controllers\Admin\AdminSurveyController;
 use App\Http\Controllers\Admin\AdminLokasiController;
 use App\Http\Controllers\Admin\AdminFaqController;
-use App\Http\Controllers\Admin\AdminInfografisController;
 use App\Http\Controllers\Admin\AdminStatistikController;
 use App\Http\Controllers\CaraKerjaController;
 use App\Models\About;
@@ -110,8 +110,6 @@ Route::get('/statistik', [StatistikController::class, 'index'])->name('statistik
 
 // Halaman FAQ (Tanya Jawab) Publik
 Route::get('/faq', [FaqController::class, 'index'])->name('faq.index');
-
-
 // Auth Routes (URL Khusus Login: /puskem-min)
 Route::get('/puskem-min', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/puskem-login', [AuthController::class, 'login'])->name('login.post');
