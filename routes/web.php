@@ -3,6 +3,8 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\SurveyController;
+use App\Http\Controllers\StatistikController;
+use App\Http\Controllers\FaqController;
 use App\Http\Controllers\Admin\ArticleController as AdminArticleController;
 use App\Http\Controllers\Admin\AboutController as AdminAboutController;
 use App\Http\Controllers\Admin\HeroController as AdminHeroController;
@@ -17,8 +19,6 @@ use App\Http\Controllers\Admin\AdminLokasiController;
 use App\Http\Controllers\Admin\AdminFaqController;
 use App\Http\Controllers\Admin\AdminStatistikController;
 use App\Http\Controllers\CaraKerjaController;
-use App\Http\Controllers\FaqController;
-use App\Http\Controllers\StatistikController;
 use App\Models\About;
 use App\Models\Article;
 use App\Models\CaraKerja;
@@ -29,6 +29,8 @@ use App\Models\Layanan;
 use App\Models\Mitra;
 use App\Models\NilaiSection;
 use App\Models\Survey;
+use App\Models\Faq;
+use App\Models\Infografis;
 use Illuminate\Support\Facades\Route;
 
 // Landing Page Utama (dengan passing artikel terbaru, cara kerja dinamis, hero & info cards)
@@ -80,14 +82,6 @@ Route::get('/layanan/{slug}', function ($slug) {
     return view('layanan.detail', compact('layanan', 'otherLayanans'));
 })->name('layanan.detail');
 
-// Jadwal Dokter (dari database) - redirect ke layanan
-Route::get('/jadwal-dokter', function () {
-    return redirect()->route('layanan.index');
-})->name('jadwal-dokter');
-
-// Statistik Publik
-Route::get('/statistik', [StatistikController::class, 'index'])->name('statistik');
-
 // Portal Publik Berita & Blog
 Route::get('/berita', [BlogController::class, 'index'])->name('blog.index');
 Route::get('/berita/{slug}', [BlogController::class, 'show'])->name('blog.show');
@@ -104,9 +98,11 @@ Route::get('/lokasi', function () {
     return view('lokasi');
 })->name('lokasi');
 
-// Halaman Tanya Jawab Pasien (FAQ)
-Route::get('/faq', [FaqController::class, 'index'])->name('faq.index');
+// Halaman Statistik Kesehatan Publik
+Route::get('/statistik', [StatistikController::class, 'index'])->name('statistik');
 
+// Halaman FAQ (Tanya Jawab) Publik
+Route::get('/faq', [FaqController::class, 'index'])->name('faq.index');
 // Auth Routes (URL Khusus Login: /puskem-min)
 Route::get('/puskem-min', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/puskem-login', [AuthController::class, 'login'])->name('login.post');
@@ -116,9 +112,28 @@ Route::post('/puskem-logout', [AuthController::class, 'logout'])->name('logout')
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () {
         $totalArticles = Article::count();
-        $totalViews = Article::sum('views_count');
+        $totalViews = Article::sum('views_count') ?? 0;
         $latestArticles = Article::orderBy('created_at', 'desc')->take(5)->get();
-        return view('admin.dashboard', compact('totalArticles', 'totalViews', 'latestArticles'));
+        $totalDokter = Dokter::count();
+        $totalLayanan = Layanan::count();
+        $totalFaq = Faq::count();
+        $totalInfografis = Infografis::count();
+        $totalSurveys = Survey::count();
+        $avgRating = Survey::getAverageRating() ?? 5.0;
+        $latestSurveys = Survey::orderBy('created_at', 'desc')->take(3)->get();
+
+        return view('admin.dashboard', compact(
+            'totalArticles',
+            'totalViews',
+            'latestArticles',
+            'totalDokter',
+            'totalLayanan',
+            'totalFaq',
+            'totalInfografis',
+            'totalSurveys',
+            'avgRating',
+            'latestSurveys'
+        ));
     })->name('dashboard');
 
     // CRUD Manajemen Berita
@@ -148,10 +163,6 @@ Route::middleware(['auth'])->group(function () {
         Route::post('layanan/{id}/reorder', [AdminLayananController::class, 'reorder'])->name('layanan.reorder');
         Route::resource('layanan', AdminLayananController::class)->except(['show']);
 
-        // Kelola Infografis
-        Route::patch('infografis/{infografis}/toggle-status', [AdminInfografisController::class, 'toggleStatus'])->name('infografis.toggle-status');
-        Route::resource('infografis', AdminInfografisController::class)->except(['show'])->parameters(['infografis' => 'infografis']);
-
         // Kelola Nilai-Nilai & Mitra (Banner & Mitra CRUD)
         Route::get('nilai', [AdminNilaiController::class, 'index'])->name('nilai.index');
         Route::put('nilai/banner', [AdminNilaiController::class, 'updateBanner'])->name('nilai.update-banner');
@@ -161,14 +172,9 @@ Route::middleware(['auth'])->group(function () {
         Route::patch('nilai/mitra/{id}/toggle-status', [AdminNilaiController::class, 'toggleMitraStatus'])->name('nilai.mitra.toggle-status');
         Route::delete('nilai/mitra/{id}', [AdminNilaiController::class, 'destroyMitra'])->name('nilai.mitra.destroy');
 
-        // Kelola Survei Kepuasan Pasien
+        // Kelola Survei Kepuasan & Testimoni
         Route::patch('surveys/{id}/toggle', [AdminSurveyController::class, 'toggleApproval'])->name('surveys.toggle');
-        Route::patch('surveys/{id}/toggle-featured', [AdminSurveyController::class, 'toggleFeatured'])->name('surveys.toggle-featured');
-        Route::resource('surveys', AdminSurveyController::class)->except(['create', 'edit']);
-
-        // Kelola Tanya Jawab (FAQ)
-        Route::patch('faq/{id}/toggle-status', [AdminFaqController::class, 'toggleStatus'])->name('faq.toggle-status');
-        Route::resource('faq', AdminFaqController::class)->except(['show']);
+        Route::resource('surveys', AdminSurveyController::class)->except(['show', 'create', 'edit']);
 
         // Kelola Identitas & Logo Aplikasi
         Route::get('settings', [AdminSettingController::class, 'index'])->name('settings.index');
@@ -178,18 +184,24 @@ Route::middleware(['auth'])->group(function () {
         Route::get('lokasi', [AdminLokasiController::class, 'index'])->name('lokasi.index');
         Route::put('lokasi', [AdminLokasiController::class, 'update'])->name('lokasi.update');
 
-        // Kelola Statistik
+        // Kelola FAQ (Tanya Jawab)
+        Route::resource('faq', AdminFaqController::class)->except(['show']);
+
+        // Kelola Infografis
+        Route::resource('infografis', AdminInfografisController::class)->except(['show']);
+
+        // Kelola Statistik Kesehatan
         Route::get('statistik', [AdminStatistikController::class, 'index'])->name('statistik.index');
-        Route::get('statistik/penyakit/create', [AdminStatistikController::class, 'penyakitCreate'])->name('statistik.penyakit.create');
-        Route::post('statistik/penyakit', [AdminStatistikController::class, 'penyakitStore'])->name('statistik.penyakit.store');
-        Route::get('statistik/penyakit/{id}/edit', [AdminStatistikController::class, 'penyakitEdit'])->name('statistik.penyakit.edit');
-        Route::put('statistik/penyakit/{id}', [AdminStatistikController::class, 'penyakitUpdate'])->name('statistik.penyakit.update');
-        Route::delete('statistik/penyakit/{id}', [AdminStatistikController::class, 'penyakitDestroy'])->name('statistik.penyakit.destroy');
-        Route::get('statistik/kunjungan/create', [AdminStatistikController::class, 'kunjunganCreate'])->name('statistik.kunjungan.create');
-        Route::post('statistik/kunjungan', [AdminStatistikController::class, 'kunjunganStore'])->name('statistik.kunjungan.store');
-        Route::get('statistik/kunjungan/{id}/edit', [AdminStatistikController::class, 'kunjunganEdit'])->name('statistik.kunjungan.edit');
-        Route::put('statistik/kunjungan/{id}', [AdminStatistikController::class, 'kunjunganUpdate'])->name('statistik.kunjungan.update');
-        Route::delete('statistik/kunjungan/{id}', [AdminStatistikController::class, 'kunjunganDestroy'])->name('statistik.kunjungan.destroy');
+        Route::get('statistik/penyakit/create', [AdminStatistikController::class, 'createPenyakit'])->name('statistik.penyakit.create');
+        Route::post('statistik/penyakit', [AdminStatistikController::class, 'storePenyakit'])->name('statistik.penyakit.store');
+        Route::get('statistik/penyakit/{id}/edit', [AdminStatistikController::class, 'editPenyakit'])->name('statistik.penyakit.edit');
+        Route::put('statistik/penyakit/{id}', [AdminStatistikController::class, 'updatePenyakit'])->name('statistik.penyakit.update');
+        Route::delete('statistik/penyakit/{id}', [AdminStatistikController::class, 'destroyPenyakit'])->name('statistik.penyakit.destroy');
+        Route::get('statistik/kunjungan/create', [AdminStatistikController::class, 'createKunjungan'])->name('statistik.kunjungan.create');
+        Route::post('statistik/kunjungan', [AdminStatistikController::class, 'storeKunjungan'])->name('statistik.kunjungan.store');
+        Route::get('statistik/kunjungan/{id}/edit', [AdminStatistikController::class, 'editKunjungan'])->name('statistik.kunjungan.edit');
+        Route::put('statistik/kunjungan/{id}', [AdminStatistikController::class, 'updateKunjungan'])->name('statistik.kunjungan.update');
+        Route::delete('statistik/kunjungan/{id}', [AdminStatistikController::class, 'destroyKunjungan'])->name('statistik.kunjungan.destroy');
     });
 
     // Pengaturan & Manajemen Tentang Kami (About)

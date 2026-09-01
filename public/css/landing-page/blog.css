@@ -18,12 +18,12 @@
     --font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
     --container-max:      1240px;
     --section-padding-x:  24px;
-    --radius-16:          16px;
+    --radius-12:          12px;
     --radius-full:        9999px;
     --shadow-sm:         0 2px 8px rgba(10, 92, 69, 0.08);
-    --shadow-md:         0 4px 16px rgba(10, 92, 69, 0.12);
+    --shadow-md:         0 4px 18px rgba(10, 92, 69, 0.08);
     --shadow-lg:         0 10px 30px rgba(10, 92, 69, 0.15);
-    --transition:         all 0.25s ease;
+    --transition:         all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* ==========================================================================
@@ -145,7 +145,7 @@
    -------------------------------------------------------------------------- */
 .blog-card--featured {
     position: relative;
-    border-radius: var(--radius-16);
+    border-radius: var(--radius-12);
     overflow: hidden;
     box-shadow: var(--shadow-md);
     transition: var(--transition);
@@ -267,7 +267,7 @@
 
 .blog-card--side {
     background: #FFFFFF;
-    border-radius: var(--radius-16);
+    border-radius: var(--radius-12);
     border: 1px solid rgba(10, 92, 69, 0.06);
     overflow: hidden;
     box-shadow: var(--shadow-md);

@@ -22,9 +22,9 @@
                 </a>
             </li>
 
-            {{-- 2. LAYANAN (DROPDOWN DINAMIS MURNI) --}}
+            {{-- 2. LAYANAN (DROPDOWN DINAMIS) --}}
             <li class="navbar__item-dropdown">
-                <a href="javascript:void(0)" class="navbar__dropdown-toggle {{ request()->routeIs('layanan.*') ? 'active' : '' }}" role="button" aria-haspopup="true" aria-expanded="false" style="cursor: pointer;">
+                <a href="javascript:void(0)" class="navbar__dropdown-toggle {{ request()->routeIs('layanan.*') ? 'active' : '' }}" role="button" aria-haspopup="true" aria-expanded="false">
                     <span>LAYANAN</span>
                     <svg class="navbar__dropdown-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                         <polyline points="6 9 12 15 18 9"></polyline>
@@ -46,7 +46,7 @@
 
             {{-- 3. INFORMASI PUBLIK (DROPDOWN) --}}
             <li class="navbar__item-dropdown">
-                <a href="{{ route('blog.index') }}" class="navbar__dropdown-toggle {{ request()->routeIs('blog.*') || request()->routeIs('jadwal-dokter') || request()->routeIs('faq.*') || request()->routeIs('infografis') ? 'active' : '' }}">
+                <a href="javascript:void(0)" class="navbar__dropdown-toggle {{ request()->routeIs('blog.*') || request()->routeIs('faq.*') || request()->routeIs('infografis') || request()->routeIs('statistik') ? 'active' : '' }}" role="button" aria-haspopup="true" aria-expanded="false">
                     <span>INFORMASI PUBLIK</span>
                     <svg class="navbar__dropdown-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                         <polyline points="6 9 12 15 18 9"></polyline>
@@ -60,14 +60,9 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('jadwal-dokter') }}" class="navbar__dropdown-item {{ request()->routeIs('jadwal-dokter') ? 'active' : '' }}">
-                            <i class="bx bx-calendar navbar__dropdown-icon"></i>
-                            <span class="navbar__dropdown-text">Jadwal Praktik Dokter</span>
-                        </a>
-                    </li>
                     <li>
                         <a href="{{ route('infografis') }}" class="navbar__dropdown-item {{ request()->routeIs('infografis') ? 'active' : '' }}">
-                            <i class="bx bx-bar-chart-alt-2 navbar__dropdown-icon"></i>
+                            <i class="bx bx-image-alt navbar__dropdown-icon"></i>
                             <span class="navbar__dropdown-text">Infografis</span>
                         </a>
                     </li>
@@ -75,6 +70,12 @@
                         <a href="{{ route('faq.index') }}" class="navbar__dropdown-item {{ request()->routeIs('faq.*') ? 'active' : '' }}">
                             <i class="bx bx-help-circle navbar__dropdown-icon"></i>
                             <span class="navbar__dropdown-text">Tanya Jawab (FAQ)</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('statistik') }}" class="navbar__dropdown-item {{ request()->routeIs('statistik') ? 'active' : '' }}">
+                            <i class="bx bx-bar-chart-alt-2 navbar__dropdown-icon"></i>
+                            <span class="navbar__dropdown-text">Statistik Kesehatan</span>
                         </a>
                     </li>
                 </ul>
@@ -96,7 +97,7 @@
         </ul>
 
         <!-- Desktop CTA -->
-        <a href="{{ $appSetting->wa_link }}" target="_blank" rel="noopener" class="btn-nav-cta">JANJI TEMU</a>
+        <a href="{{ $appSetting->wa_link ?? '#' }}" target="_blank" rel="noopener" class="btn-nav-cta">JANJI TEMU</a>
 
         <!-- Mobile Toggle Button -->
         <button class="navbar__toggle" id="mobileToggle" aria-label="Toggle navigation" aria-expanded="false">
@@ -133,7 +134,7 @@
 
         {{-- Mobile Informasi Publik Accordion --}}
         <div class="navbar__mobile-accordion">
-            <button type="button" class="navbar__mobile-accordion-toggle {{ request()->routeIs('blog.*') || request()->routeIs('jadwal-dokter') || request()->routeIs('faq.*') || request()->routeIs('infografis') ? 'active' : '' }}" id="mobileInfoToggle">
+            <button type="button" class="navbar__mobile-accordion-toggle {{ request()->routeIs('blog.*') || request()->routeIs('faq.*') || request()->routeIs('infografis') || request()->routeIs('statistik') ? 'active' : '' }}" id="mobileInfoToggle">
                 <span>INFORMASI PUBLIK</span>
                 <i class="bx bx-chevron-down" id="mobileInfoChevron"></i>
             </button>
@@ -141,20 +142,20 @@
                 <a href="{{ route('blog.index') }}" class="navbar__mobile-subitem {{ request()->routeIs('blog.*') ? 'active' : '' }}">
                     <i class="bx bx-news"></i> <span>Berita & Artikel</span>
                 </a>
-                <a href="{{ route('jadwal-dokter') }}" class="navbar__mobile-subitem {{ request()->routeIs('jadwal-dokter') ? 'active' : '' }}">
-                    <i class="bx bx-calendar"></i> <span>Jadwal Praktik Dokter</span>
-                </a>
                 <a href="{{ route('infografis') }}" class="navbar__mobile-subitem {{ request()->routeIs('infografis') ? 'active' : '' }}">
-                    <i class="bx bx-bar-chart-alt-2"></i> <span>Infografis</span>
+                    <i class="bx bx-image-alt"></i> <span>Infografis</span>
                 </a>
                 <a href="{{ route('faq.index') }}" class="navbar__mobile-subitem {{ request()->routeIs('faq.*') ? 'active' : '' }}">
                     <i class="bx bx-help-circle"></i> <span>Tanya Jawab (FAQ)</span>
+                </a>
+                <a href="{{ route('statistik') }}" class="navbar__mobile-subitem {{ request()->routeIs('statistik') ? 'active' : '' }}">
+                    <i class="bx bx-bar-chart-alt-2"></i> <span>Statistik Kesehatan</span>
                 </a>
             </div>
         </div>
 
         <a href="{{ route('lokasi') }}" class="{{ request()->routeIs('lokasi') ? 'active' : '' }}">KONTAK</a>
         <a href="{{ route('survei.index') }}" class="{{ request()->routeIs('survei.*') ? 'active' : '' }}">SURVEI</a>
-        <a href="{{ $appSetting->wa_link }}" target="_blank" rel="noopener" class="btn-nav-cta">JANJI TEMU</a>
+        <a href="{{ $appSetting->wa_link ?? '#' }}" target="_blank" rel="noopener" class="btn-nav-cta">JANJI TEMU</a>
     </div>
 </header>

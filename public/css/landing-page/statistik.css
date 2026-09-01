@@ -79,11 +79,11 @@
 
 .sl-kpi {
     background: #fff;
-    border-radius: 16px;
+    border-radius: 12px;
     padding: 1.5rem 1rem;
     text-align: center;
     border: 1px solid rgba(10,92,69,0.1);
-    box-shadow: 0 2px 12px rgba(10,92,69,0.07);
+    box-shadow: 0 4px 18px rgba(10,92,69,0.06);
     transition: transform 0.25s ease, box-shadow 0.25s ease;
     position: relative;
     overflow: hidden;
@@ -99,7 +99,7 @@
 
 .sl-kpi:hover {
     transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(10,92,69,0.13);
+    box-shadow: 0 10px 28px rgba(10,92,69,0.12);
 }
 
 .sl-kpi__num {
@@ -142,10 +142,10 @@
 /* ── Disease Card ─────────────────────────────────────────────────────────── */
 .sl-disease-wrap {
     background: #fff;
-    border-radius: 20px;
+    border-radius: 12px;
     padding: 1.75rem;
     border: 1px solid rgba(10,92,69,0.08);
-    box-shadow: 0 2px 16px rgba(10,92,69,0.07);
+    box-shadow: 0 4px 18px rgba(10,92,69,0.06);
 }
 
 .sl-disease-list {
@@ -230,10 +230,10 @@
 /* ── Kunjungan Chart Card ─────────────────────────────────────────────────── */
 .sl-kunjungan-wrap {
     background: #fff;
-    border-radius: 20px;
+    border-radius: 12px;
     padding: 1.75rem;
     border: 1px solid rgba(10,92,69,0.08);
-    box-shadow: 0 2px 16px rgba(10,92,69,0.07);
+    box-shadow: 0 4px 18px rgba(10,92,69,0.06);
     display: flex;
     flex-direction: column;
 }
@@ -271,7 +271,7 @@
     font-size: 0.9rem;
     font-weight: 700;
     padding: 0.85rem 2rem;
-    border-radius: 999px;
+    border-radius: 8px;
     text-decoration: none;
     transition: all 0.25s ease;
     box-shadow: 0 4px 16px rgba(10,92,69,0.3);

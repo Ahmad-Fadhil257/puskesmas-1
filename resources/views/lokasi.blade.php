@@ -30,10 +30,10 @@
 
 .lokasi-card {
     background: #FFFFFF;
-    border-radius: 16px;
+    border-radius: 12px;
     padding: 26px 30px;
     border: 1px solid #CBD5E1;
-    box-shadow: 0 4px 16px rgba(15, 23, 42, 0.05), 0 1px 3px rgba(15, 23, 42, 0.02);
+    box-shadow: 0 4px 18px rgba(10, 92, 69, 0.06), 0 1px 3px rgba(15, 23, 42, 0.02);
     transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
 }
 
@@ -58,9 +58,9 @@
 
 .lokasi-maps-container {
     background: #FFFFFF;
-    border-radius: 16px;
+    border-radius: 12px;
     border: 1px solid #CBD5E1;
-    box-shadow: 0 4px 16px rgba(15, 23, 42, 0.05), 0 1px 3px rgba(15, 23, 42, 0.02);
+    box-shadow: 0 4px 18px rgba(10, 92, 69, 0.06), 0 1px 3px rgba(15, 23, 42, 0.02);
     height: 100%;
     position: relative;
     min-height: 500px;
@@ -72,7 +72,7 @@
     height: 100%;
     min-height: 520px;
     border: none;
-    border-radius: 16px;
+    border-radius: 12px;
     display: block;
 }
 
@@ -188,7 +188,7 @@
             <div style="display: flex; flex-direction: column; gap: 24px;">
 
                 {{-- Card 1: Alamat Utama --}}
-                <div class="lokasi-card">
+                <div class="lokasi-card" data-aos="fade-right" data-aos-delay="0">
                     <div style="display: flex; align-items: flex-start; gap: 18px;">
                         <div class="lokasi-icon-wrapper">
                             <i class="bx bx-map"></i>
@@ -211,7 +211,7 @@
                 </div>
 
                 {{-- Card 2: Jam Pelayanan --}}
-                <div class="lokasi-card">
+                <div class="lokasi-card" data-aos="fade-right" data-aos-delay="100">
                     <div style="display: flex; align-items: flex-start; gap: 18px;">
                         <div class="lokasi-icon-wrapper" style="background: #FFFBEB; color: #D97706;">
                             <i class="bx bx-time-five"></i>
@@ -243,7 +243,7 @@
                 </div>
 
                 {{-- Card 3: Kontak & Bantuan --}}
-                <div class="lokasi-card">
+                <div class="lokasi-card" data-aos="fade-right" data-aos-delay="200">
                     <div style="display: flex; align-items: flex-start; gap: 18px;">
                         <div class="lokasi-icon-wrapper" style="background: #F0FDF4; color: #16A34A;">
                             <i class="bx bx-phone-call"></i>

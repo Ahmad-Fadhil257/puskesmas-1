@@ -68,7 +68,6 @@
                     <h4 class="footer__heading">Tautan Terkait</h4>
                     <ul class="footer__list">
                         <li><a href="{{ route('layanan.index') }}">Layanan & Poliklinik</a></li>
-                        <li><a href="{{ route('jadwal-dokter') }}">Jadwal Dokter</a></li>
                         <li><a href="{{ route('blog.index') }}">Berita & Informasi</a></li>
                         <li><a href="{{ route('faq.index') }}">Tanya Jawab (FAQ)</a></li>
                         <li><a href="{{ route('survei.index') }}">Survei Kepuasan Pasien</a></li>

@@ -22,7 +22,7 @@
         <div class="process__grid">
 
             @foreach ($caraKerja as $item)
-                <div class="process-card" data-aos="fade-up">
+                <div class="process-card" data-aos="fade-up" data-aos-delay="{{ $loop->index * 80 }}">
                     <div class="process-card__number-wrap">
                         <div class="process-card__number">{{ str_pad($item->urutan, 2, '0', STR_PAD_LEFT) }}</div>
                     </div>

@@ -157,8 +157,8 @@
         @if(isset($gridArticles) && $gridArticles->count() > 0)
             <div class="articles-catalog-section">
                 <div class="articles-grid">
-                    @foreach($gridArticles as $item)
-                        <article class="article-card" data-aos="fade-up">
+                    @foreach($gridArticles as $index => $item)
+                        <article class="article-card" data-aos="fade-up" data-aos-delay="{{ min($loop->index * 60, 450) }}">
                             <a href="{{ route('blog.show', $item->slug) }}" class="article-card__thumb-wrap">
                                 <img src="{{ $item->thumbnail_url }}" alt="{{ $item->title }}" class="article-card__img" loading="lazy">
                                 <span class="article-card__category">{{ $item->category }}</span>

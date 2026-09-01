@@ -12,7 +12,7 @@
 {{-- =========================================================================
    SUBPAGE HEADER
    ========================================================================= --}}
-<section class="subpage-header">
+<section class="subpage-header" data-aos="fade-down">
     <img src="{{ asset('assets/botanical-clean.png') }}?v={{ file_exists(public_path('assets/botanical-clean.png')) ? filemtime(public_path('assets/botanical-clean.png')) : time() }}" alt="" class="subpage-header__watermark" aria-hidden="true">
     <div class="subpage-header__container">
         <div class="subpage-header__breadcrumb">
@@ -37,7 +37,7 @@
 
         {{-- Filter Kategori --}}
         @if($kategoris->count() > 1)
-        <div class="infografis-filter" id="infografisFilter">
+        <div class="infografis-filter" id="infografisFilter" data-aos="fade-up">
             <button class="infografis-filter-btn active" data-filter="semua">Semua</button>
             @foreach($kategoris as $kat)
                 <button class="infografis-filter-btn" data-filter="{{ $kat }}">{{ $kat }}</button>
@@ -48,8 +48,8 @@
         {{-- Grid Infografis --}}
         @if($infografis->count() > 0)
         <div class="infografis-grid" id="infografisGrid">
-            @foreach($infografis as $item)
-            <div class="infografis-card" data-kategori="{{ $item->kategori }}" data-aos="fade-up">
+            @foreach($infografis as $index => $item)
+            <div class="infografis-card" data-kategori="{{ $item->kategori }}" data-aos="fade-up" data-aos-delay="{{ min($index * 70, 450) }}">
                 {{-- Thumbnail --}}
                 <div class="infografis-card__thumb">
                     <img src="{{ $item->image_url }}"

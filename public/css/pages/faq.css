@@ -12,7 +12,7 @@
     --color-surface:         #FFFFFF;
     --font-family:           'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
     --container-max:         1240px;
-    --radius-16:             16px;
+    --radius-12:             12px;
     --transition:            all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -36,9 +36,9 @@
    -------------------------------------------------------------------------- */
 .faq-filter-card {
     background: #FFFFFF;
-    border-radius: var(--radius-16);
+    border-radius: var(--radius-12);
     padding: 24px 28px;
-    box-shadow: 0 4px 16px rgba(15, 23, 42, 0.05), 0 1px 3px rgba(15, 23, 42, 0.02);
+    box-shadow: 0 4px 18px rgba(10, 92, 69, 0.06), 0 1px 3px rgba(15, 23, 42, 0.02);
     border: 1px solid var(--color-border);
     margin-bottom: 32px;
 }
@@ -75,7 +75,7 @@
     align-items: center;
     background: #F8FAFC;
     border: 1.5px solid #E2E8F0;
-    border-radius: 12px;
+    border-radius: 8px;
     padding: 4px 6px 4px 14px;
     transition: var(--transition);
     gap: 8px;
@@ -147,7 +147,7 @@
     align-items: center;
     background: #F8FAFC;
     border: 1.5px solid #E2E8F0;
-    border-radius: 12px;
+    border-radius: 8px;
     padding: 4px 14px;
     transition: var(--transition);
 }
@@ -261,15 +261,15 @@
 .faq-item {
     background: #FFFFFF;
     border: 1px solid var(--color-border);
-    border-radius: var(--radius-16);
+    border-radius: var(--radius-12);
     overflow: hidden;
     transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
-    box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04), 0 1px 3px rgba(15, 23, 42, 0.02);
+    box-shadow: 0 4px 18px rgba(10, 92, 69, 0.05), 0 1px 3px rgba(15, 23, 42, 0.02);
 }
 
 .faq-item:hover {
     border-color: rgba(10, 92, 69, 0.35);
-    box-shadow: 0 8px 24px rgba(10, 92, 69, 0.08), 0 2px 6px rgba(0, 0, 0, 0.02);
+    box-shadow: 0 8px 26px rgba(10, 92, 69, 0.09), 0 2px 6px rgba(0, 0, 0, 0.02);
     transform: translateY(-2px);
 }
 
@@ -305,7 +305,7 @@
     color: #0A5C45;
     background: #E6F5F1;
     padding: 3px 10px;
-    border-radius: 6px;
+    border-radius: 8px;
     margin-bottom: 8px;
     border: 1px solid rgba(10, 92, 69, 0.12);
 }
@@ -412,7 +412,7 @@
     text-align: center;
     padding: 60px 24px;
     background: #FFFFFF;
-    border-radius: var(--radius-16);
+    border-radius: var(--radius-12);
     border: 1px dashed var(--color-border);
     box-shadow: 0 4px 16px rgba(15, 23, 42, 0.03);
 }
@@ -442,7 +442,7 @@
 .faq-help-card {
     margin-top: 50px;
     background: linear-gradient(135deg, #0A5C45 0%, #064E3B 100%);
-    border-radius: 20px;
+    border-radius: 12px;
     padding: 36px 40px;
     color: #FFFFFF;
     display: flex;
