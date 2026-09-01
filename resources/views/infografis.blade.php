@@ -38,9 +38,9 @@
         {{-- Filter Kategori --}}
         @if($kategoris->count() > 1)
         <div class="infografis-filter" id="infografisFilter" data-aos="fade-up">
-            <button class="infografis-filter-btn active" data-filter="semua">Semua</button>
+            <a href="{{ route('infografis', ['kategori' => 'semua']) }}" class="infografis-filter-btn {{ request('kategori', 'semua') === 'semua' ? 'active' : '' }}">Semua</a>
             @foreach($kategoris as $kat)
-                <button class="infografis-filter-btn" data-filter="{{ $kat }}">{{ $kat }}</button>
+                <a href="{{ route('infografis', ['kategori' => $kat]) }}" class="infografis-filter-btn {{ request('kategori') === $kat ? 'active' : '' }}">{{ $kat }}</a>
             @endforeach
         </div>
         @endif
@@ -91,7 +91,13 @@
             @endforeach
         </div>
 
-        {{-- Empty state (ditampilkan JS saat filter kosong) --}}
+        @if($infografis->hasPages())
+            <div class="d-flex justify-content-center mt-4 pt-3">
+                {{ $infografis->links() }}
+            </div>
+        @endif
+
+        {{-- Empty state (ditampilkan saat filter kosong) --}}
         <div class="infografis-empty" id="infografisEmpty">
             <i class="bx bx-image-alt"></i>
             <p>Tidak ada infografis untuk kategori ini.</p>

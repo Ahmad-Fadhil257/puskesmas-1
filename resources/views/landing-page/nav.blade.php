@@ -60,7 +60,6 @@
                         </a>
                     </li>
                     <li>
-                    <li>
                         <a href="{{ route('infografis') }}" class="navbar__dropdown-item {{ request()->routeIs('infografis') ? 'active' : '' }}">
                             <i class="bx bx-image-alt navbar__dropdown-icon"></i>
                             <span class="navbar__dropdown-text">Infografis</span>
