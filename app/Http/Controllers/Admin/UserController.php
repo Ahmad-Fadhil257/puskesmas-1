@@ -108,7 +108,7 @@ class UserController extends Controller
             'role' => $request->role ?? $user->role ?? 'admin',
             'phone' => $request->phone,
             'is_active' => $user->id === Auth::id() ? true : $request->boolean('is_active', true),
-            'accessible_pages' => $request->role === 'staf' ? ($request->accessible_pages ?? []) : null,
+            'accessible_pages' => $request->has('role') ? ($request->role === 'staf' ? ($request->accessible_pages ?? []) : null) : $user->accessible_pages,
         ];
 
         if ($request->filled('password')) {

@@ -341,21 +341,6 @@
 @push('scripts')
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        // Toggle accessible pages visibility based on role
-        function setupRoleToggle(roleId, pagesId) {
-            var roleEl = document.getElementById(roleId);
-            var pagesEl = document.getElementById(pagesId);
-            if (roleEl && pagesEl) {
-                roleEl.addEventListener('change', function () {
-                    pagesEl.style.display = this.value === 'staf' ? 'block' : 'none';
-                });
-            }
-        }
-        setupRoleToggle('createRole', 'createAccessiblePages');
-        @foreach ($users as $item)
-            setupRoleToggle('editRole-{{ $item->id }}', 'editAccessiblePages-{{ $item->id }}');
-        @endforeach
-
         // Delete confirmation
         document.querySelectorAll('.btn-delete-user').forEach(function (button) {
             button.addEventListener('click', function () {
