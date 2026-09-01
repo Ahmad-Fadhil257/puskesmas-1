@@ -70,7 +70,7 @@ class SurveyController extends Controller
             'poli_name'      => $validated['poli_name'],
             'rating'         => $validated['rating'],
             'pesan'          => $pesan,
-            'is_approved'    => true,
+            'is_approved'    => false,
             'is_featured'    => false,
         ]);
 
