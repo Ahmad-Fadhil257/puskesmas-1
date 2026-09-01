@@ -87,9 +87,16 @@ Route::get('/berita', [BlogController::class, 'index'])->name('blog.index');
 Route::get('/berita/{slug}', [BlogController::class, 'show'])->name('blog.show');
 
 // Halaman Infografis Publik
-Route::get('/infografis', function () {
-    $infografis = \App\Models\Infografis::active()->orderBy('order', 'asc')->orderBy('id', 'desc')->get();
-    $kategoris = $infografis->pluck('kategori')->unique()->values();
+Route::get('/infografis', function (\Illuminate\Http\Request $request) {
+    $kategoris = \App\Models\Infografis::active()->pluck('kategori')->unique()->values();
+
+    $query = \App\Models\Infografis::active()->orderBy('order', 'asc')->orderBy('id', 'desc');
+
+    if ($request->filled('kategori') && $request->kategori !== 'semua') {
+        $query->where('kategori', $request->kategori);
+    }
+
+    $infografis = $query->paginate(9)->withQueryString();
     return view('infografis', compact('infografis', 'kategoris'));
 })->name('infografis');
 
