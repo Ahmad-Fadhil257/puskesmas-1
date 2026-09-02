@@ -57,14 +57,14 @@ class UserController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
-            'password' => ['required', 'string', 'min:6'],
-            'role' => ['nullable', 'in:admin,staf'],
+            'password' => ['required', 'string', 'min:6', 'confirmed'],
             'phone' => ['nullable', 'string', 'max:20'],
-            'is_active' => ['nullable', 'boolean'],
-            'accessible_pages' => ['nullable', 'array'],
+        ], [
+            'password.confirmed' => 'Konfirmasi kata sandi tidak cocok.',
+            'email.unique' => 'Alamat email ini sudah terdaftar.',
         ]);
 
-        $role = $request->role ?? 'admin';
+        $role = $request->boolean('is_admin', true) ? 'admin' : 'staf';
 
         $data = [
             'name' => $request->name,
@@ -72,7 +72,7 @@ class UserController extends Controller
             'password' => Hash::make($request->password),
             'role' => $role,
             'phone' => $request->phone,
-            'is_active' => $request->boolean('is_active', true),
+            'is_active' => true,
             'accessible_pages' => null,
         ];
 
@@ -96,29 +96,26 @@ class UserController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
-            'password' => ['nullable', 'string', 'min:6'],
-            'role' => ['nullable', 'in:admin,staf'],
+            'password' => ['nullable', 'string', 'min:6', 'confirmed'],
             'phone' => ['nullable', 'string', 'max:20'],
-            'is_active' => ['nullable', 'boolean'],
+        ], [
+            'password.confirmed' => 'Konfirmasi kata sandi baru tidak cocok.',
+            'email.unique' => 'Alamat email ini sudah terdaftar.',
         ]);
+
+        $role = $user->id === Auth::id() ? 'admin' : ($request->boolean('is_admin', true) ? 'admin' : 'staf');
 
         $data = [
             'name' => $request->name,
             'email' => $request->email,
-            'role' => $request->role ?? $user->role ?? 'admin',
+            'role' => $role,
             'phone' => $request->phone,
-            'is_active' => $user->id === Auth::id() ? true : $request->boolean('is_active', true),
-            'accessible_pages' => $request->role === 'staf' ? ($request->accessible_pages ?? []) : null,
+            'is_active' => true,
+            'accessible_pages' => null,
         ];
 
         if ($request->filled('password')) {
             $data['password'] = Hash::make($request->password);
-        }
-
-        if ($user->id === Auth::id() && !$request->boolean('is_active', true)) {
-            return redirect()->back()
-                ->withInput()
-                ->with('error', 'Anda tidak dapat menonaktifkan akun yang sedang digunakan saat ini!');
         }
 
         $user->update($data);

@@ -210,8 +210,13 @@
                             <div class="p-3 rounded border" style="background: rgba(0, 0, 0, 0.02);">
                                 <div class="d-flex align-items-center justify-content-between mb-1">
                                     <div class="d-flex align-items-center gap-2">
-                                        <strong class="small mb-0">{{ $srv->nama ?? 'Masyarakat' }}</strong>
-                                        <span class="badge bg-label-info px-2 py-0" style="font-size: 10px;">{{ $srv->layanan ?? 'Pelayanan' }}</span>
+                                        <div class="avatar avatar-xs flex-shrink-0">
+                                            <span class="avatar-initial rounded-circle bg-label-primary fw-bold" style="font-size: 10px;">
+                                                {{ strtoupper(substr($srv->name ?? $srv->nama ?? 'M', 0, 1)) }}
+                                            </span>
+                                        </div>
+                                        <strong class="small mb-0">{{ $srv->name ?? $srv->nama ?? 'Masyarakat' }}</strong>
+                                        <span class="badge bg-label-info px-2 py-0" style="font-size: 10px;">{{ $srv->poli_name ?? $srv->layanan ?? 'Pelayanan' }}</span>
                                     </div>
                                     <div class="text-warning small fw-bold">
                                         @for($i = 1; $i <= 5; $i++)

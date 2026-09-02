@@ -60,17 +60,7 @@
                         @enderror
                     </div>
 
-                    {{-- Role / Peran --}}
-                    <div class="col-md-6">
-                        <label class="form-label fw-semibold" for="role">Peran / Hak Akses <span class="text-danger">*</span></label>
-                        <select class="form-select @error('role') is-invalid @enderror" id="role" name="role" required>
-                            <option value="admin" {{ old('role') === 'admin' ? 'selected' : '' }}>Administrator (Akses Penuh)</option>
-                            <option value="staf" {{ old('role', 'staf') === 'staf' ? 'selected' : '' }}>Staf Puskesmas</option>
-                        </select>
-                        @error('role')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
+
 
                     {{-- Nomor Telepon --}}
                     <div class="col-md-6">
