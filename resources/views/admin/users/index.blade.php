@@ -128,8 +128,8 @@
                         <th style="width: 60px;" class="text-center">No</th>
                         <th>Pengguna</th>
                         <th>Kontak</th>
-                        <th class="text-center">Status</th>
-                        <th class="text-center" style="width: 150px;">Aksi</th>
+                        <th class="text-center">Peran Akun</th>
+                        <th class="text-center" style="width: 130px;">Aksi</th>
                     </tr>
                 </thead>
                 <tbody class="table-border-bottom-0">
@@ -166,30 +166,18 @@
                                 </span>
                             </td>
                             <td class="text-center">
-                                @if($item->is_active)
-                                    <span class="badge bg-label-success rounded-pill px-3 py-1">
-                                        <i class="bx bx-check-circle me-1"></i> Aktif
+                                @if($item->role === 'admin')
+                                    <span class="badge bg-label-primary rounded-pill px-3 py-1">
+                                        <i class="bx bx-shield-quarter me-1"></i> Administrator
                                     </span>
                                 @else
-                                    <span class="badge bg-label-danger rounded-pill px-3 py-1">
-                                        <i class="bx bx-x-circle me-1"></i> Nonaktif
+                                    <span class="badge bg-label-info rounded-pill px-3 py-1">
+                                        <i class="bx bx-id-card me-1"></i> Staf Puskesmas
                                     </span>
                                 @endif
                             </td>
                             <td>
                                 <div class="d-flex justify-content-center align-items-center gap-1">
-                                    {{-- Toggle Status Button --}}
-                                    @if($item->id !== Auth::id())
-                                        <form action="{{ route('admin.users.toggle-status', $item->id) }}" method="POST" class="d-inline">
-                                            @csrf
-                                            @method('PATCH')
-                                            <button type="submit" class="btn btn-sm btn-icon {{ $item->is_active ? 'btn-outline-secondary' : 'btn-outline-success' }}" 
-                                                    title="{{ $item->is_active ? 'Nonaktifkan Akun' : 'Aktifkan Akun' }}">
-                                                <i class="bx {{ $item->is_active ? 'bx-block' : 'bx-check' }}"></i>
-                                            </button>
-                                        </form>
-                                    @endif
-
                                     {{-- Edit Button (Buka Popup Modal) --}}
                                     <button type="button" class="btn btn-sm btn-icon btn-outline-warning" data-bs-toggle="modal" data-bs-target="#modalEditUser-{{ $item->id }}" title="Edit Pengguna">
                                         <i class="bx bx-edit-alt"></i>
@@ -253,21 +241,25 @@
                             <input type="text" name="name" class="form-control" placeholder="Contoh: dr. Hendra Pratama" required>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label fw-semibold">Alamat Email <span class="text-danger">*</span></label>
-                            <input type="email" name="email" class="form-control" placeholder="nama@puskesmas.go.id" required>
+                            <label class="form-label fw-semibold">Email Untuk Login <span class="text-danger">*</span></label>
+                            <input type="email" name="email" class="form-control" placeholder="yuri@gmail.com" required>
                         </div>
                         <div class="mb-3">
                             <label class="form-label fw-semibold">Kata Sandi <span class="text-danger">*</span></label>
-                            <input type="password" name="password" class="form-control" placeholder="Minimal 6 karakter" required>
+                            <input type="password" name="password" class="form-control" placeholder="••••••••" required>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label fw-semibold">Nomor Telepon / WhatsApp</label>
+                            <label class="form-label fw-semibold">Konfirmasi Kata Sandi <span class="text-danger">*</span></label>
+                            <input type="password" name="password_confirmation" class="form-control" placeholder="••••••••" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Kontak</label>
                             <input type="text" name="phone" class="form-control" placeholder="Contoh: 08123456789">
                         </div>
                         <div class="form-check form-switch pt-2">
-                            <input class="form-check-input" type="checkbox" name="is_active" value="1" id="createIsActive" checked>
-                            <label class="form-check-label fw-semibold" for="createIsActive">
-                                Status Akun Aktif (Dapat Login)
+                            <input class="form-check-input" type="checkbox" name="is_admin" value="1" id="createIsAdmin" checked onchange="toggleRoleLabel(this, 'createRoleBadge')">
+                            <label class="form-check-label fw-semibold" for="createIsAdmin">
+                                Peran Akun: <span id="createRoleBadge" class="badge bg-label-primary ms-1">Administrator (Akses Penuh)</span>
                             </label>
                         </div>
                     </div>
@@ -303,7 +295,7 @@
                                 <input type="text" name="name" class="form-control" value="{{ old('name', $item->name) }}" required>
                             </div>
                             <div class="mb-3">
-                                <label class="form-label fw-semibold">Alamat Email <span class="text-danger">*</span></label>
+                                <label class="form-label fw-semibold">Email Untuk Login <span class="text-danger">*</span></label>
                                 <input type="email" name="email" class="form-control" value="{{ old('email', $item->email) }}" required>
                             </div>
                             <div class="mb-3">
@@ -312,17 +304,28 @@
                                 <div class="form-text">Biarkan kosong jika kata sandi tidak ingin diubah.</div>
                             </div>
                             <div class="mb-3">
-                                <label class="form-label fw-semibold">Nomor Telepon / WhatsApp</label>
+                                <label class="form-label fw-semibold">Konfirmasi Kata Sandi Baru</label>
+                                <input type="password" name="password_confirmation" class="form-control" placeholder="Ulangi kata sandi baru">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">Kontak</label>
                                 <input type="text" name="phone" class="form-control" value="{{ old('phone', $item->phone) }}" placeholder="Contoh: 08123456789">
                             </div>
                             <div class="form-check form-switch pt-2">
-                                <input class="form-check-input" type="checkbox" name="is_active" value="1" id="editIsActive-{{ $item->id }}" {{ $item->is_active ? 'checked' : '' }} {{ $item->id === Auth::id() ? 'disabled' : '' }}>
-                                <label class="form-check-label fw-semibold" for="editIsActive-{{ $item->id }}">
-                                    Status Akun Aktif (Dapat Login)
+                                <input class="form-check-input" type="checkbox" name="is_admin" value="1" id="editIsAdmin-{{ $item->id }}" {{ $item->role === 'admin' ? 'checked' : '' }} {{ $item->id === Auth::id() ? 'disabled' : '' }} onchange="toggleRoleLabel(this, 'editRoleBadge-{{ $item->id }}')">
+                                @if($item->id === Auth::id())
+                                    <input type="hidden" name="is_admin" value="1">
+                                @endif
+                                <label class="form-check-label fw-semibold" for="editIsAdmin-{{ $item->id }}">
+                                    Peran Akun: 
+                                    @if($item->role === 'admin')
+                                        <span id="editRoleBadge-{{ $item->id }}" class="badge bg-label-primary ms-1">Administrator (Akses Penuh)</span>
+                                    @else
+                                        <span id="editRoleBadge-{{ $item->id }}" class="badge bg-label-info ms-1">Staf Puskesmas</span>
+                                    @endif
                                 </label>
                                 @if($item->id === Auth::id())
-                                    <input type="hidden" name="is_active" value="1">
-                                    <div class="form-text text-warning small">Akun Anda sendiri tidak dapat dinonaktifkan.</div>
+                                    <div class="form-text text-warning small">Akun Anda sendiri tidak dapat diubah menjadi Staf.</div>
                                 @endif
                             </div>
                         </div>
@@ -340,6 +343,18 @@
 
 @push('scripts')
 <script>
+    function toggleRoleLabel(checkbox, badgeId) {
+        const badge = document.getElementById(badgeId);
+        if (!badge) return;
+        if (checkbox.checked) {
+            badge.className = 'badge bg-label-primary ms-1';
+            badge.textContent = 'Administrator (Akses Penuh)';
+        } else {
+            badge.className = 'badge bg-label-info ms-1';
+            badge.textContent = 'Staf Puskesmas';
+        }
+    }
+
     document.addEventListener('DOMContentLoaded', function () {
         // Delete confirmation
         document.querySelectorAll('.btn-delete-user').forEach(function (button) {
