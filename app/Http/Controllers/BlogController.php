@@ -29,7 +29,7 @@ class BlogController extends Controller
             $query->where('category', $category);
         }
 
-        $articles = $query->paginate(9)->withQueryString();
+        $articles = $query->paginate(10)->withQueryString();
 
         // Ambil daftar kategori unik
         $categories = Article::published()->distinct()->pluck('category')->filter()->values();
