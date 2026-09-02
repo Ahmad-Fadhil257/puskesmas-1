@@ -87,7 +87,7 @@ class ArticleController extends Controller
         Article::create([
             'title'        => $validated['title'],
             'slug'         => $slug,
-            'category'     => $validated['category'],
+            'category'     => Str::title(trim($validated['category'])),
             'excerpt'      => $validated['excerpt'] ?? Str::limit(strip_tags($validated['content']), 160),
             'content'      => $validated['content'],
             'thumbnail'    => $thumbnailPath ?? 'assets/blog/blog-1.png',
@@ -149,7 +149,7 @@ class ArticleController extends Controller
 
         $article->update([
             'title'        => $validated['title'],
-            'category'     => $validated['category'],
+            'category'     => Str::title(trim($validated['category'])),
             'excerpt'      => $validated['excerpt'] ?? Str::limit(strip_tags($validated['content']), 160),
             'content'      => $validated['content'],
             'thumbnail'    => $thumbnailPath,

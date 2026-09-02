@@ -63,8 +63,7 @@ class AdminLayananController extends Controller
             'persyaratan'        => 'nullable|string',
         ]);
 
-        $order = $validated['order'] ?? ((Layanan::max('order') ?? 0) + 1);
-        $kategori = $validated['kategori'] ?? 'Rawat Jalan (BPJS & Umum)';
+        $kategori = !empty($validated['kategori']) ? \Illuminate\Support\Str::title(trim($validated['kategori'])) : 'Rawat Jalan (BPJS & Umum)';
         $kategoriList = Layanan::getKategoriList();
         $kategoriData = $kategoriList[$kategori] ?? ['variant' => 'default', 'badge' => 'BPJS & UMUM'];
 
@@ -138,7 +137,7 @@ class AdminLayananController extends Controller
             'persyaratan'        => 'nullable|string',
         ]);
 
-        $kategori = $validated['kategori'] ?? ($layanan->kategori ?? 'Rawat Jalan (BPJS & Umum)');
+        $kategori = !empty($validated['kategori']) ? \Illuminate\Support\Str::title(trim($validated['kategori'])) : ($layanan->kategori ?? 'Rawat Jalan (BPJS & Umum)');
         $kategoriData = $kategoriList[$kategori] ?? ['variant' => 'default', 'badge' => 'BPJS & UMUM'];
 
         if ($request->hasFile('image')) {

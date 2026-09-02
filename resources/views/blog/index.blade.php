@@ -1,16 +1,16 @@
 @extends('layouts.app')
 
-@section('title', 'Rilis Berita & Informasi Terkini - Puskesmas CareLink')
-@section('meta_description', 'Temukan berbagai artikel kesehatan, tips medis, pola hidup sehat, dan rilis informasi kegiatan terkini dari Puskesmas CareLink.')
+@section('title', 'Rilis Berita & Artikel Kesehatan - Puskesmas CareLink')
+@section('meta_description', 'Temukan berbagai artikel kesehatan terbaru, tips medis, gizi & nutrisi, serta rilis informasi kegiatan pelayanan terkini dari Puskesmas CareLink.')
 
 @push('styles')
-<link rel="stylesheet" href="{{ asset('css/blog/blog-public.css') }}">
+<link rel="stylesheet" href="{{ asset('css/blog/blog-public.css') }}?v={{ time() }}">
 @endpush
 
 @section('content')
 
 {{-- =========================================================================
-   HEADER SECTION: CLEAN MINT SUBPAGE HEADER WITH BOTANICAL ORNAMENT
+   HEADER SECTION: CLEAN MINT SUBPAGE HEADER WITH BOTANICAL WATERMARK
    ========================================================================= --}}
 <section class="subpage-header">
     <img src="{{ asset('assets/botanical-clean.png') }}?v={{ file_exists(public_path('assets/botanical-clean.png')) ? filemtime(public_path('assets/botanical-clean.png')) : time() }}" alt="" class="subpage-header__watermark" aria-hidden="true">
@@ -19,76 +19,65 @@
         <div class="subpage-header__breadcrumb" data-aos="fade-right">
             <a href="{{ route('home') }}">Beranda</a>
             <span class="subpage-header__breadcrumb-sep">•</span>
-            <span class="subpage-header__breadcrumb-current">Rilis Berita & Artikel</span>
+            <span class="subpage-header__breadcrumb-current">Berita & Artikel</span>
         </div>
         <h1 class="subpage-header__title" data-aos="fade-right">Rilis Berita & Informasi Terkini</h1>
         <p class="subpage-header__subtitle" data-aos="fade-up">
-            Informasi seputar kesehatan terkini dan kegiatan pelayanan yang dilaksanakan oleh Puskesmas CareLink
+            Kumpulan edukasi kesehatan, tips medis terpercaya, dan warta kegiatan terkini dari Puskesmas CareLink
         </p>
     </div>
 </section>
 
-{{-- Main Content Container --}}
-<div class="blog-content-wrapper">
-    <div class="blog-content-container">
+{{-- =========================================================================
+   MAIN CONTENT WRAPPER
+   ========================================================================= --}}
+<div class="blog-magazine-wrapper">
+    <div class="blog-magazine-container">
 
-        {{-- Search & Filter Controls (2 Kolom Seperti Gambar 2 Dinkes) --}}
-        <div class="blog-filter-card" data-aos="fade-up">
-            <form action="{{ route('blog.index') }}" method="GET" class="blog-filter-form">
-                <div class="blog-filter-form__grid">
-                    {{-- Kolom Kiri: Cari Album / Kegiatan / Artikel --}}
-                    <div class="blog-filter-col">
-                        <label class="blog-filter-label" for="search-input">Cari Album / Kegiatan / Artikel</label>
-                        <div class="blog-search-input-group">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6E857E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="search-icon">
-                                <circle cx="11" cy="11" r="8"></circle>
-                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                            </svg>
-                            <input type="text" id="search-input" name="search" placeholder="Cari nama artikel atau kegiatan..." value="{{ request('search') }}">
-                            @if(request('search'))
-                                <a href="{{ route('blog.index', ['category' => request('category')]) }}" class="search-clear-btn" title="Hapus pencarian">&times;</a>
-                            @endif
-                            <button type="submit" class="btn-dinkes-search">
-                                <span>Cari</span>
-                            </button>
-                        </div>
+        {{-- 1. MODERN CATEGORY PILLS TABS + SEARCH BAR HEADER --}}
+        <div class="blog-magazine-nav-card" data-aos="fade-up">
+            <form action="{{ route('blog.index') }}" method="GET" id="blogSearchFilterForm" class="blog-nav-form">
+                <div class="blog-nav-row">
+                    {{-- Left: Horizontal Scrollable Category Pills --}}
+                    <div class="blog-pills-scroll-wrapper">
+                        <a href="{{ route('blog.index', array_filter(['search' => request('search')])) }}" 
+                           class="blog-pill-btn {{ !request('category') ? 'active' : '' }}">
+                           <i class="bx bx-grid-alt me-1"></i> Semua Artikel
+                        </a>
+                        @foreach($categories as $cat)
+                            <a href="{{ route('blog.index', array_filter(['search' => request('search'), 'category' => $cat])) }}" 
+                               class="blog-pill-btn {{ request('category') == $cat ? 'active' : '' }}">
+                               {{ $cat }}
+                            </a>
+                        @endforeach
                     </div>
 
-                    {{-- Kolom Kanan: Filter Kategori --}}
-                    <div class="blog-filter-col">
-                        <label class="blog-filter-label" for="category-select">Filter Kategori</label>
-                        <div class="blog-select-group">
-                            <select id="category-select" name="category" onchange="this.form.submit()" class="blog-category-select">
-                                <option value="">Semua Kategori</option>
-                                @foreach($categories as $cat)
-                                    <option value="{{ $cat }}" {{ request('category') == $cat ? 'selected' : '' }}>
-                                        {{ $cat }}
-                                    </option>
-                                @endforeach
-                            </select>
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0A5C45" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="select-chevron">
-                                <polyline points="6 9 12 15 18 9"></polyline>
-                            </svg>
-                        </div>
-                        {{-- Custom Dropdown Mobile --}}
-                        <div class="blog-custom-dropdown" id="customCategoryDropdown">
-                            <div class="blog-custom-dropdown__selected" id="customDropdownSelected">
-                                <span>{{ request('category') ?: 'Semua Kategori' }}</span>
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                            </div>
-                            <div class="blog-custom-dropdown__options" id="customDropdownOptions">
-                                <a href="{{ route('blog.index', array_filter(['search' => request('search')])) }}" class="blog-custom-dropdown__option {{ !request('category') ? 'active' : '' }}">Semua Kategori</a>
-                                @foreach($categories as $cat)
-                                    <a href="{{ route('blog.index', array_filter(['search' => request('search'), 'category' => $cat])) }}" class="blog-custom-dropdown__option {{ request('category') == $cat ? 'active' : '' }}">{{ $cat }}</a>
-                                @endforeach
-                            </div>
+                    {{-- Right: Search Input Bar --}}
+                    <div class="blog-nav-search-wrap">
+                        @if(request('category'))
+                            <input type="hidden" name="category" value="{{ request('category') }}">
+                        @endif
+                        <div class="blog-search-box">
+                            <i class="bx bx-search search-icon"></i>
+                            <input type="text" 
+                                   name="search" 
+                                   placeholder="Cari berita atau kata kunci..." 
+                                   value="{{ request('search') }}"
+                                   autocomplete="off">
+                            @if(request('search'))
+                                <a href="{{ route('blog.index', array_filter(['category' => request('category')])) }}" 
+                                   class="search-clear-btn" 
+                                   title="Hapus pencarian">&times;</a>
+                            @endif
+                            <button type="submit" class="btn-blog-search-submit">Cari</button>
                         </div>
                     </div>
                 </div>
             </form>
         </div>
 
-        {{-- Top Highlight / Featured Row (Ditampilkan jika halaman 1 dan tanpa pencarian) --}}
+
+        {{-- 2. FEATURED MAGAZINE HERO SECTION (Halaman 1 tanpa filter) --}}
         @if($articles->currentPage() == 1 && !request('search') && !request('category') && $articles->count() >= 3)
             @php
                 $heroFeatured = $articles->first();
@@ -96,153 +85,168 @@
                 $gridArticles = $articles->slice(3);
             @endphp
 
-            <div class="blog-highlights-grid">
-                {{-- Highlight Kiri (Banner Besar) --}}
-                <article class="blog-card blog-card--featured" data-aos="fade-up">
-                    <a href="{{ route('blog.show', $heroFeatured->slug) }}" class="blog-card__image-wrap">
-                        <img src="{{ $heroFeatured->thumbnail_url }}" alt="{{ $heroFeatured->title }}" class="blog-card__img">
-                        <div class="blog-card__overlay"></div>
-                    </a>
-                    <div class="blog-card__content">
-                        <div class="blog-card__meta">
-                            <span>{{ strtoupper($heroFeatured->formatted_date) }}</span>
-                            <span class="blog-card__meta-dot">&bull;</span>
-                            <span>{{ strtoupper($heroFeatured->category) }}</span>
-                        </div>
-                        <h2 class="blog-card__title">
-                            <a href="{{ route('blog.show', $heroFeatured->slug) }}">
-                                {{ $heroFeatured->title }}
+            <div class="blog-editorial-hero" data-aos="fade-up">
+                <div class="row g-4">
+                    {{-- Hero Kiri (Banner Utama Besar 16:9) --}}
+                    <div class="col-lg-7 col-12">
+                        <article class="magazine-hero-card">
+                            <a href="{{ route('blog.show', $heroFeatured->slug) }}" class="magazine-hero-card__thumb">
+                                <img src="{{ $heroFeatured->thumbnail_url }}" alt="{{ $heroFeatured->title }}" class="magazine-hero-card__img">
+                                <div class="magazine-hero-card__gradient"></div>
+                                <span class="magazine-hero-card__badge">
+                                    <i class="bx bx-bookmark-heart me-1"></i> {{ strtoupper($heroFeatured->category) }}
+                                </span>
                             </a>
-                        </h2>
-                        <a href="{{ route('blog.show', $heroFeatured->slug) }}" class="btn-blog-read">
-                            Baca selengkapnya
-                        </a>
-                    </div>
-                </article>
-
-                {{-- Highlight Kanan (2 Kartu Stack) --}}
-                <div class="blog__sidebar" data-aos="fade-up">
-                    @foreach($heroSides as $side)
-                        <article class="blog-card blog-card--side">
-                            <a href="{{ route('blog.show', $side->slug) }}" class="blog-card__side-img-wrap">
-                                <img src="{{ $side->thumbnail_url }}" alt="{{ $side->title }}" class="blog-card__side-img">
-                            </a>
-                            <div class="blog-card__side-body">
-                                <div class="blog-card__side-meta-row">
-                                    <span class="blog-card__category-badge">{{ strtoupper($side->category) }}</span>
-                                    <span class="blog-card__date">{{ $side->formatted_date }}</span>
+                            <div class="magazine-hero-card__content">
+                                <div class="magazine-hero-card__meta">
+                                    <span><i class="bx bx-calendar me-1"></i>{{ $heroFeatured->formatted_date }}</span>
+                                    <span class="meta-divider">•</span>
+                                    <span><i class="bx bx-time-five me-1"></i>{{ $heroFeatured->reading_time }}</span>
+                                    <span class="meta-divider">•</span>
+                                    <span><i class="bx bx-user me-1"></i>{{ $heroFeatured->author }}</span>
                                 </div>
-                                <h3 class="blog-card__side-title">
-                                    <a href="{{ route('blog.show', $side->slug) }}">
-                                        {{ $side->title }}
+                                <h2 class="magazine-hero-card__title">
+                                    <a href="{{ route('blog.show', $heroFeatured->slug) }}">
+                                        {{ $heroFeatured->title }}
                                     </a>
-                                </h3>
-                                <a href="{{ route('blog.show', $side->slug) }}" class="blog-card__link-text">
-                                    <span>Baca Artikel</span>
-                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                                        <polyline points="12 5 19 12 12 19"></polyline>
-                                    </svg>
-                                </a>
+                                </h2>
+                                <p class="magazine-hero-card__excerpt">
+                                    {{ Str::limit(strip_tags($heroFeatured->excerpt), 130) }}
+                                </p>
                             </div>
                         </article>
-                    @endforeach
+                    </div>
+
+                    {{-- Hero Kanan (2 Artikel Unggulan Stack) --}}
+                    <div class="col-lg-5 col-12 d-flex flex-column gap-3">
+                        @foreach($heroSides as $side)
+                            <article class="magazine-side-card flex-grow-1">
+                                <a href="{{ route('blog.show', $side->slug) }}" class="magazine-side-card__thumb">
+                                    <img src="{{ $side->thumbnail_url }}" alt="{{ $side->title }}" class="magazine-side-card__img">
+                                    <span class="magazine-side-card__badge">{{ strtoupper($side->category) }}</span>
+                                </a>
+                                <div class="magazine-side-card__body">
+                                    <div class="magazine-side-card__meta">
+                                        <span><i class="bx bx-calendar me-1"></i>{{ $side->formatted_date }}</span>
+                                        <span class="meta-divider">•</span>
+                                        <span><i class="bx bx-time-five me-1"></i>{{ $side->reading_time }}</span>
+                                    </div>
+                                    <h3 class="magazine-side-card__title">
+                                        <a href="{{ route('blog.show', $side->slug) }}">
+                                            {{ $side->title }}
+                                        </a>
+                                    </h3>
+                                    <a href="{{ route('blog.show', $side->slug) }}" class="magazine-read-link">
+                                        <span>Baca Selengkapnya</span>
+                                        <i class="bx bx-right-arrow-alt"></i>
+                                    </a>
+                                </div>
+                            </article>
+                        @endforeach
+                    </div>
                 </div>
             </div>
         @else
             @php $gridArticles = $articles; @endphp
         @endif
 
-        {{-- Catalog Grid Section (3 Kolom Seperti Dinkes) --}}
+
+        {{-- 3. EDITORIAL ARTICLES CATALOG GRID (3 KOLOM) --}}
         @if(isset($gridArticles) && $gridArticles->count() > 0)
-            <div class="articles-catalog-section">
-                <div class="articles-grid">
+            <div class="blog-catalog-section mt-4">
+                @if(request('category') || request('search'))
+                    <div class="blog-search-results-header mb-4 d-flex align-items-center justify-content-between">
+                        <h5 class="fw-bold mb-0 text-dark">
+                            <i class="bx bx-news me-2 text-primary"></i>
+                            @if(request('category'))
+                                Kategori: <span class="text-primary">{{ request('category') }}</span>
+                            @else
+                                Hasil Pencarian: "<span class="text-primary">{{ request('search') }}</span>"
+                            @endif
+                            <small class="text-muted fs-6 ms-2">({{ $articles->total() }} Artikel Ditemukan)</small>
+                        </h5>
+                        <a href="{{ route('blog.index') }}" class="btn btn-sm btn-outline-secondary rounded-pill px-3">
+                            <i class="bx bx-reset me-1"></i> Reset Filter
+                        </a>
+                    </div>
+                @endif
+
+                <div class="row g-4">
                     @foreach($gridArticles as $index => $item)
-                        <article class="article-card" data-aos="fade-up" data-aos-delay="{{ min($loop->index * 60, 450) }}">
-                            <a href="{{ route('blog.show', $item->slug) }}" class="article-card__thumb-wrap">
-                                <img src="{{ $item->thumbnail_url }}" alt="{{ $item->title }}" class="article-card__img" loading="lazy">
-                                <span class="article-card__category">{{ $item->category }}</span>
-                            </a>
-                            <div class="article-card__body">
-                                <div>
-                                    <div class="article-card__meta">
-                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6E857E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                                            <line x1="16" y1="2" x2="16" y2="6"></line>
-                                            <line x1="8" y1="2" x2="8" y2="6"></line>
-                                            <line x1="3" y1="10" x2="21" y2="10"></line>
-                                        </svg>
-                                        <span>{{ $item->formatted_date }}</span>
-                                        <span>&bull;</span>
-                                        <span>{{ $item->reading_time }}</span>
+                        <div class="col-lg-4 col-md-6 col-12 d-flex">
+                            <article class="magazine-card w-100" data-aos="fade-up" data-aos-delay="{{ min($loop->index * 60, 450) }}">
+                                {{-- Thumbnail & Overlay Badges --}}
+                                <a href="{{ route('blog.show', $item->slug) }}" class="magazine-card__thumb-wrap">
+                                    <img src="{{ $item->thumbnail_url }}" alt="{{ $item->title }}" class="magazine-card__img" loading="lazy">
+                                    <span class="magazine-card__cat-badge">
+                                        {{ $item->category }}
+                                    </span>
+                                    <span class="magazine-card__read-badge">
+                                        <i class="bx bx-time-five me-1"></i>{{ $item->reading_time }}
+                                    </span>
+                                </a>
+
+                                {{-- Body Content --}}
+                                <div class="magazine-card__body">
+                                    <div class="magazine-card__meta">
+                                        <span class="meta-date">
+                                            <i class="bx bx-calendar me-1"></i>{{ $item->formatted_date }}
+                                        </span>
+                                        <span class="meta-views">
+                                            <i class="bx bx-show me-1"></i>{{ number_format($item->views_count ?? 0) }} dibaca
+                                        </span>
                                     </div>
-                                    <h2 class="article-card__title">
+
+                                    <h2 class="magazine-card__title">
                                         <a href="{{ route('blog.show', $item->slug) }}">
                                             {{ $item->title }}
                                         </a>
                                     </h2>
-                                    <p class="article-card__excerpt">
-                                        {{ Str::limit($item->excerpt, 110) }}
+
+                                    <p class="magazine-card__excerpt">
+                                        {{ Str::limit(strip_tags($item->excerpt), 110) }}
                                     </p>
                                 </div>
-                                <div class="article-card__footer">
-                                    <span class="article-card__author">{{ $item->author }}</span>
-                                    <a href="{{ route('blog.show', $item->slug) }}" class="article-card__read-more">
-                                        <span>Baca Artikel</span>
-                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                            <line x1="5" y1="12" x2="19" y2="12"></line>
-                                            <polyline points="12 5 19 12 12 19"></polyline>
-                                        </svg>
+
+                                {{-- Footer --}}
+                                <div class="magazine-card__footer">
+                                    <div class="magazine-card__author">
+                                        <div class="author-avatar">
+                                            {{ strtoupper(substr($item->author ?? 'P', 0, 1)) }}
+                                        </div>
+                                        <span class="author-name">{{ Str::limit($item->author ?? 'Admin', 16) }}</span>
+                                    </div>
+                                    <a href="{{ route('blog.show', $item->slug) }}" class="magazine-card__btn-read">
+                                        <span>Baca</span>
+                                        <i class="bx bx-right-arrow-alt icon-arrow"></i>
                                     </a>
                                 </div>
-                            </div>
-                        </article>
+                            </article>
+                        </div>
                     @endforeach
                 </div>
 
                 {{-- Pagination Links --}}
-                <div class="blog-pagination-wrapper">
+                <div class="blog-pagination-wrapper mt-5 d-flex justify-content-center">
                     {{ $articles->links() }}
                 </div>
             </div>
         @elseif($articles->count() == 0)
-            <div class="blog-empty-state">
-                <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#6E857E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="11" cy="11" r="8"></circle>
-                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                </svg>
-                <h3>Artikel Tidak Ditemukan</h3>
-                <p>Maaf, tidak ada rilis berita atau informasi yang sesuai dengan kata kunci pencarian Anda.</p>
-                <a href="{{ route('blog.index') }}" class="btn-reset-filter">Reset Filter & Pencarian</a>
+            <div class="blog-empty-state text-center py-5 my-4">
+                <div class="avatar avatar-xl bg-label-secondary mx-auto mb-3 rounded-circle d-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
+                    <i class="bx bx-news fs-1 text-muted"></i>
+                </div>
+                <h4 class="fw-bold mb-2 text-dark">Artikel Tidak Ditemukan</h4>
+                <p class="text-muted mb-4" style="max-width: 480px; margin: 0 auto;">
+                    Maaf, tidak ada rilis berita atau artikel kesehatan yang sesuai dengan kata kunci atau kategori yang Anda pilih.
+                </p>
+                <a href="{{ route('blog.index') }}" class="btn btn-primary px-4 rounded-pill">
+                    <i class="bx bx-reset me-1"></i> Tampilkan Semua Artikel
+                </a>
             </div>
         @endif
 
     </div>
 </div>
-
-@push('scripts')
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const selected = document.getElementById('customDropdownSelected');
-        const options = document.getElementById('customDropdownOptions');
-        if (!selected || !options) return;
-
-        selected.addEventListener('click', function(e) {
-            e.stopPropagation();
-            const isOpen = options.classList.contains('show');
-            document.querySelectorAll('.blog-custom-dropdown__options').forEach(function(el) {
-                el.classList.remove('show');
-            });
-            if (!isOpen) {
-                options.classList.add('show');
-            }
-        });
-
-        document.addEventListener('click', function() {
-            options.classList.remove('show');
-        });
-    });
-</script>
-@endpush
 
 @endsection

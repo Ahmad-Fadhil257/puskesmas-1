@@ -57,7 +57,8 @@ class AuthController extends Controller
                 Auth::logout();
                 return response()->json([
                     'success' => false,
-                    'message' => 'Akun Anda sedang dinonaktifkan oleh Administrator.',
+                    'is_deactivated' => true,
+                    'message' => 'Akun Anda telah dinonaktifkan. Silakan hubungi Administrator yang bersangkutan.',
                 ], 403);
             }
 
