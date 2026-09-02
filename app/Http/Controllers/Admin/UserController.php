@@ -110,7 +110,7 @@ class UserController extends Controller
             'email' => $request->email,
             'role' => $role,
             'phone' => $request->phone,
-            'is_active' => true,
+            'is_active' => $user->id === Auth::id() ? true : $request->boolean('is_active', $user->is_active),
             'accessible_pages' => null,
         ];
 

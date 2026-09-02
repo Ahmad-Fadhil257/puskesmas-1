@@ -4,6 +4,22 @@
 
 @section('content')
 
+@push('styles')
+<style>
+    .modal-content .form-control,
+    .modal-content .form-select {
+        color: #FFFFFF !important;
+    }
+    .modal-content .form-control::placeholder {
+        color: rgba(255, 255, 255, 0.7) !important;
+    }
+    .modal-content .form-control:focus,
+    .modal-content .form-select:focus {
+        color: #FFFFFF !important;
+    }
+</style>
+@endpush
+
     {{-- Breadcrumb & Header --}}
     <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-3">
         <div>
@@ -129,7 +145,8 @@
                         <th>Pengguna</th>
                         <th>Kontak</th>
                         <th class="text-center">Peran Akun</th>
-                        <th class="text-center" style="width: 130px;">Aksi</th>
+                        <th class="text-center">Status</th>
+                        <th class="text-center" style="width: 150px;">Aksi</th>
                     </tr>
                 </thead>
                 <tbody class="table-border-bottom-0">
@@ -176,8 +193,31 @@
                                     </span>
                                 @endif
                             </td>
+                            <td class="text-center">
+                                @if($item->is_active)
+                                    <span class="badge bg-label-success rounded-pill px-3 py-1">
+                                        <i class="bx bx-check-circle me-1"></i> Aktif
+                                    </span>
+                                @else
+                                    <span class="badge bg-label-danger rounded-pill px-3 py-1">
+                                        <i class="bx bx-x-circle me-1"></i> Nonaktif
+                                    </span>
+                                @endif
+                            </td>
                             <td>
                                 <div class="d-flex justify-content-center align-items-center gap-1">
+                                    {{-- Toggle Status Button --}}
+                                    @if($item->id !== Auth::id())
+                                        <form action="{{ route('admin.users.toggle-status', $item->id) }}" method="POST" class="d-inline">
+                                            @csrf
+                                            @method('PATCH')
+                                            <button type="submit" class="btn btn-sm btn-icon {{ $item->is_active ? 'btn-outline-secondary' : 'btn-outline-success' }}" 
+                                                    title="{{ $item->is_active ? 'Nonaktifkan Akun' : 'Aktifkan Akun' }}">
+                                                <i class="bx {{ $item->is_active ? 'bx-block' : 'bx-check' }}"></i>
+                                            </button>
+                                        </form>
+                                    @endif
+
                                     {{-- Edit Button (Buka Popup Modal) --}}
                                     <button type="button" class="btn btn-sm btn-icon btn-outline-warning" data-bs-toggle="modal" data-bs-target="#modalEditUser-{{ $item->id }}" title="Edit Pengguna">
                                         <i class="bx bx-edit-alt"></i>
@@ -241,7 +281,7 @@
                             <input type="text" name="name" class="form-control" placeholder="Contoh: dr. Hendra Pratama" required>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label fw-semibold">Email Untuk Login <span class="text-danger">*</span></label>
+                            <label class="form-label fw-semibold">Email <span class="text-danger">*</span></label>
                             <input type="email" name="email" class="form-control" placeholder="yuri@gmail.com" required>
                         </div>
                         <div class="mb-3">
@@ -295,7 +335,7 @@
                                 <input type="text" name="name" class="form-control" value="{{ old('name', $item->name) }}" required>
                             </div>
                             <div class="mb-3">
-                                <label class="form-label fw-semibold">Email Untuk Login <span class="text-danger">*</span></label>
+                                <label class="form-label fw-semibold">Email <span class="text-danger">*</span></label>
                                 <input type="email" name="email" class="form-control" value="{{ old('email', $item->email) }}" required>
                             </div>
                             <div class="mb-3">
@@ -311,22 +351,33 @@
                                 <label class="form-label fw-semibold">Kontak</label>
                                 <input type="text" name="phone" class="form-control" value="{{ old('phone', $item->phone) }}" placeholder="Contoh: 08123456789">
                             </div>
-                            <div class="form-check form-switch pt-2">
-                                <input class="form-check-input" type="checkbox" name="is_admin" value="1" id="editIsAdmin-{{ $item->id }}" {{ $item->role === 'admin' ? 'checked' : '' }} {{ $item->id === Auth::id() ? 'disabled' : '' }} onchange="toggleRoleLabel(this, 'editRoleBadge-{{ $item->id }}')">
-                                @if($item->id === Auth::id())
-                                    <input type="hidden" name="is_admin" value="1">
-                                @endif
-                                <label class="form-check-label fw-semibold" for="editIsAdmin-{{ $item->id }}">
-                                    Peran Akun: 
-                                    @if($item->role === 'admin')
-                                        <span id="editRoleBadge-{{ $item->id }}" class="badge bg-label-primary ms-1">Administrator (Akses Penuh)</span>
-                                    @else
-                                        <span id="editRoleBadge-{{ $item->id }}" class="badge bg-label-info ms-1">Staf Puskesmas</span>
+                            <div class="d-flex flex-column gap-2 pt-2">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" name="is_admin" value="1" id="editIsAdmin-{{ $item->id }}" {{ $item->role === 'admin' ? 'checked' : '' }} {{ $item->id === Auth::id() ? 'disabled' : '' }} onchange="toggleRoleLabel(this, 'editRoleBadge-{{ $item->id }}')">
+                                    @if($item->id === Auth::id())
+                                        <input type="hidden" name="is_admin" value="1">
                                     @endif
-                                </label>
-                                @if($item->id === Auth::id())
-                                    <div class="form-text text-warning small">Akun Anda sendiri tidak dapat diubah menjadi Staf.</div>
-                                @endif
+                                    <label class="form-check-label fw-semibold" for="editIsAdmin-{{ $item->id }}">
+                                        Peran Akun: 
+                                        @if($item->role === 'admin')
+                                            <span id="editRoleBadge-{{ $item->id }}" class="badge bg-label-primary ms-1">Administrator (Akses Penuh)</span>
+                                        @else
+                                            <span id="editRoleBadge-{{ $item->id }}" class="badge bg-label-info ms-1">Staf Puskesmas</span>
+                                        @endif
+                                    </label>
+                                </div>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" name="is_active" value="1" id="editIsActive-{{ $item->id }}" {{ $item->is_active ? 'checked' : '' }} {{ $item->id === Auth::id() ? 'disabled' : '' }}>
+                                    @if($item->id === Auth::id())
+                                        <input type="hidden" name="is_active" value="1">
+                                    @endif
+                                    <label class="form-check-label fw-semibold" for="editIsActive-{{ $item->id }}">
+                                        Status Akun Aktif (Dapat Login)
+                                    </label>
+                                    @if($item->id === Auth::id())
+                                        <div class="form-text text-warning small">Akun Anda sendiri tidak dapat dinonaktifkan.</div>
+                                    @endif
+                                </div>
                             </div>
                         </div>
                         <div class="modal-footer border-top py-2">

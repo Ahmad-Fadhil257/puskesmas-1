@@ -172,7 +172,22 @@
                             body: JSON.stringify({ email, password, remember })
                         });
 
-                        const result = await response.json();
+                        if (response.status === 419) {
+                            Swal.fire({
+                                icon: 'info',
+                                title: 'Sesi Login Diperbarui',
+                                text: 'Halaman akan diperbarui otomatis untuk menyegarkan token keamanan Anda.',
+                                confirmButtonText: 'Segarkan Halaman',
+                                confirmButtonColor: '#0A5C45'
+                            }).then(() => {
+                                window.location.reload();
+                            });
+                            btnSubmitLogin.disabled = false;
+                            btnText.textContent = 'Masuk ke Dashboard';
+                            return;
+                        }
+
+                        const result = await response.json().catch(() => ({}));
 
                         if (response.ok && result.success) {
                             Toast.fire({
@@ -183,13 +198,23 @@
                             setTimeout(() => {
                                 window.location.href = result.redirect_url || "{{ route('dashboard') }}";
                             }, 700);
+                        } else if (response.status === 403 || result.is_deactivated) {
+                            Swal.fire({
+                                icon: 'warning',
+                                title: 'Akun Dinonaktifkan',
+                                text: result.message || 'Akun Anda telah dinonaktifkan. Silakan hubungi Administrator yang bersangkutan.',
+                                confirmButtonText: 'Saya Mengerti',
+                                confirmButtonColor: '#0A5C45'
+                            });
+                            btnSubmitLogin.disabled = false;
+                            btnText.textContent = 'Masuk ke Dashboard';
                         } else {
                             throw new Error(result.message || 'Email atau kata sandi tidak cocok.');
                         }
                     } catch (error) {
                         Toast.fire({
                             icon: 'error',
-                            title: error.message
+                            title: error.message || 'Email atau kata sandi tidak cocok.'
                         });
                         btnSubmitLogin.disabled = false;
                         btnText.textContent = 'Masuk ke Dashboard';

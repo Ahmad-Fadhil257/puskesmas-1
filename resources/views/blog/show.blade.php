@@ -4,20 +4,20 @@
 @section('meta_description', Str::limit(strip_tags($article->excerpt ?? $article->content), 150))
 
 @push('styles')
-<link rel="stylesheet" href="{{ asset('css/blog/blog-public.css') }}">
+<link rel="stylesheet" href="{{ asset('css/blog/blog-public.css') }}?v={{ time() }}">
 @endpush
 
 @section('content')
 
 {{-- =========================================================================
-   HEADER SECTION: CLEAN MINT SUBPAGE HEADER WITH BOTANICAL ORNAMENT
+   SUBPAGE HEADER: CLEAN MINT SUBPAGE HEADER WITH BOTANICAL ORNAMENT
    ========================================================================= --}}
 <section class="subpage-header" data-aos="fade-down">
     <img src="{{ asset('assets/botanical-clean.png') }}?v={{ file_exists(public_path('assets/botanical-clean.png')) ? filemtime(public_path('assets/botanical-clean.png')) : time() }}" alt="" class="subpage-header__watermark" aria-hidden="true">
 
     <div class="subpage-header__container">
-        {{-- Breadcrumbs Navigasi --}}
-        <div class="subpage-header__breadcrumb">
+        {{-- Breadcrumb Navigasi --}}
+        <div class="subpage-header__breadcrumb" data-aos="fade-right">
             <a href="{{ route('home') }}">Beranda</a>
             <span class="subpage-header__breadcrumb-sep">•</span>
             <a href="{{ route('blog.index') }}">Berita & Artikel</a>
@@ -25,148 +25,147 @@
             <span class="subpage-header__breadcrumb-current">{{ Str::limit($article->title, 35) }}</span>
         </div>
 
-        {{-- Category Badge --}}
-        <span class="article-header-category-pill" data-aos="fade-right">{{ strtoupper($article->category) }}</span>
-
-        {{-- Large Article Title --}}
-        <h1 class="article-header-main-title" data-aos="fade-right">{{ $article->title }}</h1>
-
-        {{-- Metadata Row --}}
-        <div class="article-header-meta-row" data-aos="fade-up">
-            <span class="meta-item">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                    <circle cx="12" cy="7" r="4"></circle>
-                </svg>
-                <strong>{{ $article->author }}</strong>
-            </span>
-            <span class="dot">&bull;</span>
-            <span class="meta-item">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                    <line x1="16" y1="2" x2="16" y2="6"></line>
-                    <line x1="8" y1="2" x2="8" y2="6"></line>
-                    <line x1="3" y1="10" x2="21" y2="10"></line>
-                </svg>
-                {{ $article->formatted_date }}
-            </span>
-            <span class="dot">&bull;</span>
-            <span class="meta-item">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <polyline points="12 6 12 12 16 14"></polyline>
-                </svg>
-                {{ $article->reading_time }}
-            </span>
-            <span class="dot">&bull;</span>
-            <span class="meta-item">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                    <circle cx="12" cy="12" r="3"></circle>
-                </svg>
-                {{ $article->views_count }} kali dibaca
-            </span>
+        {{-- Badge Kategori --}}
+        <div class="mt-2 mb-2" data-aos="fade-right">
+            <span class="article-header-category-pill">{{ strtoupper($article->category) }}</span>
         </div>
+
+        {{-- Judul Artikel Utama Header --}}
+        <h1 class="subpage-header__title" data-aos="fade-right">{{ $article->title }}</h1>
+        <p class="subpage-header__subtitle" data-aos="fade-up">
+            Dipublikasikan oleh {{ $article->author }} pada {{ $article->formatted_date }} • {{ $article->reading_time }} • {{ number_format($article->views_count ?? 0) }} kali dibaca
+        </p>
     </div>
 </section>
 
-{{-- Content Container --}}
-<div class="blog-content-wrapper">
-    <div class="blog-content-container">
+{{-- =========================================================================
+   MAIN READER CONTENT CONTAINER
+   ========================================================================= --}}
+<div class="article-reader-wrapper">
+    <div class="article-reader-container">
 
-        {{-- Kartu 1: Konten Utama Artikel (Card Terpisah Latar Putih) --}}
-        <article class="article-main-card" data-aos="fade-up">
-            {{-- Featured Image Banner --}}
-            <div class="article-featured-image">
-                <img src="{{ $article->thumbnail_url }}" alt="{{ $article->title }}">
+        {{-- 1. HERO IMAGE BANNER BESAR ROUNDED (12px Border Radius) --}}
+        <div class="article-hero-banner" data-aos="zoom-in" data-aos-delay="100">
+            <img src="{{ $article->thumbnail_url }}" alt="{{ $article->title }}" class="article-hero-banner__img">
+            <div class="article-hero-banner__overlay"></div>
+            <div class="article-hero-banner__badge">
+                <i class="bx bx-bookmark-heart me-1"></i> {{ strtoupper($article->category) }}
             </div>
+        </div>
 
-            {{-- Article Content Body --}}
-            <div class="article-body-content">
-                {!! $article->content !!}
-            </div>
+        {{-- 2. LAYOUT 2 KOLOM: KARTU KONTEN OVERLAP (KIRI) + SIDEBAR STICKY (KANAN) --}}
+        <div class="article-reader-grid">
+            
+            {{-- KOLOM KIRI (70%): KARTU PUTIH MENGAMBANG OVERLAP --}}
+            <main class="article-reader-main">
+                <article class="article-stack-card" data-aos="fade-up" data-aos-delay="200">
+                    {{-- Baris Meta Info Ringkas --}}
+                    <div class="article-stack-card__meta">
+                        <span class="meta-item">
+                            <i class="bx bx-user text-primary me-1"></i> {{ $article->author }}
+                        </span>
+                        <span class="meta-sep">•</span>
+                        <span class="meta-item">
+                            <i class="bx bx-calendar text-primary me-1"></i> {{ $article->formatted_date }}
+                        </span>
+                        <span class="meta-sep">•</span>
+                        <span class="meta-item">
+                            <i class="bx bx-time-five text-primary me-1"></i> {{ $article->reading_time }}
+                        </span>
+                        <span class="meta-sep">•</span>
+                        <span class="meta-item">
+                            <i class="bx bx-show text-primary me-1"></i> {{ number_format($article->views_count ?? 0) }} kali dibaca
+                        </span>
+                    </div>
 
-            {{-- Action Bar: Back & Share --}}
-            <div class="article-actions-bar">
-                <a href="{{ route('blog.index') }}" class="btn-back-catalog">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="19" y1="12" x2="5" y2="12"></line>
-                        <polyline points="12 19 5 12 12 5"></polyline>
-                    </svg>
-                    <span>Kembali ke Semua Berita</span>
-                </a>
+                    <hr class="article-stack-card__divider">
 
-                <div class="share-links">
-                    <span class="share-links__label">Bagikan:</span>
-                    
-                    {{-- WhatsApp Share --}}
-                    <a href="https://api.whatsapp.com/send?text={{ urlencode($article->title . ' - ' . url()->current()) }}" target="_blank" rel="noopener noreferrer" class="share-btn" title="Bagikan ke WhatsApp">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
-                        </svg>
-                    </a>
+                    {{-- Isi Teks & Gambar Artikel --}}
+                    <div class="article-stack-card__body">
+                        {!! $article->content !!}
+                    </div>
 
-                    {{-- Copy Link --}}
-                    <button type="button" class="share-btn" id="btnCopyLink" title="Salin Tautan">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
-                            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
-                        </svg>
-                    </button>
-                </div>
-            </div>
-        </article>
+                    {{-- Bottom Action: Kembali & Share Mobile --}}
+                    <div class="article-stack-card__footer">
+                        <a href="{{ route('blog.index') }}" class="btn-back-to-articles">
+                            <i class="bx bx-arrow-back me-1"></i> Kembali ke Berita & Artikel
+                        </a>
 
-        {{-- Kartu 2: Direkomendasikan untuk Anda (Card Terpisah Maksimal 6 Artikel) --}}
-        @if(isset($relatedArticles) && $relatedArticles->count() > 0)
-            <section class="article-related-card" data-aos="fade-up">
-                <div class="article-related-card__header">
-                    <h3 class="article-related-card__title">Direkomendasikan untuk Anda</h3>
-                    <p class="article-related-card__subtitle">Rekomendasi bacaan edukasi kesehatan seputar topik <strong>{{ $article->category }}</strong> untuk Anda dan keluarga.</p>
-                </div>
-
-                <div class="articles-grid">
-                    @foreach($relatedArticles as $index => $rel)
-                        <article class="article-card" data-aos="fade-up" data-aos-delay="{{ min($index * 80, 450) }}">
-                            <a href="{{ route('blog.show', $rel->slug) }}" class="article-card__thumb-wrap">
-                                <img src="{{ $rel->thumbnail_url }}" alt="{{ $rel->title }}" class="article-card__img" loading="lazy">
-                                <span class="article-card__category">{{ $rel->category }}</span>
+                        <div class="article-footer-share d-md-none">
+                            <span class="share-label me-2">Bagikan:</span>
+                            <a href="https://api.whatsapp.com/send?text={{ urlencode($article->title . ' - ' . url()->current()) }}" target="_blank" rel="noopener noreferrer" class="btn-share-icon btn-share-wa" title="Bagikan ke WhatsApp">
+                                <i class="bx bxl-whatsapp"></i>
                             </a>
-                            <div class="article-card__body">
-                                <div>
-                                    <div class="article-card__meta">
-                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6E857E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                                            <line x1="16" y1="2" x2="16" y2="6"></line>
-                                            <line x1="8" y1="2" x2="8" y2="6"></line>
-                                            <line x1="3" y1="10" x2="21" y2="10"></line>
-                                        </svg>
-                                        <span>{{ $rel->formatted_date }}</span>
-                                        <span>&bull;</span>
-                                        <span>{{ $rel->reading_time }}</span>
-                                    </div>
-                                    <h4 class="article-card__title">
-                                        <a href="{{ route('blog.show', $rel->slug) }}">
-                                            {{ $rel->title }}
-                                        </a>
-                                    </h4>
-                                </div>
-                                <div class="article-card__footer">
-                                    <span class="article-card__author">{{ $rel->author }}</span>
-                                    <a href="{{ route('blog.show', $rel->slug) }}" class="article-card__read-more">
-                                        <span>Baca Artikel</span>
-                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                            <line x1="5" y1="12" x2="19" y2="12"></line>
-                                            <polyline points="12 5 19 12 12 19"></polyline>
-                                        </svg>
-                                    </a>
-                                </div>
+                            <button type="button" class="btn-share-icon btn-share-copy btn-copy-trigger" title="Salin Tautan">
+                                <i class="bx bx-link"></i>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </main>
+
+            {{-- KOLOM KANAN (30%): SIDEBAR STICKY READER --}}
+            <aside class="article-reader-sidebar">
+                <div class="article-sticky-box" data-aos="fade-up" data-aos-delay="300">
+                    
+                    {{-- Widget 1: Profil Penulis --}}
+                    <div class="sidebar-widget-card">
+                        <div class="widget-author-wrap">
+                            <div class="widget-author-avatar">
+                                {{ strtoupper(substr($article->author ?? 'P', 0, 1)) }}
                             </div>
-                        </article>
-                    @endforeach
+                            <div class="widget-author-info">
+                                <span class="author-label">Penulis Artikel</span>
+                                <h6 class="author-name">{{ $article->author }}</h6>
+                                <span class="badge bg-label-primary px-2 py-1" style="font-size: 0.72rem;">
+                                    <i class="bx bx-check-shield me-1"></i> Tim Puskesmas
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- Widget 2: Bagikan Artikel --}}
+                    <div class="sidebar-widget-card">
+                        <h6 class="widget-card-title">
+                            <i class="bx bx-share-alt me-1 text-primary"></i> Bagikan Artikel
+                        </h6>
+                        <p class="widget-card-desc">Bagikan informasi kesehatan bermanfaat ini kepada keluarga dan teman Anda.</p>
+                        <div class="widget-share-buttons">
+                            <a href="https://api.whatsapp.com/send?text={{ urlencode($article->title . ' - ' . url()->current()) }}" target="_blank" rel="noopener noreferrer" class="btn-sidebar-share btn-share-whatsapp">
+                                <i class="bx bxl-whatsapp fs-5"></i>
+                                <span>Kirim via WhatsApp</span>
+                            </a>
+                            <button type="button" class="btn-sidebar-share btn-share-copy-link btn-copy-trigger">
+                                <i class="bx bx-copy fs-5"></i>
+                                <span>Salin Tautan Berita</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    {{-- Widget 3: Artikel Terkait Ringkas (Topik Serupa) --}}
+                    @if(isset($relatedArticles) && $relatedArticles->count() > 0)
+                        <div class="sidebar-widget-card">
+                            <h6 class="widget-card-title">
+                                <i class="bx bx-bookmark-alt me-1 text-primary"></i> Topik Serupa
+                            </h6>
+                            <div class="widget-mini-articles-list">
+                                @foreach($relatedArticles->take(4) as $mini)
+                                    <a href="{{ route('blog.show', $mini->slug) }}" class="mini-article-item">
+                                        <img src="{{ $mini->thumbnail_url }}" alt="{{ $mini->title }}" class="mini-article-thumb">
+                                        <div class="mini-article-info">
+                                            <span class="mini-article-date">{{ $mini->formatted_date }}</span>
+                                            <h6 class="mini-article-title">{{ Str::limit($mini->title, 48) }}</h6>
+                                        </div>
+                                    </a>
+                                @endforeach
+                            </div>
+                        </div>
+                    @endif
+
                 </div>
-            </section>
-        @endif
+            </aside>
+
+        </div>
 
     </div>
 </div>
@@ -174,9 +173,9 @@
 @push('scripts')
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        const btnCopy = document.getElementById('btnCopyLink');
-        if (btnCopy) {
-            btnCopy.addEventListener('click', function () {
+        const copyBtns = document.querySelectorAll('.btn-copy-trigger');
+        copyBtns.forEach(function(btn) {
+            btn.addEventListener('click', function () {
                 navigator.clipboard.writeText(window.location.href).then(function () {
                     if (typeof Swal !== 'undefined') {
                         const Toast = Swal.mixin({
@@ -188,14 +187,14 @@
                         });
                         Toast.fire({
                             icon: 'success',
-                            title: 'Tautan artikel berhasil disalin!'
+                            title: 'Tautan berita berhasil disalin ke clipboard!'
                         });
                     } else {
-                        alert('Tautan artikel berhasil disalin!');
+                        alert('Tautan berita berhasil disalin!');
                     }
                 });
             });
-        }
+        });
     });
 </script>
 @endpush

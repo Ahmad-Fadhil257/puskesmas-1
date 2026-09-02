@@ -94,15 +94,13 @@
                                 <label class="form-label fw-semibold" for="kategori">
                                     Kategori Layanan <span class="text-danger">*</span>
                                 </label>
-                                <select class="form-select @error('kategori') is-invalid @enderror" id="kategori" name="kategori" required>
-                                    <option value="">-- Pilih Kategori Layanan --</option>
+                                <input type="text" list="layananCategoryDatalist" class="form-control @error('kategori') is-invalid @enderror" id="kategori" name="kategori" value="{{ old('kategori', $layanan->kategori ?? 'Rawat Jalan (BPJS & Umum)') }}" placeholder="Pilih atau ketik kategori layanan..." required autocomplete="off">
+                                <datalist id="layananCategoryDatalist">
                                     @foreach($categories as $cat)
-                                        <option value="{{ $cat }}" {{ old('kategori', $layanan->kategori ?? 'Rawat Jalan (BPJS & Umum)') == $cat ? 'selected' : '' }}>
-                                            {{ $cat }}
-                                        </option>
+                                        <option value="{{ $cat }}"></option>
                                     @endforeach
-                                </select>
-                                <div class="form-text">Kategori ini otomatis mengatur warna kartu, label jaminan, dan badge modal pasien.</div>
+                                </datalist>
+                                <div class="form-text">Pilih dari daftar rekomendasi atau ketik kategori baru.</div>
                                 @error('kategori')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror

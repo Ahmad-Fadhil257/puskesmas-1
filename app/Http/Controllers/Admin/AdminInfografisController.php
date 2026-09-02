@@ -69,7 +69,7 @@ class AdminInfografisController extends Controller
 
         Infografis::create([
             'title'      => $request->title,
-            'kategori'   => $request->kategori,
+            'kategori'   => \Illuminate\Support\Str::title(trim($request->kategori)),
             'deskripsi'  => $request->deskripsi,
             'image_path' => 'uploads/infografis/' . $filename,
             'is_active'  => $request->boolean('is_active', true),
@@ -98,7 +98,7 @@ class AdminInfografisController extends Controller
 
         $data = [
             'title'     => $request->title,
-            'kategori'  => $request->kategori,
+            'kategori'  => \Illuminate\Support\Str::title(trim($request->kategori)),
             'deskripsi' => $request->deskripsi,
             'is_active' => $request->boolean('is_active', true),
             'order'     => $request->order ?? 0,
