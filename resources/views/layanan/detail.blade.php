@@ -460,7 +460,7 @@
                 </div>
                 <div class="cta-help-actions">
                     @php
-                        $pesanWaLayanan = "Halo Admin Puskesmas, saya ingin bertanya dan berkonsultasi mengenai layanan " . $layanan->nama . ". Apakah kuota antrean untuk hari ini/besok masih tersedia? Terima kasih.";
+                        $pesanWaLayanan = "Halo Admin Puskesmas, saya ingin bertanya dan berkonsultasi mengenai layanan " . ($layanan->title ?? $layanan->nama ?? 'kesehatan') . ". Apakah kuota antrean untuk hari ini/besok masih tersedia? Terima kasih.";
                         $waLayananLink = isset($appSetting) ? $appSetting->getWaUrl($pesanWaLayanan) : '#';
                     @endphp
                     <a href="{{ $waLayananLink }}" target="_blank" rel="noopener" class="btn-cta-wa">
