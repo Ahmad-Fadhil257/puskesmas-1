@@ -12,18 +12,18 @@
 <div class="statistik-page">
 
     {{-- ── Subpage Header (konsisten dengan halaman lain) ─────────────────── --}}
-    <section class="subpage-header" data-aos="fade-down">
+    <section class="subpage-header">
         <img src="{{ asset('assets/botanical-clean.png') }}" alt="" class="subpage-header__watermark" aria-hidden="true">
         <div class="subpage-header__container">
-            <div class="subpage-header__breadcrumb">
+            <div class="subpage-header__breadcrumb" data-aos="fade-right">
                 <a href="{{ route('home') }}">Beranda</a>
                 <span class="subpage-header__breadcrumb-sep">•</span>
                 <span>Informasi Publik</span>
                 <span class="subpage-header__breadcrumb-sep">•</span>
                 <span class="subpage-header__breadcrumb-current">Statistik Kesehatan</span>
             </div>
-            <h1 class="subpage-header__title">Statistik Kesehatan Masyarakat</h1>
-            <p class="subpage-header__subtitle">
+            <h1 class="subpage-header__title" data-aos="fade-right">Statistik Kesehatan Masyarakat</h1>
+            <p class="subpage-header__subtitle" data-aos="fade-up">
                 Transparansi data layanan kesehatan: 10 penyakit terbanyak yang ditangani dan tren kunjungan pasien ke Puskesmas kami.
             </p>
         </div>

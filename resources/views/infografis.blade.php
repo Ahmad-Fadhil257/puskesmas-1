@@ -12,18 +12,18 @@
 {{-- =========================================================================
    SUBPAGE HEADER
    ========================================================================= --}}
-<section class="subpage-header" data-aos="fade-down">
+<section class="subpage-header">
     <img src="{{ asset('assets/botanical-clean.png') }}?v={{ file_exists(public_path('assets/botanical-clean.png')) ? filemtime(public_path('assets/botanical-clean.png')) : time() }}" alt="" class="subpage-header__watermark" aria-hidden="true">
     <div class="subpage-header__container">
-        <div class="subpage-header__breadcrumb">
+        <div class="subpage-header__breadcrumb" data-aos="fade-right">
             <a href="{{ route('home') }}">Beranda</a>
             <span class="subpage-header__breadcrumb-sep">•</span>
             <span>Informasi Publik</span>
             <span class="subpage-header__breadcrumb-sep">•</span>
             <span class="subpage-header__breadcrumb-current">Infografis</span>
         </div>
-        <h1 class="subpage-header__title">Infografis Kesehatan</h1>
-        <p class="subpage-header__subtitle">
+        <h1 class="subpage-header__title" data-aos="fade-right">Infografis Kesehatan</h1>
+        <p class="subpage-header__subtitle" data-aos="fade-up">
             Visualisasi data dan informasi kesehatan masyarakat yang disajikan secara menarik dan mudah dipahami.
         </p>
     </div>

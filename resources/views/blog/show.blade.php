@@ -12,12 +12,12 @@
 {{-- =========================================================================
    HEADER SECTION: CLEAN MINT SUBPAGE HEADER WITH BOTANICAL ORNAMENT
    ========================================================================= --}}
-<section class="subpage-header" data-aos="fade-down">
+<section class="subpage-header">
     <img src="{{ asset('assets/botanical-clean.png') }}?v={{ file_exists(public_path('assets/botanical-clean.png')) ? filemtime(public_path('assets/botanical-clean.png')) : time() }}" alt="" class="subpage-header__watermark" aria-hidden="true">
 
     <div class="subpage-header__container">
         {{-- Breadcrumbs Navigasi --}}
-        <div class="subpage-header__breadcrumb">
+        <div class="subpage-header__breadcrumb" data-aos="fade-right">
             <a href="{{ route('home') }}">Beranda</a>
             <span class="subpage-header__breadcrumb-sep">•</span>
             <a href="{{ route('blog.index') }}">Berita & Artikel</a>

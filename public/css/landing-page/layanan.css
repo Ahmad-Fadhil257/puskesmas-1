@@ -188,7 +188,7 @@
     font-weight: 700;
     font-size: 14px;
     padding: 12px 24px;
-    border-radius: var(--radius-full);
+    border-radius: 8px;
     text-decoration: none;
     box-shadow: 0 4px 14px rgba(184, 93, 56, 0.35);
     transition: var(--transition);
@@ -331,7 +331,7 @@
     font-weight: 800;
     font-size: 13px;
     padding: 10px 20px;
-    border-radius: var(--radius-full);
+    border-radius: 8px;
     text-decoration: none;
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
     transition: var(--transition);

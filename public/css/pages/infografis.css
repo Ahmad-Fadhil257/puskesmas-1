@@ -4,7 +4,7 @@
 
 /* ---------- Wrapper ---------- */
 .infografis-wrapper {
-    background: #F8FAFB;
+    background: #EDF2F7;
     padding: 56px 0 80px;
     min-height: 60vh;
 }
@@ -72,7 +72,7 @@
 }
 
 .infografis-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-4px);
     box-shadow: 0 14px 34px rgba(10, 92, 69, 0.12);
     border-color: rgba(10, 92, 69, 0.25);
 }
