@@ -22,6 +22,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        \Illuminate\Pagination\Paginator::defaultView('vendor.pagination.custom');
+
         // Bagikan data $appSetting dan $navLayanans ke semua view secara global
         View::composer('*', function ($view) {
             $setting = null;
