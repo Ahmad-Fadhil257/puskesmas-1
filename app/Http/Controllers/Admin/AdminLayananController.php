@@ -38,7 +38,8 @@ class AdminLayananController extends Controller
     {
         $categories = array_values(array_unique(array_merge(array_keys(Layanan::getKategoriList()), Layanan::distinct()->pluck('kategori')->filter()->toArray())));
         $nextOrder = (Layanan::max('order') ?? 0) + 1;
-        return view('admin.layanan.create', compact('categories', 'nextOrder'));
+        $dokters = \App\Models\Dokter::active()->orderBy('name', 'asc')->get();
+        return view('admin.layanan.create', compact('categories', 'nextOrder', 'dokters'));
     }
 
     /**
@@ -61,6 +62,7 @@ class AdminLayananController extends Controller
             'jadwal_pendaftaran' => 'nullable|string',
             'jam_operasional'    => 'nullable|string',
             'persyaratan'        => 'nullable|string',
+            'dokter_ids'         => 'nullable|array',
         ]);
 
         $kategori = !empty($validated['kategori']) ? \Illuminate\Support\Str::title(trim($validated['kategori'])) : 'Rawat Jalan (BPJS & Umum)';
@@ -77,6 +79,10 @@ class AdminLayananController extends Controller
             }
             $file->move($uploadPath, $imageName);
         }
+
+        $order = !empty($validated['order']) 
+            ? (int) $validated['order'] 
+            : ((Layanan::max('order') ?? 0) + 1);
 
         $slug = !empty($validated['slug']) 
             ? \Illuminate\Support\Str::slug($validated['slug']) 
@@ -96,6 +102,7 @@ class AdminLayananController extends Controller
             'jadwal_pendaftaran' => $validated['jadwal_pendaftaran'] ?? null,
             'jam_operasional'    => $validated['jam_operasional'] ?? null,
             'persyaratan'        => $validated['persyaratan'] ?? null,
+            'dokter_ids'         => $request->input('dokter_ids', []),
             'btn_text'           => 'Pendaftaran / Chat WA',
             'btn_link'           => null,
             'is_active'          => true,
@@ -112,7 +119,8 @@ class AdminLayananController extends Controller
     {
         $layanan = Layanan::findOrFail($id);
         $categories = array_values(array_unique(array_merge(array_keys(Layanan::getKategoriList()), Layanan::distinct()->pluck('kategori')->filter()->toArray())));
-        return view('admin.layanan.edit', compact('layanan', 'categories'));
+        $dokters = \App\Models\Dokter::active()->orderBy('name', 'asc')->get();
+        return view('admin.layanan.edit', compact('layanan', 'categories', 'dokters'));
     }
 
     /**
@@ -135,6 +143,7 @@ class AdminLayananController extends Controller
             'jadwal_pendaftaran' => 'nullable|string',
             'jam_operasional'    => 'nullable|string',
             'persyaratan'        => 'nullable|string',
+            'dokter_ids'         => 'nullable|array',
         ]);
 
         $kategori = !empty($validated['kategori']) ? \Illuminate\Support\Str::title(trim($validated['kategori'])) : ($layanan->kategori ?? 'Rawat Jalan (BPJS & Umum)');
@@ -177,6 +186,7 @@ class AdminLayananController extends Controller
         $layanan->jadwal_pendaftaran = $validated['jadwal_pendaftaran'] ?? null;
         $layanan->jam_operasional    = $validated['jam_operasional'] ?? null;
         $layanan->persyaratan        = $validated['persyaratan'] ?? null;
+        $layanan->dokter_ids         = $request->input('dokter_ids', []);
         $layanan->save();
 
         return redirect()->route('admin.layanan.index')
