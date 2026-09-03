@@ -137,7 +137,7 @@
 
         {{-- Pagination --}}
         @if($articles->hasPages())
-            <div class="card-footer py-3 d-flex justify-content-end">
+            <div class="card-footer py-3 d-flex justify-content-center">
                 {{ $articles->links() }}
             </div>
         @endif

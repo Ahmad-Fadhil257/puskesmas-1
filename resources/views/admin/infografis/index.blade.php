@@ -266,9 +266,11 @@
         </div>
 
         @if($infografis->hasPages())
-            <div class="card-footer d-flex justify-content-between align-items-center py-3 border-top">
+            <div class="card-footer d-flex flex-column align-items-center justify-content-center gap-2 py-3 border-top">
                 <small class="text-muted">Halaman {{ $infografis->currentPage() }} dari {{ $infografis->lastPage() }}</small>
-                {{ $infografis->links() }}
+                <div>
+                    {{ $infografis->links() }}
+                </div>
             </div>
         @endif
     </div>

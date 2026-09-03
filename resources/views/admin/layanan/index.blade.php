@@ -172,10 +172,10 @@
         {{-- Pagination --}}
         @if ($layanans->hasPages())
         <div class="card-footer border-top py-3">
-            <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+            <div class="d-flex flex-column align-items-center justify-content-center gap-2">
                 <small class="text-muted">Halaman {{ $layanans->currentPage() }} dari {{ $layanans->lastPage() }}</small>
                 <div>
-                    {{ $layanans->links('pagination::bootstrap-5') }}
+                    {{ $layanans->links() }}
                 </div>
             </div>
         </div>

@@ -432,3 +432,108 @@ a:hover {
     background-color: #334155 !important;
     color: #FFFFFF !important;
 }
+
+/* ==========================================================================
+   PAGINATION STYLES IN DARK MODE
+   ========================================================================== */
+.card-footer .custom-pagination-container {
+    margin: 0.5rem auto !important;
+    width: 100% !important;
+    justify-content: center !important;
+}
+
+.card-footer .pagination,
+.card-footer .custom-pagination {
+    margin: 0 auto !important;
+    justify-content: center !important;
+}
+
+.card-footer nav {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+.card-footer.justify-content-end,
+.card-footer.d-flex.justify-content-end {
+    justify-content: center !important;
+}
+
+.dark-style .pagination,
+.dark-style .custom-pagination,
+[data-bs-theme="dark"] .pagination,
+[data-bs-theme="dark"] .custom-pagination {
+    margin: 0 auto !important;
+    justify-content: center !important;
+}
+
+.dark-style .page-link,
+.dark-style .pagination .page-link,
+.dark-style .custom-pagination .page-link,
+[data-bs-theme="dark"] .page-link,
+[data-bs-theme="dark"] .pagination .page-link,
+[data-bs-theme="dark"] .custom-pagination .page-link {
+    background-color: #0F172A !important;
+    border: 1px solid #334155 !important;
+    color: #CBD5E1 !important;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) !important;
+    transition: all 0.2s ease-in-out !important;
+}
+
+.dark-style .page-link:hover,
+.dark-style .page-link:focus,
+.dark-style .pagination .page-link:hover,
+.dark-style .pagination .page-link:focus,
+.dark-style .custom-pagination .page-link:hover,
+.dark-style .custom-pagination .page-link:focus,
+[data-bs-theme="dark"] .page-link:hover,
+[data-bs-theme="dark"] .page-link:focus,
+[data-bs-theme="dark"] .pagination .page-link:hover,
+[data-bs-theme="dark"] .pagination .page-link:focus,
+[data-bs-theme="dark"] .custom-pagination .page-link:hover,
+[data-bs-theme="dark"] .custom-pagination .page-link:focus {
+    background-color: rgba(16, 185, 129, 0.18) !important;
+    border-color: #10B981 !important;
+    color: #34D399 !important;
+    box-shadow: 0 4px 10px rgba(16, 185, 129, 0.25) !important;
+    transform: translateY(-1px) !important;
+    outline: none !important;
+}
+
+.dark-style .page-item.active .page-link,
+.dark-style .pagination .page-item.active .page-link,
+.dark-style .custom-pagination .page-item.active .page-link,
+[data-bs-theme="dark"] .page-item.active .page-link,
+[data-bs-theme="dark"] .pagination .page-item.active .page-link,
+[data-bs-theme="dark"] .custom-pagination .page-item.active .page-link {
+    background: linear-gradient(135deg, #0A5C45 0%, #059669 100%) !important;
+    border-color: #10B981 !important;
+    color: #FFFFFF !important;
+    box-shadow: 0 4px 14px rgba(10, 92, 69, 0.5) !important;
+    font-weight: 700 !important;
+    transform: none !important;
+}
+
+.dark-style .page-item.disabled .page-link,
+.dark-style .pagination .page-item.disabled .page-link,
+.dark-style .custom-pagination .page-item.disabled .page-link,
+[data-bs-theme="dark"] .page-item.disabled .page-link,
+[data-bs-theme="dark"] .pagination .page-item.disabled .page-link,
+[data-bs-theme="dark"] .custom-pagination .page-item.disabled .page-link {
+    background-color: rgba(15, 23, 42, 0.55) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    color: #64748B !important;
+    opacity: 0.55 !important;
+    cursor: not-allowed !important;
+    box-shadow: none !important;
+    transform: none !important;
+    pointer-events: none !important;
+}
+
+.dark-style .card-footer .pagination-info,
+.dark-style .card-footer p,
+.dark-style .card-footer .text-muted {
+    color: #94A3B8 !important;
+}
+

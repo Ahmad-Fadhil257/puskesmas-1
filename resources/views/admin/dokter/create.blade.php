@@ -130,16 +130,5 @@ function previewPhoto(input) {
     }
 }
 </script>
-
-<style>
-.custom-dropdown { position: relative; }
-.custom-dropdown .dropdown-toggle {
-    cursor: pointer; background: #fff; border: 1px solid #dee2e6;
-    border-radius: 10px; padding: 8px 32px 8px 14px; font-size: 0.8125rem;
-    transition: border-color 0.2s, box-shadow 0.2s; width: 100%; min-height: 31px;
-    position: relative;
-}
-.dark-style .custom-dropdown .dropdown-toggle { background: #1f2937; border-color: #374151; color: #f3f4f6; }
-.custom-dropdown .dropdown-toggle:hover { border-color: #BBE4D8; }
-.dark-style .custom-dropdown .dropdown-toggle:hover { border-color: #0A5C45; }
 @endpush
+

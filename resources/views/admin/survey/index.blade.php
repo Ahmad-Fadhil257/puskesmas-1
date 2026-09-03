@@ -235,7 +235,7 @@
         </div>
 
         @if($surveys->hasPages())
-        <div class="card-footer py-3 d-flex justify-content-end border-top">
+        <div class="card-footer py-3 d-flex justify-content-center border-top">
             {{ $surveys->links() }}
         </div>
         @endif

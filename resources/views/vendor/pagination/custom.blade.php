@@ -1,19 +1,20 @@
 @if ($paginator->hasPages())
 <style>
     .custom-pagination-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        margin: 2rem 0;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        width: 100% !important;
+        margin: 1.5rem auto !important;
     }
     .custom-pagination {
         display: inline-flex !important;
+        justify-content: center !important;
         align-items: center !important;
         gap: 6px !important;
         list-style: none !important;
         padding-left: 0 !important;
-        margin: 0 !important;
+        margin: 0 auto !important;
     }
     .custom-pagination .page-item {
         list-style: none !important;
@@ -55,6 +56,52 @@
         border-color: #E2E8F0 !important;
         cursor: not-allowed !important;
         box-shadow: none !important;
+    }
+
+    /* ==========================================
+       DARK MODE SUPPORT (Admin / Dark Theme)
+       ========================================== */
+    .dark-style .custom-pagination-container,
+    [data-bs-theme="dark"] .custom-pagination-container {
+        margin: 1rem auto !important;
+        justify-content: center !important;
+    }
+    .card-footer .custom-pagination-container {
+        margin: 0 auto !important;
+        width: 100% !important;
+        justify-content: center !important;
+    }
+    .dark-style .custom-pagination .page-link,
+    [data-bs-theme="dark"] .custom-pagination .page-link {
+        color: #CBD5E1 !important;
+        background-color: #0F172A !important;
+        border: 1px solid #334155 !important;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) !important;
+    }
+    .dark-style .custom-pagination .page-link:hover,
+    [data-bs-theme="dark"] .custom-pagination .page-link:hover {
+        background-color: rgba(16, 185, 129, 0.18) !important;
+        color: #34D399 !important;
+        border-color: #10B981 !important;
+        box-shadow: 0 4px 10px rgba(16, 185, 129, 0.2) !important;
+        transform: translateY(-1px) !important;
+    }
+    .dark-style .custom-pagination .page-item.active .page-link,
+    [data-bs-theme="dark"] .custom-pagination .page-item.active .page-link {
+        background: linear-gradient(135deg, #0A5C45 0%, #059669 100%) !important;
+        color: #FFFFFF !important;
+        border-color: #10B981 !important;
+        box-shadow: 0 4px 14px rgba(10, 92, 69, 0.45) !important;
+    }
+    .dark-style .custom-pagination .page-item.disabled .page-link,
+    [data-bs-theme="dark"] .custom-pagination .page-item.disabled .page-link {
+        color: #64748B !important;
+        background-color: rgba(15, 23, 42, 0.55) !important;
+        border-color: rgba(255, 255, 255, 0.08) !important;
+        opacity: 0.55 !important;
+        box-shadow: none !important;
+        transform: none !important;
+        cursor: not-allowed !important;
     }
 </style>
 

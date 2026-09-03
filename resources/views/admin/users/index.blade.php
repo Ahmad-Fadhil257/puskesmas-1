@@ -255,9 +255,11 @@
         </div>
 
         @if($users->hasPages())
-            <div class="card-footer d-flex justify-content-between align-items-center py-3 border-top">
+            <div class="card-footer d-flex flex-column align-items-center justify-content-center gap-2 py-3 border-top">
                 <small class="text-muted">Halaman {{ $users->currentPage() }} dari {{ $users->lastPage() }}</small>
-                {{ $users->links() }}
+                <div>
+                    {{ $users->links() }}
+                </div>
             </div>
         @endif
     </div>

@@ -125,8 +125,8 @@
 
         {{-- Pagination --}}
         @if($dokters->hasPages())
-        <div class="card-footer border-top d-flex justify-content-end py-3">
-            {{ $dokters->links('pagination::bootstrap-5') }}
+        <div class="card-footer border-top d-flex justify-content-center py-3">
+            {{ $dokters->links() }}
         </div>
         @endif
     </div>

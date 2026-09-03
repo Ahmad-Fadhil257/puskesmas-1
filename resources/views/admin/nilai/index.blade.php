@@ -393,5 +393,3 @@
     });
 </script>
 @endpush
-
-@endsection
