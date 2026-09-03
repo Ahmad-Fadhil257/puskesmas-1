@@ -80,7 +80,6 @@
                     <div class="col-md-6">
                         <label class="form-label fw-semibold" for="btn_primary_link">Tautan / Link Tombol 1 <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" id="btn_primary_link" name="btn_primary_link" value="{{ old('btn_primary_link', $hero->btn_primary_link) }}" required>
-                        <div class="form-text small">Default: <code>#janji-temu</code> (otomatis membuka WhatsApp pendaftaran resmi Puskesmas).</div>
                     </div>
 
                     {{-- Tombol 2 (Sekunder) --}}

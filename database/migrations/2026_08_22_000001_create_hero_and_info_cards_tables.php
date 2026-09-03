@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('badge_text')->default('Selamat Datang Di Puskesmas CareLink');
             $table->string('title')->default('Melayani Kesehatan Masyarakat dengan Sepenuh Hati');
             $table->text('description')->nullable();
-            $table->string('btn_primary_text')->default('Janji Temu Online');
-            $table->string('btn_primary_link')->default('#janji-temu');
+            $table->string('btn_primary_text')->default('Statistik');
+            $table->string('btn_primary_link')->default('#statistik');
             $table->string('btn_secondary_text')->default('Layanan Kami');
             $table->string('btn_secondary_link')->default('#layanan');
             $table->string('image_1')->nullable();
