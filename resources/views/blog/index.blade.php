@@ -12,7 +12,7 @@
 {{-- =========================================================================
    HEADER SECTION: CLEAN MINT SUBPAGE HEADER WITH BOTANICAL ORNAMENT
    ========================================================================= --}}
-<section class="subpage-header" data-aos="fade-down">
+<section class="subpage-header">
     <img src="{{ asset('assets/botanical-clean.png') }}?v={{ file_exists(public_path('assets/botanical-clean.png')) ? filemtime(public_path('assets/botanical-clean.png')) : time() }}" alt="" class="subpage-header__watermark" aria-hidden="true">
 
     <div class="subpage-header__container">
@@ -62,6 +62,13 @@
                         <i class="bx bx-chevron-down select-icon"></i>
                     </div>
 
+                    {{-- Reset Filter Icon Button on the Right with Tooltip --}}
+                    @if(request('search') || request('category'))
+                        <a href="{{ route('blog.index') }}" class="btn-filterbar-reset-icon" title="Reset Filter" data-tooltip="Reset Filter" aria-label="Reset Filter">
+                            <i class="bx bx-reset"></i>
+                        </a>
+                    @endif
+
                 </div>
             </form>
         </div>
@@ -69,27 +76,6 @@
         {{-- 2. CONDITIONAL LAYOUT: SEARCH/FILTER/PAGE > 1 ACTIVE vs MOSAIC HOMEPAGE --}}
         @if(request('search') || request('category') || request('page', 1) > 1)
             
-            {{-- Info Bar Hasil Pencarian / Filter / Halaman --}}
-            @if(request('search') || request('category'))
-                <div class="blog-search-info-bar mb-4" data-aos="fade-up">
-                    <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
-                        <div>
-                            <h5 class="fw-bold mb-1 text-dark">
-                                <i class="bx bx-filter-alt text-primary me-2"></i>Hasil Filter Berita
-                            </h5>
-                            <p class="text-muted small mb-0">
-                                Menampilkan {{ $articles->total() }} berita 
-                                @if(request('search')) untuk kata kunci <strong>"{{ request('search') }}"</strong> @endif
-                                @if(request('category')) dalam kategori <strong>"{{ request('category') }}"</strong> @endif
-                            </p>
-                        </div>
-                        <a href="{{ route('blog.index') }}" class="btn btn-outline-secondary rounded-pill btn-sm px-3 fw-bold">
-                            <i class="bx bx-reset me-1"></i> Reset Filter
-                        </a>
-                    </div>
-                </div>
-            @endif
-
             {{-- Grid Standard 3 Kolom untuk Pencarian --}}
             @if($articles->count() > 0)
                 <div class="articles-grid mb-4">

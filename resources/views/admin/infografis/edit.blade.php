@@ -108,18 +108,6 @@
                             @error('kategori') <div class="text-danger small mt-1">{{ $message }}</div> @enderror
                         </div>
 
-                        {{-- Deskripsi --}}
-                        <div class="mb-3">
-                            <label class="form-label fw-semibold" for="deskripsi">Deskripsi Singkat / Catatan</label>
-                            <textarea name="deskripsi" 
-                                      id="deskripsi" 
-                                      rows="3" 
-                                      class="form-control @error('deskripsi') is-invalid @enderror"
-                                      placeholder="Ringkasan penjelasan mengenai infografis ini (opsional, maks. 500 karakter)...">{{ old('deskripsi', $infografis->deskripsi) }}</textarea>
-                            <div class="form-text">Beri keterangan singkat agar masyarakat lebih memahami konteks infografis.</div>
-                            @error('deskripsi') <div class="text-danger small mt-1">{{ $message }}</div> @enderror
-                        </div>
-
                         {{-- Gambar Saat Ini & Upload Baru --}}
                         <div class="mb-4">
                             <label class="form-label fw-semibold" for="imageInput">File Gambar Infografis</label>

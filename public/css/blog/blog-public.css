@@ -6,7 +6,7 @@
     --color-dark:            #0F172A;
     --color-body:            #334155;
     --color-muted:           #64748B;
-    --color-bg-page:         #F8FAFC;
+    --color-bg-page:         #EDF2F7;
     --color-surface:         #FFFFFF;
     --color-border:          #E2E8F0;
     --color-orange:          #FA883C;
@@ -34,6 +34,7 @@ body {
     width: 100%;
     padding: 36px 20px 80px 20px;
     box-sizing: border-box;
+    background-color: #EDF2F7 !important;
 }
 
 .blog-content-container,
@@ -52,7 +53,7 @@ body {
     padding: 16px 20px;
     box-shadow: var(--card-shadow);
     border: 1px solid var(--color-border);
-    margin-bottom: 36px;
+    margin-bottom: 24px;
 }
 
 .blog-filterbar-row {
@@ -159,9 +160,89 @@ body {
 .blog-filterbar-select-wrap .select-icon {
     position: absolute;
     right: 14px;
-    font-size: 1.25rem;
-    color: var(--color-primary);
+    color: var(--color-muted);
     pointer-events: none;
+    font-size: 1.2rem;
+}
+
+/* Reset Filter Icon Button on the Right with Tooltip */
+.btn-filterbar-reset-icon {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background: #F8FAFC;
+    color: #64748B;
+    border: 1.5px solid #CBD5E1;
+    border-radius: 8px;
+    font-size: 22px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: var(--transition);
+    flex-shrink: 0;
+}
+
+.btn-filterbar-reset-icon:hover {
+    background: #EF4444;
+    color: #FFFFFF;
+    border-color: #EF4444;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 14px rgba(239, 68, 68, 0.28);
+}
+
+.btn-filterbar-reset-icon i {
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-filterbar-reset-icon:hover i {
+    transform: rotate(-180deg);
+}
+
+/* Tooltip on hover */
+.btn-filterbar-reset-icon[data-tooltip]::before {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: calc(100% + 9px);
+    left: 50%;
+    transform: translateX(-50%) translateY(4px);
+    background: #0F172A;
+    color: #FFFFFF;
+    font-size: 11.5px;
+    font-weight: 700;
+    padding: 5px 10px;
+    border-radius: 6px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+}
+
+.btn-filterbar-reset-icon[data-tooltip]::after {
+    content: '';
+    position: absolute;
+    bottom: calc(100% + 3px);
+    left: 50%;
+    transform: translateX(-50%) translateY(4px);
+    border-width: 6px 6px 0 6px;
+    border-style: solid;
+    border-color: #0F172A transparent transparent transparent;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+    z-index: 100;
+}
+
+.btn-filterbar-reset-icon[data-tooltip]:hover::before,
+.btn-filterbar-reset-icon[data-tooltip]:hover::after {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
 }
 
 

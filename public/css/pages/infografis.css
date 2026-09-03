@@ -2,52 +2,223 @@
    INFOGRAFIS PAGE — Puskesmas
    ============================================================ */
 
-/* ---------- Wrapper ---------- */
+/* ---------- Wrapper & Container ---------- */
 .infografis-wrapper {
-    background: #EDF2F7;
-    padding: 56px 0 80px;
+    width: 100%;
+    padding: 36px 20px 80px 20px;
+    box-sizing: border-box;
+    background-color: #EDF2F7 !important;
     min-height: 60vh;
 }
 
 .infografis-container {
-    max-width: 1180px;
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 0 24px;
+    width: 100%;
 }
 
-/* ---------- Filter / Kategori Tabs ---------- */
-.infografis-filter {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 40px;
-    justify-content: center;
-}
-
-.infografis-filter-btn {
-    padding: 9px 22px;
-    border-radius: 8px;
-    border: 1.5px solid #D1D5DB;
+/* ==========================================================================
+   1. CLEAN 1-ROW FILTER BAR (BORDER RADIUS 12PX)
+   ========================================================================== */
+.infografis-filterbar {
     background: #FFFFFF;
-    color: #374151;
-    font-size: 13.5px;
-    font-weight: 600;
+    border-radius: 12px;
+    padding: 16px 20px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
+    border: 1px solid #E2E8F0;
+    margin-bottom: 24px;
+}
+
+.infografis-filterbar-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.infografis-filterbar-search {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: #F8FAFC;
+    border-radius: 12px;
+    border: 1px solid #E2E8F0;
+    padding: 4px 4px 4px 14px;
+    flex: 1;
+    min-width: 280px;
+    transition: all 0.25s ease;
+}
+
+.infografis-filterbar-search:focus-within {
+    border-color: #0A5C45;
+    background: #FFFFFF;
+    box-shadow: 0 0 0 3px rgba(10, 92, 69, 0.12);
+}
+
+.infografis-filterbar-search .search-icon {
+    font-size: 1.2rem;
+    color: #64748B;
+    margin-right: 8px;
+}
+
+.infografis-filterbar-search input {
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 0.9rem;
+    color: #0F172A;
+    width: 100%;
+    font-family: inherit;
+}
+
+.infografis-filterbar-search .search-clear-btn {
+    color: #94A3B8;
+    text-decoration: none;
+    font-size: 1.25rem;
+    font-weight: bold;
+    padding: 0 8px;
     cursor: pointer;
-    transition: all 0.22s ease;
-    white-space: nowrap;
 }
 
-.infografis-filter-btn:hover {
-    border-color: #00A86B;
-    color: #00A86B;
-    background: #F0FDF4;
+.infografis-filterbar-search .search-clear-btn:hover {
+    color: #EF4444;
 }
 
-.infografis-filter-btn.active {
-    background: #00A86B;
-    border-color: #00A86B;
+.btn-filterbar-submit {
+    background: #0A5C45;
     color: #FFFFFF;
-    box-shadow: 0 4px 14px rgba(0, 168, 107, 0.25);
+    border: none;
+    border-radius: 8px;
+    padding: 8px 22px;
+    font-size: 0.875rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    flex-shrink: 0;
+    font-family: inherit;
+}
+
+.btn-filterbar-submit:hover {
+    background: #084A37;
+}
+
+.infografis-filterbar-select-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-width: 220px;
+}
+
+.infografis-filterbar-select {
+    width: 100%;
+    background: #F8FAFC;
+    border: 1px solid #E2E8F0;
+    border-radius: 12px;
+    padding: 10px 38px 10px 16px;
+    font-size: 0.9rem;
+    color: #0F172A;
+    font-weight: 600;
+    appearance: none;
+    -webkit-appearance: none;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    font-family: inherit;
+}
+
+.infografis-filterbar-select:focus {
+    border-color: #0A5C45;
+    background: #FFFFFF;
+    box-shadow: 0 0 0 3px rgba(10, 92, 69, 0.12);
+}
+
+.infografis-filterbar-select-wrap .select-icon {
+    position: absolute;
+    right: 14px;
+    color: #64748B;
+    pointer-events: none;
+    font-size: 1.2rem;
+}
+
+/* Reset Filter Icon Button on the Right with Tooltip */
+.btn-filterbar-reset-icon {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background: #F8FAFC;
+    color: #64748B;
+    border: 1.5px solid #CBD5E1;
+    border-radius: 8px;
+    font-size: 22px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    flex-shrink: 0;
+}
+
+.btn-filterbar-reset-icon:hover {
+    background: #EF4444;
+    color: #FFFFFF;
+    border-color: #EF4444;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 14px rgba(239, 68, 68, 0.28);
+}
+
+.btn-filterbar-reset-icon i {
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-filterbar-reset-icon:hover i {
+    transform: rotate(-180deg);
+}
+
+/* Tooltip on hover */
+.btn-filterbar-reset-icon[data-tooltip]::before {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: calc(100% + 9px);
+    left: 50%;
+    transform: translateX(-50%) translateY(4px);
+    background: #0F172A;
+    color: #FFFFFF;
+    font-size: 11.5px;
+    font-weight: 700;
+    padding: 5px 10px;
+    border-radius: 6px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+}
+
+.btn-filterbar-reset-icon[data-tooltip]::after {
+    content: '';
+    position: absolute;
+    bottom: calc(100% + 3px);
+    left: 50%;
+    transform: translateX(-50%) translateY(4px);
+    border-width: 6px 6px 0 6px;
+    border-style: solid;
+    border-color: #0F172A transparent transparent transparent;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+    z-index: 100;
+}
+
+.btn-filterbar-reset-icon[data-tooltip]:hover::before,
+.btn-filterbar-reset-icon[data-tooltip]:hover::after {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
 }
 
 /* ---------- Grid ---------- */

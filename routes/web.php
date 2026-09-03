@@ -92,6 +92,14 @@ Route::get('/infografis', function (\Illuminate\Http\Request $request) {
 
     $query = \App\Models\Infografis::active()->orderBy('order', 'asc')->orderBy('id', 'desc');
 
+    if ($request->filled('search')) {
+        $search = $request->search;
+        $query->where(function ($q) use ($search) {
+            $q->where('title', 'like', "%{$search}%")
+              ->orWhere('deskripsi', 'like', "%{$search}%");
+        });
+    }
+
     if ($request->filled('kategori') && $request->kategori !== 'semua') {
         $query->where('kategori', $request->kategori);
     }

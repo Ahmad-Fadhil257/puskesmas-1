@@ -35,15 +35,46 @@
 <div class="infografis-wrapper">
     <div class="infografis-container">
 
-        {{-- Filter Kategori --}}
-        @if($kategoris->count() > 1)
-        <div class="infografis-filter" id="infografisFilter" data-aos="fade-up">
-            <a href="{{ route('infografis', ['kategori' => 'semua']) }}" class="infografis-filter-btn {{ request('kategori', 'semua') === 'semua' ? 'active' : '' }}">Semua</a>
-            @foreach($kategoris as $kat)
-                <a href="{{ route('infografis', ['kategori' => $kat]) }}" class="infografis-filter-btn {{ request('kategori') === $kat ? 'active' : '' }}">{{ $kat }}</a>
-            @endforeach
+        {{-- 1. CLEAN 1-ROW FILTER BAR --}}
+        <div class="infografis-filterbar" data-aos="fade-up">
+            <form action="{{ route('infografis') }}" method="GET" class="infografis-filterbar-form">
+                <div class="infografis-filterbar-row">
+                    
+                    {{-- Search Input Group --}}
+                    <div class="infografis-filterbar-search">
+                        <i class="bx bx-search search-icon"></i>
+                        <input type="text" name="search" placeholder="Cari judul atau topik infografis kesehatan..." value="{{ request('search') }}" autocomplete="off">
+                        @if(request('search'))
+                            <a href="{{ route('infografis', array_filter(['kategori' => request('kategori')])) }}" class="search-clear-btn" title="Hapus pencarian">&times;</a>
+                        @endif
+                        <button type="submit" class="btn-filterbar-submit">
+                            <span>Cari</span>
+                        </button>
+                    </div>
+
+                    {{-- Category Select Dropdown --}}
+                    <div class="infografis-filterbar-select-wrap">
+                        <select name="kategori" onchange="this.form.submit()" class="infografis-filterbar-select">
+                            <option value="">Semua Kategori</option>
+                            @foreach($kategoris as $kat)
+                                <option value="{{ $kat }}" {{ request('kategori') == $kat ? 'selected' : '' }}>
+                                    {{ $kat }}
+                                </option>
+                            @endforeach
+                        </select>
+                        <i class="bx bx-chevron-down select-icon"></i>
+                    </div>
+
+                    {{-- Reset Filter Icon Button on the Right with Tooltip --}}
+                    @if(request('search') || (request('kategori') && request('kategori') !== 'semua'))
+                        <a href="{{ route('infografis') }}" class="btn-filterbar-reset-icon" title="Reset Filter" data-tooltip="Reset Filter" aria-label="Reset Filter">
+                            <i class="bx bx-reset"></i>
+                        </a>
+                    @endif
+
+                </div>
+            </form>
         </div>
-        @endif
 
         {{-- Grid Infografis --}}
         @if($infografis->count() > 0)
@@ -60,7 +91,7 @@
                     {{-- Overlay aksi --}}
                     <div class="infografis-card__overlay">
                         <button class="infografis-overlay-btn"
-                                onclick="openModal('{{ $item->image_url }}', '{{ addslashes($item->title) }}', '{{ addslashes($item->deskripsi ?? '') }}')"
+                                onclick="openModal('{{ $item->image_url }}', '{{ addslashes($item->title) }}')"
                                 title="Lihat Besar">
                             <i class="bx bx-zoom-in"></i>
                         </button>
@@ -73,9 +104,6 @@
                 {{-- Body --}}
                 <div class="infografis-card__body">
                     <h2 class="infografis-card__title">{{ $item->title }}</h2>
-                    @if($item->deskripsi)
-                        <p class="infografis-card__desc">{{ $item->deskripsi }}</p>
-                    @endif
                     <div class="infografis-card__footer">
                         <span class="infografis-card__date">
                             <i class="bx bx-calendar-alt"></i>
@@ -125,7 +153,6 @@
         <img src="" alt="" id="modalImg">
         <div class="infografis-modal-info">
             <h3 id="modalTitle"></h3>
-            <p id="modalDesc"></p>
         </div>
     </div>
 </div>
@@ -134,34 +161,10 @@
 
 @push('scripts')
 <script>
-    // ====== FILTER KATEGORI ======
-    const filterBtns = document.querySelectorAll('.infografis-filter-btn');
-    const cards      = document.querySelectorAll('.infografis-card');
-    const emptyState = document.getElementById('infografisEmpty');
-
-    filterBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            filterBtns.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-
-            const filter = btn.dataset.filter;
-            let visible  = 0;
-
-            cards.forEach(card => {
-                const match = filter === 'semua' || card.dataset.kategori === filter;
-                card.style.display = match ? '' : 'none';
-                if (match) visible++;
-            });
-
-            emptyState.style.display = visible === 0 ? 'block' : 'none';
-        });
-    });
-
     // ====== LIGHTBOX MODAL ======
-    function openModal(imgSrc, title, desc) {
+    function openModal(imgSrc, title) {
         document.getElementById('modalImg').src    = imgSrc;
         document.getElementById('modalTitle').textContent = title;
-        document.getElementById('modalDesc').textContent  = desc;
         document.getElementById('infografisModalBackdrop').classList.add('open');
         document.body.style.overflow = 'hidden';
     }

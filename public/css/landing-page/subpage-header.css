@@ -1,13 +1,14 @@
-/* =============================================================================
-   SUBPAGE HEADER — Shared across all landing subpages
-   Background: #C3E5D8 (mint hijau segar), ornamen botanical kanan
-   ============================================================================= */
+/* Reset HTML & Body default spacing to prevent top gap */
+html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+}
 
 /* ----- Container Section ----- */
 .subpage-header {
     width: 100%;
-    margin-top: -95px;
-    padding-top: 145px;
+    margin-top: -125px;
+    padding-top: 175px;
     padding-bottom: 50px;
     padding-left: 24px;
     padding-right: 24px;
@@ -97,8 +98,8 @@
 /* Support legacy class selectors */
 .lokasi-full-header {
     width: 100%;
-    margin-top: -95px;
-    padding-top: 145px;
+    margin-top: -125px;
+    padding-top: 175px;
     padding-bottom: 50px;
     padding-left: 24px;
     padding-right: 24px;
@@ -181,7 +182,8 @@
 @media (max-width: 768px) {
     .subpage-header,
     .lokasi-full-header {
-        padding-top: 125px;
+        margin-top: -110px;
+        padding-top: 155px;
         padding-bottom: 40px;
     }
     .subpage-header__watermark,

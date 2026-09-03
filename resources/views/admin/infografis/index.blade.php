@@ -179,17 +179,10 @@
                                 </div>
                             </td>
 
-                            {{-- Judul & Deskripsi --}}
+                            {{-- Judul --}}
                             <td>
                                 <div style="max-width: 380px; white-space: normal;">
-                                    <span class="fw-bold d-block mb-1 fs-6">{{ $item->title }}</span>
-                                    @if($item->deskripsi)
-                                        <p class="text-muted small mb-0" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; line-height: 1.4;">
-                                            {{ $item->deskripsi }}
-                                        </p>
-                                    @else
-                                        <span class="text-muted small fst-italic">Tanpa deskripsi tambahan</span>
-                                    @endif
+                                    <span class="fw-bold d-block fs-6 text-dark">{{ $item->title }}</span>
                                 </div>
                             </td>
 
@@ -235,7 +228,6 @@
                                             data-id="{{ $item->id }}"
                                             data-title="{{ $item->title }}"
                                             data-kategori="{{ $item->kategori }}"
-                                            data-deskripsi="{{ $item->deskripsi }}"
                                             data-order="{{ $item->order }}"
                                             data-is-active="{{ $item->is_active ? '1' : '0' }}"
                                             data-image="{{ $item->image_url }}"
@@ -328,12 +320,6 @@
                                 <div class="form-text">Semakin kecil angkanya, semakin awal muncul di galeri.</div>
                             </div>
 
-                            {{-- Deskripsi --}}
-                            <div class="col-12">
-                                <label class="form-label fw-semibold" for="create_deskripsi">Deskripsi Singkat / Catatan Edukasi</label>
-                                <textarea name="deskripsi" id="create_deskripsi" rows="3" class="form-control" placeholder="Tuliskan ringkasan pesan edukasi dari infografis ini...">{{ old('deskripsi') }}</textarea>
-                            </div>
-
                             {{-- Upload Poster dengan Live Preview --}}
                             <div class="col-12">
                                 <label class="form-label fw-semibold" for="create_image">File Poster / Gambar Infografis <span class="text-danger">*</span></label>
@@ -414,12 +400,6 @@
                             <div class="col-md-6 col-12">
                                 <label class="form-label fw-semibold" for="edit_order">Nomor Urutan Tampil</label>
                                 <input type="number" name="order" id="edit_order" class="form-control" min="0">
-                            </div>
-
-                            {{-- Deskripsi --}}
-                            <div class="col-12">
-                                <label class="form-label fw-semibold" for="edit_deskripsi">Deskripsi Singkat</label>
-                                <textarea name="deskripsi" id="edit_deskripsi" rows="3" class="form-control"></textarea>
                             </div>
 
                             {{-- Poster Saat Ini & Upload Gambar Baru --}}
@@ -541,7 +521,6 @@
                 const id = this.getAttribute('data-id');
                 const title = this.getAttribute('data-title');
                 const kategori = this.getAttribute('data-kategori');
-                const deskripsi = this.getAttribute('data-deskripsi');
                 const order = this.getAttribute('data-order');
                 const isActive = this.getAttribute('data-is-active') === '1';
                 const image = this.getAttribute('data-image');
@@ -551,7 +530,6 @@
                 document.getElementById('formEditInfografis').action = action;
                 document.getElementById('edit_title').value = title || '';
                 document.getElementById('edit_kategori').value = kategori || 'Umum';
-                document.getElementById('edit_deskripsi').value = deskripsi || '';
                 document.getElementById('edit_order').value = order || 0;
                 document.getElementById('edit_is_active').checked = isActive;
 

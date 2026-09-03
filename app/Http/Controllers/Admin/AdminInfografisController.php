@@ -15,10 +15,7 @@ class AdminInfografisController extends Controller
 
         if ($request->filled('search')) {
             $search = $request->input('search');
-            $query->where(function ($q) use ($search) {
-                $q->where('title', 'like', "%{$search}%")
-                  ->orWhere('deskripsi', 'like', "%{$search}%");
-            });
+            $query->where('title', 'like', "%{$search}%");
         }
 
         if ($request->filled('kategori')) {
@@ -51,7 +48,6 @@ class AdminInfografisController extends Controller
         $request->validate([
             'title'     => 'required|string|max:255',
             'kategori'  => 'required|string|max:100',
-            'deskripsi' => 'nullable|string|max:500',
             'image'     => 'required|image|mimes:jpg,jpeg,png,webp|max:5120',
             'order'     => 'nullable|integer|min:0',
             'is_active' => 'boolean',
@@ -70,7 +66,6 @@ class AdminInfografisController extends Controller
         Infografis::create([
             'title'      => $request->title,
             'kategori'   => \Illuminate\Support\Str::title(trim($request->kategori)),
-            'deskripsi'  => $request->deskripsi,
             'image_path' => 'uploads/infografis/' . $filename,
             'is_active'  => $request->boolean('is_active', true),
             'order'      => $request->order ?? 0,
@@ -90,7 +85,6 @@ class AdminInfografisController extends Controller
         $request->validate([
             'title'     => 'required|string|max:255',
             'kategori'  => 'required|string|max:100',
-            'deskripsi' => 'nullable|string|max:500',
             'image'     => 'nullable|image|mimes:jpg,jpeg,png,webp|max:5120',
             'order'     => 'nullable|integer|min:0',
             'is_active' => 'boolean',
@@ -99,7 +93,6 @@ class AdminInfografisController extends Controller
         $data = [
             'title'     => $request->title,
             'kategori'  => \Illuminate\Support\Str::title(trim($request->kategori)),
-            'deskripsi' => $request->deskripsi,
             'is_active' => $request->boolean('is_active', true),
             'order'     => $request->order ?? 0,
         ];

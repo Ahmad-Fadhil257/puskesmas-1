@@ -67,6 +67,9 @@ class DatabaseSeeder extends Seeder
         // Seed Data Statistik
         $this->call(StatistikSeeder::class);
 
+        // Seed Data Infografis
+        $this->call(InfografisSeeder::class);
+
         // Seed Data Cara Kerja
         $caraKerja = [
             [
