@@ -452,20 +452,16 @@
 
 
 
-            {{-- 7. CTA / PENDAFTARAN & KONSULTASI --}}
+            {{-- 7. CTA / INFORMASI PENDAFTARAN & LOKASI --}}
             <div class="cta-help-card">
                 <div class="cta-help-text">
                     <h4>Perlu Bantuan atau Informasi Pendaftaran?</h4>
-                    <p>Petugas kami siap membantu memberikan informasi seputar alur rujukan, antrean, dan pendaftaran poli.</p>
+                    <p>Silakan datang langsung ke loket pendaftaran Puskesmas atau cek rute dan jadwal operasional pelayanan kami.</p>
                 </div>
                 <div class="cta-help-actions">
-                    @php
-                        $pesanWaLayanan = "Halo Admin Puskesmas, saya ingin bertanya dan berkonsultasi mengenai layanan " . ($layanan->title ?? $layanan->nama ?? 'kesehatan') . ". Apakah kuota antrean untuk hari ini/besok masih tersedia? Terima kasih.";
-                        $waLayananLink = isset($appSetting) ? $appSetting->getWaUrl($pesanWaLayanan) : '#';
-                    @endphp
-                    <a href="{{ $waLayananLink }}" target="_blank" rel="noopener" class="btn-cta-wa">
-                        <i class="bx bxl-whatsapp fs-5"></i>
-                        <span>Pendaftaran / Chat WA</span>
+                    <a href="{{ route('lokasi') }}" class="btn-cta-wa" style="background: #0A5C45;">
+                        <i class="bx bx-map-pin fs-5"></i>
+                        <span>Lihat Lokasi & Jam Buka</span>
                     </a>
                 </div>
             </div>

@@ -217,7 +217,7 @@
 
                         <div>
                             <label class="form-section-label" for="email_or_phone">
-                                Nomor WhatsApp / Telepon <span style="font-weight: 500; color: #64748B; font-size: 12px;">(Opsional)</span>
+                                Nomor Telepon <span style="font-weight: 500; color: #64748B; font-size: 12px;">(Opsional)</span>
                             </label>
                             <input type="text" 
                                    name="email_or_phone" 

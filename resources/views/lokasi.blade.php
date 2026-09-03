@@ -272,17 +272,11 @@
                 </div>
 
                 {{-- Card 4: Action Buttons --}}
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;" data-aos="fade-up">
-                    <a href="{{ $appSetting->direct_maps_link }}" target="_blank" rel="noopener" class="btn-rute-maps">
+                <div data-aos="fade-up">
+                    <a href="{{ $appSetting->direct_maps_link }}" target="_blank" rel="noopener" class="btn-rute-maps" style="width: 100%; justify-content: center;">
                         <i class="bx bx-navigation"></i>
-                        <span>Petunjuk Rute</span>
+                        <span>Buka Petunjuk Rute Google Maps</span>
                     </a>
-                    @if(!empty($appSetting->wa_link))
-                        <a href="{{ $appSetting->wa_link }}" target="_blank" rel="noopener" class="btn-wa-lokasi">
-                            <i class="bx bxl-whatsapp" style="font-size: 18px;"></i>
-                            <span>Hubungi WhatsApp</span>
-                        </a>
-                    @endif
                 </div>
 
             </div>

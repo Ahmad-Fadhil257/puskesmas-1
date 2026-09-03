@@ -110,22 +110,18 @@
             </button>
         </div>
 
-        {{-- WhatsApp Help CTA Card --}}
+        {{-- Help CTA Card (Informasi & Lokasi) --}}
         <div class="faq-help-card" data-aos="fade-up">
             <div class="faq-help-info">
                 <h3>Belum Menemukan Jawaban yang Anda Cari?</h3>
                 <p>
-                    Tim petugas informasi dan loket layanan kami siap membantu menjawab pertanyaan Anda seputar pelayanan Puskesmas secara ramah dan langsung melalui WhatsApp.
+                    Kunjungi langsung loket informasi Puskesmas kami atau lihat informasi kontak dan jadwal pelayanan pada halaman lokasi kami.
                 </p>
             </div>
             <div>
-                @php
-                    $pesanWaFaq = "Halo Admin Puskesmas, pertanyaan saya tidak tercantum di daftar Tanya Jawab (FAQ) website. Saya ingin menanyakan perihal pelayanan Puskesmas lebih lanjut. Terima kasih.";
-                    $waFaqLink = isset($appSetting) ? $appSetting->getWaUrl($pesanWaFaq) : '#';
-                @endphp
-                <a href="{{ $waFaqLink }}" target="_blank" rel="noopener" class="btn-faq-wa">
-                    <i class="bx bxl-whatsapp fs-5"></i>
-                    <span>Tanya Petugas via WhatsApp</span>
+                <a href="{{ route('lokasi') }}" class="btn-faq-wa" style="background: #0A5C45;">
+                    <i class="bx bx-map-pin fs-5"></i>
+                    <span>Informasi & Lokasi Layanan</span>
                 </a>
             </div>
         </div>

@@ -31,9 +31,8 @@
                     $secondaryLink = (!empty($hero->btn_secondary_link) && $hero->btn_secondary_link !== '#layanan')
                         ? $hero->btn_secondary_link
                         : route('layanan.index');
-                    $isPrimaryWa = str_contains($primaryLink, 'wa.me') || str_contains($primaryLink, 'whatsapp');
                 @endphp
-                <a href="{{ $primaryLink }}" class="btn-primary" @if($isPrimaryWa) target="_blank" rel="noopener" @endif>
+                <a href="{{ $primaryLink }}" class="btn-primary">
                     {{ $hero->btn_primary_text ?? 'Statistik' }}
                 </a>
                 <a href="{{ $secondaryLink }}" class="btn-secondary">

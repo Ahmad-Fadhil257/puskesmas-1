@@ -66,7 +66,7 @@
 
                     {{-- Nomor Telepon --}}
                     <div class="col-md-6">
-                        <label class="form-label fw-semibold" for="phone">Nomor Telepon / WhatsApp</label>
+                        <label class="form-label fw-semibold" for="phone">Nomor Telepon</label>
                         <input type="text" class="form-control @error('phone') is-invalid @enderror" id="phone" name="phone" value="{{ old('phone', $user->phone) }}" placeholder="Contoh: 08123456789">
                         @error('phone')
                             <div class="invalid-feedback">{{ $message }}</div>

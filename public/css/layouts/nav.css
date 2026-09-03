@@ -79,6 +79,25 @@ a { text-decoration: none; color: inherit; }
     max-width: var(--container-max);
     margin: 0 auto;
     transition: var(--transition);
+    position: relative;
+}
+
+@media (min-width: 993px) {
+    .navbar {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        align-items: center;
+    }
+
+    .navbar__brand {
+        grid-column: 1;
+        justify-self: start;
+    }
+
+    .navbar__menu {
+        grid-column: 2;
+        justify-self: center;
+    }
 }
 
 .navbar__brand {

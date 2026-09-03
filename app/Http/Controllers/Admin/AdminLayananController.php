@@ -103,7 +103,7 @@ class AdminLayananController extends Controller
             'jam_operasional'    => $validated['jam_operasional'] ?? null,
             'persyaratan'        => $validated['persyaratan'] ?? null,
             'dokter_ids'         => $request->input('dokter_ids', []),
-            'btn_text'           => 'Pendaftaran / Chat WA',
+            'btn_text'           => 'Informasi Pelayanan',
             'btn_link'           => null,
             'is_active'          => true,
         ]);

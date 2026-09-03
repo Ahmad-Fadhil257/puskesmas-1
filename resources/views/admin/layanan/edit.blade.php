@@ -289,7 +289,7 @@
                                 id="btn_text" name="btn_text"
                                 value="{{ old('btn_text', $layanan->btn_text) }}"
                                 placeholder="Contoh: Janji Temu / Pendaftaran" />
-                            <div class="form-text">Tombol otomatis menghubungkan pasien ke WhatsApp Puskesmas.</div>
+                            <div class="form-text">Teks tombol aksi pada informasi layanan.</div>
                         </div>
                     </div>
                 </div>
