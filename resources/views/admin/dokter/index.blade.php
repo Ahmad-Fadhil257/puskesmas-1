@@ -74,7 +74,7 @@
                         <td class="text-center fw-semibold text-muted">{{ $dokters->firstItem() + $index }}</td>
                         <td class="text-center">
                             @if($dokter->photo)
-                                <img src="{{ asset($dokter->photo) }}" alt="{{ $dokter->name }}" class="rounded" style="width: 46px; height: 46px; object-fit: cover; object-position: top; border: 1px solid #E2F0EC;">
+                                <img src="{{ $dokter->photo_url }}" alt="{{ $dokter->name }}" class="rounded" style="width: 46px; height: 46px; object-fit: cover; object-position: top; border: 1px solid #E2F0EC;" loading="lazy">
                             @else
                                 <div class="avatar avatar-sm mx-auto">
                                     <span class="avatar-initial rounded bg-label-primary fw-bold">

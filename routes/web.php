@@ -40,11 +40,11 @@ Route::get('/', function () {
     $about = About::getActive();
     $hero = HeroSection::first();
     $infoCards = InfoCard::orderBy('urutan', 'asc')->get();
-    $dokters = Dokter::orderBy('created_at', 'asc')->get();
+    $dokters = Dokter::active()->orderBy('created_at', 'asc')->take(8)->get();
     $nilaiSection = NilaiSection::first();
     $mitras = Mitra::where('is_active', true)->orderBy('order', 'asc')->get();
-    $layanans = Layanan::orderBy('order', 'asc')->orderBy('id', 'asc')->get();
-    $surveys = Survey::approved()->orderBy('is_featured', 'desc')->orderBy('created_at', 'desc')->get();
+    $layanans = Layanan::where('is_active', true)->orderBy('order', 'asc')->orderBy('id', 'asc')->take(6)->get();
+    $surveys = Survey::approved()->orderBy('is_featured', 'desc')->orderBy('created_at', 'desc')->take(6)->get();
     $avgRating = Survey::getAverageRating();
     $satisfactionPct = Survey::getSatisfactionPercentage();
     return view('welcome', compact('latestArticles', 'caraKerja', 'about', 'hero', 'infoCards', 'dokters', 'nilaiSection', 'mitras', 'layanans', 'surveys', 'avgRating', 'satisfactionPct'));
@@ -203,6 +203,7 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('faq', AdminFaqController::class)->except(['show']);
 
         // Kelola Infografis
+        Route::patch('infografis/{infografis}/toggle-status', [AdminInfografisController::class, 'toggleStatus'])->name('infografis.toggle-status');
         Route::resource('infografis', AdminInfografisController::class)->except(['show']);
 
         // Kelola Statistik Kesehatan

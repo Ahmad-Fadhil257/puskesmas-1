@@ -30,11 +30,37 @@ class AdminDokterController extends Controller
     }
 
     /**
+     * Daftar pilihan spesialisasi/poli default + dinamis dari database
+     */
+    public static function getSpecialtyList(): array
+    {
+        $defaults = [
+            'Dokter Umum',
+            'Spesialis Gigi dan Mulut',
+            'Spesialis Anak',
+            'Spesialis Kebidanan & Kandungan',
+            'Spesialis Penyakit Dalam',
+            'Spesialis Jantung dan Pembuluh Darah',
+            'Spesialis Bedah Umum',
+            'Spesialis Mata',
+            'Spesialis THT-KL',
+            'Spesialis Kulit dan Kelamin',
+            'Spesialis Saraf',
+            'Spesialis Kedokteran Jiwa (Psikiatri)',
+            'Konselor Gizi & Dietetik',
+        ];
+
+        $fromDb = Dokter::distinct()->pluck('specialty')->filter()->toArray();
+        return array_values(array_unique(array_merge($defaults, $fromDb)));
+    }
+
+    /**
      * Form tambah dokter baru
      */
     public function create()
     {
-        return view('admin.dokter.create');
+        $specialties = self::getSpecialtyList();
+        return view('admin.dokter.create', compact('specialties'));
     }
 
     /**
@@ -79,7 +105,8 @@ class AdminDokterController extends Controller
     public function edit($id)
     {
         $dokter = Dokter::findOrFail($id);
-        return view('admin.dokter.edit', compact('dokter'));
+        $specialties = self::getSpecialtyList();
+        return view('admin.dokter.edit', compact('dokter', 'specialties'));
     }
 
     /**

@@ -65,44 +65,18 @@
                         @enderror
                     </div>
 
-                    {{-- Spesialisasi --}}
+                    {{-- Spesialisasi / Poli --}}
                     <div class="col-md-6">
                         <label class="form-label fw-semibold" for="specialty">Spesialisasi / Poli <span class="text-danger">*</span></label>
-                        <div class="custom-dropdown">
-                            <input type="hidden" name="specialty" id="specialty" value="{{ old('specialty', $dokter->specialty) }}" required>
-                            <button type="button" class="dropdown-toggle text-start d-flex align-items-center justify-content-between" id="specialtyDropdownBtn" onclick="toggleDropdown(this)">
-                                <span class="dropdown-selected">
-                                    {{ old('specialty', $dokter->specialty) }}
-                                </span>
-                                <i class="bx bx-chevron-down chevron-icon"></i>
-                            </button>
-                            <div class="dropdown-menu-custom">
-                                @php
-                                    $spList = [
-                                        'Dokter Umum',
-                                        'Spesialis Gigi dan Mulut',
-                                        'Spesialis Anak',
-                                        'Spesialis Kebidanan & Kandungan',
-                                        'Spesialis Penyakit Dalam',
-                                        'Spesialis Jantung dan Pembuluh Darah',
-                                        'Spesialis Bedah Umum',
-                                        'Spesialis Mata',
-                                        'Spesialis THT-KL',
-                                        'Spesialis Kulit dan Kelamin',
-                                        'Spesialis Saraf',
-                                        'Spesialis Kedokteran Jiwa (Psikiatri)',
-                                        'Konselor Gizi & Dietetik',
-                                    ];
-                                @endphp
-                                @foreach($spList as $sp)
-                                    <div class="dropdown-item-custom {{ old('specialty', $dokter->specialty) == $sp ? 'active' : '' }}" data-value="{{ $sp }}" onclick="selectOption(this)">
-                                        {{ $sp }}
-                                    </div>
-                                @endforeach
-                            </div>
-                        </div>
+                        <input type="text" list="specialtyDatalist" class="form-control @error('specialty') is-invalid @enderror" id="specialty" name="specialty" value="{{ old('specialty', $dokter->specialty) }}" placeholder="Pilih atau ketik spesialisasi / poli..." required autocomplete="off">
+                        <datalist id="specialtyDatalist">
+                            @foreach($specialties as $sp)
+                                <option value="{{ $sp }}"></option>
+                            @endforeach
+                        </datalist>
+                        <div class="form-text">Pilih dari rekomendasi atau ketik spesialisasi / poli baru.</div>
                         @error('specialty')
-                            <div class="invalid-feedback d-block">{{ $message }}</div>
+                            <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
 
@@ -174,68 +148,4 @@ function previewPhoto(input) {
     transition: border-color 0.2s, box-shadow 0.2s; width: 100%; min-height: 31px;
     position: relative;
 }
-.dark-style .custom-dropdown .dropdown-toggle { background: #1f2937; border-color: #374151; color: #f3f4f6; }
-.custom-dropdown .dropdown-toggle:hover { border-color: #BBE4D8; }
-.dark-style .custom-dropdown .dropdown-toggle:hover { border-color: #0A5C45; }
-.custom-dropdown .dropdown-toggle:focus { border-color: #0A5C45; box-shadow: 0 0 0 3px rgba(10,92,69,0.1); outline: none; }
-.custom-dropdown .dropdown-toggle .chevron-icon {
-    position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
-    font-size: 1.1rem; color: #6b7280; transition: transform 0.2s;
-}
-.custom-dropdown.open .dropdown-toggle .chevron-icon { transform: translateY(-50%) rotate(180deg); }
-.custom-dropdown .dropdown-placeholder { color: #9ca3af; }
-.custom-dropdown .dropdown-menu-custom {
-    display: none; position: absolute; top: calc(100% + 4px); left: 0; right: 0; z-index: 1050;
-    background: #fff; border: 1px solid #E2F0EC; border-radius: 12px;
-    box-shadow: 0 8px 24px rgba(10,92,69,0.12); max-height: 220px; overflow-y: auto;
-    padding: 6px;
-}
-.dark-style .custom-dropdown .dropdown-menu-custom { background: #1f2937; border-color: #374151; box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
-.custom-dropdown.open .dropdown-menu-custom { display: block; animation: ddFadeIn 0.2s ease; }
-@keyframes ddFadeIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
-.custom-dropdown .dropdown-item-custom {
-    padding: 9px 14px; font-size: 0.8125rem; cursor: pointer; font-weight: 500;
-    border-radius: 8px; transition: background 0.15s, color 0.15s; color: #122822;
-}
-.dark-style .custom-dropdown .dropdown-item-custom { color: #e5e7eb; }
-.custom-dropdown .dropdown-item-custom:hover { background: #E8F5F1; color: #0A5C45; }
-.dark-style .custom-dropdown .dropdown-item-custom:hover { background: #064e3b; color: #a7f3d0; }
-.custom-dropdown .dropdown-item-custom.active { background: #0A5C45; color: #fff; font-weight: 600; }
-.custom-dropdown .dropdown-menu-custom::-webkit-scrollbar { width: 5px; }
-.custom-dropdown .dropdown-menu-custom::-webkit-scrollbar-track { background: transparent; }
-.custom-dropdown .dropdown-menu-custom::-webkit-scrollbar-thumb { background: #C5E5DD; border-radius: 10px; }
-.dark-style .custom-dropdown .dropdown-menu-custom::-webkit-scrollbar-thumb { background: #064e3b; }
-</style>
-
-<script>
-function toggleDropdown(btn) {
-    const wrap = btn.closest('.custom-dropdown');
-    const isOpen = wrap.classList.contains('open');
-    document.querySelectorAll('.custom-dropdown.open').forEach(d => d.classList.remove('open'));
-    if (!isOpen) wrap.classList.add('open');
-}
-
-function selectOption(item) {
-    const wrap = item.closest('.custom-dropdown');
-    const inputTarget = wrap.querySelector('input[type="hidden"]');
-    if (inputTarget) {
-        inputTarget.value = item.dataset.value;
-    }
-    const selected = wrap.querySelector('.dropdown-selected');
-    if (selected) {
-        selected.textContent = item.textContent;
-        selected.classList.remove('dropdown-placeholder');
-    }
-    wrap.querySelectorAll('.dropdown-item-custom').forEach(i => i.classList.remove('active'));
-    item.classList.add('active');
-    wrap.classList.remove('open');
-}
-
-document.addEventListener('click', function(e) {
-    if (!e.target.closest('.custom-dropdown')) {
-        document.querySelectorAll('.custom-dropdown.open').forEach(d => d.classList.remove('open'));
-    }
-});
-</script>
-
 @endpush

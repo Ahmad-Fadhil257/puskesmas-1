@@ -45,9 +45,9 @@ class Survey extends Model
             return asset($this->avatar);
         }
 
-        // Generate dynamic avatar based on name
-        $name = urlencode($this->name ?? 'Pasien');
-        return "https://ui-avatars.com/api/?name={$name}&background=0A5C45&color=ffffff&size=128&bold=true";
+        // Generate fast inline SVG data URI avatar (0 network calls, 0 latency)
+        $char = strtoupper(substr($this->name ?? 'P', 0, 1));
+        return "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'><circle cx='32' cy='32' r='32' fill='%230A5C45'/><text x='32' y='39' font-size='26' font-weight='bold' fill='white' text-anchor='middle' font-family='sans-serif'>{$char}</text></svg>";
     }
 
     /**

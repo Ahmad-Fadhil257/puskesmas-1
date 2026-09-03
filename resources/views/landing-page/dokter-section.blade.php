@@ -53,7 +53,7 @@
                         <div class="dokter-card">
                             <div class="dokter-photo-wrap">
                                 @if($dokter->photo)
-                                    <img src="{{ asset($dokter->photo) }}" alt="{{ $dokter->name }}" loading="lazy">
+                                    <img src="{{ $dokter->photo_url }}" alt="{{ $dokter->name }}" loading="lazy">
                                 @else
                                     {{-- Placeholder avatar jika tidak ada foto --}}
                                     <div class="dokter-no-photo">
