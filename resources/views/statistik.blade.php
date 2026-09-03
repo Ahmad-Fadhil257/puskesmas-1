@@ -65,13 +65,6 @@
                 <div class="kpi-card__number">{{ number_format($totalLama) }}</div>
                 <div class="kpi-card__label">Pasien Lama</div>
             </div>
-            <div class="kpi-card" style="--kpi-color:#0A5C45; --kpi-bg:#E6F4ED;" data-aos="fade-up" data-aos-delay="300">
-                <div class="kpi-card__icon">
-                    <i class='bx bx-heart-circle'></i>
-                </div>
-                <div class="kpi-card__number">{{ $penyakit->count() }}</div>
-                <div class="kpi-card__label">Jenis Penyakit Tercatat</div>
-            </div>
         </div>
 
         {{-- ── Section 1: 10 Penyakit Terbanyak ─────────────────────────────── --}}

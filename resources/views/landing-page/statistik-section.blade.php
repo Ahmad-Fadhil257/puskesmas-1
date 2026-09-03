@@ -41,14 +41,6 @@
                 <div class="sl-kpi__num" data-count="{{ $kunjunganLanding->sum('kunjungan_baru') }}">0</div>
                 <div class="sl-kpi__label">Pasien Baru</div>
             </div>
-            <div class="sl-kpi">
-                <div class="sl-kpi__num" data-count="{{ $penyakitLanding->count() }}">0</div>
-                <div class="sl-kpi__label">Jenis Penyakit</div>
-            </div>
-            <div class="sl-kpi">
-                <div class="sl-kpi__num" data-count="{{ $penyakitLanding->sum('jumlah_kasus') }}">0</div>
-                <div class="sl-kpi__label">Total Kasus Tercatat</div>
-            </div>
         </div>
 
         {{-- Two column: Bar chart + mini chart --}}
