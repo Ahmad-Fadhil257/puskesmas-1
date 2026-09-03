@@ -21,8 +21,8 @@ class HeroController extends Controller
                 'badge_text' => 'Selamat Datang Di Puskesmas CareLink',
                 'title' => 'Melayani Kesehatan Masyarakat dengan Sepenuh Hati',
                 'description' => 'Pelayanan medis komprehensif dengan dokter ahli, fasilitas modern, dan pelayanan penuh kasih sayang. Kesehatan Anda, prioritas kami.',
-                'btn_primary_text' => 'Janji Temu Online',
-                'btn_primary_link' => '#janji-temu',
+                'btn_primary_text' => 'Statistik',
+                'btn_primary_link' => '#statistik',
                 'btn_secondary_text' => 'Layanan Kami',
                 'btn_secondary_link' => '#layanan',
             ]

@@ -26,7 +26,7 @@
             <li class="navbar__item-dropdown">
                 <a href="javascript:void(0)" class="navbar__dropdown-toggle {{ request()->routeIs('layanan.*') ? 'active' : '' }}" role="button" aria-haspopup="true" aria-expanded="false">
                     <span>LAYANAN</span>
-                    <svg class="navbar__dropdown-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <svg class="navbar__dropdown-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 4px; margin-top: 1px;">
                         <polyline points="6 9 12 15 18 9"></polyline>
                     </svg>
                 </a>
@@ -48,7 +48,7 @@
             <li class="navbar__item-dropdown">
                 <a href="javascript:void(0)" class="navbar__dropdown-toggle {{ request()->routeIs('blog.*') || request()->routeIs('faq.*') || request()->routeIs('infografis') || request()->routeIs('statistik') ? 'active' : '' }}" role="button" aria-haspopup="true" aria-expanded="false">
                     <span>INFORMASI PUBLIK</span>
-                    <svg class="navbar__dropdown-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <svg class="navbar__dropdown-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 4px; margin-top: 1px;">
                         <polyline points="6 9 12 15 18 9"></polyline>
                     </svg>
                 </a>
@@ -94,9 +94,6 @@
                 </a>
             </li>
         </ul>
-
-        <!-- Desktop CTA -->
-        <a href="{{ $appSetting->wa_link ?? '#' }}" target="_blank" rel="noopener" class="btn-nav-cta">JANJI TEMU</a>
 
         <!-- Mobile Toggle Button -->
         <button class="navbar__toggle" id="mobileToggle" aria-label="Toggle navigation" aria-expanded="false">
@@ -155,6 +152,5 @@
 
         <a href="{{ route('lokasi') }}" class="{{ request()->routeIs('lokasi') ? 'active' : '' }}">KONTAK</a>
         <a href="{{ route('survei.index') }}" class="{{ request()->routeIs('survei.*') ? 'active' : '' }}">SURVEI</a>
-        <a href="{{ $appSetting->wa_link ?? '#' }}" target="_blank" rel="noopener" class="btn-nav-cta">JANJI TEMU</a>
     </div>
 </header>

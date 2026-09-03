@@ -25,17 +25,16 @@
             <!-- Dual Action Buttons -->
             <div class="hero__actions" data-aos="fade-up">
                 @php
-                    $defaultPesanJanji = "Halo Admin Puskesmas, saya ingin membuat janji temu pendaftaran online. Mohon informasi jadwal dan persyaratannya. Terima kasih.";
-                    $primaryLink = (!empty($hero->btn_primary_link) && $hero->btn_primary_link !== '#janji-temu')
+                    $primaryLink = !empty($hero->btn_primary_link)
                         ? $hero->btn_primary_link
-                        : (isset($appSetting) ? $appSetting->getWaUrl($defaultPesanJanji) : '#');
+                        : '#statistik';
                     $secondaryLink = (!empty($hero->btn_secondary_link) && $hero->btn_secondary_link !== '#layanan')
                         ? $hero->btn_secondary_link
                         : route('layanan.index');
                     $isPrimaryWa = str_contains($primaryLink, 'wa.me') || str_contains($primaryLink, 'whatsapp');
                 @endphp
                 <a href="{{ $primaryLink }}" class="btn-primary" @if($isPrimaryWa) target="_blank" rel="noopener" @endif>
-                    {{ $hero->btn_primary_text ?? 'Janji Temu Online' }}
+                    {{ $hero->btn_primary_text ?? 'Statistik' }}
                 </a>
                 <a href="{{ $secondaryLink }}" class="btn-secondary">
                     {{ $hero->btn_secondary_text ?? 'Layanan Kami' }}
