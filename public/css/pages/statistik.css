@@ -435,19 +435,103 @@
     margin-bottom: 0.5rem;
 }
 
-/* ── Responsive ───────────────────────────────────────────────────────────── */
-@media (max-width: 768px) {
-    .statistik-hero {
-        padding: 4rem 1rem 3rem;
-    }
+/* ══════════════════════════════════════════════════════════════════════════
+   RESPONSIVE — Statistik Page
+   Breakpoints: 1024px (tablet landscape), 768px (tablet), 480px (mobile)
+   ══════════════════════════════════════════════════════════════════════════ */
 
+/* ── Tablet Landscape (≤ 1024px) ─────────────────────────────────────────── */
+@media (max-width: 1024px) {
     .statistik-content {
-        padding: 2rem 1rem 4rem;
+        padding: 2.5rem 1.5rem 4rem;
     }
 
-    .disease-chart-wrap,
-    .kunjungan-chart-wrap {
-        padding: 1.25rem;
+    .statistik-kpi-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+
+    .kunjungan-canvas-container {
+        height: 280px;
+    }
+}
+
+/* ── Tablet (≤ 768px) ────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+
+    /* Year Filter */
+    .statistik-year-filter {
+        padding: 1rem 1rem;
+        gap: 0.4rem;
+    }
+
+    .statistik-year-filter .year-btn {
+        padding: 0.4rem 1rem;
+        font-size: 0.8rem;
+    }
+
+    /* Content */
+    .statistik-content {
+        padding: 1.75rem 1rem 3.5rem;
+    }
+
+    /* KPI Grid */
+    .statistik-kpi-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.85rem;
+        margin-bottom: 2.5rem;
+    }
+
+    .kpi-card {
+        padding: 1.25rem 1rem;
+    }
+
+    .kpi-card__number {
+        font-size: 1.65rem;
+    }
+
+    .kpi-card__icon {
+        width: 42px;
+        height: 42px;
+        font-size: 1.3rem;
+    }
+
+    .kpi-card__label {
+        font-size: 0.72rem;
+    }
+
+    /* Section Header */
+    .statistik-section {
+        margin-bottom: 2.5rem;
+    }
+
+    .statistik-section__header {
+        gap: 0.75rem;
+        margin-bottom: 1.25rem;
+    }
+
+    .statistik-section__icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1.1rem;
+        border-radius: 10px;
+    }
+
+    .statistik-section__title {
+        font-size: 1.2rem;
+    }
+
+    .statistik-section__subtitle {
+        font-size: 0.82rem;
+    }
+
+    /* Disease Bar Chart */
+    .disease-chart-wrap {
+        padding: 1.25rem 1rem;
+    }
+
+    .disease-bar-list {
+        gap: 0.85rem;
     }
 
     .disease-bar-item {
@@ -455,25 +539,253 @@
         gap: 0.6rem;
     }
 
+    .disease-bar-item__rank {
+        width: 24px;
+        height: 24px;
+        font-size: 0.65rem;
+    }
+
     .disease-bar-item__name {
         font-size: 0.8rem;
+        white-space: normal;        /* biarkan wrap di tablet */
+    }
+
+    .disease-bar-item__icd {
+        display: none;              /* sembunyikan kode ICD di layar kecil */
+    }
+
+    .disease-bar-track {
+        height: 8px;
+    }
+
+    .disease-bar-item__count {
+        font-size: 0.82rem;
+        min-width: 52px;
+    }
+
+    /* Kunjungan Chart */
+    .kunjungan-chart-wrap {
+        padding: 1.25rem 1rem;
     }
 
     .kunjungan-canvas-container {
-        height: 240px;
+        height: 220px;
     }
 
+    .kunjungan-legend {
+        gap: 1rem;
+        margin-top: 1rem;
+        padding-top: 1rem;
+    }
+
+    .kunjungan-legend__item {
+        font-size: 0.75rem;
+    }
+
+    /* Tabel Kunjungan — scroll horizontal */
     .kunjungan-table-wrap {
         overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        margin-top: 1.25rem;
     }
 
     .kunjungan-table {
         min-width: 480px;
+        font-size: 0.8rem;
+    }
+
+    .kunjungan-table thead th,
+    .kunjungan-table tbody td,
+    .kunjungan-table tfoot td {
+        padding: 0.7rem 1rem;
+    }
+
+    .kunjungan-table tfoot td {
+        font-size: 0.8rem;
     }
 }
 
+/* ── Mobile (≤ 480px) ────────────────────────────────────────────────────── */
 @media (max-width: 480px) {
+
+    /* Year Filter — scroll horizontal jika banyak tahun */
+    .statistik-year-filter {
+        justify-content: flex-start;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        padding: 0.85rem 1rem;
+        scrollbar-width: none;
+    }
+
+    .statistik-year-filter::-webkit-scrollbar {
+        display: none;
+    }
+
+    .statistik-year-filter .year-btn {
+        flex-shrink: 0;
+    }
+
+    /* Content */
+    .statistik-content {
+        padding: 1.25rem 0.85rem 3rem;
+    }
+
+    /* KPI — 2 kolom tetap tapi lebih compact */
     .statistik-kpi-grid {
         grid-template-columns: repeat(2, 1fr);
+        gap: 0.7rem;
+        margin-bottom: 2rem;
+    }
+
+    .kpi-card {
+        padding: 1rem 0.75rem;
+        border-radius: 10px;
+    }
+
+    .kpi-card__icon {
+        width: 38px;
+        height: 38px;
+        font-size: 1.15rem;
+        border-radius: 10px;
+        margin-bottom: 0.65rem;
+    }
+
+    .kpi-card__number {
+        font-size: 1.45rem;
+    }
+
+    .kpi-card__label {
+        font-size: 0.67rem;
+        letter-spacing: 0.03em;
+    }
+
+    /* Section */
+    .statistik-section {
+        margin-bottom: 2rem;
+    }
+
+    .statistik-section__header {
+        gap: 0.65rem;
+        margin-bottom: 1rem;
+    }
+
+    .statistik-section__icon {
+        width: 36px;
+        height: 36px;
+        font-size: 1rem;
+        border-radius: 8px;
+    }
+
+    .statistik-section__title {
+        font-size: 1.05rem;
+    }
+
+    .statistik-section__subtitle {
+        font-size: 0.78rem;
+    }
+
+    /* Disease Bar */
+    .disease-chart-wrap {
+        padding: 1rem 0.85rem;
+        border-radius: 10px;
+    }
+
+    .disease-bar-list {
+        gap: 0.75rem;
+    }
+
+    .disease-bar-item {
+        grid-template-columns: 22px 1fr auto;
+        gap: 0.5rem;
+    }
+
+    .disease-bar-item__rank {
+        width: 22px;
+        height: 22px;
+        font-size: 0.6rem;
+    }
+
+    .disease-bar-item__name {
+        font-size: 0.76rem;
+        white-space: normal;
+    }
+
+    .disease-bar-item__count {
+        font-size: 0.78rem;
+        min-width: 44px;
+    }
+
+    .disease-bar-item__sub {
+        font-size: 0.62rem;
+    }
+
+    /* Kunjungan Chart */
+    .kunjungan-chart-wrap {
+        padding: 1rem 0.85rem;
+        border-radius: 10px;
+    }
+
+    .kunjungan-canvas-container {
+        height: 190px;
+    }
+
+    .kunjungan-legend {
+        gap: 0.75rem;
+        flex-direction: column;
+    }
+
+    /* Tabel — lebih compact */
+    .kunjungan-table-wrap {
+        border-radius: 10px;
+    }
+
+    .kunjungan-table {
+        min-width: 420px;
+        font-size: 0.76rem;
+    }
+
+    .kunjungan-table thead th,
+    .kunjungan-table tbody td,
+    .kunjungan-table tfoot td {
+        padding: 0.6rem 0.85rem;
+    }
+
+    /* Empty state */
+    .statistik-empty {
+        padding: 2.5rem 1rem;
+    }
+
+    .statistik-empty__icon {
+        font-size: 2.25rem;
+    }
+
+    .statistik-empty__title {
+        font-size: 0.95rem;
+    }
+}
+
+/* ── Mobile XS (≤ 360px) ─────────────────────────────────────────────────── */
+@media (max-width: 360px) {
+    .statistik-kpi-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.6rem;
+    }
+
+    .kpi-card__number {
+        font-size: 1.25rem;
+    }
+
+    .kpi-card__label {
+        font-size: 0.62rem;
+    }
+
+    .disease-bar-item__count {
+        min-width: 38px;
+        font-size: 0.72rem;
+    }
+
+    .kunjungan-canvas-container {
+        height: 170px;
     }
 }

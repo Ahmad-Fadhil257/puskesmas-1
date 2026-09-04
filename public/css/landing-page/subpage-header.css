@@ -192,6 +192,62 @@
     }
 }
 
+@media (max-width: 480px) {
+    .subpage-header,
+    .lokasi-full-header {
+        padding-top: 115px;
+        padding-bottom: 32px;
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .subpage-header__watermark,
+    .lokasi-full-header__watermark {
+        opacity: 0.08;
+        width: 160px;
+        right: -8px;
+    }
+
+    .subpage-header__breadcrumb {
+        font-size: 11.5px;
+        gap: 6px;
+        flex-wrap: wrap;
+        margin-bottom: 10px;
+    }
+
+    .subpage-header__title,
+    .lokasi-full-header__title {
+        font-size: clamp(1.45rem, 6vw, 1.85rem);
+        margin-bottom: 8px;
+    }
+
+    .subpage-header__subtitle,
+    .lokasi-full-header__subtitle {
+        font-size: 13.5px;
+        line-height: 1.55;
+    }
+}
+
+@media (max-width: 360px) {
+    .subpage-header,
+    .lokasi-full-header {
+        padding-top: 110px;
+        padding-bottom: 28px;
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+
+    .subpage-header__title,
+    .lokasi-full-header__title {
+        font-size: 1.35rem;
+    }
+
+    .subpage-header__subtitle,
+    .lokasi-full-header__subtitle {
+        font-size: 13px;
+    }
+}
+
 /* Article Detail overrides in subpage-header */
 .subpage-header .article-header-category-pill {
     background: #0A5C45;
