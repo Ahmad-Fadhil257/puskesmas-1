@@ -29,33 +29,45 @@ html, body {
     z-index: 2;
 }
 
-/* ----- Breadcrumb ----- */
-.subpage-header__breadcrumb {
+/* ----- Breadcrumb (Clean Pill Style) ----- */
+.subpage-header__breadcrumb,
+.lokasi-header-breadcrumb {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    font-size: 13px;
+    gap: 7px;
+    font-size: 12.5px;
     font-weight: 600;
+    padding: 5px 14px;
+    background: rgba(255, 255, 255, 0.72);
+    border: 1px solid rgba(10, 92, 69, 0.16);
+    border-radius: 9999px;
     margin-bottom: 12px;
-    letter-spacing: 0.02em;
+    letter-spacing: 0.01em;
+    width: fit-content;
+    box-shadow: 0 1px 4px rgba(10, 92, 69, 0.04);
 }
 
-.subpage-header__breadcrumb a {
-    color: #2F5947;
+.subpage-header__breadcrumb a,
+.lokasi-header-breadcrumb a {
+    color: #0A5C45;
     text-decoration: none;
     transition: color 0.2s;
 }
 
-.subpage-header__breadcrumb a:hover {
-    color: #004F38;
+.subpage-header__breadcrumb a:hover,
+.lokasi-header-breadcrumb a:hover {
+    color: #064E3B;
 }
 
-.subpage-header__breadcrumb-sep {
+.subpage-header__breadcrumb-sep,
+.lokasi-header-breadcrumb-sep {
     color: #E8672C;
-    font-size: 11px;
+    font-size: 10px;
+    font-weight: 800;
 }
 
-.subpage-header__breadcrumb-current {
+.subpage-header__breadcrumb-current,
+.lokasi-header-breadcrumb-current {
     color: #E8672C;
     font-weight: 700;
 }
@@ -79,17 +91,17 @@ html, body {
     margin: 0;
 }
 
-/* ----- Botanical Ornament Watermark (kanan, tangkai kecil menghadap ke kanan) ----- */
+/* ----- Botanical Ornament Watermark ----- */
 .subpage-header__watermark,
 .lokasi-full-header__watermark {
     position: absolute;
-    right: -20px;
+    right: -10px;
     top: 50%;
-    transform: translateY(-50%) scaleX(-1); /* Tangkai kecil menghadap ke kanan */
-    width: 480px;
-    max-width: 45%;
+    transform: translateY(-50%);
+    width: 440px;
+    max-width: 42%;
     height: auto;
-    opacity: 0.28;
+    opacity: 0.22;
     pointer-events: none;
     z-index: 1;
     user-select: none;
@@ -120,36 +132,6 @@ html, body {
     z-index: 2;
 }
 
-.lokasi-header-breadcrumb {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 13px;
-    font-weight: 600;
-    margin-bottom: 12px;
-    letter-spacing: 0.02em;
-}
-
-.lokasi-header-breadcrumb a {
-    color: #2F5947;
-    text-decoration: none;
-    transition: color 0.2s;
-}
-
-.lokasi-header-breadcrumb a:hover {
-    color: #004F38;
-}
-
-.lokasi-header-breadcrumb-sep {
-    color: #E8672C;
-    font-size: 11px;
-}
-
-.lokasi-header-breadcrumb-current {
-    color: #E8672C;
-    font-weight: 700;
-}
-
 .lokasi-full-header__title {
     font-size: clamp(1.85rem, 4vw, 2.5rem);
     font-weight: 800;
@@ -172,120 +154,127 @@ html, body {
 @media (max-width: 991px) {
     .subpage-header__watermark,
     .lokasi-full-header__watermark {
-        opacity: 0.24;
-        width: 340px;
-        max-width: 50%;
+        opacity: 0.20;
+        width: 320px;
+        max-width: 45%;
         right: -10px;
+        transform: translateY(-50%);
     }
 }
 
 @media (max-width: 768px) {
     .subpage-header,
     .lokasi-full-header {
-        margin-top: -90px;
-        padding-top: 180px;
-        padding-bottom: 44px;
+        margin-top: -75px;
+        padding-top: 148px;
+        padding-bottom: 34px;
         padding-left: 20px;
         padding-right: 20px;
     }
     .subpage-header__watermark,
     .lokasi-full-header__watermark {
-        opacity: 0.24;
-        width: 280px;
-        max-width: 65%;
-        right: -15px;
-        top: 54%;
+        opacity: 0.18;
+        width: 210px;
+        max-width: 50%;
+        right: -10px;
+        top: 52%;
+        transform: translateY(-50%);
     }
-    .subpage-header__breadcrumb {
-        font-size: 12.5px;
-        gap: 7px;
+    .subpage-header__breadcrumb,
+    .lokasi-header-breadcrumb {
+        font-size: 12px;
+        gap: 6px;
+        padding: 4px 12px;
         margin-bottom: 12px;
         line-height: 1.4;
     }
     .subpage-header__title,
     .lokasi-full-header__title {
-        font-size: 1.75rem;
-        margin-bottom: 10px;
-        line-height: 1.3;
+        font-size: 1.65rem;
+        margin-bottom: 8px;
+        line-height: 1.28;
     }
     .subpage-header__subtitle,
     .lokasi-full-header__subtitle {
-        font-size: 14px;
-        line-height: 1.6;
+        font-size: 13.5px;
+        line-height: 1.55;
     }
 }
 
 @media (max-width: 480px) {
     .subpage-header,
     .lokasi-full-header {
-        margin-top: -85px;
-        padding-top: 175px;
-        padding-bottom: 38px;
+        margin-top: -72px;
+        padding-top: 142px;
+        padding-bottom: 28px;
         padding-left: 18px;
         padding-right: 18px;
     }
 
     .subpage-header__watermark,
     .lokasi-full-header__watermark {
-        opacity: 0.22;
-        width: 240px;
-        max-width: 68%;
-        right: -10px;
-        top: 54%;
+        opacity: 0.16;
+        width: 175px;
+        max-width: 46%;
+        right: -8px;
+        top: 52%;
+        transform: translateY(-50%);
     }
 
-    .subpage-header__breadcrumb {
-        font-size: 12px;
-        gap: 6px;
-        flex-wrap: wrap;
-        margin-bottom: 12px;
-        line-height: 1.45;
+    .subpage-header__breadcrumb,
+    .lokasi-header-breadcrumb {
+        font-size: 11.5px;
+        gap: 5px;
+        padding: 4px 10px;
+        margin-bottom: 10px;
+        line-height: 1.4;
     }
 
     .subpage-header__title,
     .lokasi-full-header__title {
-        font-size: 1.55rem;
-        margin-bottom: 10px;
-        line-height: 1.3;
+        font-size: 1.45rem;
+        margin-bottom: 6px;
+        line-height: 1.25;
     }
 
     .subpage-header__subtitle,
     .lokasi-full-header__subtitle {
-        font-size: 13.5px;
-        line-height: 1.6;
+        font-size: 13px;
+        line-height: 1.5;
     }
 }
 
 @media (max-width: 360px) {
     .subpage-header,
     .lokasi-full-header {
-        margin-top: -85px;
-        padding-top: 170px;
-        padding-bottom: 32px;
+        margin-top: -70px;
+        padding-top: 138px;
+        padding-bottom: 24px;
         padding-left: 14px;
         padding-right: 14px;
     }
 
     .subpage-header__watermark,
     .lokasi-full-header__watermark {
-        opacity: 0.20;
-        width: 200px;
-        max-width: 70%;
-        right: -8px;
-        top: 54%;
+        opacity: 0.15;
+        width: 150px;
+        max-width: 44%;
+        right: -6px;
+        top: 52%;
+        transform: translateY(-50%);
     }
 
     .subpage-header__title,
     .lokasi-full-header__title {
-        font-size: 1.38rem;
-        margin-bottom: 8px;
-        line-height: 1.3;
+        font-size: 1.32rem;
+        margin-bottom: 6px;
+        line-height: 1.25;
     }
 
     .subpage-header__subtitle,
     .lokasi-full-header__subtitle {
-        font-size: 13px;
-        line-height: 1.55;
+        font-size: 12.5px;
+        line-height: 1.45;
     }
 }
 
