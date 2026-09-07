@@ -428,26 +428,34 @@ a { text-decoration: none; color: inherit; }
     color: var(--color-primary);
 }
 
-.navbar__mobile-accordion-toggle #mobileLayananChevron {
+.navbar__mobile-accordion-toggle i {
     font-size: 20px;
-    transition: transform 0.25s ease;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.navbar__mobile-accordion-toggle.open #mobileLayananChevron {
+.navbar__mobile-accordion-toggle.open i {
     transform: rotate(180deg);
 }
 
 .navbar__mobile-accordion-content {
-    display: none;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    display: flex;
     flex-direction: column;
     padding-left: 14px;
     border-left: 2px solid rgba(10, 92, 69, 0.15);
-    margin: 4px 0 8px 14px;
+    margin: 0 0 0 14px;
     gap: 2px;
+    visibility: hidden;
+    transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.28s ease, margin 0.35s ease, visibility 0.35s ease;
 }
 
 .navbar__mobile-accordion-content.open {
-    display: flex;
+    max-height: 500px;
+    opacity: 1;
+    visibility: visible;
+    margin: 6px 0 10px 14px;
 }
 
 .navbar__mobile-subitem {

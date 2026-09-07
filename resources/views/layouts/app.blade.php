@@ -110,21 +110,31 @@
                 }, { passive: true });
             }
 
-            // ── Mobile Accordion Dropdowns Helper ─────────────────────────────
-            function setupMobileAccordion(toggleId, contentId) {
-                const toggle = document.getElementById(toggleId);
-                const content = document.getElementById(contentId);
-                if (toggle && content) {
-                    toggle.addEventListener('click', function (e) {
-                        e.stopPropagation();
-                        const isOpen = content.classList.toggle('open');
-                        toggle.classList.toggle('open', isOpen);
+            // ── Mobile Accordion Dropdowns Helper (Exclusive Accordion + Smooth) ──
+            const mobileAccordions = [
+                { toggle: document.getElementById('mobileLayananToggle'), content: document.getElementById('mobileLayananContent') },
+                { toggle: document.getElementById('mobileInfoToggle'), content: document.getElementById('mobileInfoContent') },
+                { toggle: document.getElementById('mobileProfilToggle'), content: document.getElementById('mobileProfilContent') }
+            ].filter(function (item) { return item.toggle && item.content; });
+
+            mobileAccordions.forEach(function (item) {
+                item.toggle.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    const willOpen = !item.content.classList.contains('open');
+
+                    // Tutup SEMUA accordion lain agar hanya 1 yang terbuka
+                    mobileAccordions.forEach(function (other) {
+                        other.content.classList.remove('open');
+                        other.toggle.classList.remove('open');
                     });
-                }
-            }
-            setupMobileAccordion('mobileProfilToggle', 'mobileProfilContent');
-            setupMobileAccordion('mobileLayananToggle', 'mobileLayananContent');
-            setupMobileAccordion('mobileInfoToggle', 'mobileInfoContent');
+
+                    // Jika sebelumnya tertutup, sekarang buka
+                    if (willOpen) {
+                        item.content.classList.add('open');
+                        item.toggle.classList.add('open');
+                    }
+                });
+            });
 
             // ── Close dropdown when clicking outside ─────────────────────────
             document.addEventListener('click', function (e) {

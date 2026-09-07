@@ -65,9 +65,9 @@
                     <span style="font-size: 13px; font-weight: 700; color: #0A5C45;">{{ $satisfactionPct ?? '98' }}% Sangat Puas</span>
                 </div>
 
-                <div style="margin-top: 20px; z-index: 2; position: relative;">
-                    <h4 style="font-size: 17px; font-weight: 800; color: #122822; margin: 0 0 6px 0;">Penilaian Anda Sangat Berarti</h4>
-                    <p style="font-size: 13.5px; color: #64748B; margin: 0; max-width: 320px; line-height: 1.5;">
+                <div class="survei-visual-caption">
+                    <h4 class="survei-visual-caption-title">Penilaian Anda Sangat Berarti</h4>
+                    <p class="survei-visual-caption-desc">
                         Setiap masukan dan evaluasi membantu kami terus meningkatkan kualitas pelayanan kesehatan masyarakat.
                     </p>
                 </div>

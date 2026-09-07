@@ -1045,7 +1045,7 @@ body {
 }
 
 /* ==========================================================================
-   RESPONSIVE ADJUSTMENTS
+   RESPONSIVE ADJUSTMENTS (KONSISTEN 2 CARD PER BARIS DI MOBILE)
    ========================================================================== */
 @media (max-width: 992px) {
     .blog-mosaic-row--odd,
@@ -1076,11 +1076,117 @@ body {
     }
 }
 
-@media (max-width: 576px) {
+@media (max-width: 768px) {
+    .blog-content-wrapper {
+        padding: 28px 16px 60px;
+    }
+
+    .blog-mosaic-row--odd,
+    .blog-mosaic-row--even {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+    }
+
+    /* Big Featured Card — Lebih Compact & Proporsional di Mobile */
+    .mosaic-card-big {
+        min-height: 240px;
+        border-radius: 12px;
+    }
+
+    .mosaic-card-big__badge {
+        top: 12px;
+        left: 12px;
+        padding: 4px 10px;
+        font-size: 0.68rem;
+        border-radius: 8px;
+    }
+
+    .mosaic-card-big__content {
+        padding: 16px 14px;
+    }
+
+    .mosaic-card-big__meta {
+        font-size: 0.72rem;
+        margin-bottom: 6px;
+    }
+
+    .mosaic-card-big__title {
+        font-size: 1rem;
+        line-height: 1.3;
+        margin-bottom: 6px;
+    }
+
+    .mosaic-card-big__excerpt {
+        display: none; /* Sembunyikan excerpt agar tidak menumpuk berantakan */
+    }
+
+    .btn-mosaic-read {
+        font-size: 0.75rem;
+    }
+
+    /* 2 Card Per Baris di Mobile */
     .mosaic-small-grid,
     .articles-grid {
-        grid-template-columns: 1fr;
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 12px !important;
     }
+
+    .mosaic-card-small,
+    .article-card {
+        border-radius: 10px;
+    }
+
+    .mosaic-card-small__thumb-wrap,
+    .article-card__thumb-wrap {
+        height: 110px;
+    }
+
+    .mosaic-card-small__badge,
+    .article-card__category {
+        top: 6px;
+        left: 6px;
+        font-size: 0.6rem;
+        padding: 2px 7px;
+        border-radius: 6px;
+    }
+
+    .mosaic-card-small__body,
+    .article-card__body {
+        padding: 10px 8px;
+    }
+
+    .mosaic-card-small__meta,
+    .article-card__meta {
+        font-size: 0.67rem;
+        margin-bottom: 4px;
+    }
+
+    .mosaic-card-small__title,
+    .article-card__title {
+        font-size: 0.78rem !important;
+        font-weight: 700;
+        line-height: 1.35;
+        margin: 0 0 6px 0 !important;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .article-card__excerpt,
+    .article-card__author {
+        display: none; /* Bersih di mobile 2 kolom */
+    }
+
+    .mosaic-card-small__link,
+    .article-card__read-more {
+        font-size: 0.72rem;
+    }
+}
+
+@media (max-width: 576px) {
     .blog-filterbar-row {
         flex-direction: column;
         align-items: stretch;
