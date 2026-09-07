@@ -110,21 +110,6 @@
             </button>
         </div>
 
-        {{-- Help CTA Card (Informasi & Lokasi) --}}
-        <div class="faq-help-card" data-aos="fade-up">
-            <div class="faq-help-info">
-                <h3>Belum Menemukan Jawaban yang Anda Cari?</h3>
-                <p>
-                    Kunjungi langsung loket informasi Puskesmas kami atau lihat informasi kontak dan jadwal pelayanan pada halaman lokasi kami.
-                </p>
-            </div>
-            <div>
-                <a href="{{ route('lokasi') }}" class="btn-faq-wa" style="background: #0A5C45;">
-                    <i class="bx bx-map-pin fs-5"></i>
-                    <span>Informasi & Lokasi Layanan</span>
-                </a>
-            </div>
-        </div>
 
     </div>
 </div>

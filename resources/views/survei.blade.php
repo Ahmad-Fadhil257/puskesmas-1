@@ -50,7 +50,7 @@
 
         <div class="survei-main-grid">
 
-            <div class="survei-visual-card" data-aos="fade-right">
+            <div class="survei-visual-card" data-aos="fade-up">
                 <div class="survei-visual-blob"></div>
                 <img src="{{ asset('assets/img/survey-illustration.jpg') }}?v={{ file_exists(public_path('assets/img/survey-illustration.jpg')) ? filemtime(public_path('assets/img/survey-illustration.jpg')) : time() }}" 
                      alt="Survei Kepuasan Pasien" 

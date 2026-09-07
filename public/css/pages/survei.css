@@ -73,6 +73,7 @@
     .survei-main-grid {
         grid-template-columns: 1fr;
         gap: 32px;
+        justify-items: center;
     }
 }
 
@@ -87,16 +88,22 @@
     justify-content: center;
     text-align: center;
     padding: 20px 10px;
+    width: 100%;
+    max-width: 460px;
+    margin: 0 auto;
 }
 
 .survei-visual-blob {
     position: absolute;
+    top: 36%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     width: 320px;
     height: 320px;
-    background: #D8F3E5;
-    border-radius: 50% 40% 60% 50% / 50% 60% 40% 50%;
+    background: radial-gradient(circle, rgba(167, 243, 208, 0.6) 0%, rgba(216, 243, 229, 0.2) 65%, transparent 100%);
+    border-radius: 50%;
     z-index: 0;
-    opacity: 0.85;
+    pointer-events: none;
 }
 
 .survei-visual-img {
@@ -110,6 +117,8 @@
     object-fit: cover;
     box-shadow: 0 16px 36px rgba(10, 92, 69, 0.12);
     border: 3px solid #FFFFFF;
+    margin: 0 auto;
+    display: block;
 }
 
 .survei-visual-floating-badge {
@@ -124,6 +133,37 @@
     align-items: center;
     gap: 10px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.survei-visual-caption {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 380px;
+    margin: 18px auto 0;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.survei-visual-caption-title {
+    font-size: 17px;
+    font-weight: 800;
+    color: #0F172A;
+    margin: 0 0 6px 0;
+    text-align: center;
+}
+
+.survei-visual-caption-desc {
+    font-size: 13.5px;
+    color: #475569;
+    line-height: 1.55;
+    max-width: 340px;
+    margin: 0 auto;
+    text-align: center;
 }
 
 /* --------------------------------------------------------------------------
@@ -508,31 +548,41 @@
         gap: 20px;
     }
 
-    /* Visual Card — Proporsional, tidak memakan seluruh layar mobile */
+    /* Visual Card — Proporsional, rapi dan simetris di tengah pada mobile */
     .survei-visual-card {
-        padding: 8px 0;
-        overflow: hidden;
+        padding: 12px 0 6px;
+        width: 100%;
+        max-width: 340px;
+        margin: 0 auto;
     }
 
     .survei-visual-blob {
-        width: 200px;
-        height: 200px;
-        max-width: 75%;
+        top: 34%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 240px;
+        height: 240px;
+        max-width: 85%;
+        background: radial-gradient(circle, rgba(167, 243, 208, 0.65) 0%, rgba(216, 243, 229, 0.2) 70%, transparent 100%);
     }
 
     .survei-visual-img {
-        max-width: 100%;
-        width: 290px;
+        width: 100%;
+        max-width: 300px;
         border-radius: 12px;
         box-shadow: 0 10px 24px rgba(10, 92, 69, 0.1);
+        margin: 0 auto;
+        display: block;
     }
 
     .survei-visual-floating-badge {
         margin-top: -16px;
-        padding: 7px 16px;
+        padding: 8px 18px;
         gap: 8px;
         font-size: 12px;
         box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .survei-visual-floating-badge span {
@@ -541,17 +591,23 @@
 
     .survei-visual-caption {
         margin-top: 14px;
+        width: 100%;
+        text-align: center;
     }
 
     .survei-visual-caption-title {
         font-size: 15px;
+        font-weight: 800;
         margin-bottom: 4px;
+        text-align: center;
     }
 
     .survei-visual-caption-desc {
-        font-size: 12px;
-        max-width: 280px;
-        line-height: 1.45;
+        font-size: 12.5px;
+        max-width: 300px;
+        margin: 0 auto;
+        line-height: 1.5;
+        text-align: center;
     }
 
     /* Form Card — Padding proporsional di mobile */
