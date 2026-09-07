@@ -45,7 +45,7 @@
             </button>
 
             {{-- Swiper Container --}}
-            <div class="swiper dokter-swiper">
+            <div class="swiper dokter-swiper" data-dokter-count="{{ $dokters->count() }}">
                 <div class="swiper-wrapper">
 
                     @forelse($dokters as $dokter)
@@ -93,7 +93,8 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const count = {{ $dokters->count() }};
+            const swiperEl = document.querySelector('.dokter-swiper');
+            const count = parseInt(swiperEl ? swiperEl.getAttribute('data-dokter-count') : '0', 10);
             const dokterSwiper = new Swiper('.dokter-swiper', {
                 slidesPerView: 1.2,
                 spaceBetween: 16,
