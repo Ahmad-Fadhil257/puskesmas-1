@@ -27,6 +27,24 @@
         </a>
     </div>
 
+    {{-- Error Alert Banner --}}
+    @if ($errors->any())
+        <div class="alert alert-danger alert-dismissible fade show mb-4" role="alert">
+            <div class="d-flex align-items-start">
+                <i class="bx bx-error-circle me-2 fs-4 mt-1"></i>
+                <div>
+                    <strong>Terdapat kesalahan pengisian data:</strong>
+                    <ul class="mb-0 mt-1 ps-3">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+
     {{-- Form Card Sneat --}}
     <div class="card mb-4">
         <div class="card-header border-bottom py-3">
@@ -102,17 +120,27 @@
                     </div>
 
                     {{-- Container Hak Akses Halaman (Khusus Staf) --}}
-                    <div class="col-12" id="accessiblePagesContainer" style="display: {{ old('role', 'staf') === 'staf' ? 'block' : 'none' }};">
+                    <div class="col-12 {{ old('role', 'staf') === 'staf' ? '' : 'd-none' }}" id="accessiblePagesContainer">
                         <div class="card bg-light border p-3 mt-2">
-                            <label class="form-label fw-bold text-dark mb-2">
-                                <i class="bx bx-check-shield text-primary me-1"></i> Pilih Hak Akses Menu untuk Staf:
-                            </label>
+                            <div class="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2">
+                                <label class="form-label fw-bold text-dark mb-0">
+                                    <i class="bx bx-check-shield text-primary me-1"></i> Pilih Hak Akses Menu untuk Staf:
+                                </label>
+                                <div class="btn-group btn-group-sm">
+                                    <button type="button" class="btn btn-outline-primary btn-sm py-1 px-2" onclick="setAllPermissions(true)">
+                                        <i class="bx bx-check-double me-1"></i> Pilih Semua
+                                    </button>
+                                    <button type="button" class="btn btn-outline-secondary btn-sm py-1 px-2" onclick="setAllPermissions(false)">
+                                        <i class="bx bx-x me-1"></i> Hapus Semua
+                                    </button>
+                                </div>
+                            </div>
                             <div class="row g-2">
                                 @foreach($allPages as $key => $title)
                                     @if($key === 'users') @continue @endif
                                     <div class="col-md-4 col-sm-6">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="accessible_pages[]" value="{{ $key }}" id="page_{{ $key }}" {{ in_array($key, old('accessible_pages', [])) ? 'checked' : '' }}>
+                                            <input class="form-check-input permission-checkbox" type="checkbox" name="accessible_pages[]" value="{{ $key }}" id="page_{{ $key }}" {{ in_array($key, old('accessible_pages', [])) ? 'checked' : '' }}>
                                             <label class="form-check-label" for="page_{{ $key }}">
                                                 {{ $title }}
                                             </label>
@@ -131,8 +159,21 @@
                     function toggleAccessiblePages(role) {
                         const container = document.getElementById('accessiblePagesContainer');
                         if (container) {
-                            container.style.display = (role === 'staf') ? 'block' : 'none';
+                            if (role === 'staf') {
+                                container.classList.remove('d-none');
+                            } else {
+                                container.classList.add('d-none');
+                            }
                         }
+                    }
+
+                    function setAllPermissions(checked) {
+                        const container = document.getElementById('accessiblePagesContainer');
+                        if (!container) return;
+                        const checkboxes = container.querySelectorAll('.permission-checkbox');
+                        checkboxes.forEach(function(cb) {
+                            cb.checked = checked;
+                        });
                     }
                 </script>
 

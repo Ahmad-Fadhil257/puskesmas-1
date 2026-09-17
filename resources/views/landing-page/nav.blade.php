@@ -6,10 +6,8 @@
             <span class="navbar__brand-icon">
                 <img src="{{ $appSetting->logo_url ?? asset('assets/logo/logo-puskesmas.png') }}" alt="Logo" style="height: 36px; width: 36px; object-fit: contain; flex-shrink: 0;">
             </span>
-            @if(($appSetting->show_app_name ?? true) && !empty($appSetting->app_name ?? 'Puskesmas'))
+            @if(($appSetting->show_app_name ?? true) && !empty($appSetting->app_name))
                 <span class="navbar__brand-text brand-text">{{ $appSetting->app_name }}</span>
-            @else
-                <span class="navbar__brand-text brand-text">Puskesmas</span>
             @endif
         </a>
 

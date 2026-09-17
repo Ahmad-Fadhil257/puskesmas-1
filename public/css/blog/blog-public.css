@@ -636,6 +636,267 @@ body {
 /* ==========================================================================
    4. DETAIL PAGE DESIGN (CARD STACK OVERLAP + STICKY SIDEBAR)
    ========================================================================== */
+/* ==========================================================================
+   DETAIL BERITA & ARTIKEL STYLING (MODERN CARD LAYOUT)
+   ========================================================================== */
+.blog-content-wrapper {
+    width: 100%;
+    padding: 40px 20px 80px 20px;
+    box-sizing: border-box;
+    background-color: #EDF2F7 !important;
+}
+
+.blog-content-container {
+    max-width: 960px;
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+/* 1. Kartu Utama Artikel */
+.article-main-card {
+    background: #FFFFFF;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid #E2E8F0;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.02);
+}
+
+.article-featured-image {
+    width: 100%;
+    max-height: 480px;
+    overflow: hidden;
+    background: #0F172A;
+    position: relative;
+}
+
+.article-featured-image img {
+    width: 100%;
+    max-height: 480px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+/* 2. Format Tipografi Konten Artikel */
+.article-body-content {
+    padding: 40px 48px 24px 48px;
+    color: #334155;
+    font-size: 1.05rem;
+    line-height: 1.85;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+.article-body-content h1,
+.article-body-content h2,
+.article-body-content h3,
+.article-body-content h4,
+.article-body-content h5,
+.article-body-content h6 {
+    color: #0F172A;
+    font-weight: 800;
+    line-height: 1.35;
+    margin-top: 1.75rem;
+    margin-bottom: 0.85rem;
+}
+
+.article-body-content h2 {
+    font-size: 1.55rem;
+    border-bottom: 2px solid #F1F5F9;
+    padding-bottom: 8px;
+}
+
+.article-body-content h3 {
+    font-size: 1.3rem;
+}
+
+.article-body-content p {
+    margin-top: 0;
+    margin-bottom: 1.25rem;
+}
+
+.article-body-content blockquote {
+    margin: 1.5rem 0;
+    padding: 16px 24px;
+    background: #F0FDF4;
+    border-left: 4px solid #0A5C45;
+    border-radius: 0 10px 10px 0;
+    font-style: italic;
+    color: #1E293B;
+    font-weight: 500;
+}
+
+.article-body-content blockquote p:last-child {
+    margin-bottom: 0;
+}
+
+.article-body-content ul,
+.article-body-content ol {
+    margin-top: 0;
+    margin-bottom: 1.25rem;
+    padding-left: 28px;
+}
+
+.article-body-content li {
+    margin-bottom: 0.5rem;
+}
+
+.article-body-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin: 1.5rem 0;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+}
+
+.article-body-content a {
+    color: #0A5C45;
+    text-decoration: underline;
+    font-weight: 600;
+    transition: color 0.2s ease;
+}
+
+.article-body-content a:hover {
+    color: #084A37;
+}
+
+.article-body-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.article-body-content th,
+.article-body-content td {
+    padding: 12px 16px;
+    border: 1px solid #E2E8F0;
+    text-align: left;
+}
+
+.article-body-content th {
+    background: #F8FAFC;
+    font-weight: 700;
+    color: #0F172A;
+}
+
+/* 3. Action Bar (Kembali & Bagikan) */
+.article-actions-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 24px 48px 36px 48px;
+    border-top: 1px solid #F1F5F9;
+}
+
+.btn-back-catalog {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: #F8FAFC;
+    color: #0A5C45;
+    border: 1px solid #CBD5E1;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.btn-back-catalog:hover {
+    background: #0A5C45;
+    color: #FFFFFF;
+    border-color: #0A5C45;
+    transform: translateX(-3px);
+}
+
+.share-links {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.share-links__label {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: #64748B;
+}
+
+.share-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 1px solid #E2E8F0;
+    background: #F8FAFC;
+    color: #334155;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.share-btn:hover {
+    background: #0A5C45;
+    color: #FFFFFF;
+    border-color: #0A5C45;
+    transform: translateY(-2px);
+}
+
+/* 4. Kartu Rekomendasi Artikel Terkait */
+.article-related-card {
+    background: #FFFFFF;
+    border-radius: 16px;
+    padding: 36px 40px;
+    border: 1px solid #E2E8F0;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.article-related-card__header {
+    margin-bottom: 24px;
+}
+
+.article-related-card__title {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: #0F172A;
+    margin: 0 0 6px 0;
+}
+
+.article-related-card__subtitle {
+    font-size: 0.9rem;
+    color: #64748B;
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .article-body-content {
+        padding: 24px 20px 16px 20px;
+        font-size: 0.98rem;
+    }
+    .article-actions-bar {
+        padding: 16px 20px 24px 20px;
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .btn-back-catalog {
+        justify-content: center;
+    }
+    .share-links {
+        justify-content: space-between;
+    }
+    .article-related-card {
+        padding: 24px 18px;
+    }
+}
+
 .article-reader-wrapper {
     width: 100%;
     padding: 24px 20px 80px 20px;
