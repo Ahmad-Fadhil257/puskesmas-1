@@ -81,7 +81,7 @@
                     <div class="col-md-6">
                         <label class="form-label fw-semibold" for="role">Peran (Role) <span class="text-danger">*</span></label>
                         @if($user->id === Auth::id())
-                            <input type="text" class="form-control bg-light" value="Administrator (Akun Anda Sendiri)" readonly disabled>
+                            <input type="text" class="form-control bg-light" id="role" value="Administrator (Akun Anda Sendiri)" readonly disabled>
                             <input type="hidden" name="role" value="admin">
                         @else
                             <select class="form-select @error('role') is-invalid @enderror" id="role" name="role" required onchange="toggleAccessiblePages(this.value)">
@@ -111,7 +111,7 @@
                     {{-- Container Hak Akses Halaman (Khusus Staf) --}}
                     @php
                         $currentRole = old('role', $user->role);
-                        $userPages = old('accessible_pages', $user->accessible_pages ?? []);
+                        $userPages = (array) (old('accessible_pages', $user->accessible_pages) ?? []);
                     @endphp
                     <div class="col-12" id="accessiblePagesContainer" style="display: {{ $currentRole === 'staf' ? 'block' : 'none' }};">
                         <div class="card bg-light border p-3 mt-2">
