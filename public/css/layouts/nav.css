@@ -1,0 +1,650 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+:root {
+    --color-primary:         #0A5C45;
+    --color-primary-hover:   #084A37;
+    --color-dark:            #122822;
+    --color-body:            #40564F;
+    --color-muted:           #3B5249;
+    --color-bg-1:            #C5E5DD;
+    --color-bg-2:            #EEF8F5;
+    --color-surface:         #FFFFFF;
+    --color-secondary:       #BBE4D8;
+    --color-secondary-hover: #A9DCCF;
+    --color-border:          #96CFC1;
+
+    --font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    --container-max:      1200px;
+    --section-padding-y:  80px;
+    --section-padding-x:  24px;
+    --radius-sm:   8px;
+    --radius-md:   12px;
+    --radius-lg:   16px;
+    --radius-xl:   24px;
+    --radius-full: 9999px;
+    --shadow-sm: 0 2px 8px rgba(10, 92, 69, 0.08);
+    --shadow-md: 0 4px 16px rgba(10, 92, 69, 0.12);
+    --shadow-lg: 0 10px 30px rgba(10, 92, 69, 0.15);
+    --transition: all 0.2s ease;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+html, body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: clip;
+}
+
+main {
+    width: 100%;
+    flex: 1;
+    overflow-x: clip;
+}
+
+body {
+    font-family: var(--font-family);
+    color: var(--color-dark);
+    background: linear-gradient(135deg, var(--color-bg-1) 0%, #D8EFE8 50%, var(--color-bg-2) 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+img { display: block; max-width: 100%; }
+a { text-decoration: none; color: inherit; }
+
+@media (max-width: 768px) { :root { --section-padding-x: 16px; } }
+
+/* ==========================================================================
+   NAVBAR / FLOATING NAV
+   ========================================================================== */
+
+.site-header {
+    width: 100%;
+    padding: 20px var(--section-padding-x) 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    transition: padding 0.25s ease, background-color 0.25s ease;
+}
+
+.site-header.scrolled {
+    padding: 10px var(--section-padding-x) 0;
+}
+
+.site-header.scrolled .navbar {
+    box-shadow: 0 4px 20px rgba(10, 92, 69, 0.16);
+    background: rgba(255, 255, 255, 0.98);
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: var(--radius-full);
+    padding: 12px 28px;
+    box-shadow: var(--shadow-sm), 0 1px 0 rgba(10, 92, 69, 0.05);
+    max-width: var(--container-max);
+    margin: 0 auto;
+    transition: var(--transition);
+    position: relative;
+}
+
+@media (min-width: 993px) {
+    .navbar {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        align-items: center;
+    }
+
+    .navbar__brand {
+        grid-column: 1;
+        justify-self: start;
+    }
+
+    .navbar__menu {
+        grid-column: 2;
+        justify-self: center;
+    }
+}
+
+.navbar__brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--color-primary);
+    letter-spacing: -0.02em;
+    transition: opacity 0.2s;
+}
+
+.navbar__brand-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.navbar__brand-icon img {
+    height: 36px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+}
+
+.navbar__brand-text {
+    line-height: 1;
+    display: inline-block;
+}
+
+.navbar__brand:hover { opacity: 0.9; }
+
+.navbar__menu {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    gap: 28px;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar__menu a,
+.navbar__dropdown-toggle {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #334155;
+    position: relative;
+    padding: 8px 4px;
+    transition: color 0.2s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+}
+
+.navbar__menu a:hover,
+.navbar__dropdown-toggle:hover,
+.navbar__item-dropdown:hover .navbar__dropdown-toggle {
+    color: var(--color-primary);
+}
+
+.navbar__menu a.active,
+.navbar__dropdown-toggle.active {
+    color: var(--color-primary);
+}
+
+.navbar__menu a.active::after,
+.navbar__dropdown-toggle.active::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--color-primary);
+    border-radius: var(--radius-full);
+}
+
+.btn-nav-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: #00A86B;
+    color: #FFFFFF !important;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 11px 24px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 4px 14px rgba(0, 168, 107, 0.28);
+    white-space: nowrap;
+    text-decoration: none;
+}
+
+.btn-nav-cta:hover {
+    background: #008F5B;
+    color: #FFFFFF !important;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 168, 107, 0.4);
+}
+
+.btn-nav-cta:active { transform: scale(0.98); }
+
+.navbar__toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--color-primary);
+    padding: 6px;
+    line-height: 0;
+}
+
+.navbar__mobile {
+    display: none;
+    flex-direction: column;
+    background: rgba(255, 255, 255, 0.97);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    box-shadow: var(--shadow-md);
+    /* Mengambang di atas halaman, tidak mendorong konten ke bawah */
+    position: absolute;
+    top: calc(100% + 8px); /* tepat di bawah header */
+    left: 16px;
+    right: 16px;
+    z-index: 200;
+}
+
+.navbar__mobile.open { display: flex; }
+
+.navbar__mobile a {
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--color-muted);
+    padding: 10px 14px;
+    border-radius: var(--radius-sm);
+    transition: background 0.15s, color 0.15s;
+}
+
+.navbar__mobile a:hover {
+    background: rgba(10, 92, 69, 0.05);
+    color: var(--color-primary);
+}
+
+.navbar__mobile a.active {
+    background: rgba(10, 92, 69, 0.08);
+    color: var(--color-primary);
+    font-weight: 700;
+}
+
+.navbar__mobile .btn-nav-cta {
+    margin-top: 10px;
+    width: 100%;
+}
+
+/* ==========================================================================
+   DROPDOWN MENU (DESKTOP)
+   ========================================================================== */
+
+.navbar__item-dropdown {
+    position: relative;
+    list-style: none;
+}
+
+.navbar__dropdown-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+}
+
+.navbar__dropdown-chevron {
+    font-size: 16px;
+    transition: transform 0.25s ease;
+}
+
+.navbar__item-dropdown:hover .navbar__dropdown-chevron {
+    transform: rotate(180deg);
+}
+
+.navbar__dropdown-menu {
+    position: absolute;
+    top: calc(100% + 14px);
+    left: 50%;
+    transform: translateX(-50%) translateY(8px);
+    background: #FFFFFF;
+    border-radius: var(--radius-md);
+    box-shadow: 0 12px 36px rgba(10, 92, 69, 0.16), 0 4px 12px rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(10, 92, 69, 0.12);
+    padding: 8px;
+    min-width: 250px;
+    max-width: 320px;
+    max-height: 380px;
+    overflow-y: auto;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 250;
+    list-style: none;
+}
+
+/* Arrow pointer above dropdown */
+.navbar__dropdown-menu::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+    width: 12px;
+    height: 12px;
+    background: #FFFFFF;
+    border-left: 1px solid rgba(10, 92, 69, 0.12);
+    border-top: 1px solid rgba(10, 92, 69, 0.12);
+}
+
+/* Invisible bridge so mouse hover doesn't break */
+.navbar__item-dropdown::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    height: 16px;
+}
+
+.navbar__item-dropdown:hover .navbar__dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+}
+
+.navbar__dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    font-size: 13.5px !important;
+    font-weight: 500;
+    color: var(--color-dark) !important;
+    border-radius: var(--radius-sm);
+    transition: all 0.18s ease;
+    text-decoration: none;
+}
+
+.navbar__dropdown-item:hover {
+    background: rgba(10, 92, 69, 0.07);
+    color: var(--color-primary) !important;
+    transform: translateX(3px);
+}
+
+.navbar__dropdown-item.active {
+    background: rgba(10, 92, 69, 0.1);
+    color: var(--color-primary) !important;
+    font-weight: 700;
+}
+
+.navbar__dropdown-icon {
+    font-size: 18px;
+    color: var(--color-primary);
+    flex-shrink: 0;
+}
+
+.navbar__dropdown-text {
+    line-height: 1.3;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.navbar__dropdown-divider {
+    height: 1px;
+    background: rgba(10, 92, 69, 0.08);
+    margin: 6px 4px;
+}
+
+.navbar__dropdown-all {
+    background: #E8F5F1;
+    color: var(--color-primary) !important;
+    font-weight: 700 !important;
+}
+
+.navbar__dropdown-all:hover {
+    background: #D4ECE4;
+}
+
+/* ==========================================================================
+   MOBILE ACCORDION DROPDOWN
+   ========================================================================== */
+
+.navbar__mobile-accordion {
+    display: flex;
+    flex-direction: column;
+}
+
+.navbar__mobile-accordion-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    background: none;
+    border: none;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--color-muted);
+    padding: 10px 14px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.15s, color 0.15s;
+    font-family: inherit;
+}
+
+.navbar__mobile-accordion-toggle:hover,
+.navbar__mobile-accordion-toggle.active {
+    background: rgba(10, 92, 69, 0.05);
+    color: var(--color-primary);
+}
+
+.navbar__mobile-accordion-toggle i {
+    font-size: 20px;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.navbar__mobile-accordion-toggle.open i {
+    transform: rotate(180deg);
+}
+
+.navbar__mobile-accordion-content {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    padding-left: 14px;
+    border-left: 2px solid rgba(10, 92, 69, 0.15);
+    margin: 0 0 0 14px;
+    gap: 2px;
+    visibility: hidden;
+    transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.28s ease, margin 0.35s ease, visibility 0.35s ease;
+}
+
+.navbar__mobile-accordion-content.open {
+    max-height: 500px;
+    opacity: 1;
+    visibility: visible;
+    margin: 6px 0 10px 14px;
+}
+
+.navbar__mobile-subitem {
+    font-size: 13px !important;
+    padding: 8px 12px !important;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.navbar__mobile-subitem-all {
+    color: var(--color-primary) !important;
+    background: rgba(10, 92, 69, 0.06);
+    margin-top: 4px;
+}
+
+@media (max-width: 992px) {
+    .site-header { padding: 12px 14px 0; }
+    .site-header.scrolled { padding: 8px 12px 0; }
+    .navbar { padding: 10px 18px; }
+    .navbar__menu, .btn-nav-cta { display: none; }
+    .navbar__toggle { display: flex; }
+}
+
+@media (max-width: 480px) {
+    .site-header { padding: 10px 12px 0; }
+    .site-header.scrolled { padding: 6px 10px 0; }
+    .navbar { padding: 8px 14px; }
+    .navbar__brand-text { font-size: 1.05rem; }
+}
+
+/* ==========================================================================
+   FLOATING CIRCULAR SEAL BADGE (JAM OPERASIONAL - UNIK & CLEAN)
+   ========================================================================== */
+
+@keyframes floatCircle {
+    0%, 100% { transform: translateY(0px); }
+    50%      { transform: translateY(-5px); }
+}
+
+@keyframes spinRing {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}
+
+@keyframes pulseCoreGlow {
+    0%, 100% { box-shadow: 0 8px 24px -2px rgba(10, 92, 69, 0.12), 0 0 0 1px rgba(10, 92, 69, 0.10); }
+    50%      { box-shadow: 0 12px 30px -2px rgba(10, 92, 69, 0.20), 0 0 0 2px rgba(16, 185, 129, 0.30); }
+}
+
+.operational-circle-badge {
+    position: fixed;
+    top: 100px;
+    left: 22px;
+    width: 150px;
+    height: 150px;
+    z-index: 90;
+    user-select: none;
+    animation: floatCircle 5s ease-in-out infinite;
+    transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.operational-circle-badge:hover {
+    transform: translateY(-5px);
+}
+
+/* Outer Rotating Circular Text Ring (Lapang, Berputar Mulus Tanpa Sentakan) */
+.operational-circle-badge__spinner {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    animation: spinRing 32s linear infinite;
+    transform-origin: center center;
+    pointer-events: none;
+}
+
+.operational-circle-badge__svg-ring {
+    width: 100%;
+    height: 100%;
+    display: block;
+    overflow: visible;
+}
+
+/* Inner Core Disc (Lapang, Bersih, Berjarak Nyaman dari Teks Melingkar) */
+.operational-circle-badge__core {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #FFFFFF 0%, #F5FAF8 75%, #E6F5EF 100%);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1.5px solid rgba(10, 92, 69, 0.16);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 6px;
+    box-sizing: border-box;
+    cursor: default;
+    animation: pulseCoreGlow 4s ease-in-out infinite;
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.operational-circle-badge:hover .operational-circle-badge__core {
+    border-color: rgba(10, 92, 69, 0.35);
+    box-shadow: 0 14px 32px rgba(10, 92, 69, 0.22), 0 0 0 3px rgba(16, 185, 129, 0.20);
+}
+
+/* Single Clean Clock Icon (Hanya Ikon Jam, Tidak Ada Titik Nempel) */
+.operational-circle-badge__icon {
+    font-size: 19px;
+    color: #0A5C45;
+    line-height: 1;
+    margin-bottom: 4px;
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.operational-circle-badge:hover .operational-circle-badge__icon {
+    transform: scale(1.15) rotate(12deg);
+}
+
+.operational-circle-badge__days {
+    font-size: 10.5px;
+    font-weight: 700;
+    color: #475569;
+    line-height: 1.2;
+    text-transform: capitalize;
+    letter-spacing: -0.01em;
+}
+
+.operational-circle-badge__hours {
+    font-size: 11.5px;
+    font-weight: 800;
+    color: #0A5C45;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin-top: 2px;
+    max-width: 82px;
+    word-break: break-word;
+}
+
+/* Close Button: Discreet mini circular button on top-right rim */
+.operational-circle-badge__close {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #FFFFFF;
+    border: 1px solid rgba(10, 92, 69, 0.16);
+    color: #94A3B8;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.2s ease;
+    padding: 0;
+}
+
+.operational-circle-badge__close:hover {
+    background: #FEE2E2;
+    color: #EF4444;
+    border-color: #FCA5A5;
+    transform: rotate(90deg) scale(1.1);
+}
+
+@media (max-width: 900px) {
+    .operational-circle-badge { display: none; }
+}
+

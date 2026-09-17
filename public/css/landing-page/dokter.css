@@ -1,0 +1,253 @@
+/* ==========================================================================
+   DOKTER SECTION (OUR DOCTORS) - SWIPER CAROUSEL SLIDER
+   ========================================================================== */
+
+.dokter-section {
+    background-color: var(--color-primary);
+    padding: 80px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Polkadot Geometric Dot Grid Pattern (Senada dengan Testimoni) */
+.dokter-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1.2px, transparent 1.2px);
+    background-size: 24px 24px;
+    opacity: 0.55;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.dokter-container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 24px;
+    position: relative;
+    z-index: 1;
+}
+
+/* ===== HEADER ===== */
+.dokter-header {
+    text-align: center;
+    max-width: 680px;
+    margin: 0 auto 48px;
+    position: relative;
+    z-index: 1;
+}
+
+.dokter-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #92e4c8;
+    background: transparent;
+    border: none;
+    border-left: 4px solid #92e4c8;
+    padding: 3px 0 3px 12px;
+    border-radius: 0;
+    margin-bottom: 16px;
+    cursor: default;
+}
+
+.dokter-label svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+}
+
+.dokter-title {
+    font-size: clamp(24px, 4vw, 36px);
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0 0 12px 0;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+}
+
+.dokter-subtitle {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Swiper Carousel Slider Wrapper & Circular Navigation Buttons
+   -------------------------------------------------------------------------- */
+.dokter-slider-wrapper {
+    position: relative;
+    width: 100%;
+    padding: 0 4px;
+}
+
+.dokter-swiper {
+    width: 100%;
+    padding-bottom: 48px !important;
+    overflow: hidden;
+}
+
+.dokter-swiper .swiper-slide {
+    height: auto;
+    display: flex;
+}
+
+.dokter-swiper .dokter-card {
+    width: 100%;
+}
+
+/* Nav Buttons */
+.dokter__nav-btn {
+    position: absolute;
+    top: 40%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #FFFFFF;
+    border: none;
+    color: var(--color-primary, #0A5C45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 15;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25);
+}
+
+.dokter__nav-btn:hover {
+    background: #92e4c8;
+    color: #063d2e;
+    transform: translateY(-50%) scale(1.15);
+    box-shadow: 0 6px 22px rgba(0, 0, 0, 0.35);
+}
+
+.dokter__nav-btn--prev {
+    left: -22px;
+}
+
+.dokter__nav-btn--next {
+    right: -22px;
+}
+
+.dokter__nav-btn.swiper-button-disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    pointer-events: none;
+    transform: translateY(-50%) scale(1);
+    box-shadow: none;
+}
+
+/* Pagination Dots */
+.dokter__pagination {
+    position: absolute;
+    bottom: 8px !important;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    z-index: 10;
+}
+
+.dokter__pagination .swiper-pagination-bullet {
+    width: 9px;
+    height: 9px;
+    background: rgba(255, 255, 255, 0.35);
+    border-radius: 50%;
+    opacity: 1;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    margin: 0 !important;
+}
+
+.dokter__pagination .swiper-pagination-bullet-active {
+    width: 24px;
+    border-radius: 10px;
+    background: #92e4c8 !important;
+    box-shadow: none !important;
+}
+
+/* ===== DOCTOR CARD ===== */
+.dokter-card {
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- Photo wrapper --- */
+.dokter-photo-wrap {
+    width: 100%;
+    aspect-ratio: 4/5;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 16px;
+    background-color: rgba(255, 255, 255, 0.1);
+    position: relative;
+}
+
+.dokter-photo-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
+    transition: transform 0.35s ease;
+}
+
+.dokter-card:hover .dokter-photo-wrap img {
+    transform: scale(1.04);
+}
+
+/* Placeholder jika tidak ada foto */
+.dokter-no-photo {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+}
+
+/* --- Text --- */
+.dokter-name {
+    font-size: 0.9375rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0 0 4px 0;
+    line-height: 1.3;
+}
+
+.dokter-specialty {
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.65);
+    margin: 0;
+    line-height: 1.55;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1200px) {
+    .dokter__nav-btn--prev {
+        left: -12px;
+    }
+    .dokter__nav-btn--next {
+        right: -12px;
+    }
+}
+
+@media (max-width: 768px) {
+    .dokter-header {
+        margin-bottom: 36px;
+    }
+    .dokter__nav-btn {
+        display: none;
+    }
+}

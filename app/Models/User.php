@@ -8,42 +8,96 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+/**
+ * @property int $id
+ * @property string $name
+ * @property string $email
+ * @property string $password
+ * @property string $role
+ * @property bool $is_active
+ * @property string|null $phone
+ * @property string|null $avatar
+ * @property array|null $accessible_pages
+ * @property \Illuminate\Support\Carbon|null $email_verified_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ */
 class User extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
-     */
+    public const PAGES = [
+        'hero'       => 'Kelola Hero & Fitur',
+        'layanan'    => 'Kelola Layanan',
+        'articles'   => 'Kelola Berita & Info',
+        'infografis' => 'Kelola Infografis',
+        'cara-kerja' => 'Kelola Cara Kerja',
+        'dokter'     => 'Kelola Dokter',
+        'about'      => 'Kelola Tentang Kami',
+        'nilai'      => 'Kelola Nilai & Mitra',
+        'surveys'    => 'Survei & Testimoni',
+        'faq'        => 'Tanya Jawab (FAQ)',
+        'lokasi'     => 'Lokasi & Peta',
+        'statistik'  => 'Statistik Kesehatan',
+        'users'      => 'Kelola Pengguna',
+        'settings'   => 'Identitas & Logo',
+    ];
+
     protected $fillable = [
         'name',
         'email',
         'password',
+        'role',
+        'is_active',
+        'phone',
+        'avatar',
+        'accessible_pages',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var list<string>
-     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
     protected function casts(): array
     {
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'is_active' => 'boolean',
+            'accessible_pages' => 'array',
         ];
+    }
+
+    public function scopeActive($query)
+    {
+        return $query->where('is_active', true);
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->role === 'admin';
+    }
+
+    public function isStaff(): bool
+    {
+        return $this->role === 'staf';
+    }
+
+    public function canAccessPage(string $page): bool
+    {
+        if ($this->isAdmin()) {
+            return true;
+        }
+        return in_array($page, $this->accessible_pages ?? []);
+    }
+
+    public function getAccessiblePageKeys(): array
+    {
+        if ($this->isAdmin()) {
+            return array_keys(self::PAGES);
+        }
+        return $this->accessible_pages ?? [];
     }
 }

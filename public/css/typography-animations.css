@@ -1,0 +1,206 @@
+:root {
+    --ease-ultra-smooth:   cubic-bezier(0.08, 0.95, 0.15, 1);
+    --ease-ultra-spring:   cubic-bezier(0.15, 1.1, 0.25, 1);
+    --anim-duration-slow:  2200ms;
+    --anim-duration-badge: 1800ms;
+    --anim-slide-dist-x:   42px;
+    --anim-slide-dist-y:   32px;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Global AOS Defaults */
+html:not(.no-js) [data-aos],
+[data-aos],
+[data-aos][data-aos],
+[data-aos][data-aos][data-aos-duration],
+body [data-aos],
+body[data-aos-duration] [data-aos] {
+    will-change: transform, opacity !important;
+    backface-visibility: hidden !important;
+    -webkit-font-smoothing: antialiased !important;
+    pointer-events: auto !important;
+    filter: none !important;
+    transition-duration: var(--anim-duration-slow) !important;
+    transition-timing-function: var(--ease-ultra-smooth) !important;
+}
+
+/* Fade Right */
+html:not(.no-js) [data-aos="fade-right"],
+[data-aos="fade-right"],
+[data-aos][data-aos="fade-right"] {
+    opacity: 0 !important;
+    transform: translate3d(calc(-1 * var(--anim-slide-dist-x)), 0, 0) scale(0.99) !important;
+    filter: none !important;
+    transition-property: opacity, transform !important;
+    transition-duration: var(--anim-duration-slow) !important;
+    transition-timing-function: var(--ease-ultra-smooth) !important;
+}
+
+html:not(.no-js) [data-aos="fade-right"].aos-animate,
+[data-aos="fade-right"].aos-animate,
+[data-aos][data-aos="fade-right"].aos-animate {
+    opacity: 1 !important;
+    transform: translate3d(0, 0, 0) scale(1) !important;
+    filter: none !important;
+}
+
+/* Fade Left */
+html:not(.no-js) [data-aos="fade-left"],
+[data-aos="fade-left"],
+[data-aos][data-aos="fade-left"] {
+    opacity: 0 !important;
+    transform: translate3d(var(--anim-slide-dist-x), 0, 0) scale(0.99) !important;
+    filter: none !important;
+    transition-property: opacity, transform !important;
+    transition-duration: var(--anim-duration-slow) !important;
+    transition-timing-function: var(--ease-ultra-smooth) !important;
+}
+
+html:not(.no-js) [data-aos="fade-left"].aos-animate,
+[data-aos="fade-left"].aos-animate,
+[data-aos][data-aos="fade-left"].aos-animate {
+    opacity: 1 !important;
+    transform: translate3d(0, 0, 0) scale(1) !important;
+    filter: none !important;
+}
+
+/* Fade Up */
+html:not(.no-js) [data-aos="fade-up"],
+[data-aos="fade-up"],
+[data-aos][data-aos="fade-up"] {
+    opacity: 0 !important;
+    transform: translate3d(0, var(--anim-slide-dist-y), 0) scale(0.99) !important;
+    filter: none !important;
+    transition-property: opacity, transform !important;
+    transition-duration: var(--anim-duration-slow) !important;
+    transition-timing-function: var(--ease-ultra-smooth) !important;
+}
+
+html:not(.no-js) [data-aos="fade-up"].aos-animate,
+[data-aos="fade-up"].aos-animate,
+[data-aos][data-aos="fade-up"].aos-animate {
+    opacity: 1 !important;
+    transform: translate3d(0, 0, 0) scale(1) !important;
+    filter: none !important;
+}
+
+/* Fade Down */
+html:not(.no-js) [data-aos="fade-down"],
+[data-aos="fade-down"],
+[data-aos][data-aos="fade-down"] {
+    opacity: 0 !important;
+    transform: translate3d(0, calc(-1 * var(--anim-slide-dist-y)), 0) scale(0.99) !important;
+    filter: none !important;
+    transition-property: opacity, transform !important;
+    transition-duration: var(--anim-duration-slow) !important;
+    transition-timing-function: var(--ease-ultra-smooth) !important;
+}
+
+html:not(.no-js) [data-aos="fade-down"].aos-animate,
+[data-aos="fade-down"].aos-animate,
+[data-aos][data-aos="fade-down"].aos-animate {
+    opacity: 1 !important;
+    transform: translate3d(0, 0, 0) scale(1) !important;
+    filter: none !important;
+}
+
+/* Badges */
+.hero__badge[data-aos],
+.about__badge[data-aos],
+.values__badge[data-aos],
+.layanan-bento-badge[data-aos],
+.dokter-label[data-aos],
+.process__badge[data-aos],
+.testimonials__badge[data-aos],
+.blog__badge[data-aos],
+.jadwal-header-badge[data-aos],
+.survei-header-badge[data-aos],
+.lokasi-header-badge[data-aos],
+.article-header-category-pill[data-aos] {
+    transition-timing-function: var(--ease-ultra-spring) !important;
+    transition-duration: var(--anim-duration-badge) !important;
+}
+
+/* Card Containers */
+.about__card[data-aos],
+.about__cards[data-aos],
+.info-card[data-aos],
+.bento-card[data-aos],
+.process-card[data-aos],
+.blog-card[data-aos],
+.lokasi-card[data-aos],
+.jadwal-card[data-aos],
+.values__card[data-aos],
+.layanan-box-card[data-aos],
+.lokasi-maps-container[data-aos],
+.survei-visual-card[data-aos],
+.survei-form-card[data-aos],
+.blog-filter-card[data-aos],
+.article-card[data-aos],
+.article-main-card[data-aos],
+.article-related-card[data-aos],
+.testimonials__slider-wrapper[data-aos],
+.dokter-slider-wrapper[data-aos] {
+    will-change: transform, opacity !important;
+    backface-visibility: hidden !important;
+    pointer-events: auto !important;
+}
+
+/* Strict Exclusion for Elements Inside Cards */
+.info-card [data-aos],
+.bento-card [data-aos],
+.dokter-card [data-aos],
+.process-card [data-aos],
+.testimonial-card [data-aos],
+.testimoni-card [data-aos],
+.blog-card [data-aos],
+.about__card [data-aos],
+.lokasi-card [data-aos],
+.jadwal-card [data-aos],
+.layanan-box-card [data-aos],
+.article-card [data-aos],
+.survei-visual-card [data-aos],
+.survei-form-card [data-aos],
+.card [data-aos] {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    transition: none !important;
+    animation: none !important;
+}
+
+/* Interactive CTA Buttons */
+.hero__actions .btn-primary,
+.hero__actions .btn-secondary,
+.btn-blog-see-all {
+    transition: 
+        transform 0.45s var(--ease-ultra-spring),
+        box-shadow 0.45s ease,
+        background-color 0.3s ease,
+        color 0.3s ease !important;
+}
+
+.hero__actions .btn-primary:hover,
+.hero__actions .btn-secondary:hover,
+.btn-blog-see-all:hover {
+    transform: translateY(-3px) scale(1.025);
+}
+
+.hero__actions .btn-primary:active,
+.hero__actions .btn-secondary:active {
+    transform: translateY(0) scale(0.98);
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    [data-aos] {
+        opacity: 1 !important;
+        transform: none !important;
+        filter: none !important;
+        transition: none !important;
+        animation: none !important;
+    }
+}

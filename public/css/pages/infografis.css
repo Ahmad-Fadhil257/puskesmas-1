@@ -1,0 +1,615 @@
+/* ============================================================
+   INFOGRAFIS PAGE — Puskesmas
+   ============================================================ */
+
+/* ---------- Wrapper & Container ---------- */
+.infografis-wrapper {
+    width: 100%;
+    padding: 36px 20px 80px 20px;
+    box-sizing: border-box;
+    background-color: #EDF2F7 !important;
+    min-height: 60vh;
+}
+
+.infografis-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* ==========================================================================
+   1. CLEAN 1-ROW FILTER BAR (BORDER RADIUS 12PX)
+   ========================================================================== */
+.infografis-filterbar {
+    background: #FFFFFF;
+    border-radius: 12px;
+    padding: 16px 20px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
+    border: 1px solid #E2E8F0;
+    margin-bottom: 24px;
+}
+
+.infografis-filterbar-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.infografis-filterbar-search {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: #F8FAFC;
+    border-radius: 12px;
+    border: 1px solid #E2E8F0;
+    padding: 4px 4px 4px 14px;
+    flex: 1;
+    min-width: 280px;
+    transition: all 0.25s ease;
+}
+
+.infografis-filterbar-search:focus-within {
+    border-color: #0A5C45;
+    background: #FFFFFF;
+    box-shadow: 0 0 0 3px rgba(10, 92, 69, 0.12);
+}
+
+.infografis-filterbar-search .search-icon {
+    font-size: 1.2rem;
+    color: #64748B;
+    margin-right: 8px;
+}
+
+.infografis-filterbar-search input {
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 0.9rem;
+    color: #0F172A;
+    width: 100%;
+    font-family: inherit;
+}
+
+.infografis-filterbar-search .search-clear-btn {
+    color: #94A3B8;
+    text-decoration: none;
+    font-size: 1.25rem;
+    font-weight: bold;
+    padding: 0 8px;
+    cursor: pointer;
+}
+
+.infografis-filterbar-search .search-clear-btn:hover {
+    color: #EF4444;
+}
+
+.btn-filterbar-submit {
+    background: #0A5C45;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 22px;
+    font-size: 0.875rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    flex-shrink: 0;
+    font-family: inherit;
+}
+
+.btn-filterbar-submit:hover {
+    background: #084A37;
+}
+
+.infografis-filterbar-select-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-width: 220px;
+}
+
+.infografis-filterbar-select {
+    width: 100%;
+    background: #F8FAFC;
+    border: 1px solid #E2E8F0;
+    border-radius: 12px;
+    padding: 10px 38px 10px 16px;
+    font-size: 0.9rem;
+    color: #0F172A;
+    font-weight: 600;
+    appearance: none;
+    -webkit-appearance: none;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    font-family: inherit;
+}
+
+.infografis-filterbar-select:focus {
+    border-color: #0A5C45;
+    background: #FFFFFF;
+    box-shadow: 0 0 0 3px rgba(10, 92, 69, 0.12);
+}
+
+.infografis-filterbar-select-wrap .select-icon {
+    position: absolute;
+    right: 14px;
+    color: #64748B;
+    pointer-events: none;
+    font-size: 1.2rem;
+}
+
+/* Reset Filter Icon Button on the Right with Tooltip */
+.btn-filterbar-reset-icon {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background: #F8FAFC;
+    color: #64748B;
+    border: 1.5px solid #CBD5E1;
+    border-radius: 8px;
+    font-size: 22px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    flex-shrink: 0;
+}
+
+.btn-filterbar-reset-icon:hover {
+    background: #EF4444;
+    color: #FFFFFF;
+    border-color: #EF4444;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 14px rgba(239, 68, 68, 0.28);
+}
+
+.btn-filterbar-reset-icon i {
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-filterbar-reset-icon:hover i {
+    transform: rotate(-180deg);
+}
+
+/* Tooltip on hover */
+.btn-filterbar-reset-icon[data-tooltip]::before {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: calc(100% + 9px);
+    left: 50%;
+    transform: translateX(-50%) translateY(4px);
+    background: #0F172A;
+    color: #FFFFFF;
+    font-size: 11.5px;
+    font-weight: 700;
+    padding: 5px 10px;
+    border-radius: 6px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+}
+
+.btn-filterbar-reset-icon[data-tooltip]::after {
+    content: '';
+    position: absolute;
+    bottom: calc(100% + 3px);
+    left: 50%;
+    transform: translateX(-50%) translateY(4px);
+    border-width: 6px 6px 0 6px;
+    border-style: solid;
+    border-color: #0F172A transparent transparent transparent;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+    z-index: 100;
+}
+
+.btn-filterbar-reset-icon[data-tooltip]:hover::before,
+.btn-filterbar-reset-icon[data-tooltip]:hover::after {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* ---------- Grid ---------- */
+.infografis-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+}
+
+/* ---------- Card ---------- */
+.infografis-card {
+    background: #FFFFFF;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 18px rgba(10, 92, 69, 0.06), 0 1px 3px rgba(0, 0, 0, 0.03);
+    border: 1px solid rgba(10, 92, 69, 0.08);
+    transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1),
+                box-shadow 0.28s ease, border-color 0.28s ease;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+}
+
+.infografis-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 34px rgba(10, 92, 69, 0.12);
+    border-color: rgba(10, 92, 69, 0.25);
+}
+
+.infografis-card__thumb {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+    background: linear-gradient(135deg, #E2F0EC, #C7E0D8);
+}
+
+.infografis-card__thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.45s ease;
+    display: block;
+}
+
+.infografis-card:hover .infografis-card__thumb img {
+    transform: scale(1.06);
+}
+
+/* Placeholder thumb (no image) */
+.infografis-card__thumb-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.infografis-card__thumb-placeholder i {
+    font-size: 52px;
+    color: #0A5C45;
+    opacity: 0.65;
+}
+
+.infografis-card__thumb-placeholder span {
+    font-size: 12px;
+    font-weight: 600;
+    color: #0A5C45;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    opacity: 0.65;
+}
+
+/* Badge kategori di atas thumb */
+.infografis-card__badge {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    background: rgba(10, 92, 69, 0.85);
+    color: #FFFFFF;
+    font-size: 10.5px;
+    font-weight: 700;
+    padding: 4px 11px;
+    border-radius: 9999px;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    backdrop-filter: blur(4px);
+}
+
+/* Overlay aksi saat hover */
+.infografis-card__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(10, 92, 69, 0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+}
+
+.infografis-card:hover .infografis-card__overlay {
+    opacity: 1;
+}
+
+.infografis-overlay-btn {
+    width: 48px;
+    height: 48px;
+    background: #FFFFFF;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #0A5C45;
+    font-size: 20px;
+    text-decoration: none;
+    transform: scale(0.8);
+    transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.infografis-card:hover .infografis-overlay-btn {
+    transform: scale(1);
+}
+
+.infografis-overlay-btn:hover {
+    background: #0A5C45;
+    color: #FFFFFF;
+}
+
+/* ---------- Card Body ---------- */
+.infografis-card__body {
+    padding: 20px 22px 22px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.infografis-card__title {
+    font-size: 15.5px;
+    font-weight: 700;
+    color: #111827;
+    line-height: 1.45;
+    margin: 0 0 8px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+.infografis-card__desc {
+    font-size: 13.5px;
+    color: #6B7280;
+    line-height: 1.6;
+    margin: 0 0 16px;
+    flex: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+.infografis-card__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.infografis-card__date {
+    font-size: 12px;
+    color: #9CA3AF;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.infografis-card__date i {
+    font-size: 13px;
+}
+
+.infografis-card__dl {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: #00A86B;
+    text-decoration: none;
+    padding: 6px 14px;
+    border: 1.5px solid #00A86B;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.infografis-card__dl:hover {
+    background: #00A86B;
+    color: #FFFFFF;
+    border-color: #00A86B;
+}
+
+/* ---------- Modal Lightbox ---------- */
+.infografis-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.82);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+
+.infografis-modal-backdrop.open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.infografis-modal {
+    position: relative;
+    max-width: 860px;
+    width: 100%;
+    max-height: 92vh;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 32px 80px rgba(0, 0, 0, 0.5);
+    transform: scale(0.92);
+    transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.infografis-modal-backdrop.open .infografis-modal {
+    transform: scale(1);
+}
+
+.infografis-modal img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    background: #000;
+    max-height: 88vh;
+}
+
+.infografis-modal-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.15);
+    border: none;
+    border-radius: 50%;
+    color: #FFFFFF;
+    font-size: 22px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(6px);
+    transition: background 0.2s ease;
+    z-index: 10;
+}
+
+.infografis-modal-close:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.infografis-modal-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,0.75));
+    padding: 28px 24px 20px;
+    color: #FFFFFF;
+}
+
+.infografis-modal-info h3 {
+    font-size: 17px;
+    font-weight: 700;
+    margin: 0 0 6px;
+}
+
+.infografis-modal-info p {
+    font-size: 13px;
+    opacity: 0.8;
+    margin: 0;
+}
+
+/* ---------- Empty State ---------- */
+.infografis-empty {
+    text-align: center;
+    padding: 80px 24px;
+    color: #9CA3AF;
+    display: none;
+}
+
+.infografis-empty i {
+    font-size: 56px;
+    display: block;
+    margin-bottom: 14px;
+    opacity: 0.5;
+}
+
+.infografis-empty p {
+    font-size: 15px;
+    margin: 0;
+}
+
+/* ---------- Responsive (2 Card Per Baris di Mobile) ---------- */
+@media (max-width: 1024px) {
+    .infografis-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .infografis-wrapper {
+        padding: 28px 16px 60px;
+    }
+
+    .infografis-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 12px !important;
+    }
+
+    .infografis-card {
+        border-radius: 10px;
+    }
+
+    .infografis-card__thumb {
+        height: 120px;
+    }
+
+    .infografis-card__badge {
+        top: 6px;
+        left: 6px;
+        font-size: 0.6rem;
+        padding: 2px 7px;
+        border-radius: 6px;
+    }
+
+    .infografis-card__body {
+        padding: 10px 8px;
+    }
+
+    .infografis-card__title {
+        font-size: 0.78rem !important;
+        line-height: 1.35;
+        margin: 0 0 6px 0;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .infografis-card__footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+
+    .infografis-card__date {
+        font-size: 0.67rem;
+    }
+
+    .infografis-card__dl {
+        font-size: 0.72rem;
+        padding: 3px 8px;
+        width: 100%;
+        justify-content: center;
+        box-sizing: border-box;
+    }
+}
+
+@media (max-width: 480px) {
+    .infografis-filterbar-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .infografis-filterbar-select-wrap {
+        min-width: 100%;
+    }
+}
