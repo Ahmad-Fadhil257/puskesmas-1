@@ -4,6 +4,17 @@
 
 @section('content')
 
+    @php
+        /** @var \Illuminate\Database\Eloquent\Collection<\App\Models\StatistikPenyakit> $penyakit */
+        /** @var \Illuminate\Database\Eloquent\Collection<\App\Models\StatistikKunjungan> $kunjungan */
+        /** @var \Illuminate\Support\Collection $tahunList */
+        /** @var int $totalKunjungan */
+        /** @var int $totalBaru */
+        /** @var int $totalLama */
+        /** @var int $totalKasusPenyakit */
+        /** @var int|string $tahunFilter */
+    @endphp
+
     {{-- Page Header --}}
     <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-3">
         <div>

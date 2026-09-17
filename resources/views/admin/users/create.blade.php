@@ -4,6 +4,10 @@
 
 @section('content')
 
+    @php
+        /** @var array<string, string> $allPages */
+    @endphp
+
     {{-- Breadcrumb & Header --}}
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
