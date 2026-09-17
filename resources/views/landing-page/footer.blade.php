@@ -75,6 +75,24 @@
                     </ul>
                 </div>
 
+                <!-- Jam Pelayanan -->
+                <div class="footer__hours">
+                    <h4 class="footer__heading">Jam Pelayanan</h4>
+                    <ul class="footer__list footer__list--hours">
+                        <li>
+                            <strong>{{ $appSetting->footer_weekday_days ?? 'Senin - Jumat' }}</strong>
+                            <span class="hours-time">{{ $appSetting->footer_weekday_hours ?? '07.30 - 16.00 WIB' }}</span>
+                        </li>
+                        <li>
+                            <strong>{{ $appSetting->footer_weekend_days ?? 'Sabtu' }}</strong>
+                            <span class="hours-time">{{ $appSetting->footer_weekend_hours ?? '07.30 - 12.00 WIB' }}</span>
+                        </li>
+                        <li>
+                            <span class="hours-closed">{{ $appSetting->footer_closed_info ?? 'Minggu & Libur: Tutup' }}</span>
+                        </li>
+                    </ul>
+                </div>
+
                 <!-- Kontak Kami -->
                 <div class="footer__contact">
                     <h4 class="footer__heading">Kontak Kami</h4>

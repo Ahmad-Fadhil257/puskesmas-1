@@ -97,7 +97,8 @@ class LayananSeeder extends Seeder
             ],
         ];
 
-        foreach ($services as $service) {
+        foreach ($services as $index => $service) {
+            $service['order'] = $index + 1;
             Layanan::updateOrCreate(
                 ['title' => $service['title']],
                 $service

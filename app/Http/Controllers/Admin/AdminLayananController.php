@@ -15,6 +15,16 @@ class AdminLayananController extends Controller
     {
         $search = $request->query('search');
 
+        // Pastikan nomor urut tidak 0 atau duplikat (auto-repair urutan)
+        $hasZeroOrNull = Layanan::where('order', '<=', 0)->orWhereNull('order')->exists();
+        if ($hasZeroOrNull) {
+            $allLayanans = Layanan::orderBy('order', 'asc')->orderBy('id', 'asc')->get();
+            foreach ($allLayanans as $idx => $item) {
+                $item->order = $idx + 1;
+                $item->saveQuietly();
+            }
+        }
+
         $query = Layanan::query()->orderBy('order', 'asc')->orderBy('id', 'asc');
 
         if ($search) {
@@ -199,29 +209,45 @@ class AdminLayananController extends Controller
     public function reorder(Request $request, $id)
     {
         $direction = $request->input('direction');
-        $current = Layanan::findOrFail($id);
 
-        if ($direction === 'up') {
-            $prev = Layanan::where('order', '<', $current->order)
-                           ->orderBy('order', 'desc')
-                           ->first();
-            if ($prev) {
-                $temp = $current->order;
-                $current->order = $prev->order;
-                $prev->order = $temp;
-                $current->save();
-                $prev->save();
+        // Ambil seluruh data layanan terurut
+        $layanans = Layanan::orderBy('order', 'asc')->orderBy('id', 'asc')->get();
+
+        // Pastikan urutan ternormalisasi (1, 2, 3...)
+        foreach ($layanans as $index => $item) {
+            $expected = $index + 1;
+            if ($item->order !== $expected) {
+                $item->order = $expected;
+                $item->saveQuietly();
             }
-        } elseif ($direction === 'down') {
-            $next = Layanan::where('order', '>', $current->order)
-                           ->orderBy('order', 'asc')
-                           ->first();
-            if ($next) {
+        }
+
+        // Cari index item saat ini
+        $currentIndex = $layanans->search(fn($item) => $item->id == $id);
+
+        if ($currentIndex !== false) {
+            if ($direction === 'up' && $currentIndex > 0) {
+                $targetIndex = $currentIndex - 1;
+                $current = $layanans[$currentIndex];
+                $target = $layanans[$targetIndex];
+
                 $temp = $current->order;
-                $current->order = $next->order;
-                $next->order = $temp;
-                $current->save();
-                $next->save();
+                $current->order = $target->order;
+                $target->order = $temp;
+
+                $current->saveQuietly();
+                $target->saveQuietly();
+            } elseif ($direction === 'down' && $currentIndex < $layanans->count() - 1) {
+                $targetIndex = $currentIndex + 1;
+                $current = $layanans[$currentIndex];
+                $target = $layanans[$targetIndex];
+
+                $temp = $current->order;
+                $current->order = $target->order;
+                $target->order = $temp;
+
+                $current->saveQuietly();
+                $target->saveQuietly();
             }
         }
 

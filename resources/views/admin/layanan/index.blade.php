@@ -89,7 +89,7 @@
                                     <form action="{{ route('admin.layanan.reorder', $item->id) }}" method="POST" class="d-inline">
                                         @csrf
                                         <input type="hidden" name="direction" value="down">
-                                        <button type="submit" class="btn btn-xs btn-outline-secondary py-0 px-1" title="Geser ke Bawah">
+                                        <button type="submit" class="btn btn-xs btn-outline-secondary py-0 px-1" title="Geser ke Bawah" {{ $loop->last && $layanans->currentPage() === $layanans->lastPage() ? 'disabled' : '' }}>
                                             <i class="bx bx-chevron-down" style="font-size: 14px;"></i>
                                         </button>
                                     </form>

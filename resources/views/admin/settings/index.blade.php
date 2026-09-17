@@ -170,50 +170,39 @@
                                 </div>
                             </div>
 
-                            {{-- Divider Jam Operasional --}}
+
+
+                            {{-- Divider Jam Operasional Footer --}}
                             <div class="col-12 pt-2">
                                 <div class="divider text-start my-1">
-                                    <div class="divider-text fw-bold text-dark">JAM OPERASIONAL (FLOATING BADGE)</div>
+                                    <div class="divider-text fw-bold text-dark">JAM OPERASIONAL (FOOTER)</div>
                                 </div>
                             </div>
 
-                            {{-- Hari Operasional --}}
+                            {{-- Footer Weekday --}}
                             <div class="col-md-6 col-12">
-                                <label class="form-label fw-semibold" for="operational_days">Hari Operasional</label>
-                                <input type="text" class="form-control" id="operational_days" name="operational_days" value="{{ old('operational_days', $setting->operational_days ?? 'Senin - Sabtu') }}" placeholder="Contoh: Senin - Sabtu">
-                                <small class="text-muted">Hari aktif pelayanan puskesmas.</small>
+                                <label class="form-label fw-semibold" for="footer_weekday_days">Hari Layanan 1</label>
+                                <input type="text" class="form-control" id="footer_weekday_days" name="footer_weekday_days" value="{{ old('footer_weekday_days', $setting->footer_weekday_days ?? 'Senin - Jumat') }}" placeholder="Contoh: Senin - Jumat">
                             </div>
-
-                            {{-- Jam Operasional --}}
                             <div class="col-md-6 col-12">
-                                <label class="form-label fw-semibold" for="operational_hours">Jam Operasional</label>
-                                <input type="text" class="form-control" id="operational_hours" name="operational_hours" value="{{ old('operational_hours', $setting->operational_hours ?? '08.00 - 16.00 WIB') }}" placeholder="Contoh: 08.00 - 16.00 WIB">
-                                <small class="text-muted">Jam pelayanan puskesmas.</small>
+                                <label class="form-label fw-semibold" for="footer_weekday_hours">Jam Layanan 1</label>
+                                <input type="text" class="form-control" id="footer_weekday_hours" name="footer_weekday_hours" value="{{ old('footer_weekday_hours', $setting->footer_weekday_hours ?? '07.30 - 16.00 WIB') }}" placeholder="Contoh: 07.30 - 16.00 WIB">
                             </div>
 
-                            {{-- Teks Melingkar Badge --}}
-                            <div class="col-12">
-                                <label class="form-label fw-semibold" for="operational_badge_text">Teks Melingkar Badge (Slogan / Keterangan)</label>
-                                <input type="text" class="form-control" id="operational_badge_text" name="operational_badge_text" value="{{ old('operational_badge_text', $setting->operational_badge_text ?? '• JAM OPERASIONAL • PUSKESMAS BUKA •') }}" placeholder="Contoh: • JAM OPERASIONAL • PUSKESMAS BUKA •">
-                                <small class="text-muted">Teks yang berputar perlahan mengelilingi lingkaran jam operasional. Gunakan simbol titik (•) sebagai pemisah kata.</small>
+                            {{-- Footer Weekend --}}
+                            <div class="col-md-6 col-12">
+                                <label class="form-label fw-semibold" for="footer_weekend_days">Hari Layanan 2</label>
+                                <input type="text" class="form-control" id="footer_weekend_days" name="footer_weekend_days" value="{{ old('footer_weekend_days', $setting->footer_weekend_days ?? 'Sabtu') }}" placeholder="Contoh: Sabtu">
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <label class="form-label fw-semibold" for="footer_weekend_hours">Jam Layanan 2</label>
+                                <input type="text" class="form-control" id="footer_weekend_hours" name="footer_weekend_hours" value="{{ old('footer_weekend_hours', $setting->footer_weekend_hours ?? '07.30 - 12.00 WIB') }}" placeholder="Contoh: 07.30 - 12.00 WIB">
                             </div>
 
-                            {{-- Switch Tampilkan Jam Operasional --}}
+                            {{-- Footer Closed Info --}}
                             <div class="col-12">
-                                <div class="form-check form-switch p-3 border rounded-3 bg-label-primary">
-                                    <input class="form-check-input ms-0 me-3" 
-                                           type="checkbox" 
-                                           name="show_operational_hours" 
-                                           value="1" 
-                                           id="show_operational_hours" 
-                                           {{ old('show_operational_hours', $setting->show_operational_hours ?? true) ? 'checked' : '' }}>
-                                    <label class="form-check-label fw-bold text-dark" for="show_operational_hours">
-                                        Tampilkan Badge Jam Operasional di Hero Section
-                                    </label>
-                                    <small class="d-block text-muted mt-1">
-                                        Jika dinonaktifkan, badge jam operasional tidak akan tampil di landing page.
-                                    </small>
-                                </div>
+                                <label class="form-label fw-semibold" for="footer_closed_info">Info Libur</label>
+                                <input type="text" class="form-control" id="footer_closed_info" name="footer_closed_info" value="{{ old('footer_closed_info', $setting->footer_closed_info ?? 'Minggu & Libur: Tutup') }}" placeholder="Contoh: Minggu & Libur: Tutup">
                             </div>
 
                             {{-- Divider Media Sosial --}}
