@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('nilai_sections', function (Blueprint $table) {
+        Schema::create('nilai_section', function (Blueprint $table) {
             $table->id();
             $table->string('badge_text')->default('NILAI - NILAI KAMI');
             $table->text('title');
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('nilai_sections');
+        Schema::dropIfExists('nilai_section');
     }
 };

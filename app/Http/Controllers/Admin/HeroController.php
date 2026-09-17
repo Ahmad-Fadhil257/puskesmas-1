@@ -18,7 +18,7 @@ class HeroController extends Controller
         $hero = HeroSection::firstOrCreate(
             ['id' => 1],
             [
-                'badge_text' => 'Selamat Datang Di Puskesmas CareLink',
+                'badge_text' => 'Selamat Datang Di Puskesmas Sukaluyu',
                 'title' => 'Melayani Kesehatan Masyarakat dengan Sepenuh Hati',
                 'description' => 'Pelayanan medis komprehensif dengan dokter ahli, fasilitas modern, dan pelayanan penuh kasih sayang. Kesehatan Anda, prioritas kami.',
                 'btn_primary_text' => 'Statistik',

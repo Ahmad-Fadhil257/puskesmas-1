@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', $article->title . ' - Puskesmas CareLink')
+@section('title', $article->title . ' - Puskesmas Sukaluyu')
 @section('meta_description', Str::limit(strip_tags($article->excerpt ?? $article->content), 150))
 
 @push('styles')

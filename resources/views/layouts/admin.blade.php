@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
-    <title>@yield('title', 'Dashboard - Puskesmas CareLink')</title>
+    <title>@yield('title', 'Dashboard - Puskesmas Sukaluyu')</title>
 
     <!-- Theme State Early Init (Mencegah kedipan tema) -->
     <script>
@@ -48,7 +48,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
-    <!-- Custom Puskesmas CareLink Theme Override (Emerald Green & Dark Mode) -->
+    <!-- Custom Puskesmas Sukaluyu Theme Override (Emerald Green & Dark Mode) -->
     <link rel="stylesheet" href="{{ asset('admin-assets/css/custom-theme.css') }}" />
 
     <style>

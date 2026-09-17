@@ -1,12 +1,12 @@
-# Design System & Blueprint: Puskesmas CareLink Landing Page
+# Design System & Blueprint: Puskesmas Sukaluyu Landing Page
 
-Dokumen ini merupakan panduan desain dan spesifikasi teknis UI/UX untuk landing page **Puskesmas CareLink**. Panduan ini diturunkan langsung dari acuan visual **Hero Section** dan akan diterapkan secara konsisten ke seluruh seksi halaman website.
+Dokumen ini merupakan panduan desain dan spesifikasi teknis UI/UX untuk landing page **Puskesmas Sukaluyu**. Panduan ini diturunkan langsung dari acuan visual **Hero Section** dan akan diterapkan secara konsisten ke seluruh seksi halaman website.
 
 ---
 
 ## 1. Identitas Visual & Filosofi Desain
 
-- **Nama Proyek / Brand**: Puskesmas CareLink
+- **Nama Proyek / Brand**: Puskesmas Sukaluyu
 - **Tagline**: *"Melayani Kesehatan Masyarakat dengan Sepenuh Hati"*
 - **Karakter Desain**:
   - **Modern & Bersih**: Memberikan rasa profesionalisme, higienis, dan terpercaya.
@@ -50,7 +50,7 @@ Dokumen ini merupakan panduan desain dan spesifikasi teknis UI/UX untuk landing 
 
 ### A. Floating Navbar (Kapsul Mengambang)
 - **Container**: `rounded-full` (border radius maksimal), latar belakang `#FFFFFF`, bayangan halus (`box-shadow: 0 4px 20px rgba(10, 92, 69, 0.08)`).
-- **Brand Logo**: Teks tebal **"Puskesmas CareLink"** warna `#0A5C45`.
+- **Brand Logo**: Teks tebal **"Puskesmas Sukaluyu"** warna `#0A5C45`.
 - **Menu Navigasi**: `Home` (ada indikator garis bawah warna hijau), `Layanan`, `Jadwal Dokter`, `Berita`, `Tentang Kami`, `Kontak`.
 - **CTA Navbar**: Tombol pill kapsul (`rounded-full`) warna hijau `#0A5C45`, teks putih **"Janji Temu"**.
 

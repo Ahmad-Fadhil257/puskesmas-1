@@ -328,7 +328,7 @@
 
         <h1 class="subpage-header__title" data-aos="fade-right">{{ $layanan->title }}</h1>
         <p class="subpage-header__subtitle" data-aos="fade-up">
-            Pelayanan kesehatan komprehensif UPTD Puskesmas {{ $appSetting->app_name ?? 'CareLink' }} • {{ $layanan->tipe_jaminan ?? 'BPJS & Umum' }}
+            Pelayanan kesehatan komprehensif UPTD Puskesmas {{ $appSetting->app_name ?? 'Sukaluyu' }} • {{ $layanan->tipe_jaminan ?? 'BPJS & Umum' }}
         </p>
     </div>
 </section>

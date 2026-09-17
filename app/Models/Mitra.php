@@ -9,7 +9,7 @@ class Mitra extends Model
 {
     use HasFactory;
 
-    protected $table = 'mitras';
+    protected $table = 'mitra';
 
     protected $fillable = [
         'order',

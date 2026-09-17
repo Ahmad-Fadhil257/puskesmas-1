@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('layanans', function (Blueprint $table) {
+        Schema::table('layanan', function (Blueprint $table) {
             $table->string('jam_operasional')->nullable()->after('variant')->default('Senin - Sabtu: 08.00 - 14.00 WIB');
             $table->json('dokter_ids')->nullable()->after('jam_operasional');
             $table->text('tindakan_medis')->nullable()->after('dokter_ids');
@@ -24,7 +24,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('layanans', function (Blueprint $table) {
+        Schema::table('layanan', function (Blueprint $table) {
             $table->dropColumn(['jam_operasional', 'dokter_ids', 'tindakan_medis', 'persyaratan']);
         });
     }

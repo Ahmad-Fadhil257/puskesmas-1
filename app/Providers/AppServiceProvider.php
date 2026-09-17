@@ -32,7 +32,7 @@ class AppServiceProvider extends ServiceProvider
                 if (Schema::hasTable('app_settings')) {
                     $setting = AppSetting::getSettings();
                 }
-                if (Schema::hasTable('layanans')) {
+                if (Schema::hasTable('layanan') || Schema::hasTable('layanans')) {
                     $navLayanans = \App\Models\Layanan::where('is_active', true)->orderBy('order', 'asc')->orderBy('id', 'asc')->get();
                 }
             } catch (\Throwable $e) {

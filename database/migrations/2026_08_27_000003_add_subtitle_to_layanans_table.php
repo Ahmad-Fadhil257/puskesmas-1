@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('layanans', function (Blueprint $table) {
-            if (!Schema::hasColumn('layanans', 'subtitle')) {
+        Schema::table('layanan', function (Blueprint $table) {
+            if (!Schema::hasColumn('layanan', 'subtitle')) {
                 $table->string('subtitle')->nullable()->after('title');
             }
         });
@@ -23,8 +23,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('layanans', function (Blueprint $table) {
-            if (Schema::hasColumn('layanans', 'subtitle')) {
+        Schema::table('layanan', function (Blueprint $table) {
+            if (Schema::hasColumn('layanan', 'subtitle')) {
                 $table->dropColumn('subtitle');
             }
         });

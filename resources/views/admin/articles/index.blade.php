@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Kelola Berita & Artikel - Puskesmas CareLink')
+@section('title', 'Kelola Berita & Artikel - Puskesmas Sukaluyu')
 
 @section('content')
 

@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('layanans', function (Blueprint $table) {
+        Schema::table('layanan', function (Blueprint $table) {
             $table->integer('order')->default(0)->after('id');
             $table->string('tipe_jaminan')->nullable()->default('BPJS & UMUM')->after('variant');
         });
@@ -22,7 +22,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('layanans', function (Blueprint $table) {
+        Schema::table('layanan', function (Blueprint $table) {
             $table->dropColumn(['order', 'tipe_jaminan']);
         });
     }

@@ -9,7 +9,7 @@ class NilaiSection extends Model
 {
     use HasFactory;
 
-    protected $table = 'nilai_sections';
+    protected $table = 'nilai_section';
 
     protected $fillable = [
         'badge_text',
