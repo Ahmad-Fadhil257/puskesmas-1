@@ -203,7 +203,7 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('faq', AdminFaqController::class)->except(['show']);
 
         // Kelola Infografis
-        Route::patch('infografis/{infografis}/toggle-status', [AdminInfografisController::class, 'toggleStatus'])->name('infografis.toggle-status');
+        Route::patch('infografis/{id}/toggle-status', [AdminInfografisController::class, 'toggleStatus'])->name('infografis.toggle-status');
         Route::resource('infografis', AdminInfografisController::class)->except(['show']);
 
         // Kelola Statistik Kesehatan

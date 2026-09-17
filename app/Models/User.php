@@ -25,6 +25,7 @@ class User extends Authenticatable
         'surveys'    => 'Survei & Testimoni',
         'faq'        => 'Tanya Jawab (FAQ)',
         'lokasi'     => 'Lokasi & Peta',
+        'statistik'  => 'Statistik Kesehatan',
         'users'      => 'Kelola Pengguna',
         'settings'   => 'Identitas & Logo',
     ];

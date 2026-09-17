@@ -60,7 +60,11 @@
                         @enderror
                     </div>
 
-
+                    {{-- Konfirmasi Kata Sandi --}}
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold" for="password_confirmation">Konfirmasi Kata Sandi <span class="text-danger">*</span></label>
+                        <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Ketik ulang kata sandi" required>
+                    </div>
 
                     {{-- Nomor Telepon --}}
                     <div class="col-md-6">
@@ -71,16 +75,61 @@
                         @enderror
                     </div>
 
+                    {{-- Peran / Role --}}
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold" for="role">Peran (Role) <span class="text-danger">*</span></label>
+                        <select class="form-select @error('role') is-invalid @enderror" id="role" name="role" required onchange="toggleAccessiblePages(this.value)">
+                            <option value="admin" {{ old('role') === 'admin' ? 'selected' : '' }}>Administrator (Akses Penuh Seluruh Menu)</option>
+                            <option value="staf" {{ old('role', 'staf') === 'staf' ? 'selected' : '' }}>Staf / Petugas (Akses Menu Terbatas)</option>
+                        </select>
+                        @error('role')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
                     {{-- Status Switch --}}
-                    <div class="col-md-6 d-flex align-items-center pt-3">
-                        <div class="form-check form-switch mt-2">
+                    <div class="col-12 d-flex align-items-center pt-2">
+                        <div class="form-check form-switch">
                             <input class="form-check-input" type="checkbox" name="is_active" value="1" id="is_active" {{ old('is_active', true) ? 'checked' : '' }}>
                             <label class="form-check-label fw-semibold" for="is_active">
                                 Status Akun Aktif (Dapat Login ke Sistem)
                             </label>
                         </div>
                     </div>
+
+                    {{-- Container Hak Akses Halaman (Khusus Staf) --}}
+                    <div class="col-12" id="accessiblePagesContainer" style="display: {{ old('role', 'staf') === 'staf' ? 'block' : 'none' }};">
+                        <div class="card bg-light border p-3 mt-2">
+                            <label class="form-label fw-bold text-dark mb-2">
+                                <i class="bx bx-check-shield text-primary me-1"></i> Pilih Hak Akses Menu untuk Staf:
+                            </label>
+                            <div class="row g-2">
+                                @foreach($allPages as $key => $title)
+                                    <div class="col-md-4 col-sm-6">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="accessible_pages[]" value="{{ $key }}" id="page_{{ $key }}" {{ in_array($key, old('accessible_pages', [])) ? 'checked' : '' }}>
+                                            <label class="form-check-label" for="page_{{ $key }}">
+                                                {{ $title }}
+                                            </label>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                            <small class="text-muted mt-2 d-block">
+                                * Centang modul atau halaman yang diizinkan untuk dikelola oleh petugas ini.
+                            </small>
+                        </div>
+                    </div>
                 </div>
+
+                <script>
+                    function toggleAccessiblePages(role) {
+                        const container = document.getElementById('accessiblePagesContainer');
+                        if (container) {
+                            container.style.display = (role === 'staf') ? 'block' : 'none';
+                        }
+                    }
+                </script>
 
                 {{-- Action Buttons --}}
                 <div class="d-flex justify-content-end gap-2 mt-4 pt-3 border-top">

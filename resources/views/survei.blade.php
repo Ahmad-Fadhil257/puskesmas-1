@@ -230,7 +230,7 @@
 
                     {{-- 5. GOOGLE RECAPTCHA --}}
                     <div style="margin-bottom: 24px;">
-                        <div class="g-recaptcha" data-sitekey="{{ env('RECAPTCHA_SITE_KEY', '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI') }}"></div>
+                        <div class="g-recaptcha" data-sitekey="{{ config('services.recaptcha.site_key', env('RECAPTCHA_SITE_KEY', '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI')) }}"></div>
                         @error('g-recaptcha-response')
                             <span style="color: #EF4444; font-size: 12.5px; margin-top: 4px; display: block;">{{ $message }}</span>
                         @enderror

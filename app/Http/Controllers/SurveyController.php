@@ -39,7 +39,7 @@ class SurveyController extends Controller
             'pesan'          => 'required|string|max:1000',
             'g-recaptcha-response' => ['required', function ($attribute, $value, $fail) {
                 $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
-                    'secret'   => env('RECAPTCHA_SECRET_KEY', '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe'),
+                    'secret'   => config('services.recaptcha.secret', env('RECAPTCHA_SECRET_KEY', '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe')),
                     'response' => $value,
                     'remoteip' => request()->ip()
                 ]);
