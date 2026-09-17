@@ -82,7 +82,7 @@
 
                     {{-- Jadwal Praktik Dokter --}}
                     @php
-                        $jadwalText = old('jadwal_praktek', is_array($dokter->jadwal_praktek) ? implode("\n", $dokter->jadwal_praktek) : $dokter->jadwal_praktek);
+                        $jadwalText = old('jadwal_praktek', $dokter->jadwal_lines);
                     @endphp
                     <div class="col-12">
                         <label class="form-label fw-semibold" for="jadwal_praktek">Jadwal Praktik Dokter</label>

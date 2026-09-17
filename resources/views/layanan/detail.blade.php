@@ -541,10 +541,10 @@
                             <div class="dokter-layanan-info">
                                 <h5 class="dokter-layanan-name">{{ $doc->name }}</h5>
                                 <p class="dokter-layanan-spec">{{ $doc->specialty }}</p>
-                                @if(!empty($doc->jadwal_praktek) && is_array($doc->jadwal_praktek))
+                                @if(!empty($doc->formatted_jadwal))
                                     <div class="dokter-layanan-schedule">
                                         <i class="bx bx-calendar"></i>
-                                        <span>{{ implode(', ', array_slice($doc->jadwal_praktek, 0, 3)) }}</span>
+                                        <span>{{ $doc->formatted_jadwal }}</span>
                                     </div>
                                 @endif
                             </div>
