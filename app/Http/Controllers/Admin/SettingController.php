@@ -41,6 +41,11 @@ class SettingController extends Controller
             'twitter_link' => ['nullable', 'string', 'max:255'],
             'youtube_link' => ['nullable', 'string', 'max:255'],
             'tiktok_link' => ['nullable', 'string', 'max:255'],
+            'footer_weekday_days' => ['nullable', 'string', 'max:100'],
+            'footer_weekday_hours' => ['nullable', 'string', 'max:100'],
+            'footer_weekend_days' => ['nullable', 'string', 'max:100'],
+            'footer_weekend_hours' => ['nullable', 'string', 'max:100'],
+            'footer_closed_info' => ['nullable', 'string', 'max:100'],
         ], [
             'logo.image' => 'File logo harus berupa gambar.',
             'logo.mimes' => 'Format logo yang diizinkan: PNG, JPG, JPEG, SVG, WEBP.',
@@ -62,6 +67,11 @@ class SettingController extends Controller
             'twitter_link' => $request->twitter_link,
             'youtube_link' => $request->youtube_link,
             'tiktok_link' => $request->tiktok_link,
+            'footer_weekday_days' => $request->footer_weekday_days,
+            'footer_weekday_hours' => $request->footer_weekday_hours,
+            'footer_weekend_days' => $request->footer_weekend_days,
+            'footer_weekend_hours' => $request->footer_weekend_hours,
+            'footer_closed_info' => $request->footer_closed_info,
         ];
 
         // Handle upload logo baru

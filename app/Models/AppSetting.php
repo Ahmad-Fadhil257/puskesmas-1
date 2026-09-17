@@ -29,6 +29,11 @@ class AppSetting extends Model
         'twitter_link',
         'youtube_link',
         'tiktok_link',
+        'footer_weekday_days',
+        'footer_weekday_hours',
+        'footer_weekend_days',
+        'footer_weekend_hours',
+        'footer_closed_info',
     ];
 
     protected function casts(): array

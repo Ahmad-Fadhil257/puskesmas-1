@@ -56,11 +56,11 @@ Route::post('/survei', [SurveyController::class, 'store'])->name('survei.store')
 
 // Layanan & Poli Puskesmas (Redirect langsung ke layanan pertama)
 Route::get('/layanan', function () {
-    $firstLayanan = Layanan::where('is_active', true)->orderBy('order', 'asc')->orderBy('id', 'asc')->first();
-    if ($firstLayanan && !empty($firstLayanan->slug)) {
-        return redirect()->route('layanan.detail', $firstLayanan->slug);
-    }
-    return redirect()->route('home');
+    $layanans = Layanan::where('is_active', true)
+        ->orderBy('order', 'asc')
+        ->orderBy('id', 'asc')
+        ->paginate(12);
+    return view('layanan.index', compact('layanans'));
 })->name('layanan.index');
 
 // Halaman Detail Layanan Informatif (Slug)

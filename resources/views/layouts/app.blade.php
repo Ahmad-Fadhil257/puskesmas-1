@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="{{ asset('css/landing-page/info-cards.css') }}">
     <link rel="stylesheet" href="{{ asset('css/landing-page/about.css') }}">
     <link rel="stylesheet" href="{{ asset('css/landing-page/nilai-nilai.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/landing-page/layanan.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/landing-page/layanan.css') }}?v={{ file_exists(public_path('css/landing-page/layanan.css')) ? filemtime(public_path('css/landing-page/layanan.css')) : time() }}">
     <link rel="stylesheet" href="{{ asset('css/landing-page/dokter.css') }}">
     <link rel="stylesheet" href="{{ asset('css/landing-page/cara.css') }}">
     <link rel="stylesheet" href="{{ asset('css/landing-page/testimoni.css') }}">
@@ -39,39 +39,7 @@
         @yield('content')
     </main>
 
-    <!-- Floating Badge: Jam Operasional (Circular Medical Seal) — hanya di landing page utama -->
-    @if(($appSetting->show_operational_hours ?? true) && request()->routeIs('home'))
-    <div class="operational-circle-badge" id="operationalBadge" role="complementary" aria-label="Jam Operasional Puskesmas">
-        <button type="button" class="operational-circle-badge__close" id="closeOperationalBadge" aria-label="Tutup pemberitahuan" title="Tutup">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="18" y1="6" x2="6" y2="18"></line>
-                <line x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
-        </button>
 
-        <!-- Outer Rotating Circular Text Ring (Jarak Lebih Pas & Rapi Mengitari Lingkaran) -->
-        <div class="operational-circle-badge__spinner">
-            <svg viewBox="0 0 150 150" class="operational-circle-badge__svg-ring" aria-hidden="true">
-                <defs>
-                    <path id="circleTextPath" d="M 75, 75 m -57, 0 a 57,57 0 1,1 114,0 a 57,57 0 1,1 -114,0" />
-                </defs>
-                <circle cx="75" cy="75" r="68" fill="none" stroke="rgba(249, 115, 22, 0.3)" stroke-width="1.2" stroke-dasharray="3.5 3" />
-                <text font-size="8.6" font-weight="800" fill="#F97316" letter-spacing="2.2px">
-                    <textPath href="#circleTextPath" startOffset="0%">
-                        {{ $appSetting->operational_badge_text ?? '• JAM OPERASIONAL • PUSKESMAS BUKA •' }}
-                    </textPath>
-                </text>
-            </svg>
-        </div>
-
-        <!-- Inner Core Disc (Bersih: Hanya Ikon Jam + Hari + Waktu) -->
-        <div class="operational-circle-badge__core">
-            <i class="bx bx-time-five operational-circle-badge__icon"></i>
-            <span class="operational-circle-badge__days">{{ $appSetting->operational_days ?? 'Senin - Sabtu' }}</span>
-            <span class="operational-circle-badge__hours">{{ $appSetting->operational_hours ?? '08.00 - 16.00 WIB' }}</span>
-        </div>
-    </div>
-    @endif
 
     <!-- Footer -->
     @include('landing-page.footer')
@@ -145,18 +113,6 @@
                 }
             });
 
-            // ── Close Operational Badge ──────────────────────────────────────
-            document.getElementById('closeOperationalBadge')?.addEventListener('click', function() {
-                const badge = document.getElementById('operationalBadge');
-                if (badge) {
-                    badge.style.animation = 'none';
-                    badge.style.opacity = '0';
-                    badge.style.transform = 'scale(0.3) rotate(-40deg)';
-                    setTimeout(() => {
-                        badge.style.display = 'none';
-                    }, 250);
-                }
-            });
         });
     </script>
 
