@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'Rilis Berita & Informasi Terkini - Puskesmas CareLink')
-@section('meta_description', 'Temukan berbagai artikel kesehatan, tips medis, pola hidup sehat, dan rilis informasi kegiatan terkini dari Puskesmas CareLink.')
+@section('title', 'Rilis Berita & Informasi Terkini - Puskesmas Sukaluyu')
+@section('meta_description', 'Temukan berbagai artikel kesehatan, tips medis, pola hidup sehat, dan rilis informasi kegiatan terkini dari Puskesmas Sukaluyu.')
 
 @push('styles')
 <link rel="stylesheet" href="{{ asset('css/blog/blog-public.css') }}?v={{ time() }}">
@@ -23,7 +23,7 @@
         </div>
         <h1 class="subpage-header__title" data-aos="fade-right">Rilis Berita & Informasi Terkini</h1>
         <p class="subpage-header__subtitle" data-aos="fade-up">
-            Informasi seputar kesehatan terkini dan kegiatan pelayanan yang dilaksanakan oleh Puskesmas CareLink
+            Informasi seputar kesehatan terkini dan kegiatan pelayanan yang dilaksanakan oleh Puskesmas Sukaluyu
         </p>
     </div>
 </section>

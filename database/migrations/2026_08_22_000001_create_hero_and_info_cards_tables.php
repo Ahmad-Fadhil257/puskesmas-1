@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('hero_sections', function (Blueprint $table) {
             $table->id();
-            $table->string('badge_text')->default('Selamat Datang Di Puskesmas CareLink');
+            $table->string('badge_text')->default('Selamat Datang Di Puskesmas Sukaluyu');
             $table->string('title')->default('Melayani Kesehatan Masyarakat dengan Sepenuh Hati');
             $table->text('description')->nullable();
             $table->string('btn_primary_text')->default('Statistik');

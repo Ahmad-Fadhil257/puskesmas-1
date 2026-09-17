@@ -14,7 +14,7 @@
                 Layanan Kesehatan Terpercaya yang Berfokus pada Kesejahteraan Anda
             </h2>
             <p class="process__subtitle" data-aos="fade-up">
-                Di CareLink, kami telah menyederhanakan proses layanan kesehatan untuk memastikan Anda mendapatkan perawatan terbaik dengan mudah dan nyaman.
+                Di Puskesmas Sukaluyu, kami telah menyederhanakan proses layanan kesehatan untuk memastikan Anda mendapatkan perawatan terbaik dengan mudah dan nyaman.
             </p>
         </div>
 

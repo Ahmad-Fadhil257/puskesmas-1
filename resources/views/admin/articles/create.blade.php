@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Tulis Artikel Baru - Puskesmas CareLink')
+@section('title', 'Tulis Artikel Baru - Puskesmas Sukaluyu')
 
 @section('content')
 
@@ -60,7 +60,7 @@
                     {{-- Penulis --}}
                     <div class="col-md-6">
                         <label class="form-label fw-semibold" for="author">Nama Penulis / Dokter <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control @error('author') is-invalid @enderror" id="author" name="author" value="{{ old('author', 'Tim Medis CareLink') }}" required>
+                        <input type="text" class="form-control @error('author') is-invalid @enderror" id="author" name="author" value="{{ old('author', 'Tim Medis Puskesmas Sukaluyu') }}" required>
                         @error('author')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror

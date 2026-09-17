@@ -6,13 +6,13 @@
         <div class="about__images" data-aos="fade-right">
             <div class="about__img-wrap about__img-wrap--main">
                 <img src="{{ isset($about) ? $about->image_main_url : asset('assets/about/about-1.jpg') }}"
-                     alt="{{ $about->title ?? 'Tim medis profesional Puskesmas CareLink' }}"
+                     alt="{{ $about->title ?? 'Tim medis profesional Puskesmas Sukaluyu' }}"
                      class="about__img"
                      loading="lazy">
             </div>
             <div class="about__img-wrap about__img-wrap--accent">
                 <img src="{{ isset($about) ? $about->image_accent_url : asset('assets/about/about-2.jpg') }}"
-                     alt="{{ $about->title ?? 'Tenaga kesehatan berstandar tinggi Puskesmas CareLink' }}"
+                     alt="{{ $about->title ?? 'Tenaga kesehatan berstandar tinggi Puskesmas Sukaluyu' }}"
                      class="about__img"
                      loading="lazy">
             </div>
@@ -31,12 +31,12 @@
 
             {{-- Heading H2 --}}
             <h2 class="about__title" data-aos="fade-left">
-                {!! nl2br(e($about->title ?? 'Puskesmas CareLink  Menciptakan Pelayanan Aman, Kesehatan Adalah Prioritas Kami')) !!}
+                {!! nl2br(e($about->title ?? 'Puskesmas Sukaluyu  Menciptakan Pelayanan Aman, Kesehatan Adalah Prioritas Kami')) !!}
             </h2>
 
             {{-- Description --}}
             <p class="about__desc" data-aos="fade-up">
-                {!! nl2br(e($about->description ?? 'Puskesmas CareLink menyediakan layanan kesehatan berkualitas tinggi dengan dokter berpengalaman, layanan gawat darurat, dan dukungan sepanjang waktu. Mitra tepercaya Anda untuk hidup yang lebih sehat.')) !!}
+                {!! nl2br(e($about->description ?? 'Puskesmas Sukaluyu menyediakan layanan kesehatan berkualitas tinggi dengan dokter berpengalaman, layanan gawat darurat, dan dukungan sepanjang waktu. Mitra tepercaya Anda untuk hidup yang lebih sehat.')) !!}
             </p>
 
             {{-- Visi & Misi Cards --}}
@@ -66,7 +66,7 @@
                     </div>
                     <h3 class="about__card-title">{{ $about->misi_title ?? 'Misi Kami' }}</h3>
                     <p class="about__card-text">
-                        {!! nl2br(e($about->misi_text ?? 'CareLink menghadirkan layanan ahli yang berfokus pada pasien, didukung oleh teknologi canggih dan layanan 24/7, serta berorientasi pada kesehatan dan kesejahteraan.')) !!}
+                        {!! nl2br(e($about->misi_text ?? 'Puskesmas Sukaluyu menghadirkan layanan ahli yang berfokus pada pasien, didukung oleh teknologi canggih dan layanan 24/7, serta berorientasi pada kesehatan dan kesejahteraan.')) !!}
                     </p>
                 </div>
 

@@ -70,7 +70,7 @@
                                name="email"
                                id="email"
                                class="form-input"
-                               placeholder="admin@carelink.com"
+                               placeholder="admin@sukaluyu.go.id"
                                required>
                     </div>
                 </div>

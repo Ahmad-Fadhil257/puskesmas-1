@@ -64,7 +64,7 @@ class AdminLayananController extends Controller
             'order'              => 'nullable|integer|min:1',
             'title'              => 'required|string|max:255',
             'subtitle'           => 'nullable|string|max:255',
-            'slug'               => 'nullable|string|max:255|unique:layanans,slug',
+            'slug'               => 'nullable|string|max:255|unique:layanan,slug',
             'kategori'           => 'nullable|string|max:100',
             'description'        => 'required|string',
             'icon'               => 'required|string|max:100',
@@ -72,6 +72,7 @@ class AdminLayananController extends Controller
             'jadwal_pendaftaran' => 'nullable|string',
             'jam_operasional'    => 'nullable|string',
             'persyaratan'        => 'nullable|string',
+            'tindakan_medis'     => 'nullable|string',
             'dokter_ids'         => 'nullable|array',
         ]);
 
@@ -112,6 +113,7 @@ class AdminLayananController extends Controller
             'jadwal_pendaftaran' => $validated['jadwal_pendaftaran'] ?? null,
             'jam_operasional'    => $validated['jam_operasional'] ?? null,
             'persyaratan'        => $validated['persyaratan'] ?? null,
+            'tindakan_medis'     => $validated['tindakan_medis'] ?? null,
             'dokter_ids'         => $request->input('dokter_ids', []),
             'btn_text'           => 'Informasi Pelayanan',
             'btn_link'           => null,
@@ -145,7 +147,7 @@ class AdminLayananController extends Controller
             'order'              => 'required|integer|min:1',
             'title'              => 'required|string|max:255',
             'subtitle'           => 'nullable|string|max:255',
-            'slug'               => 'nullable|string|max:255|unique:layanans,slug,' . $layanan->id,
+            'slug'               => 'nullable|string|max:255|unique:layanan,slug,' . $layanan->id,
             'kategori'           => 'nullable|string|max:100',
             'description'        => 'required|string',
             'icon'               => 'required|string|max:100',
@@ -153,6 +155,7 @@ class AdminLayananController extends Controller
             'jadwal_pendaftaran' => 'nullable|string',
             'jam_operasional'    => 'nullable|string',
             'persyaratan'        => 'nullable|string',
+            'tindakan_medis'     => 'nullable|string',
             'dokter_ids'         => 'nullable|array',
         ]);
 
@@ -196,6 +199,7 @@ class AdminLayananController extends Controller
         $layanan->jadwal_pendaftaran = $validated['jadwal_pendaftaran'] ?? null;
         $layanan->jam_operasional    = $validated['jam_operasional'] ?? null;
         $layanan->persyaratan        = $validated['persyaratan'] ?? null;
+        $layanan->tindakan_medis     = $validated['tindakan_medis'] ?? null;
         $layanan->dokter_ids         = $request->input('dokter_ids', []);
         $layanan->save();
 

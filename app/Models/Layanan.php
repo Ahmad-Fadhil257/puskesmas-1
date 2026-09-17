@@ -9,7 +9,7 @@ class Layanan extends Model
 {
     use HasFactory;
 
-    protected $table = 'layanans';
+    protected $table = 'layanan';
 
     protected $fillable = [
         'order',

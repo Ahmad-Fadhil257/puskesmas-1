@@ -23,7 +23,7 @@
 </section>
 
 {{-- Layanan Index Content --}}
-<div class="layanan-section" style="padding-top: 50px; padding-bottom: 80px; background: #FFFFFF;">
+<section class="layanan-section" style="background: #FFFFFF;">
     <div class="layanan-container">
         @if(isset($layanans) && $layanans->isNotEmpty())
             <div class="layanan-grid">
@@ -62,6 +62,6 @@
             </div>
         @endif
     </div>
-</div>
+</section>
 
 @endsection

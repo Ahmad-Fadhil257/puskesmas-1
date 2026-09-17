@@ -69,9 +69,10 @@ class AdminDokterController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'name'      => 'required|string|max:255',
-            'specialty' => 'required|string|max:255',
-            'photo'     => 'nullable|image|mimes:jpeg,png,jpg,webp|max:3072',
+            'name'           => 'required|string|max:255',
+            'specialty'      => 'required|string|max:255',
+            'jadwal_praktek' => 'nullable|string',
+            'photo'          => 'nullable|image|mimes:jpeg,png,jpg,webp|max:3072',
         ]);
 
         $photoPath = null;
@@ -88,11 +89,18 @@ class AdminDokterController extends Controller
             $photoPath = 'assets/dokter/' . $filename;
         }
 
+        $jadwal = null;
+        if ($request->filled('jadwal_praktek')) {
+            $lines = preg_split('/[\r\n]+/', $request->jadwal_praktek);
+            $jadwal = array_values(array_filter(array_map('trim', $lines)));
+        }
+
         Dokter::create([
-            'name'      => $validated['name'],
-            'specialty' => $validated['specialty'],
-            'photo'     => $photoPath,
-            'is_active' => true,
+            'name'           => $validated['name'],
+            'specialty'      => $validated['specialty'],
+            'jadwal_praktek' => $jadwal,
+            'photo'          => $photoPath,
+            'is_active'      => true,
         ]);
 
         return redirect()->route('admin.dokter.index')
@@ -117,9 +125,10 @@ class AdminDokterController extends Controller
         $dokter = Dokter::findOrFail($id);
 
         $validated = $request->validate([
-            'name'      => 'required|string|max:255',
-            'specialty' => 'required|string|max:255',
-            'photo'     => 'nullable|image|mimes:jpeg,png,jpg,webp|max:3072',
+            'name'           => 'required|string|max:255',
+            'specialty'      => 'required|string|max:255',
+            'jadwal_praktek' => 'nullable|string',
+            'photo'          => 'nullable|image|mimes:jpeg,png,jpg,webp|max:3072',
         ]);
 
         if ($request->hasFile('photo')) {
@@ -139,8 +148,15 @@ class AdminDokterController extends Controller
             $dokter->photo = 'assets/dokter/' . $filename;
         }
 
-        $dokter->name      = $validated['name'];
-        $dokter->specialty = $validated['specialty'];
+        $jadwal = null;
+        if ($request->filled('jadwal_praktek')) {
+            $lines = preg_split('/[\r\n]+/', $request->jadwal_praktek);
+            $jadwal = array_values(array_filter(array_map('trim', $lines)));
+        }
+
+        $dokter->name           = $validated['name'];
+        $dokter->specialty      = $validated['specialty'];
+        $dokter->jadwal_praktek = $jadwal;
         $dokter->save();
 
         return redirect()->route('admin.dokter.index')

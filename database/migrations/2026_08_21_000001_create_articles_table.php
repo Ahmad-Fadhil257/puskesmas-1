@@ -19,7 +19,7 @@ return new class extends Migration
             $table->text('excerpt')->nullable();
             $table->longText('content');
             $table->string('thumbnail')->nullable();
-            $table->string('author')->default('Tim Medis CareLink');
+            $table->string('author')->default('Tim Medis Puskesmas Sukaluyu');
             $table->string('reading_time')->default('3 Menit');
             $table->unsignedBigInteger('views_count')->default(0);
             $table->boolean('is_published')->default(true);

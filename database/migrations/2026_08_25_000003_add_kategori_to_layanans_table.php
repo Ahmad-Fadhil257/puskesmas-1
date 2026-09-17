@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('layanans', function (Blueprint $table) {
+        Schema::table('layanan', function (Blueprint $table) {
             $table->string('kategori')->nullable()->default('Rawat Jalan (BPJS & Umum)')->after('title');
         });
     }
@@ -21,7 +21,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('layanans', function (Blueprint $table) {
+        Schema::table('layanan', function (Blueprint $table) {
             $table->dropColumn('kategori');
         });
     }

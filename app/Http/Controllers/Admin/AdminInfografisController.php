@@ -40,7 +40,7 @@ class AdminInfografisController extends Controller
 
     public function create()
     {
-        return redirect()->route('admin.infografis.index');
+        return view('admin.infografis.create');
     }
 
     public function store(Request $request)
@@ -75,13 +75,16 @@ class AdminInfografisController extends Controller
             ->with('success', 'Infografis berhasil ditambahkan.');
     }
 
-    public function edit(Infografis $infografis)
+    public function edit($id)
     {
-        return redirect()->route('admin.infografis.index');
+        $infografis = Infografis::findOrFail($id);
+        return view('admin.infografis.edit', compact('infografis'));
     }
 
-    public function update(Request $request, Infografis $infografis)
+    public function update(Request $request, $id)
     {
+        $infografis = Infografis::findOrFail($id);
+
         $request->validate([
             'title'     => 'required|string|max:255',
             'kategori'  => 'required|string|max:100',
@@ -117,8 +120,10 @@ class AdminInfografisController extends Controller
             ->with('success', 'Infografis berhasil diperbarui.');
     }
 
-    public function destroy(Infografis $infografis)
+    public function destroy($id)
     {
+        $infografis = Infografis::findOrFail($id);
+
         if ($infografis->image_path && \Illuminate\Support\Facades\File::exists(public_path($infografis->image_path))) {
             \Illuminate\Support\Facades\File::delete(public_path($infografis->image_path));
         }
@@ -128,8 +133,9 @@ class AdminInfografisController extends Controller
             ->with('success', 'Infografis berhasil dihapus.');
     }
 
-    public function toggleStatus(Infografis $infografis)
+    public function toggleStatus($id)
     {
+        $infografis = Infografis::findOrFail($id);
         $infografis->update(['is_active' => !$infografis->is_active]);
         return back()->with('success', 'Status infografis diperbarui.');
     }

@@ -85,9 +85,7 @@
                          role="region" 
                          aria-labelledby="faq-header-{{ $faq->id }}">
                         <div class="faq-body-collapse-inner">
-                            <div class="faq-body-content">
-                                {!! nl2br(e($faq->jawaban)) !!}
-                            </div>
+                            <div class="faq-body-content">{!! nl2br(e(trim($faq->jawaban))) !!}</div>
                         </div>
                     </div>
                 </div>

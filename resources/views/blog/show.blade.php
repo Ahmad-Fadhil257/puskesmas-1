@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
-@section('title', $article->title . ' - Puskesmas CareLink')
+@section('title', $article->title . ' - Puskesmas Sukaluyu')
 @section('meta_description', Str::limit(strip_tags($article->excerpt ?? $article->content), 150))
 
 @push('styles')
-<link rel="stylesheet" href="{{ asset('css/blog/blog-public.css') }}">
+<link rel="stylesheet" href="{{ asset('css/blog/blog-public.css') }}?v={{ file_exists(public_path('css/blog/blog-public.css')) ? filemtime(public_path('css/blog/blog-public.css')) : time() }}">
 @endpush
 
 @section('content')

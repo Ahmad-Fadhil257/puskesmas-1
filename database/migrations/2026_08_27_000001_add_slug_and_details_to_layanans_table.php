@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('layanans', function (Blueprint $table) {
-            if (!Schema::hasColumn('layanans', 'slug')) {
+        Schema::table('layanan', function (Blueprint $table) {
+            if (!Schema::hasColumn('layanan', 'slug')) {
                 $table->string('slug')->nullable()->unique()->after('title');
             }
-            if (!Schema::hasColumn('layanans', 'image')) {
+            if (!Schema::hasColumn('layanan', 'image')) {
                 $table->string('image')->nullable()->after('description');
             }
-            if (!Schema::hasColumn('layanans', 'jadwal_pendaftaran')) {
+            if (!Schema::hasColumn('layanan', 'jadwal_pendaftaran')) {
                 $table->text('jadwal_pendaftaran')->nullable()->after('jam_operasional');
             }
         });
@@ -29,7 +29,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('layanans', function (Blueprint $table) {
+        Schema::table('layanan', function (Blueprint $table) {
             $table->dropColumn(['slug', 'image', 'jadwal_pendaftaran']);
         });
     }

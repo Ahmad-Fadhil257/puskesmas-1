@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
-    <title>@yield('title', 'Dashboard - Puskesmas CareLink')</title>
+    <title>@yield('title', 'Dashboard - Puskesmas Sukaluyu')</title>
 
     <!-- Theme State Early Init (Mencegah kedipan tema) -->
     <script>
@@ -48,7 +48,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
-    <!-- Custom Puskesmas CareLink Theme Override (Emerald Green & Dark Mode) -->
+    <!-- Custom Puskesmas Sukaluyu Theme Override (Emerald Green & Dark Mode) -->
     <link rel="stylesheet" href="{{ asset('admin-assets/css/custom-theme.css') }}" />
 
     <style>
@@ -158,7 +158,7 @@
                     </li>
 
                     <!-- 2. INFORMASI & BERITA PUBLIK -->
-                    @if($user->canAccessPage('articles') || $user->canAccessPage('infografis') || $user->canAccessPage('faq') || $user->canAccessPage('cara-kerja'))
+                    @if($user->canAccessPage('articles') || $user->canAccessPage('infografis') || $user->canAccessPage('faq') || $user->canAccessPage('statistik') || $user->canAccessPage('cara-kerja'))
                     <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">Informasi & Berita</span>
                     </li>
@@ -191,12 +191,14 @@
                     </li>
                     @endif
 
+                    @if($user->canAccessPage('statistik'))
                     <li class="menu-item {{ request()->routeIs('admin.statistik.*') ? 'active' : '' }}">
                         <a href="{{ route('admin.statistik.index') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-bar-chart-alt-2"></i>
                             <div>Statistik Kesehatan</div>
                         </a>
                     </li>
+                    @endif
 
                     @if($user->canAccessPage('cara-kerja'))
                     <li class="menu-item {{ request()->routeIs('admin.cara-kerja.*') ? 'active' : '' }}">
@@ -300,7 +302,7 @@
                     </li>
                     @endif
 
-                    @if($user->canAccessPage('users'))
+                    @if($user->isAdmin())
                     <li class="menu-item {{ request()->routeIs('admin.users.*') ? 'active' : '' }}">
                         <a href="{{ route('admin.users.index') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-user-pin"></i>
@@ -375,7 +377,7 @@
                                                 </div>
                                                 <div class="flex-grow-1">
                                                     <span class="fw-semibold d-block">{{ Auth::user()->name ?? 'Admin Puskesmas' }}</span>
-                                                    <small class="text-muted">{{ Auth::user()->email ?? 'admin@carelink.com' }}</small>
+                                                    <small class="text-muted">{{ Auth::user()->email ?? 'admin@sukaluyu.go.id' }}</small>
                                                 </div>
                                             </div>
                                         </a>

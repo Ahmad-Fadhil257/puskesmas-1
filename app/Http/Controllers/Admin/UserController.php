@@ -59,12 +59,16 @@ class UserController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
             'phone' => ['nullable', 'string', 'max:20'],
+            'role' => ['required', 'in:admin,staf'],
+            'accessible_pages' => ['nullable', 'array'],
+            'accessible_pages.*' => ['string', Rule::in(array_keys(User::PAGES))],
         ], [
             'password.confirmed' => 'Konfirmasi kata sandi tidak cocok.',
             'email.unique' => 'Alamat email ini sudah terdaftar.',
         ]);
 
-        $role = $request->boolean('is_admin', true) ? 'admin' : 'staf';
+        $role = $request->input('role', 'staf');
+        $accessiblePages = ($role === 'admin') ? null : $request->input('accessible_pages', []);
 
         $data = [
             'name' => $request->name,
@@ -72,8 +76,8 @@ class UserController extends Controller
             'password' => Hash::make($request->password),
             'role' => $role,
             'phone' => $request->phone,
-            'is_active' => true,
-            'accessible_pages' => null,
+            'is_active' => $request->boolean('is_active', true),
+            'accessible_pages' => $accessiblePages,
         ];
 
         User::create($data);
@@ -98,12 +102,16 @@ class UserController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
             'password' => ['nullable', 'string', 'min:6', 'confirmed'],
             'phone' => ['nullable', 'string', 'max:20'],
+            'role' => ['nullable', 'in:admin,staf'],
+            'accessible_pages' => ['nullable', 'array'],
+            'accessible_pages.*' => ['string', Rule::in(array_keys(User::PAGES))],
         ], [
             'password.confirmed' => 'Konfirmasi kata sandi baru tidak cocok.',
             'email.unique' => 'Alamat email ini sudah terdaftar.',
         ]);
 
-        $role = $user->id === Auth::id() ? 'admin' : ($request->boolean('is_admin', true) ? 'admin' : 'staf');
+        $role = $user->id === Auth::id() ? 'admin' : $request->input('role', $user->role);
+        $accessiblePages = ($role === 'admin') ? null : $request->input('accessible_pages', []);
 
         $data = [
             'name' => $request->name,
@@ -111,7 +119,7 @@ class UserController extends Controller
             'role' => $role,
             'phone' => $request->phone,
             'is_active' => $user->id === Auth::id() ? true : $request->boolean('is_active', $user->is_active),
-            'accessible_pages' => null,
+            'accessible_pages' => $accessiblePages,
         ];
 
         if ($request->filled('password')) {

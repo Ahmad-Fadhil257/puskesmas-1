@@ -115,8 +115,9 @@
                             {{-- Current Image Display --}}
                             <div class="d-flex align-items-center gap-3 p-3 bg-light border rounded mb-2">
                                 <img src="{{ $infografis->image_url }}" alt="Saat Ini" 
+                                     data-fallback="{{ asset('admin-assets/images/placeholder.png') }}"
                                      style="max-height: 100px; max-width: 120px; border-radius: 6px; object-fit: contain;"
-                                     onerror="this.src='{{ asset('admin-assets/images/placeholder.png') }}'">
+                                     onerror="this.onerror=null; this.src=this.dataset.fallback;">
                                 <div>
                                     <span class="fw-semibold text-dark d-block">Gambar Sedang Digunakan</span>
                                     <small class="text-muted">Pilih file baru di bawah ini hanya jika Anda ingin menggantinya.</small>

@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Survei Kepuasan Masyarakat & Testimoni - Puskesmas CareLink')
+@section('title', 'Survei Kepuasan Masyarakat & Testimoni - Puskesmas Sukaluyu')
 
 @section('content')
 

@@ -253,7 +253,69 @@
     max-width: 100%;
 }
 
+/* 6. Dokter Layanan Grid */
+.dokter-layanan-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+}
 
+.dokter-layanan-card {
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 12px;
+    padding: 14px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    box-shadow: 0 2px 6px rgba(10, 92, 69, 0.04);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.dokter-layanan-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(10, 92, 69, 0.08);
+}
+
+.dokter-layanan-img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #0A5C45;
+    flex-shrink: 0;
+}
+
+.dokter-layanan-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.dokter-layanan-name {
+    font-size: 14.5px;
+    font-weight: 700;
+    color: #0F172A;
+    margin: 0 0 4px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.dokter-layanan-spec {
+    font-size: 13px;
+    color: #0A5C45;
+    font-weight: 600;
+    margin: 0 0 4px 0;
+}
+
+.dokter-layanan-schedule {
+    font-size: 12px;
+    color: #64748B;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
 
 /* 7. Call to Action Card */
 .cta-help-card {
@@ -328,7 +390,7 @@
 
         <h1 class="subpage-header__title" data-aos="fade-right">{{ $layanan->title }}</h1>
         <p class="subpage-header__subtitle" data-aos="fade-up">
-            Pelayanan kesehatan komprehensif UPTD Puskesmas {{ $appSetting->app_name ?? 'CareLink' }} • {{ $layanan->tipe_jaminan ?? 'BPJS & Umum' }}
+            Pelayanan kesehatan komprehensif UPTD Puskesmas {{ $appSetting->app_name ?? 'Sukaluyu' }} • {{ $layanan->tipe_jaminan ?? 'BPJS & Umum' }}
         </p>
     </div>
 </section>
@@ -450,7 +512,46 @@
                 </p>
             </div>
 
+            {{-- 5. TINDAKAN & PROSEDUR MEDIS --}}
+            @if(!empty($layanan->tindakan_list) && count($layanan->tindakan_list) > 0)
+                <h3 class="section-headline">
+                    <i class="bx bx-check-shield"></i>
+                    <span>Tindakan & Prosedur Medis</span>
+                </h3>
+                <div class="tindakan-list">
+                    @foreach($layanan->tindakan_list as $tindakan)
+                        <div class="tindakan-item">
+                            <i class="bx bx-check-circle"></i>
+                            <span>{{ $tindakan }}</span>
+                        </div>
+                    @endforeach
+                </div>
+            @endif
 
+            {{-- 6. DOKTER & TENAGA MEDIS TERKAIT --}}
+            @if($layanan->dokters && $layanan->dokters->count() > 0)
+                <h3 class="section-headline">
+                    <i class="bx bx-user-pin"></i>
+                    <span>Dokter & Tenaga Medis Penanggung Jawab</span>
+                </h3>
+                <div class="dokter-layanan-grid">
+                    @foreach($layanan->dokters as $doc)
+                        <div class="dokter-layanan-card">
+                            <img src="{{ $doc->photo_url }}" alt="{{ $doc->name }}" class="dokter-layanan-img">
+                            <div class="dokter-layanan-info">
+                                <h5 class="dokter-layanan-name">{{ $doc->name }}</h5>
+                                <p class="dokter-layanan-spec">{{ $doc->specialty }}</p>
+                                @if(!empty($doc->jadwal_praktek) && is_array($doc->jadwal_praktek))
+                                    <div class="dokter-layanan-schedule">
+                                        <i class="bx bx-calendar"></i>
+                                        <span>{{ implode(', ', array_slice($doc->jadwal_praktek, 0, 3)) }}</span>
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            @endif
 
             {{-- 7. CTA / INFORMASI PENDAFTARAN & LOKASI --}}
             <div class="cta-help-card">

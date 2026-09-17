@@ -8,6 +8,20 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+/**
+ * @property int $id
+ * @property string $name
+ * @property string $email
+ * @property string $password
+ * @property string $role
+ * @property bool $is_active
+ * @property string|null $phone
+ * @property string|null $avatar
+ * @property array|null $accessible_pages
+ * @property \Illuminate\Support\Carbon|null $email_verified_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ */
 class User extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */
@@ -25,6 +39,7 @@ class User extends Authenticatable
         'surveys'    => 'Survei & Testimoni',
         'faq'        => 'Tanya Jawab (FAQ)',
         'lokasi'     => 'Lokasi & Peta',
+        'statistik'  => 'Statistik Kesehatan',
         'users'      => 'Kelola Pengguna',
         'settings'   => 'Identitas & Logo',
     ];

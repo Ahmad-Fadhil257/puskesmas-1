@@ -135,8 +135,8 @@ class DummyArticleSeeder extends Seeder
             [
                 'title'        => 'Kegiatan Senam Sehat Bersama Warga RW 05 Kelurahan Sukamaju',
                 'category'     => 'Kegiatan',
-                'excerpt'      => 'Puskesmas CareLink mengadakan kegiatan senam sehat bersama warga RW 05 sebagai upaya promosi kesehatan dan pencegahan penyakit tidak menular.',
-                'content'      => '<p>Pada hari Minggu lalu, Puskesmas CareLink bekerja sama dengan kader kesehatan RW 05 Kelurahan Sukamaju menyelenggarakan kegiatan senam sehat bersama. Kegiatan ini diikuti oleh lebih dari 100 warga dari berbagai kelompok usia.</p><p>Selain senam, kegiatan juga diisi dengan pemeriksaan tekanan darah gratis dan penyuluhan tentang pentingnya gaya hidup aktif untuk mencegah penyakit tidak menular seperti diabetes dan hipertensi.</p>',
+                'excerpt'      => 'Puskesmas Sukaluyu mengadakan kegiatan senam sehat bersama warga RW 05 sebagai upaya promosi kesehatan dan pencegahan penyakit tidak menular.',
+                'content'      => '<p>Pada hari Minggu lalu, Puskesmas Sukaluyu bekerja sama dengan kader kesehatan RW 05 Kelurahan Sukamaju menyelenggarakan kegiatan senam sehat bersama. Kegiatan ini diikuti oleh lebih dari 100 warga dari berbagai kelompok usia.</p><p>Selain senam, kegiatan juga diisi dengan pemeriksaan tekanan darah gratis dan penyuluhan tentang pentingnya gaya hidup aktif untuk mencegah penyakit tidak menular seperti diabetes dan hipertensi.</p>',
                 'author'       => 'Tim Promkes Puskesmas',
                 'reading_time' => '3 Menit',
                 'thumbnail'    => 'https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=800&q=80',

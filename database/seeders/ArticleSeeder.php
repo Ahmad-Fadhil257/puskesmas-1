@@ -37,7 +37,7 @@ class ArticleSeeder extends Seeder
 </ul>
 
 <h3>Kapan Anda Harus Memulai?</h3>
-<p>Tidak perlu menunggu usia tua untuk melakukan pemeriksaan rutin. Mulailah sedini mungkin, setidaknya satu kali dalam setahun untuk usia produktif, dan lebih sering bagi mereka yang memiliki riwayat penyakit keluarga. Kunjungi Puskesmas CareLink untuk berkonsultasi langsung dengan tim dokter kami!</p>
+<p>Tidak perlu menunggu usia tua untuk melakukan pemeriksaan rutin. Mulailah sedini mungkin, setidaknya satu kali dalam setahun untuk usia produktif, dan lebih sering bagi mereka yang memiliki riwayat penyakit keluarga. Kunjungi Puskesmas Sukaluyu untuk berkonsultasi langsung dengan tim dokter kami!</p>
                 ',
                 'thumbnail'    => 'assets/blog/blog-1.png',
                 'author'       => 'dr. Alamsyah Pratama',
@@ -65,7 +65,7 @@ class ArticleSeeder extends Seeder
     <li><strong>Berbagi Cerita dengan Orang Terpercaya:</strong> Jangan ragu untuk mencurahkan beban pikiran kepada keluarga, sahabat, atau konselor profesional.</li>
 </ol>
 
-<p>Jika Anda merasa stres mulai mengganggu aktivitas harian, Puskesmas CareLink menyediakan layanan konseling psikologi dan konsultasi dokter umum untuk membantu Anda memulihkan keseimbangan hidup.</p>
+<p>Jika Anda merasa stres mulai mengganggu aktivitas harian, Puskesmas Sukaluyu menyediakan layanan konseling psikologi dan konsultasi dokter umum untuk membantu Anda memulihkan keseimbangan hidup.</p>
                 ',
                 'thumbnail'    => 'assets/blog/blog-2.png',
                 'author'       => 'Psikolog Maya Rianty, M.Psi',
@@ -83,7 +83,7 @@ class ArticleSeeder extends Seeder
 <p>Dalam situasi darurat medis, waktu adalah faktor penentu keselamatan pasien. Istilah <em>"Golden Hour"</em> merujuk pada periode kritis di mana tindakan medis yang tepat dan cepat dapat mengurangi risiko kecacatan permanen atau kematian secara signifikan.</p>
 
 <h3>Modernisasi Layanan Gawat Darurat</h3>
-<p>Puskesmas CareLink terus berinovasi dalam meningkatkan standar Unit Gawat Darurat (UGD) dengan mengadopsi protokol triase terintegrasi digital, ambulans respon cepat, dan peralatan defibrilator otomatis (AED) modern.</p>
+<p>Puskesmas Sukaluyu terus berinovasi dalam meningkatkan standar Unit Gawat Darurat (UGD) dengan mengadopsi protokol triase terintegrasi digital, ambulans respon cepat, dan peralatan defibrilator otomatis (AED) modern.</p>
 
 <h3>Tanda-Tanda Darurat yang Membutuhkan Penanganan Segera:</h3>
 <ul>
@@ -94,7 +94,7 @@ class ArticleSeeder extends Seeder
     <li>Reaksi alergi berat (anafilaksis) dengan pembengkakan bibir dan jalan napas.</li>
 </ul>
 
-<p>Simpan nomor darurat Puskesmas CareLink di kontak cepat ponsel Anda. Tim medis kami siaga 24 jam untuk memberikan pertolongan pertama yang cepat, tepat, dan penuh kepedulian.</p>
+<p>Simpan nomor darurat Puskesmas Sukaluyu di kontak cepat ponsel Anda. Tim medis kami siaga 24 jam untuk memberikan pertolongan pertama yang cepat, tepat, dan penuh kepedulian.</p>
                 ',
                 'thumbnail'    => 'assets/blog/blog-3.png',
                 'author'       => 'dr. Farhan Nugroho, Sp.EM',

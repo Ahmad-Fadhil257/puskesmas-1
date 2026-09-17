@@ -4,21 +4,6 @@
 
 @section('content')
 
-@push('styles')
-<style>
-    .modal-content .form-control,
-    .modal-content .form-select {
-        color: #FFFFFF !important;
-    }
-    .modal-content .form-control::placeholder {
-        color: rgba(255, 255, 255, 0.7) !important;
-    }
-    .modal-content .form-control:focus,
-    .modal-content .form-select:focus {
-        color: #FFFFFF !important;
-    }
-</style>
-@endpush
 
     {{-- Breadcrumb & Header --}}
     <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-3">
@@ -34,11 +19,11 @@
             </nav>
         </div>
         <div>
-            {{-- Tombol Tambah Pengguna (Membuka Popup Modal Sneat) --}}
-            <button type="button" class="btn btn-primary d-inline-flex align-items-center gap-2" data-bs-toggle="modal" data-bs-target="#modalCreateUser">
+            {{-- Tombol Tambah Pengguna --}}
+            <a href="{{ route('admin.users.create') }}" class="btn btn-primary d-inline-flex align-items-center gap-2">
                 <i class="bx bx-user-plus"></i>
                 <span>Tambah Pengguna Baru</span>
-            </button>
+            </a>
         </div>
     </div>
 
@@ -218,10 +203,10 @@
                                         </form>
                                     @endif
 
-                                    {{-- Edit Button (Buka Popup Modal) --}}
-                                    <button type="button" class="btn btn-sm btn-icon btn-outline-warning" data-bs-toggle="modal" data-bs-target="#modalEditUser-{{ $item->id }}" title="Edit Pengguna">
+                                    {{-- Edit Button --}}
+                                    <a href="{{ route('admin.users.edit', $item->id) }}" class="btn btn-sm btn-icon btn-outline-warning" title="Edit Pengguna">
                                         <i class="bx bx-edit-alt"></i>
-                                    </button>
+                                    </a>
 
                                     {{-- Delete Button --}}
                                     @if($item->id !== Auth::id())
@@ -265,149 +250,8 @@
     </div>
 
 
-    {{-- ====== SNEAT MODAL: TAMBAH PENGGUNA BARU ====== --}}
-    <div class="modal fade" id="modalCreateUser" tabindex="-1" aria-labelledby="modalCreateLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <form action="{{ route('admin.users.store') }}" method="POST">
-                    @csrf
-                    <div class="modal-header border-bottom py-3">
-                        <h5 class="modal-title fw-bold" id="modalCreateLabel">
-                            <i class="bx bx-user-plus me-1 text-primary"></i> Tambah Pengguna Baru
-                        </h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body py-4">
-                        <div class="mb-3">
-                            <label class="form-label fw-semibold">Nama Lengkap <span class="text-danger">*</span></label>
-                            <input type="text" name="name" class="form-control" placeholder="Contoh: dr. Hendra Pratama" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label fw-semibold">Email <span class="text-danger">*</span></label>
-                            <input type="email" name="email" class="form-control" placeholder="yuri@gmail.com" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label fw-semibold">Kata Sandi <span class="text-danger">*</span></label>
-                            <input type="password" name="password" class="form-control" placeholder="••••••••" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label fw-semibold">Konfirmasi Kata Sandi <span class="text-danger">*</span></label>
-                            <input type="password" name="password_confirmation" class="form-control" placeholder="••••••••" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label fw-semibold">Kontak</label>
-                            <input type="text" name="phone" class="form-control" placeholder="Contoh: 08123456789">
-                        </div>
-                        <div class="form-check form-switch pt-2">
-                            <input class="form-check-input" type="checkbox" name="is_admin" value="1" id="createIsAdmin" checked onchange="toggleRoleLabel(this, 'createRoleBadge')">
-                            <label class="form-check-label fw-semibold" for="createIsAdmin">
-                                Peran Akun: <span id="createRoleBadge" class="badge bg-label-primary ms-1">Administrator (Akses Penuh)</span>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="modal-footer border-top py-2">
-                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-primary px-4">
-                            <i class="bx bx-save me-1"></i> Simpan Pengguna
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-
-    {{-- ====== SNEAT MODALS: EDIT DATA PENGGUNA ====== --}}
-    @foreach ($users as $item)
-        <div class="modal fade" id="modalEditUser-{{ $item->id }}" tabindex="-1" aria-labelledby="modalEditLabel-{{ $item->id }}" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <form action="{{ route('admin.users.update', $item->id) }}" method="POST">
-                        @csrf
-                        @method('PUT')
-                        <div class="modal-header border-bottom py-3">
-                            <h5 class="modal-title fw-bold" id="modalEditLabel-{{ $item->id }}">
-                                <i class="bx bx-edit me-1 text-primary"></i> Edit Pengguna: {{ $item->name }}
-                            </h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body py-4">
-                            <div class="mb-3">
-                                <label class="form-label fw-semibold">Nama Lengkap <span class="text-danger">*</span></label>
-                                <input type="text" name="name" class="form-control" value="{{ old('name', $item->name) }}" required>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label fw-semibold">Email <span class="text-danger">*</span></label>
-                                <input type="email" name="email" class="form-control" value="{{ old('email', $item->email) }}" required>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label fw-semibold">Kata Sandi Baru</label>
-                                <input type="password" name="password" class="form-control" placeholder="Kosongkan jika tidak diubah">
-                                <div class="form-text">Biarkan kosong jika kata sandi tidak ingin diubah.</div>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label fw-semibold">Konfirmasi Kata Sandi Baru</label>
-                                <input type="password" name="password_confirmation" class="form-control" placeholder="Ulangi kata sandi baru">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label fw-semibold">Kontak</label>
-                                <input type="text" name="phone" class="form-control" value="{{ old('phone', $item->phone) }}" placeholder="Contoh: 08123456789">
-                            </div>
-                            <div class="d-flex flex-column gap-2 pt-2">
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" name="is_admin" value="1" id="editIsAdmin-{{ $item->id }}" {{ $item->role === 'admin' ? 'checked' : '' }} {{ $item->id === Auth::id() ? 'disabled' : '' }} onchange="toggleRoleLabel(this, 'editRoleBadge-{{ $item->id }}')">
-                                    @if($item->id === Auth::id())
-                                        <input type="hidden" name="is_admin" value="1">
-                                    @endif
-                                    <label class="form-check-label fw-semibold" for="editIsAdmin-{{ $item->id }}">
-                                        Peran Akun: 
-                                        @if($item->role === 'admin')
-                                            <span id="editRoleBadge-{{ $item->id }}" class="badge bg-label-primary ms-1">Administrator (Akses Penuh)</span>
-                                        @else
-                                            <span id="editRoleBadge-{{ $item->id }}" class="badge bg-label-info ms-1">Staf Puskesmas</span>
-                                        @endif
-                                    </label>
-                                </div>
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" name="is_active" value="1" id="editIsActive-{{ $item->id }}" {{ $item->is_active ? 'checked' : '' }} {{ $item->id === Auth::id() ? 'disabled' : '' }}>
-                                    @if($item->id === Auth::id())
-                                        <input type="hidden" name="is_active" value="1">
-                                    @endif
-                                    <label class="form-check-label fw-semibold" for="editIsActive-{{ $item->id }}">
-                                        Status Akun Aktif (Dapat Login)
-                                    </label>
-                                    @if($item->id === Auth::id())
-                                        <div class="form-text text-warning small">Akun Anda sendiri tidak dapat dinonaktifkan.</div>
-                                    @endif
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer border-top py-2">
-                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Batal</button>
-                            <button type="submit" class="btn btn-primary px-4">
-                                <i class="bx bx-save me-1"></i> Simpan Perubahan
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    @endforeach
-
 @push('scripts')
 <script>
-    function toggleRoleLabel(checkbox, badgeId) {
-        const badge = document.getElementById(badgeId);
-        if (!badge) return;
-        if (checkbox.checked) {
-            badge.className = 'badge bg-label-primary ms-1';
-            badge.textContent = 'Administrator (Akses Penuh)';
-        } else {
-            badge.className = 'badge bg-label-info ms-1';
-            badge.textContent = 'Staf Puskesmas';
-        }
-    }
-
     document.addEventListener('DOMContentLoaded', function () {
         // Delete confirmation
         document.querySelectorAll('.btn-delete-user').forEach(function (button) {
