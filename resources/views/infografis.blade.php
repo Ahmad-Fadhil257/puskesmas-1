@@ -86,12 +86,14 @@
                     <img src="{{ $item->image_url }}"
                          alt="{{ $item->title }}"
                          loading="lazy"
-                         onerror="this.parentElement.innerHTML='<div class=\'infografis-card__thumb-placeholder\'><i class=\'bx bx-image\'></i><span>Infografis</span></div>'">
+                         onerror="handleThumbError(this)">
                     <span class="infografis-card__badge">{{ $item->kategori }}</span>
                     {{-- Overlay aksi --}}
                     <div class="infografis-card__overlay">
                         <button class="infografis-overlay-btn"
-                                onclick="openModal('{{ $item->image_url }}', '{{ addslashes($item->title) }}')"
+                                data-preview-img="{{ $item->image_url }}"
+                                data-preview-title="{{ $item->title }}"
+                                onclick="openModal(this.dataset.previewImg, this.dataset.previewTitle)"
                                 title="Lihat Besar">
                             <i class="bx bx-zoom-in"></i>
                         </button>
@@ -161,6 +163,10 @@
 
 @push('scripts')
 <script>
+    function handleThumbError(img) {
+        img.parentElement.innerHTML = '<div class="infografis-card__thumb-placeholder"><i class="bx bx-image"></i><span>Infografis</span></div>';
+    }
+
     // ====== LIGHTBOX MODAL ======
     function openModal(imgSrc, title) {
         document.getElementById('modalImg').src    = imgSrc;

@@ -238,7 +238,7 @@
 
                         <div class="doctor-selection-list" style="max-height: 400px; overflow-y: auto;">
                             @forelse($dokters as $doc)
-                                <div class="doc-select-card mb-2 p-2 rounded border d-flex align-items-center justify-content-between" style="cursor: pointer;" onclick="toggleDocCheck({{ $doc->id }})">
+                                <div class="doc-select-card mb-2 p-2 rounded border d-flex align-items-center justify-content-between" style="cursor: pointer;" onclick="toggleDocCheck(this)">
                                     <div class="d-flex align-items-center gap-2">
                                         <div class="avatar avatar-sm rounded-circle overflow-hidden flex-shrink-0" style="background: #E6F5F1;">
                                             @if($doc->photo)
@@ -310,6 +310,8 @@
 
     </form>
 
+@endsection
+
 @push('scripts')
 <script>
     function selectIcon(iconClass) {
@@ -326,13 +328,11 @@
         document.getElementById('jam_operasional').value = text;
     }
 
-    function toggleDocCheck(id) {
-        const checkbox = document.getElementById('doc_check_' + id);
+    function toggleDocCheck(card) {
+        const checkbox = card.querySelector('.doc-checkbox');
         if (checkbox) {
             checkbox.checked = !checkbox.checked;
         }
     }
 </script>
 @endpush
-
-@endsection

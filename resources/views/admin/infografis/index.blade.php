@@ -168,11 +168,14 @@
                             <td>
                                 <div class="position-relative d-flex align-items-center justify-content-center rounded overflow-hidden shadow-xs cursor-pointer"
                                      style="width: 75px; height: 95px; background: rgba(0, 0, 0, 0.05); border: 1px solid rgba(148, 163, 184, 0.3);"
-                                     onclick="previewImage('{{ $item->image_url }}', '{{ addslashes($item->title) }}')"
+                                     data-preview-img="{{ $item->image_url }}"
+                                     data-preview-title="{{ $item->title }}"
+                                     onclick="previewImage(this.dataset.previewImg, this.dataset.previewTitle)"
                                      title="Klik untuk melihat poster penuh">
                                     <img src="{{ $item->image_url }}" alt="{{ $item->title }}"
+                                         data-fallback="{{ asset('assets/images/infografis-placeholder.svg') }}"
                                          class="w-100 h-100" style="object-fit: contain; padding: 2px;"
-                                         onerror="this.onerror=null; this.src='{{ asset('assets/images/infografis-placeholder.svg') }}'">
+                                         onerror="this.onerror=null; this.src=this.dataset.fallback;">
                                     <span class="position-absolute bottom-0 end-0 bg-dark bg-opacity-75 text-white px-1 rounded-top" style="font-size: 10px;">
                                         <i class="bx bx-zoom-in"></i>
                                     </span>
