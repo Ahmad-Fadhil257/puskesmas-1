@@ -17,16 +17,22 @@
                 </ol>
             </nav>
         </div>
-        <div class="d-flex gap-2 flex-wrap">
+        <div class="d-flex gap-2 flex-wrap align-items-center">
+            <span class="badge bg-label-info d-inline-flex align-items-center gap-1 py-2 px-3">
+                <i class="bx bx-cloud-sync fs-5"></i>
+                <span>Sinkronisasi Otomatis (API Kesehatan)</span>
+            </span>
             <a href="{{ route('statistik') }}" target="_blank" class="btn btn-outline-primary d-inline-flex align-items-center gap-2">
                 <i class="bx bx-link-external"></i> Lihat Halaman Publik
             </a>
-            <a href="{{ route('admin.statistik.penyakit.create') }}" class="btn btn-danger d-inline-flex align-items-center gap-2">
-                <i class="bx bx-plus-circle"></i> Tambah Penyakit
-            </a>
-            <a href="{{ route('admin.statistik.kunjungan.create') }}" class="btn btn-primary d-inline-flex align-items-center gap-2">
-                <i class="bx bx-plus-circle"></i> Tambah Kunjungan
-            </a>
+        </div>
+    </div>
+
+    {{-- API Information Banner --}}
+    <div class="alert alert-info d-flex align-items-center mb-4 border-0 shadow-sm" role="alert" style="background-color: #E8F4FD; color: #0288D1; border-radius: 8px;">
+        <i class="bx bx-info-circle fs-4 me-2"></i>
+        <div>
+            <strong>Informasi Integrasi Data:</strong> Data statistik kunjungan pasien dan penyakit pada dashboard ini disinkronisasikan secara otomatis melalui integrasi API Layanan Kesehatan.
         </div>
     </div>
 
@@ -100,9 +106,9 @@
                     <h6 class="fw-bold mb-0" style="color:#0A5C45;">
                         <i class="bx bx-list-ol me-2"></i>10 Penyakit Terbanyak — {{ $tahunFilter }}
                     </h6>
-                    <a href="{{ route('admin.statistik.penyakit.create') }}" class="btn btn-sm btn-outline-danger">
-                        <i class="bx bx-plus"></i> Tambah
-                    </a>
+                    <span class="badge bg-label-info">
+                        <i class="bx bx-cloud-check me-1"></i>Data API
+                    </span>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-hover align-middle mb-0">
@@ -112,7 +118,7 @@
                                 <th>Nama Penyakit</th>
                                 <th class="text-center" style="width:110px">Kasus</th>
                                 <th class="text-center" style="width:80px">Status</th>
-                                <th class="text-center" style="width:90px">Aksi</th>
+                                <th class="text-center" style="width:100px">Sinkronisasi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -143,20 +149,10 @@
                                         <span class="badge bg-label-secondary">Non-aktif</span>
                                     @endif
                                 </td>
-                                <td>
-                                    <div class="d-flex justify-content-center gap-1">
-                                        <a href="{{ route('admin.statistik.penyakit.edit', $item->id) }}"
-                                           class="btn btn-sm btn-icon btn-outline-warning" title="Edit">
-                                            <i class="bx bx-edit-alt"></i>
-                                        </a>
-                                        <form action="{{ route('admin.statistik.penyakit.destroy', $item->id) }}" method="POST"
-                                              onsubmit="return confirm('Hapus data penyakit ini?')">
-                                            @csrf @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-icon btn-outline-danger" title="Hapus">
-                                                <i class="bx bx-trash"></i>
-                                            </button>
-                                        </form>
-                                    </div>
+                                <td class="text-center">
+                                    <span class="badge bg-label-success" style="font-size: 11px;">
+                                        <i class="bx bx-check me-1"></i>Tersinkron
+                                    </span>
                                 </td>
                             </tr>
                             @empty
@@ -180,9 +176,9 @@
                     <h6 class="fw-bold mb-0" style="color:#0A5C45;">
                         <i class="bx bx-line-chart me-2"></i>Kunjungan Pasien — {{ $tahunFilter }}
                     </h6>
-                    <a href="{{ route('admin.statistik.kunjungan.create') }}" class="btn btn-sm btn-outline-primary">
-                        <i class="bx bx-plus"></i> Tambah
-                    </a>
+                    <span class="badge bg-label-info">
+                        <i class="bx bx-cloud-check me-1"></i>Data API
+                    </span>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-hover align-middle mb-0">
@@ -192,7 +188,7 @@
                                 <th class="text-center">Total</th>
                                 <th class="text-center">Baru</th>
                                 <th class="text-center">Lama</th>
-                                <th class="text-center" style="width:70px">Aksi</th>
+                                <th class="text-center" style="width:100px">Sinkronisasi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -202,20 +198,10 @@
                                 <td class="text-center fw-bold">{{ number_format($item->jumlah_kunjungan) }}</td>
                                 <td class="text-center text-primary fw-semibold">{{ number_format($item->kunjungan_baru) }}</td>
                                 <td class="text-center" style="color:#8B5CF6; font-weight:600;">{{ number_format($item->kunjungan_lama) }}</td>
-                                <td>
-                                    <div class="d-flex justify-content-center gap-1">
-                                        <a href="{{ route('admin.statistik.kunjungan.edit', $item->id) }}"
-                                           class="btn btn-sm btn-icon btn-outline-warning" title="Edit">
-                                            <i class="bx bx-edit-alt"></i>
-                                        </a>
-                                        <form action="{{ route('admin.statistik.kunjungan.destroy', $item->id) }}" method="POST"
-                                              onsubmit="return confirm('Hapus data kunjungan bulan {{ $item->bulan_label }}?')">
-                                            @csrf @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-icon btn-outline-danger" title="Hapus">
-                                                <i class="bx bx-trash"></i>
-                                            </button>
-                                        </form>
-                                    </div>
+                                <td class="text-center">
+                                    <span class="badge bg-label-success" style="font-size: 11px;">
+                                        <i class="bx bx-check me-1"></i>Tersinkron
+                                    </span>
                                 </td>
                             </tr>
                             @empty

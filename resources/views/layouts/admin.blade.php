@@ -158,7 +158,7 @@
                     </li>
 
                     <!-- 2. INFORMASI & BERITA PUBLIK -->
-                    @if($user->canAccessPage('articles') || $user->canAccessPage('infografis') || $user->canAccessPage('faq') || $user->canAccessPage('cara-kerja'))
+                    @if($user->canAccessPage('articles') || $user->canAccessPage('infografis') || $user->canAccessPage('faq') || $user->canAccessPage('statistik') || $user->canAccessPage('cara-kerja'))
                     <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">Informasi & Berita</span>
                     </li>
@@ -191,12 +191,14 @@
                     </li>
                     @endif
 
+                    @if($user->canAccessPage('statistik'))
                     <li class="menu-item {{ request()->routeIs('admin.statistik.*') ? 'active' : '' }}">
                         <a href="{{ route('admin.statistik.index') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-bar-chart-alt-2"></i>
                             <div>Statistik Kesehatan</div>
                         </a>
                     </li>
+                    @endif
 
                     @if($user->canAccessPage('cara-kerja'))
                     <li class="menu-item {{ request()->routeIs('admin.cara-kerja.*') ? 'active' : '' }}">
@@ -300,7 +302,7 @@
                     </li>
                     @endif
 
-                    @if($user->canAccessPage('users'))
+                    @if($user->isAdmin())
                     <li class="menu-item {{ request()->routeIs('admin.users.*') ? 'active' : '' }}">
                         <a href="{{ route('admin.users.index') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-user-pin"></i>
@@ -375,7 +377,7 @@
                                                 </div>
                                                 <div class="flex-grow-1">
                                                     <span class="fw-semibold d-block">{{ Auth::user()->name ?? 'Admin Puskesmas' }}</span>
-                                                    <small class="text-muted">{{ Auth::user()->email ?? 'admin@carelink.com' }}</small>
+                                                    <small class="text-muted">{{ Auth::user()->email ?? 'admin@sukaluyu.go.id' }}</small>
                                                 </div>
                                             </div>
                                         </a>

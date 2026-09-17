@@ -96,6 +96,7 @@ Route::get('/infografis', function (\Illuminate\Http\Request $request) {
         $search = $request->search;
         $query->where(function ($q) use ($search) {
             $q->where('title', 'like', "%{$search}%")
+              ->orWhere('kategori', 'like', "%{$search}%")
               ->orWhere('deskripsi', 'like', "%{$search}%");
         });
     }
@@ -200,6 +201,7 @@ Route::middleware(['auth'])->group(function () {
         Route::put('lokasi', [AdminLokasiController::class, 'update'])->name('lokasi.update');
 
         // Kelola FAQ (Tanya Jawab)
+        Route::patch('faq/{id}/toggle-status', [AdminFaqController::class, 'toggleStatus'])->name('faq.toggle-status');
         Route::resource('faq', AdminFaqController::class)->except(['show']);
 
         // Kelola Infografis

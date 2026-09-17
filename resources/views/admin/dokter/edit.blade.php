@@ -80,6 +80,21 @@
                         @enderror
                     </div>
 
+                    {{-- Jadwal Praktik Dokter --}}
+                    @php
+                        $jadwalText = old('jadwal_praktek', is_array($dokter->jadwal_praktek) ? implode("\n", $dokter->jadwal_praktek) : $dokter->jadwal_praktek);
+                    @endphp
+                    <div class="col-12">
+                        <label class="form-label fw-semibold" for="jadwal_praktek">Jadwal Praktik Dokter</label>
+                        <textarea class="form-control @error('jadwal_praktek') is-invalid @enderror"
+                            id="jadwal_praktek" name="jadwal_praktek" rows="3"
+                            placeholder="Tuliskan jadwal praktik per baris:&#10;Senin - Kamis : 08.00 - 12.00 WIB&#10;Jumat : 08.00 - 11.00 WIB">{{ $jadwalText }}</textarea>
+                        <div class="form-text">Tuliskan 1 baris untuk setiap hari atau rentang jadwal praktik.</div>
+                        @error('jadwal_praktek')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
                     {{-- Upload Foto --}}
                     <div class="col-md-12">
                         <label class="form-label fw-semibold" for="photo">Ganti Foto Dokter</label>

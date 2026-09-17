@@ -120,6 +120,7 @@
                             </label>
                             <div class="row g-2">
                                 @foreach($allPages as $key => $title)
+                                    @if($key === 'users') @continue @endif
                                     <div class="col-md-4 col-sm-6">
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" name="accessible_pages[]" value="{{ $key }}" id="page_{{ $key }}" {{ in_array($key, $userPages) ? 'checked' : '' }}>
