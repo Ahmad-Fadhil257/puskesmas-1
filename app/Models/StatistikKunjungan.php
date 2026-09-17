@@ -5,6 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property int $id
+ * @property int $tahun
+ * @property int $bulan
+ * @property string $bulan_label
+ * @property int $jumlah_kunjungan
+ * @property int $kunjungan_baru
+ * @property int $kunjungan_lama
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ */
 class StatistikKunjungan extends Model
 {
     use HasFactory;

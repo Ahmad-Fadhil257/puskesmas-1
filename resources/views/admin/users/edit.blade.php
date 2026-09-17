@@ -110,7 +110,9 @@
 
                     {{-- Container Hak Akses Halaman (Khusus Staf) --}}
                     @php
+                        /** @var string $currentRole */
                         $currentRole = old('role', $user->role);
+                        /** @var array $userPages */
                         $userPages = (array) (old('accessible_pages', $user->accessible_pages) ?? []);
                     @endphp
                     <div class="col-12" id="accessiblePagesContainer" style="display: {{ $currentRole === 'staf' ? 'block' : 'none' }};">
